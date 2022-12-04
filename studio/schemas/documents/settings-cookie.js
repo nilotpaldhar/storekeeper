@@ -27,9 +27,11 @@ export default {
 			hidden: ({ parent }) => !parent.enabled,
 		},
 		{
-			title: 'Link',
+			title: 'Link to Cookie Policy',
 			name: 'link',
-			type: 'url',
+			type: 'reference',
+			to: [{ type: 'page' }],
+			options: { disableNew: true },
 			description: 'Show a link to "Learn More" about your cookie policy',
 			hidden: ({ parent }) => !parent.enabled,
 		},

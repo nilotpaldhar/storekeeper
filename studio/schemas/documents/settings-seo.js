@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+import decodeAssetUrl from '../../helpers/decodeAssetUrl';
 
 export default {
 	title: 'Default SEO / Share',

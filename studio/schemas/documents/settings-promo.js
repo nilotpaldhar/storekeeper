@@ -38,9 +38,11 @@ export default {
 			hidden: ({ parent }) => !parent.enabled,
 		},
 		{
-			title: 'Link',
+			title: 'Page Link',
 			name: 'link',
-			type: 'url',
+			type: 'reference',
+			to: [{ type: 'homepage' }, { type: 'shoppage' }, { type: 'page' }],
+			options: { disableNew: true },
 			description: '(optional) Select a page to link the promo banner to',
 			hidden: ({ parent }) => !parent.enabled,
 		},

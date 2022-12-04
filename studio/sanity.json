@@ -24,6 +24,10 @@
 			"plugins": ["@sanity/vision"]
 		}
 	},
+	"server": {
+		"hostname": "0.0.0.0",
+		"port": 8000
+	},
 	"parts": [
 		{
 			"name": "part:@sanity/base/schema",

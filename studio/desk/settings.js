@@ -2,6 +2,8 @@ import S from '@sanity/desk-tool/structure-builder';
 import { BsGear, BsFlag, BsGlobe } from 'react-icons/bs';
 import { TbCookie } from 'react-icons/tb';
 import { AiOutlineUsergroupAdd } from 'react-icons/ai';
+import { RiNavigationLine } from 'react-icons/ri';
+import { FiAnchor } from 'react-icons/fi';
 
 // General Settings Menu
 const generalSettingsMenu = S.listItem()
@@ -10,6 +12,18 @@ const generalSettingsMenu = S.listItem()
 		S.editor().id('generalSettings').schemaType('generalSettings').documentId('generalSettings')
 	)
 	.icon(BsGear);
+
+// Header Settings Menu
+const headerSettingsMenu = S.listItem()
+	.title('Header Settings')
+	.child(S.editor().id('headerSettings').schemaType('headerSettings').documentId('headerSettings'))
+	.icon(RiNavigationLine);
+
+// Footer Settings Menu
+const footerSettingsMenu = S.listItem()
+	.title('Footer Settings')
+	.child(S.editor().id('footerSettings').schemaType('footerSettings').documentId('footerSettings'))
+	.icon(FiAnchor);
 
 // Cookie Consent Settings Menu
 const cookieConsentSettingsMenu = S.listItem()
@@ -44,6 +58,9 @@ export const settingsMenu = S.listItem()
 			.title('Settings')
 			.items([
 				generalSettingsMenu,
+				S.divider(),
+				headerSettingsMenu,
+				footerSettingsMenu,
 				S.divider(),
 				cookieConsentSettingsMenu,
 				promoBarSettingsMenu,
