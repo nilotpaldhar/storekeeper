@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { RiCustomerService2Fill } from 'react-icons/ri';
 
 /**
@@ -8,7 +8,7 @@ import { RiCustomerService2Fill } from 'react-icons/ri';
  * @return {Element} The CustomerService icon.
  */
 const CustomerService = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<RiCustomerService2Fill />
 	</span>
 );

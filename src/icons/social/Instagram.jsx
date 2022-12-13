@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiFillInstagram } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiFillInstagram } from 'react-icons/ai';
  * @return {Element} The Instagram icon.
  */
 const Instagram = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiFillInstagram />
 	</span>
 );

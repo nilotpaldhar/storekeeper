@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiOutlineUp } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiOutlineUp } from 'react-icons/ai';
  * @return {Element} The ChevronUp icon.
  */
 const ChevronUp = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiOutlineUp />
 	</span>
 );

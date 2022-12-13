@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { FaRegMoneyBillAlt } from 'react-icons/fa';
 
 /**
@@ -8,7 +8,7 @@ import { FaRegMoneyBillAlt } from 'react-icons/fa';
  * @return {Element} The MoneyBill icon.
  */
 const MoneyBill = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<FaRegMoneyBillAlt />
 	</span>
 );

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiOutlineUser } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiOutlineUser } from 'react-icons/ai';
  * @return {Element} The User icon.
  */
 const User = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiOutlineUser />
 	</span>
 );

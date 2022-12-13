@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as isBrowser } from './general/isBrowser';
+export { default as mapSocialIcons } from './general/mapSocialIcons';

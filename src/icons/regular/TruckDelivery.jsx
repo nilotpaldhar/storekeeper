@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { TbTruckDelivery } from 'react-icons/tb';
 
 /**
@@ -8,7 +8,7 @@ import { TbTruckDelivery } from 'react-icons/tb';
  * @return {Element} The TruckDelivery icon.
  */
 const TruckDelivery = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<TbTruckDelivery />
 	</span>
 );

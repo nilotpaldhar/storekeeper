@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { IoLanguageOutline } from 'react-icons/io5';
 
 /**
@@ -8,7 +8,7 @@ import { IoLanguageOutline } from 'react-icons/io5';
  * @return {Element} The Language icon.
  */
 const Language = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<IoLanguageOutline />
 	</span>
 );

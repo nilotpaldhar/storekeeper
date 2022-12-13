@@ -25,14 +25,14 @@ export default {
 			type: 'string',
 			description: 'enter an internal URL',
 			initialValue: '#',
-			hidden: ({ document }) => document?.isExternal,
+			hidden: ({ parent }) => parent?.isExternal,
 		},
 		{
 			title: 'External URL',
 			name: 'externalUrl',
 			type: 'url',
 			description: 'enter an external URL',
-			hidden: ({ document }) => !document?.isExternal,
+			hidden: ({ parent }) => !parent?.isExternal,
 		},
 	],
 	preview: {

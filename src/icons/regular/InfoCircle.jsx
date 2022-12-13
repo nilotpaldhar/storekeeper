@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiFillInfoCircle } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiFillInfoCircle } from 'react-icons/ai';
  * @return {Element} The InfoCircle icon.
  */
 const InfoCircle = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiFillInfoCircle />
 	</span>
 );

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { IoShieldCheckmarkSharp } from 'react-icons/io5';
 
 /**
@@ -8,7 +8,7 @@ import { IoShieldCheckmarkSharp } from 'react-icons/io5';
  * @return {Element} The ShieldCheck icon.
  */
 const ShieldCheck = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<IoShieldCheckmarkSharp />
 	</span>
 );

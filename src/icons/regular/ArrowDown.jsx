@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiOutlineArrowDown } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiOutlineArrowDown } from 'react-icons/ai';
  * @return {Element} The ArrowDown icon.
  */
 const ArrowDown = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiOutlineArrowDown />
 	</span>
 );

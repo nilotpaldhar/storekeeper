@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { MdOutlineCardGiftcard } from 'react-icons/md';
 
 /**
@@ -8,7 +8,7 @@ import { MdOutlineCardGiftcard } from 'react-icons/md';
  * @return {Element} The Giftcard icon.
  */
 const Giftcard = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<MdOutlineCardGiftcard />
 	</span>
 );
