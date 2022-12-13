@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { BiDollar } from 'react-icons/bi';
 
 /**
@@ -8,7 +8,7 @@ import { BiDollar } from 'react-icons/bi';
  * @return {Element} The Dollar icon.
  */
 const Dollar = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<BiDollar />
 	</span>
 );

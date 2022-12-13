@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { FiMapPin } from 'react-icons/fi';
 
 /**
@@ -8,7 +8,7 @@ import { FiMapPin } from 'react-icons/fi';
  * @return {Element} The MapPin icon.
  */
 const MapPin = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<FiMapPin />
 	</span>
 );

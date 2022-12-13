@@ -1,3 +1,8 @@
-const Homepage = () => <div className="px-5 py-10">Homepage</div>;
+/**
+ * Render the Homepage component.
+ *
+ * @return {Element} The Homepage component.
+ */
+const Homepage = () => <div>Homepage</div>;
 
 export default Homepage;

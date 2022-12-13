@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiOutlineTwitter } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiOutlineTwitter } from 'react-icons/ai';
  * @return {Element} The Twitter icon.
  */
 const Twitter = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiOutlineTwitter />
 	</span>
 );

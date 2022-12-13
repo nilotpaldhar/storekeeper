@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiOutlineDash } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiOutlineDash } from 'react-icons/ai';
  * @return {Element} The Dash icon.
  */
 const Dash = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiOutlineDash />
 	</span>
 );

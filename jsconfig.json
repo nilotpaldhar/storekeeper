@@ -4,8 +4,8 @@
 		"paths": {
 			"@public": ["../public"],
 			"@public/*": ["../public/*"],
-			"@components": ["components"],
-			"@components/*": ["components/*"],
+			"@ui": ["components"],
+			"@ui/*": ["components/*"],
 			"@config": ["config"],
 			"@config/*": ["config/*"],
 			"@icons": ["icons"],

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiOutlineClose } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiOutlineClose } from 'react-icons/ai';
  * @return {Element} The Close icon.
  */
 const Close = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiOutlineClose />
 	</span>
 );

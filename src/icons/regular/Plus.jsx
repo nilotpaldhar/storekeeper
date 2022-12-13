@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiOutlinePlus } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
  * @return {Element} The Plus icon.
  */
 const Plus = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiOutlinePlus />
 	</span>
 );

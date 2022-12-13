@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { IoAppsSharp } from 'react-icons/io5';
 
 /**
@@ -8,7 +8,7 @@ import { IoAppsSharp } from 'react-icons/io5';
  * @return {Element} The LayoutGrid icon.
  */
 const LayoutGrid = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<IoAppsSharp />
 	</span>
 );

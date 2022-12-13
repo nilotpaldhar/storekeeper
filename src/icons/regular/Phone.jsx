@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { AiOutlinePhone } from 'react-icons/ai';
 
 /**
@@ -8,7 +8,7 @@ import { AiOutlinePhone } from 'react-icons/ai';
  * @return {Element} The Phone icon.
  */
 const Phone = ({ className, ...props }) => (
-	<span className={cx('icon', className && className)} {...props}>
+	<span className={clsx('icon', className && className)} {...props}>
 		<AiOutlinePhone />
 	</span>
 );
