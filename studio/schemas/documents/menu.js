@@ -18,17 +18,13 @@ export default {
 			type: 'slug',
 			description: 'required',
 			options: { source: 'title', maxLength: 30 },
+			validation: (Rule) => Rule.required().error('The slug is required'),
 		},
 		{
 			title: 'Nav Items',
 			name: 'items',
 			type: 'array',
-			of: [
-				{ type: 'navLink' },
-				{ type: 'navPage' },
-				{ type: 'navDropdown' },
-				{ type: 'navMegaDropdown' },
-			],
+			of: [{ type: 'navLink' }, { type: 'navPage' }, { type: 'navDropdown' }],
 		},
 	],
 };

@@ -25,7 +25,7 @@ const FooterMenu = ({ title, items, ...props }) => (
 								<Link
 									href={href}
 									external={item?.isExternal}
-									className="text-inherit leading-none hover:text-neutral-300 focus:outline-neutral-600 py-1"
+									className="py-1 leading-none text-inherit hover:text-neutral-300 focus-visible:outline-neutral-600"
 								>
 									<span className="inline-block">{item?.title}</span>
 								</Link>

@@ -20,6 +20,7 @@ import generalSettings from './documents/settings-general';
 // Object Types
 import seo from './objects/seo';
 import asset from './objects/asset';
+import dropdown from './objects/dropdown';
 import breadcrumb from './objects/breadcrumb';
 
 import navLink from './objects/nav-link';
@@ -27,7 +28,6 @@ import navPage from './objects/nav-page';
 import navProduct from './objects/nav-product';
 import navCategory from './objects/nav-category';
 import navDropdown from './objects/nav-dropdown';
-import navMegaDropdown from './objects/nav-mega-dropdown';
 
 import productPrice from './objects/product-price';
 import productVariant from './objects/product-variant';
@@ -63,6 +63,7 @@ export default createSchema({
 		/* 2: Generic Object types */
 		seo,
 		asset,
+		dropdown,
 		breadcrumb,
 
 		/* ----------------------- */
@@ -72,7 +73,6 @@ export default createSchema({
 		navProduct,
 		navCategory,
 		navDropdown,
-		navMegaDropdown,
 
 		/* ----------------------- */
 		/* 4: Commerce Object types */

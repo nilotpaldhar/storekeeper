@@ -10,7 +10,7 @@ import clsx from 'clsx';
  */
 const Logo = ({ href, src, alt, width, height, className, ...props }) => {
 	const classNames = clsx(
-		'border rounded border-transparent p-1 transition focus:outline-0 focus:border-primary-600',
+		'py-1 border border-transparent transition focus-visible:outline-none focus-visible:border-primary-600 focus-visible:rounded',
 		className
 	);
 
