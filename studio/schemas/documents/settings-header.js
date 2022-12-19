@@ -27,7 +27,7 @@ export default {
 			options: {
 				icon: BsInfoCircle,
 				headline: 'Note',
-				message: `On mobile, "dropdowns" and "mega-dropdowns" will appear as accordions.`,
+				message: `On desktop, dropdowns will appear as a "mega-dropdowns". On mobile, dropdowns will appear as "accordions".`,
 				tone: 'caution',
 			},
 		},

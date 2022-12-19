@@ -18,7 +18,7 @@ const SocialHandles = ({ handles, className, ...props }) => (
 					href={url}
 					newWindow
 					external
-					className="w-10 h-10 flex justify-center items-center rounded-full border border-transparent text-gray-100 hover:text-neutral-300 leading-none focus:outline-none focus:border-neutral-600"
+					className="flex items-center justify-center w-10 h-10 leading-none text-gray-100 border border-transparent rounded-full hover:text-neutral-300 focus-visible:text-neutral-300 focus-visible:outline-none focus-visible:border-neutral-600 focus-visible:rounded-full"
 				>
 					<Icon className="!text-xl" />
 					<span className="sr-only">{key}</span>

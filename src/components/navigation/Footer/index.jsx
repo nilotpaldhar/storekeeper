@@ -51,7 +51,6 @@ const Footer = ({ data }) => {
 							href="/"
 							width={220}
 							height={30}
-							className="px-0"
 							src={company?.logo?.src}
 							alt={company?.logo?.alt}
 						/>

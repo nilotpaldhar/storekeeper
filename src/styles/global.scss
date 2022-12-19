@@ -27,9 +27,12 @@ button {
 		@apply text-primary-600;
 	}
 
-	&:focus,
+	&:focus {
+		@apply outline-none;
+	}
+
 	&:focus-visible {
-		@apply outline-1 outline-dotted outline-neutral-600;
+		@apply rounded-[1px] outline-1 outline-dotted outline-neutral-600;
 	}
 }
 

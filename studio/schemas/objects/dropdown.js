@@ -1,10 +1,10 @@
-import { HiChevronDoubleDown } from 'react-icons/hi';
+import { HiChevronDown } from 'react-icons/hi';
 
 export default {
-	title: 'Mega Dropdown',
-	name: 'navMegaDropdown',
+	title: 'Dropdown',
+	name: 'dropdown',
 	type: 'object',
-	icon: HiChevronDoubleDown,
+	icon: HiChevronDown,
 	fields: [
 		{
 			title: 'Title',
@@ -17,7 +17,7 @@ export default {
 			title: 'Items',
 			name: 'items',
 			type: 'array',
-			of: [{ type: 'navDropdown' }],
+			of: [{ type: 'navLink' }, { type: 'navPage' }],
 		},
 	],
 	preview: {
