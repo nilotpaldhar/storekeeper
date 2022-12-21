@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import Link from '@ui/general/Link';
-import Image from '@ui/general/Image';
+import Anchor from '@ui/general/Anchor';
+import Image from '@ui/data-display/Image';
 import clsx from 'clsx';
 
 /**
@@ -15,9 +15,9 @@ const Logo = ({ href, src, alt, width, height, className, ...props }) => {
 	);
 
 	return (
-		<Link href={href} className={classNames} {...props}>
+		<Anchor href={href} className={classNames} {...props}>
 			<Image src={src} alt={alt} width={width} height={height} />
-		</Link>
+		</Anchor>
 	);
 };
 

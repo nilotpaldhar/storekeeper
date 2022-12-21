@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Link from '@ui/general/Link';
+import Anchor from '@ui/general/Anchor';
 
 /**
  * Render the FooterMenu component.
@@ -22,13 +22,13 @@ const FooterMenu = ({ title, items, ...props }) => (
 						return (
 							<li key={item?.id} className="flex items-center gap-[6px]">
 								{item?.icon && <span className="inline-block leading-none">{item?.icon}</span>}
-								<Link
+								<Anchor
 									href={href}
 									external={item?.isExternal}
 									className="py-1 leading-none text-inherit hover:text-neutral-300 focus-visible:outline-neutral-600"
 								>
 									<span className="inline-block">{item?.title}</span>
-								</Link>
+								</Anchor>
 							</li>
 						);
 					})}

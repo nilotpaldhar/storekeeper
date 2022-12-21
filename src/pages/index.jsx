@@ -1,6 +1,9 @@
 import Header from '@ui/navigation/Header';
 import Footer from '@ui/navigation/Footer';
 
+import headerData from '@public/seeder/header';
+import footerData from '@public/seeder/footer';
+
 /**
  * Render the Homepage component.
  *
@@ -8,9 +11,9 @@ import Footer from '@ui/navigation/Footer';
  */
 const Homepage = () => (
 	<div>
-		<Header />
-		<div className="min-h-screen" />
-		<Footer />
+		<Header data={headerData} />
+		<div className="h-screen" />
+		<Footer data={footerData} />
 	</div>
 );
 

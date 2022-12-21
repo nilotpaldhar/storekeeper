@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styles from '@ui/utility/Badge/styles.cva';
+import styles from '@ui/data-display/Badge/styles.cva';
 
 /**
  * Render the Badge component.

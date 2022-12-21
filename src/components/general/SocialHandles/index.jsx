@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Link from '@ui/general/Link';
+import Anchor from '@ui/general/Anchor';
 import mapSocialIcons from '@utils/general/mapSocialIcons';
 import { clsx } from 'clsx';
 
@@ -13,7 +13,7 @@ const SocialHandles = ({ handles, className, ...props }) => (
 		{Object.entries(handles).map(([key, url]) => {
 			const Icon = mapSocialIcons(key);
 			return Icon ? (
-				<Link
+				<Anchor
 					key={key}
 					href={url}
 					newWindow
@@ -22,7 +22,7 @@ const SocialHandles = ({ handles, className, ...props }) => (
 				>
 					<Icon className="!text-xl" />
 					<span className="sr-only">{key}</span>
-				</Link>
+				</Anchor>
 			) : null;
 		})}
 	</div>
