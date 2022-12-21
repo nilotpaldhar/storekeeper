@@ -3,20 +3,18 @@ import { forwardRef } from 'react';
 import NextLink from 'next/link';
 
 /**
- * Render the Link component.
+ * Render the Anchor component.
  *
- * @return {Element} The Link component.
+ * @return {Element} The Anchor component.
  */
-const Link = forwardRef((props, ref) => {
-	const { href, external, newWindow, children, ...rest } = props;
-
+const Anchor = forwardRef(({ href, external, newWindow, children, ...props }, forwardedRef) => {
 	/** Link config */
 	const linkConf = {
-		ref,
 		href,
+		ref: forwardedRef,
 		target: newWindow ? '_black' : undefined,
 		rel: newWindow ? 'noopener noreferrer' : undefined,
-		...rest,
+		...props,
 	};
 
 	if (external) {
@@ -29,7 +27,7 @@ const Link = forwardRef((props, ref) => {
 /**
  * Default Props.
  */
-Link.defaultProps = {
+Anchor.defaultProps = {
 	children: '',
 	newWindow: false,
 	external: false,
@@ -38,11 +36,11 @@ Link.defaultProps = {
 /**
  * Prop Types.
  */
-Link.propTypes = {
+Anchor.propTypes = {
 	href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 	external: PropTypes.bool,
 	newWindow: PropTypes.bool,
 	children: PropTypes.node,
 };
 
-export default Link;
+export default Anchor;

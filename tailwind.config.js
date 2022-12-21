@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const { fontFamily } = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 
 /** Backface Visibility Plugin. */
@@ -99,7 +99,7 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+				sans: ['var(--font-nunito)', ...fontFamily.sans],
 			},
 		},
 	},

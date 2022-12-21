@@ -13,6 +13,7 @@ const Image = ({ src, alt, placeholder, className, ...props }) => {
 		src,
 		alt,
 		placeholder,
+		priority: true,
 		className: clsx('select-none object-contain', className),
 		...props,
 	};

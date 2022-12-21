@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 
 /** Components */
-import Link from '@ui/general/Link';
-import Logo from '@ui/general/Logo';
+import Anchor from '@ui/general/Anchor';
+import Logo from '@ui/data-display/Logo';
 import Container from '@ui/general/Container';
 import SocialHandles from '@ui/general/SocialHandles';
 import FooterMenu from '@ui/navigation/Footer/FooterMenu';
@@ -56,13 +56,13 @@ const Footer = ({ data }) => {
 						/>
 						<p className="max-w-[40ch] font-normal mt-5">{company?.about}</p>
 						{company?.readMore?.href && (
-							<Link
+							<Anchor
 								href={company?.readMore?.href}
 								className="flex items-center gap-2 mt-4 max-w-max text-inherit font-semibold hover:text-neutral-300 focus:outline-neutral-600"
 							>
 								<span>{company?.readMore?.title || 'Read More'}</span>
 								<ArrowRight className="!text-xs" />
-							</Link>
+							</Anchor>
 						)}
 					</div>
 					<FooterMenu title={blockOne?.title} items={blockOne?.menus} />
