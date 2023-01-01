@@ -12,7 +12,7 @@ const SocialHandles = ({ handles, className, ...props }) => (
 	<div className={clsx('flex flex-wrap gap-2 items-center justify-center', className)} {...props}>
 		{Object.entries(handles).map(([key, url]) => {
 			const Icon = mapSocialIcons(key);
-			return Icon ? (
+			return Icon && url ? (
 				<Anchor
 					key={key}
 					href={url}
@@ -32,12 +32,7 @@ const SocialHandles = ({ handles, className, ...props }) => (
  * Default Props.
  */
 SocialHandles.defaultProps = {
-	handles: {
-		twitter: '#',
-		instagram: '#',
-		facebook: '#',
-		linkedin: '#',
-	},
+	handles: {},
 	className: '',
 };
 

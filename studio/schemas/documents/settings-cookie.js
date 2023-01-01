@@ -25,6 +25,7 @@ export default {
 			rows: 3,
 			description: 'Your cookie consent message',
 			hidden: ({ parent }) => !parent.enabled,
+			validation: (Rule) => Rule.max(200).error('The message may not exceed 200 characters'),
 		},
 		{
 			title: 'Link to Cookie Policy',

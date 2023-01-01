@@ -19,28 +19,30 @@ import clsx from 'clsx';
  *
  * @return {Element} The HeaderNav component.
  */
-const HeaderNav = ({ items, className, ...props }) => (
-	<Root
-		delayDuration={100}
-		className={clsx('relative h-full [&>div]:h-full', className)}
-		{...props}
-	>
-		<List className="h-full [&>li]:h-full flex flex-wrap items-center space-x-8 xl:space-x-10">
-			{items?.map((item) =>
-				item?.type === 'navDropdown' ? (
-					<HeaderDropdown key={item?.id} data={item} />
-				) : (
-					<Item key={item?.id} className="flex items-center">
-						<HeaderLinkWrapper asChild>
-							<HeaderLink data={item} />
-						</HeaderLinkWrapper>
-					</Item>
-				)
-			)}
-		</List>
-		<Viewport />
-	</Root>
-);
+const HeaderNav = ({ items, className, ...props }) =>
+	items?.length > 0 ? (
+		<Root
+			delayDuration={100}
+			className={clsx('relative h-full [&>div]:h-full', className)}
+			{...props}
+		>
+			<List className="h-full [&>li]:h-full flex flex-wrap items-center space-x-8 xl:space-x-10">
+				{items?.map((item) =>
+					item?.type === 'navDropdown' ? (
+						<HeaderDropdown key={item?.id} data={item} />
+					) : (
+						<Item key={item?.id} className="flex items-center">
+							<HeaderLinkWrapper asChild>
+								<HeaderLink data={item} />
+							</HeaderLinkWrapper>
+						</Item>
+					)
+				)}
+			</List>
+			<Viewport />
+		</Root>
+	) : null;
+
 /**
  * Default Props.
  */

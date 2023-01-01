@@ -29,7 +29,7 @@ const SubMenu = ({ data, collapsible }) => {
 					type="button"
 					className={clsx('flex items-center justify-between text-sm font-medium', itemClassNames)}
 				>
-					<span>{data?.title}</span>
+					<span>{data?.label}</span>
 					{open ? <ChevronDown className="!text-xs" /> : <ChevronRightIcon className="!text-xs" />}
 				</button>
 			</Collapsible.Trigger>
@@ -39,7 +39,7 @@ const SubMenu = ({ data, collapsible }) => {
 						{data?.items?.map((item) => (
 							<li key={item?.id}>
 								<span className="block px-8 py-2 text-sm font-medium border-b text-neutral-900 border-neutral-50">
-									{item?.title}
+									{item?.label}
 								</span>
 								<ul className="">
 									{item?.items?.map((childItem) => (
@@ -78,7 +78,7 @@ SubMenu.defaultProps = {
  */
 SubMenu.propTypes = {
 	data: PropTypes.shape({
-		title: PropTypes.string,
+		label: PropTypes.string,
 		items: PropTypes.arrayOf(PropTypes.shape({})),
 	}),
 	collapsible: PropTypes.bool,

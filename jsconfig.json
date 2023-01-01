@@ -2,18 +2,28 @@
 	"compilerOptions": {
 		"baseUrl": "./src",
 		"paths": {
+			"@root": ["../"],
+			"@root/*": ["../*"],
 			"@public": ["../public"],
 			"@public/*": ["../public/*"],
 			"@ui": ["components"],
 			"@ui/*": ["components/*"],
 			"@config": ["config"],
 			"@config/*": ["config/*"],
+			"@constants": ["constants"],
+			"@constants/*": ["constants/*"],
+			"@hooks": ["hooks"],
+			"@hooks/*": ["hooks/*"],
 			"@icons": ["icons"],
 			"@icons/*": ["icons/*"],
+			"@libs": ["libs"],
+			"@libs/*": ["libs/*"],
 			"@pages": ["pages"],
 			"@pages/*": ["pages/*"],
 			"@styles": ["styles"],
 			"@styles/*": ["styles/*"],
+			"@templates": ["templates"],
+			"@templates/*": ["templates/*"],
 			"@utils": ["utils"],
 			"@utils/*": ["utils/*"]
 		}

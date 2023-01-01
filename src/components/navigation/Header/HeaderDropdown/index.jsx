@@ -13,7 +13,7 @@ import ContentArea from './ContentArea';
 const HeaderDropdown = ({ data }) => (
 	<Item className="relative flex items-center">
 		<Trigger asChild>
-			<HeaderLink elementType="button" data={{ title: data?.title }} />
+			<HeaderLink elementType="button" data={{ label: data?.label }} />
 		</Trigger>
 		<Content className="z-10 w-[200%] max-w-4xl absolute top-full -translate-x-10 border bg-white border-neutral-100 rounded rounded-t-none shadow">
 			<ContentArea items={data?.items} />
@@ -33,7 +33,7 @@ HeaderDropdown.defaultProps = {
  */
 HeaderDropdown.propTypes = {
 	data: PropTypes.shape({
-		title: PropTypes.string,
+		label: PropTypes.string,
 		items: PropTypes.arrayOf(PropTypes.shape({})),
 	}),
 };

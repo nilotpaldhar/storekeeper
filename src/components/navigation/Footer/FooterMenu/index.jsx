@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Anchor from '@ui/general/Anchor';
+import MenuLink from '@ui/navigation/MenuLink';
 
 /**
  * Render the FooterMenu component.
@@ -16,22 +16,15 @@ const FooterMenu = ({ title, items, ...props }) => (
 		{items?.length > 0 && (
 			<nav className="mt-5 lg:mt-8">
 				<ul className="flex flex-col gap-5">
-					{items?.map((item) => {
-						const href = item?.isExternal ? item?.externalUrl : item?.internalUrl;
-
-						return (
-							<li key={item?.id} className="flex items-center gap-[6px]">
-								{item?.icon && <span className="inline-block leading-none">{item?.icon}</span>}
-								<Anchor
-									href={href}
-									external={item?.isExternal}
-									className="py-1 leading-none text-inherit hover:text-neutral-300 focus-visible:outline-neutral-600"
-								>
-									<span className="inline-block">{item?.title}</span>
-								</Anchor>
-							</li>
-						);
-					})}
+					{items?.map(({ icon, ...data }) => (
+						<li key={data?.id} className="flex items-center gap-[6px]">
+							{icon && <span className="inline-block leading-none">{icon}</span>}
+							<MenuLink
+								data={data}
+								className="py-1 leading-none text-inherit hover:text-neutral-300 focus-visible:outline-neutral-600"
+							/>
+						</li>
+					))}
 				</ul>
 			</nav>
 		)}
@@ -54,9 +47,8 @@ FooterMenu.propTypes = {
 	items: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string,
-			title: PropTypes.string,
-			externalUrl: PropTypes.string,
-			internalUrl: PropTypes.string,
+			label: PropTypes.string,
+			href: PropTypes.string,
 			isExternal: PropTypes.bool,
 			icon: PropTypes.node,
 		})

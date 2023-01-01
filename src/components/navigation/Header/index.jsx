@@ -8,9 +8,6 @@ import HeaderNav from '@ui/navigation/Header/HeaderNav';
 import HeaderSearch from '@ui/navigation/Header/HeaderSearch';
 import HeaderActions from '@ui/navigation/Header/HeaderActions';
 
-/** Seeder. */
-import seedData from '@public/seeder/header';
-
 const MobileNav = dynamic(() => import('@ui/navigation/MobileNav'));
 
 /**
@@ -19,18 +16,28 @@ const MobileNav = dynamic(() => import('@ui/navigation/MobileNav'));
  * @return {Element} The Header component.
  */
 const Header = ({ data }) => {
-	const { company, menus } = data;
+	const { site, desktop, mobile } = data;
+
+	/** Logo Config. */
+	const logoConf = {
+		href: '/',
+		srcSanity: true,
+		src: site?.logo,
+		alt: site?.title,
+		className: 'shrink-0',
+	};
 
 	return (
-		<header className="w-full h-20 border-b border-neutral-50">
+		<header className="w-full h-20 border-b border-neutral-100">
 			<Container className="flex items-center justify-start h-full xxl:justify-between">
-				<Logo href="/" src={company?.logo?.src} alt={company?.logo?.alt} className="shrink-0" />
-				{menus?.length > 0 && <HeaderNav className="hidden xxl:block" items={menus} />}
+				<Logo {...logoConf} />
+				{desktop && <HeaderNav className="hidden xxl:block" items={desktop?.menu} />}
 				<HeaderSearch className="ml-auto mr-2 sm:mr-4 lg:mx-auto xl:ml-auto xl:mr-14 xxl:mx-0" />
 				<HeaderActions />
 				<MobileNav
-					data={data}
-					triggerClassName="flex items-center order-first p-2 mr-4 rounded xxl:hidden text-neutral-900 hover:text-current focus-visible:outline-primary-600 focus-visible:text-primary-600"
+					data={{ site, menus: mobile?.menu }}
+					rootClassName="block order-first mr-4 xxl:hidden"
+					triggerClassName="flex items-center p-2 rounded text-neutral-900 hover:text-current focus-visible:outline-primary-600 focus-visible:text-primary-600"
 				/>
 			</Container>
 		</header>
@@ -41,7 +48,7 @@ const Header = ({ data }) => {
  * Default Props.
  */
 Header.defaultProps = {
-	data: seedData,
+	data: {},
 };
 
 /**
@@ -49,13 +56,16 @@ Header.defaultProps = {
  */
 Header.propTypes = {
 	data: PropTypes.shape({
-		company: PropTypes.shape({
-			logo: PropTypes.shape({
-				src: PropTypes.string,
-				alt: PropTypes.string,
-			}),
+		site: PropTypes.shape({
+			title: PropTypes.string,
+			logo: PropTypes.string,
 		}),
-		menus: PropTypes.arrayOf(PropTypes.shape({})),
+		desktop: PropTypes.shape({
+			menu: PropTypes.arrayOf(PropTypes.shape({})),
+		}),
+		mobile: PropTypes.shape({
+			menu: PropTypes.arrayOf(PropTypes.shape({})),
+		}),
 	}),
 };
 

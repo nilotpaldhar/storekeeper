@@ -28,11 +28,6 @@ export default {
 			type: 'image',
 			options: { hotspot: true },
 		},
-		{
-			title: 'Footer Copyright Text',
-			name: 'copyrightText',
-			type: 'string',
-		},
 	],
 	preview: {
 		prepare() {

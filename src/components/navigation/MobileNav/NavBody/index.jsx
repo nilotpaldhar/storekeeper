@@ -17,7 +17,7 @@ import CloseIcon from '@icons/regular/Close';
 const NavBody = ({ logo, menus, onClose, ...props }) => (
 	<div {...props}>
 		<div className="flex items-center justify-between px-5 pt-4">
-			<Logo href="/" src={logo?.src} alt={logo?.alt} className="" />
+			<Logo href="/" src={logo?.src} alt={logo?.alt} srcSanity />
 			<button
 				type="button"
 				onClick={onClose}
@@ -41,7 +41,7 @@ const NavBody = ({ logo, menus, onClose, ...props }) => (
 			</button>
 		</div>
 		<NavDivider className="mt-6 mb-4" />
-		<NavMenu items={menus} />
+		{menus && <NavMenu items={menus} />}
 	</div>
 );
 
