@@ -13,54 +13,64 @@ import ArrowRight from '@icons/regular/ArrowRight';
 import Email from '@icons/regular/Email';
 import Phone from '@icons/regular/Phone';
 
-/** Seeder. */
-import seedData from '@public/seeder/footer';
-
 /**
  * Render the Footer component.
  *
  * @return {Element} The Footer component.
  */
-const Footer = ({ data }) => {
-	const { company, blockOne, blockTwo, blockThree, info } = data;
+const Footer = ({ data: { site, blockOne, blockTwo, blockThree, info, social } }) => {
+	/** Read More Link. */
+	const readMore = {
+		title: site?.readMore?.title ?? 'Read More',
+		// eslint-disable-next-line react/prop-types
+		href: site?.readMore?.link?.slug?.current ?? site?.readMore?.link?.slug,
+	};
 
 	/** Info Menu Items. */
 	const infoMenuItems = [
 		{
 			id: nanoid(),
-			icon: <Email className="!text-base" />,
+			custom: true,
+			type: 'navLink',
 			isExternal: true,
-			title: `Email: ${info?.email}`,
-			externalUrl: info?.email ? `mailto:${info?.email}` : '#',
+			label: `Email: ${info?.email}`,
+			icon: <Email className="!text-base" />,
+			href: info?.email ? `mailto:${info?.email}` : '#',
 		},
 		{
 			id: nanoid(),
-			icon: <Phone className="!text-base" />,
+			custom: true,
+			type: 'navLink',
 			isExternal: true,
-			title: `Call Us: ${info?.phoneNumber}`,
-			externalUrl: info?.phoneNumber ? `tel::${info?.phoneNumber}` : '#',
+			label: `Call Us: ${info?.phoneNumber}`,
+			icon: <Phone className="!text-base" />,
+			href: info?.phoneNumber ? `tel:${info?.phoneNumber}` : '#',
 		},
 	];
+
+	/** Logo Config. */
+	const logoConf = {
+		href: '/',
+		src: site?.logo,
+		alt: site?.title,
+		width: 220,
+		height: 30,
+		srcSanity: true,
+	};
 
 	return (
 		<footer className="w-full py-10 text-neutral-100 bg-neutral-900 lg:pt-16 lg:pb-10">
 			<Container>
 				<div className="flex flex-col gap-10 justify-between xl:flex-row xl:gap-0">
 					<div>
-						<Logo
-							href="/"
-							width={220}
-							height={30}
-							src={company?.logo?.src}
-							alt={company?.logo?.alt}
-						/>
-						<p className="max-w-[40ch] font-normal mt-5">{company?.about}</p>
-						{company?.readMore?.href && (
+						<Logo {...logoConf} />
+						<p className="max-w-[40ch] font-normal mt-5">{site?.description}</p>
+						{readMore.href && (
 							<Anchor
-								href={company?.readMore?.href}
-								className="flex items-center gap-2 mt-4 max-w-max text-inherit font-semibold hover:text-neutral-300 focus:outline-neutral-600"
+								href={readMore.href}
+								className="flex items-center gap-2 mt-4 max-w-max text-inherit font-medium hover:text-neutral-300 focus:outline-neutral-600"
 							>
-								<span>{company?.readMore?.title || 'Read More'}</span>
+								<span>{readMore.title}</span>
 								<ArrowRight className="!text-xs" />
 							</Anchor>
 						)}
@@ -72,10 +82,10 @@ const Footer = ({ data }) => {
 				</div>
 				<hr className="border-t border-neutral-800 my-10 lg:mt-14 lg:mb-10" />
 				<div className="flex flex-col gap-5 items-center xl:flex-row xl:gap-0 xl:justify-between">
-					{company?.copyright && (
-						<p className="text-center font-normal text-inherit">{company?.copyright}</p>
+					{site?.copyright && (
+						<p className="text-center font-normal text-inherit">{site?.copyright}</p>
 					)}
-					<SocialHandles />
+					<SocialHandles handles={social} />
 				</div>
 			</Container>
 		</footer>
@@ -86,7 +96,7 @@ const Footer = ({ data }) => {
  * Default Props.
  */
 Footer.defaultProps = {
-	data: seedData,
+	data: {},
 };
 
 /**
@@ -94,59 +104,34 @@ Footer.defaultProps = {
  */
 Footer.propTypes = {
 	data: PropTypes.shape({
-		company: PropTypes.shape({
-			logo: PropTypes.shape({
-				src: PropTypes.string,
-				alt: PropTypes.string,
-			}),
-			about: PropTypes.string,
+		site: PropTypes.shape({
+			title: PropTypes.string,
+			logo: PropTypes.string,
+			description: PropTypes.string,
+			copyright: PropTypes.string,
 			readMore: PropTypes.shape({
 				title: PropTypes.string,
-				href: PropTypes.string,
+				link: PropTypes.shape({}),
 			}),
-			copyright: PropTypes.string,
 		}),
 		blockOne: PropTypes.shape({
 			title: PropTypes.string,
-			menus: PropTypes.arrayOf(
-				PropTypes.shape({
-					id: PropTypes.string,
-					title: PropTypes.string,
-					externalUrl: PropTypes.string,
-					internalUrl: PropTypes.string,
-					isExternal: PropTypes.bool,
-				})
-			),
+			menus: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 		blockTwo: PropTypes.shape({
 			title: PropTypes.string,
-			menus: PropTypes.arrayOf(
-				PropTypes.shape({
-					id: PropTypes.string,
-					title: PropTypes.string,
-					externalUrl: PropTypes.string,
-					internalUrl: PropTypes.string,
-					isExternal: PropTypes.bool,
-				})
-			),
+			menus: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 		blockThree: PropTypes.shape({
 			title: PropTypes.string,
-			menus: PropTypes.arrayOf(
-				PropTypes.shape({
-					id: PropTypes.string,
-					title: PropTypes.string,
-					externalUrl: PropTypes.string,
-					internalUrl: PropTypes.string,
-					isExternal: PropTypes.bool,
-				})
-			),
+			menus: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 		info: PropTypes.shape({
 			title: PropTypes.string,
 			email: PropTypes.string,
 			phoneNumber: PropTypes.string,
 		}),
+		social: PropTypes.shape({}),
 	}),
 };
 

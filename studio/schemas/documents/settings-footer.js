@@ -52,6 +52,12 @@ export default {
 			type: 'navPage',
 			fieldset: 'aboutBlock',
 		},
+		{
+			title: 'Copyright Text',
+			name: 'copyrightText',
+			type: 'string',
+			fieldset: 'aboutBlock',
+		},
 
 		/** Navigation Block One. */
 		{

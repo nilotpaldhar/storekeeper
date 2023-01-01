@@ -22,6 +22,11 @@ export default {
 			validation: (Rule) => Rule.required().error('The slug is required'),
 		},
 		{
+			title: 'Page Content',
+			name: 'pageContent',
+			type: 'portableContent',
+		},
+		{
 			title: 'SEO / Share Settings',
 			name: 'seo',
 			type: 'seo',

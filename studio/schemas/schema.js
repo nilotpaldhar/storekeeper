@@ -20,6 +20,7 @@ import generalSettings from './documents/settings-general';
 // Object Types
 import seo from './objects/seo';
 import asset from './objects/asset';
+import content from './objects/content';
 import dropdown from './objects/dropdown';
 import breadcrumb from './objects/breadcrumb';
 
@@ -63,6 +64,7 @@ export default createSchema({
 		/* 2: Generic Object types */
 		seo,
 		asset,
+		content,
 		dropdown,
 		breadcrumb,
 

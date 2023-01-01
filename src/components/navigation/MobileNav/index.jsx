@@ -18,14 +18,14 @@ const DrawerRoot = dynamic(() =>
  *
  * @return {Element} The MobileNav component.
  */
-const MobileNav = ({ data, className, triggerClassName }) => {
-	const { company, menus } = data;
+const MobileNav = ({ data, className, rootClassName, triggerClassName }) => {
+	const { site, menus } = data;
 	const [open, setOpen] = useState(false);
 	const handleToggle = () => setOpen((prevState) => !prevState);
 	const handleStateChange = (state) => setOpen(state.isOpen);
 
 	return (
-		<>
+		<div className={rootClassName}>
 			<NavTrigger onOpen={handleToggle} className={triggerClassName} />
 			<DrawerRoot
 				right={false}
@@ -38,9 +38,13 @@ const MobileNav = ({ data, className, triggerClassName }) => {
 				className={clsx('fixed top-0 left-0 h-full', className)}
 				overlayClassName="!bg-black !bg-opacity-10 top-0 left-0"
 			>
-				<NavBody logo={company?.logo} menus={menus} onClose={handleToggle} />
+				<NavBody
+					menus={menus}
+					onClose={handleToggle}
+					logo={{ src: site?.logo, alt: site?.title }}
+				/>
 			</DrawerRoot>
-		</>
+		</div>
 	);
 };
 
@@ -50,6 +54,7 @@ const MobileNav = ({ data, className, triggerClassName }) => {
 MobileNav.defaultProps = {
 	data: {},
 	className: '',
+	rootClassName: '',
 	triggerClassName: '',
 };
 
@@ -58,15 +63,14 @@ MobileNav.defaultProps = {
  */
 MobileNav.propTypes = {
 	data: PropTypes.shape({
-		company: PropTypes.shape({
-			logo: PropTypes.shape({
-				src: PropTypes.string,
-				alt: PropTypes.string,
-			}),
+		site: PropTypes.shape({
+			logo: PropTypes.string,
+			title: PropTypes.string,
 		}),
 		menus: PropTypes.arrayOf(PropTypes.shape({})),
 	}),
 	className: PropTypes.string,
+	rootClassName: PropTypes.string,
 	triggerClassName: PropTypes.string,
 };
 

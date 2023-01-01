@@ -15,7 +15,7 @@ const ContentArea = ({ items, ...props }) => (
 			<div className="flex">
 				{items?.map((item) => (
 					<div key={item?.id} className="flex flex-col flex-shrink-0 w-1/4 px-5 space-y-3">
-						<h4 className="text-sm font-semibold text-primary-600">{item.title}</h4>
+						<h4 className="text-sm font-semibold text-primary-600">{item?.label}</h4>
 						{item?.items?.length > 0 && (
 							<ul className="flex flex-col space-y-2">
 								{item?.items?.map((childItem) => (

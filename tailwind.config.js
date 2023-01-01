@@ -1,5 +1,6 @@
-const { fontFamily } = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
+const { fontFamily } = require('tailwindcss/defaultTheme');
+const tailwindTypography = require('@tailwindcss/typography');
 
 /** Backface Visibility Plugin. */
 const backfaceVisibility = plugin(({ addUtilities }) => {
@@ -109,5 +110,5 @@ module.exports = {
 	corePlugins: {
 		container: false,
 	},
-	plugins: [backfaceVisibility],
+	plugins: [backfaceVisibility, tailwindTypography],
 };
