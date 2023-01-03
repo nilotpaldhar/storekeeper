@@ -29,6 +29,7 @@ export { default as InfoCircle } from './regular/InfoCircle';
 export { default as Language } from './regular/Language';
 export { default as LayoutGrid } from './regular/LayoutGrid';
 export { default as LayoutList } from './regular/LayoutList';
+export { default as Loading } from './regular/Loading';
 export { default as Lock } from './regular/Lock';
 export { default as Logout } from './regular/Logout';
 export { default as MapPin } from './regular/MapPin';
