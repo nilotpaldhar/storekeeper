@@ -1,4 +1,5 @@
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
+import Container from '@ui/general/Container';
 import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
 
 /**
@@ -7,9 +8,9 @@ import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
  * @return {Element} The Homepage component.
  */
 const Homepage = () => (
-	<main>
-		<section className="text-base font-semibold py-60">Homepage</section>
-	</main>
+	<Container className="py-10">
+		<h1 className="text-4xl font-bold text-center">Home Page</h1>
+	</Container>
 );
 
 /** Page Layout. */
