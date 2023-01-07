@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
+export { default as Checkbox } from '@ui/data-entry/Checkbox';
 export { default as TextField } from '@ui/data-entry/TextField';
