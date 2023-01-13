@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 /** Components. */
 import Anchor from '@ui/general/Anchor';
+import RegularButton from '@ui/buttons/RegularButton';
 
 /** Constants. */
 import { COOKIE_CONSENT_KEY } from '@constants';
@@ -63,23 +64,19 @@ const CookieConsent = ({ enabled, message, link, delay, className, ...props }) =
 						</Anchor>
 					</p>
 				)}
-				<div className="flex flex-col sm:flex-row items-center mt-4 space-y-1 sm:space-y-0 sm:space-x-1">
-					<button
-						type="button"
+				<div className="flex flex-col sm:flex-row items-center mt-4 space-y-2 sm:space-y-0 sm:space-x-2">
+					<RegularButton
+						fullWidth
+						intent="primary-ghost"
 						aria-label="Decline Cookies"
 						onClick={() => handleClick(false)}
-						className="block w-full flex-1 p-1 text-sm font-normal bg-white border text-primary-600 border-primary-600"
+						className="border border-primary-600"
 					>
 						Decline
-					</button>
-					<button
-						type="button"
-						aria-label="Accept Cookies"
-						onClick={() => handleClick(true)}
-						className="block w-full flex-1 p-1 text-sm font-normal text-white border bg-primary-600 border-primary-600 hover:text-white"
-					>
+					</RegularButton>
+					<RegularButton fullWidth aria-label="Accept Cookies" onClick={() => handleClick(true)}>
 						Accept
-					</button>
+					</RegularButton>
 				</div>
 			</div>
 		</div>

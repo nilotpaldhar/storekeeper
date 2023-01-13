@@ -23,7 +23,7 @@ const fetchPage = async (preview = false, slug = null) => {
   `;
 
 	/** Fatch page data. */
-	const data = await client(preview).fetch(query);
+	const data = await client({ useCdn: preview }).fetch(query);
 
 	return data?.page !== null ? data : null;
 };

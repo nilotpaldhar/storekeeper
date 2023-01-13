@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Nunito } from '@next/font/google';
 import { DefaultSeo } from 'next-seo';
+import { SessionProvider } from 'next-auth/react';
 
 /** Default Seo Config. */
 import defaultSeoConf from '@config/next-seo';
@@ -28,10 +29,10 @@ const App = ({ Component, pageProps }) => {
 	const getLayout = Component.getLayout || ((page) => page);
 
 	/** Extract site configuration. */
-	const { data: { siteConfig, ...restPageProps } = {} } = pageProps ?? {};
+	const { data: { siteConfig, ...restPageProps } = {}, session } = pageProps ?? {};
 
 	return (
-		<>
+		<SessionProvider session={session}>
 			<DefaultSeo {...defaultSeoConf} />
 			<div className={`${nunito.variable} ${nunito.className} h-full`}>
 				{getLayout(<Component {...restPageProps} />, {
@@ -39,7 +40,7 @@ const App = ({ Component, pageProps }) => {
 					pageSeo: restPageProps?.page?.seo,
 				})}
 			</div>
-		</>
+		</SessionProvider>
 	);
 };
 
