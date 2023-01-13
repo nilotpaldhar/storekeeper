@@ -17,6 +17,11 @@ import cookieSettings from './documents/settings-cookie';
 import socialSettings from './documents/settings-social';
 import generalSettings from './documents/settings-general';
 
+// Document types (User/Auth)
+import user from './documents/user';
+import account from './documents/account';
+import verificationToken from './documents/verificationToken';
+
 // Object Types
 import seo from './objects/seo';
 import asset from './objects/asset';
@@ -60,8 +65,14 @@ export default createSchema({
 		socialSettings,
 		generalSettings,
 
+		/* ------------------------------------ */
+		/* 2: Document types (User/Auth) */
+		user,
+		account,
+		verificationToken,
+
 		/* ----------------------- */
-		/* 2: Generic Object types */
+		/* 3: Generic Object types */
 		seo,
 		asset,
 		content,
@@ -69,7 +80,7 @@ export default createSchema({
 		breadcrumb,
 
 		/* ----------------------- */
-		/* 3: Navigation Object types */
+		/* 4: Navigation Object types */
 		navLink,
 		navPage,
 		navProduct,
@@ -77,7 +88,7 @@ export default createSchema({
 		navDropdown,
 
 		/* ----------------------- */
-		/* 4: Commerce Object types */
+		/* 5: Commerce Object types */
 		productPrice,
 		productVariant,
 		productInventory,

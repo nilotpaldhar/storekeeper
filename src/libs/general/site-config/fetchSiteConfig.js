@@ -7,7 +7,7 @@ import SiteConfigQuery from '@libs/queries/SiteConfig';
  */
 const fetchSiteConfig = async (preview = false) => {
 	const query = groq`{"siteConfig": ${SiteConfigQuery}}`;
-	const data = await client(preview).fetch(query);
+	const data = await client({ useCdn: preview }).fetch(query);
 	return data;
 };
 

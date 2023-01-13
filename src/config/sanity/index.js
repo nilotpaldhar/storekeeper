@@ -11,22 +11,15 @@ const config = {
 	 **/
 	dataset: process.env.NEXT_PUBLIC_SANITY_PROJECT_DATASET,
 	projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-	apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+	apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2021-10-21',
 	/**
 	 * Set useCdn to `false` if your application require the freshest possible
 	 * data always (potentially slightly slower and a bit more expensive).
 	 * Authenticated request (like preview) will always bypass the CDN
 	 **/
 	useCdn: process.env.NODE_ENV === 'production',
+	token: process.env.SANITY_API_TOKEN,
 };
-
-if (!config.projectId) {
-	throw Error('The Project ID is not set. Check your environment variables.');
-}
-
-if (!config.dataset) {
-	throw Error('The dataset name is not set. Check your environment variables.');
-}
 
 /**
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
@@ -34,13 +27,19 @@ if (!config.dataset) {
  **/
 export const urlFor = (source) => createImageUrlBuilder(config).image(source);
 
-/** Setup sanity client. */
-export const sanityClient = createClient(config);
-
-/** Setup preview client. */
-export const previewClient = createClient({ ...config, useCdn: false });
-
 /** Helper function for easily switching between normal client and preview client. */
-export const getClient = (usePreview) => (usePreview ? previewClient : sanityClient);
+export const getClient = ({ useCdn = true }) => {
+	config.useCdn = !!useCdn;
+
+	if (!config.projectId) {
+		throw Error('The Project ID is not set. Check your environment variables.');
+	}
+
+	if (!config.dataset) {
+		throw Error('The dataset name is not set. Check your environment variables.');
+	}
+
+	return createClient(config);
+};
 
 export default getClient;
