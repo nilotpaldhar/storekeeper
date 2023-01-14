@@ -25,10 +25,12 @@ const LayoutWrapper = ({ data, layoutType, children, ...props }) => {
 	return (
 		<>
 			<Seo {...seoData} />
-			<Promobar {...promo} />
+			{layoutType !== 'auth' && <Promobar {...promo} />}
 			<CookieConsent {...cookie} />
 			{layoutType === 'auth' ? (
-				<AuthLayout {...props}>{children}</AuthLayout>
+				<AuthLayout site={root} {...props}>
+					{children}
+				</AuthLayout>
 			) : (
 				<PrimaryLayout data={{ header, footer }} {...props}>
 					{children}

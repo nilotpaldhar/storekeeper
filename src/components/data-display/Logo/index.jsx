@@ -23,7 +23,7 @@ const Logo = ({ href, src, alt, width, height, srcSanity, className, ...props })
 
 	return (
 		<Anchor href={href} className={classNames} {...props}>
-			<Image src={logoSrc} alt={alt} width={width} height={height} />
+			<Image src={logoSrc} alt={alt} width={width} height={height} priority />
 		</Anchor>
 	);
 };
