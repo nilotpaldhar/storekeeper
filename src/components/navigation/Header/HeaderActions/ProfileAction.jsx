@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import { Item, Trigger, Content } from '@radix-ui/react-navigation-menu';
 
 /** Components */
+import UserNavAction from '@ui/user/UserNavAction';
 import HeaderIcon from '@ui/navigation/Header/HeaderIcon';
 
 /** Icons. */
 import UserIcon from '@icons/regular/User';
-import LockIcon from '@icons/regular/Lock';
 
 /** Helpers. */
 import clsx from 'clsx';
@@ -28,17 +28,7 @@ const ProfileAction = ({ className, ...props }) => (
 		</Trigger>
 		<Content className="absolute z-10 w-64 transform -translate-x-1/2 bg-white border rounded rounded-t-none shadow top-full left-1/2 border-neutral-100">
 			<div className="px-4 py-5">
-				<div className="flex flex-col space-y-2">
-					<h4 className="text-sm font-bold leading-none">Welcome</h4>
-					<p className="text-xs font-light leading-none">To access your account & manage orders</p>
-				</div>
-				<button
-					type="button"
-					className="flex items-center justify-center w-full py-3 mt-3 space-x-2 text-center text-white bg-primary-600 hover:bg-primary-500 hover:text-white"
-				>
-					<LockIcon className="!text-sm" />
-					<span className="text-sm leading-none">Login / Register</span>
-				</button>
+				<UserNavAction />
 			</div>
 		</Content>
 	</Item>

@@ -99,6 +99,14 @@ module.exports = {
 					800: '#820014',
 					900: '#5C0011',
 				},
+				social: {
+					google: '#ea4335',
+					facebook: '#1877f2',
+					twitter: '#1da1f2',
+					instagram: '#405de6',
+					github: '#333333',
+					linkedin: '#0077b5',
+				},
 			},
 			fontFamily: {
 				sans: ['var(--font-nunito)', ...fontFamily.sans],

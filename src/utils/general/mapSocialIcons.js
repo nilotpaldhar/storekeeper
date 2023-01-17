@@ -1,4 +1,6 @@
 import Facebook from '@icons/social/Facebook';
+import Github from '@icons/social/Github';
+import Google from '@icons/social/Google';
 import Instagram from '@icons/social/Instagram';
 import Linkedin from '@icons/social/Linkedin';
 import Twitter from '@icons/social/Twitter';
@@ -12,10 +14,12 @@ import Twitter from '@icons/social/Twitter';
  */
 const mapSocialIcons = (name = '') => {
 	const SocialIconsMap = {
-		twitter: Twitter,
-		instagram: Instagram,
 		facebook: Facebook,
+		github: Github,
+		google: Google,
+		instagram: Instagram,
 		linkedin: Linkedin,
+		twitter: Twitter,
 	};
 
 	if (name in SocialIconsMap) {

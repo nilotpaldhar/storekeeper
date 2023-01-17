@@ -41,7 +41,7 @@ export const account = (client) => {
 				providerAccountId: `${providerAccountId}`,
 				accessToken,
 				refreshToken,
-				accessTokenExpires,
+				accessTokenExpires: `${accessTokenExpires}`,
 				userId,
 			};
 

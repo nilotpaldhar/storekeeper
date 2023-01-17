@@ -25,7 +25,7 @@ export const user = (client) => {
 	const findUser = async (key = '_id', value = '') => {
 		let userSanity;
 		const query = groq`*[_type == "user" && ${key} == $value]{
-      "id": _id, firstName, lastName, email, emailVerified, image, checId
+      "id": _id, "name": firstName, firstName, lastName, email, emailVerified, image, checId
     }[0]`;
 
 		try {
@@ -86,9 +86,14 @@ export const user = (client) => {
 			};
 
 			try {
-				const { _id: userId, checId, ...rest } = await sanity.patch(id).set(userObjSanity).commit();
+				const {
+					_id: userId,
+					checId,
+					firstName,
+					...rest
+				} = await sanity.patch(id).set(userObjSanity).commit();
 				await chec.request(`customers/${checId}`, 'put', userObjChec);
-				return { id: userId, ...rest };
+				return { id: userId, name: firstName, ...rest };
 			} catch (error) {
 				throw new Error("Can't update user. Something went wrong");
 			}
