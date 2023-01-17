@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
-import GithubProvider from 'next-auth/providers/github';
+import GoogleProvider from 'next-auth/providers/google';
+import FacebookProvider from 'next-auth/providers/facebook';
 import EmailProvider from 'next-auth/providers/email';
 
 /** API clients. */
@@ -16,9 +17,13 @@ const API_CLIENTS = {
 
 export const authOptions = {
 	providers: [
-		GithubProvider({
-			clientId: process.env.GITHUB_CLIENT_ID,
-			clientSecret: process.env.GITHUB_CLIENT_SECRET,
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+		}),
+		FacebookProvider({
+			clientId: process.env.FACEBOOK_CLIENT_ID,
+			clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
 		}),
 		EmailProvider({
 			server: {
@@ -32,8 +37,22 @@ export const authOptions = {
 			from: process.env.EMAIL_FROM,
 		}),
 	],
+	callbacks: {
+		async jwt({ token, account }) {
+			if (account?.access_token) {
+				token.accessToken = account.access_token;
+			}
+			return token;
+		},
+	},
 	adapter: ChecSanityAdapter(API_CLIENTS),
 	session: { strategy: 'jwt' },
+	pages: { signIn: '/login' },
+	theme: {
+		colorScheme: 'light',
+		brandColor: '#0059B3',
+		buttonText: '#FFFFFF',
+	},
 	debug: process.env.NODE_ENV === 'development',
 };
 

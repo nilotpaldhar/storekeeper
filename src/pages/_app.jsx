@@ -29,13 +29,13 @@ const App = ({ Component, pageProps }) => {
 	const getLayout = Component.getLayout || ((page) => page);
 
 	/** Extract site configuration. */
-	const { data: { siteConfig, ...restPageProps } = {}, session } = pageProps ?? {};
+	const { data: { siteConfig, ...restSiteData } = {}, session, ...restPageProps } = pageProps ?? {};
 
 	return (
 		<SessionProvider session={session}>
 			<DefaultSeo {...defaultSeoConf} />
 			<div className={`${nunito.variable} ${nunito.className} h-full`}>
-				{getLayout(<Component {...restPageProps} />, {
+				{getLayout(<Component {...restSiteData} {...restPageProps} />, {
 					...siteConfig,
 					pageSeo: restPageProps?.page?.seo,
 				})}

@@ -31,9 +31,9 @@ const AuthLayout = ({ site, children, ...props }) => {
 
 	return (
 		<div className="relative flex h-full" {...props}>
-			<div className="flex-1 flex flex-col min-h-full">
-				<header className="w-full h-20 border-b border-neutral-100">
-					<Container className="h-full xl:px-16 flex flex-wrap items-center justify-between">
+			<div className="flex flex-col flex-1 min-h-full">
+				<header className="w-full h-20 border-b shrink-0 border-neutral-100">
+					<Container className="flex flex-wrap items-center justify-between h-full xl:px-16">
 						<Logo {...logoConf} />
 						<nav>
 							<RegularButton
@@ -48,11 +48,11 @@ const AuthLayout = ({ site, children, ...props }) => {
 						</nav>
 					</Container>
 				</header>
-				<Container className="flex-1 h-full">{children}</Container>
+				<div className="flex-1 h-full">{children}</div>
 			</div>
 			<div className={imgWrapperClassNames} />
 			<div className={`${imgWrapperClassNames} fixed inset-y-0 right-0 bg-[#fafafa]`}>
-				<div className="h-full w-full flex items-center">
+				<div className="flex items-center w-full h-full">
 					<Image src={authGraphicSrc} alt="Auth Graphics" />
 				</div>
 			</div>

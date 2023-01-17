@@ -51,6 +51,8 @@ export { default as UserAdd } from './regular/UserAdd';
 
 /** Social Icons. */
 export { default as Facebook } from './social/Facebook';
+export { default as Github } from './social/Github';
+export { default as Google } from './social/Google';
 export { default as Instagram } from './social/Instagram';
 export { default as Linkedin } from './social/Linkedin';
 export { default as Twitter } from './social/Twitter';

@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
-export { default as StaticPage } from '@templates/StaticPage';
+export { default as LoginPageTmpl } from '@templates/LoginPage';
+export { default as StaticPageTmpl } from '@templates/StaticPage';
