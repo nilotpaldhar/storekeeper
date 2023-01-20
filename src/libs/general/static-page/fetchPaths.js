@@ -6,7 +6,7 @@ import isEmpty from 'lodash-es/isEmpty';
 /**
  * Fetch paths for static pages.
  */
-const fetchPaths = async () => {
+const fetchPaths = async (preview = false) => {
 	const query = groq`
     *[_type == "page" && defined(slug.current)]{ 
       "slug": slug.current 

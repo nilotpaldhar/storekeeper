@@ -37,7 +37,7 @@ const App = ({ Component, pageProps }) => {
 			<div className={`${nunito.variable} ${nunito.className} h-full`}>
 				{getLayout(<Component {...restSiteData} {...restPageProps} />, {
 					...siteConfig,
-					pageSeo: restPageProps?.page?.seo,
+					pageSeo: restSiteData?.page?.seo,
 				})}
 			</div>
 		</SessionProvider>

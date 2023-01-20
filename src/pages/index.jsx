@@ -1,6 +1,9 @@
-import LayoutWrapper from '@ui/layouts/LayoutWrapper';
+/** Components. */
 import Container from '@ui/general/Container';
-import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
+import LayoutWrapper from '@ui/layouts/LayoutWrapper';
+
+/** Functions. */
+import fetchPage from '@libs/general/dynamic-page/fetchPage';
 
 /**
  * Render the Homepage component.
@@ -23,7 +26,7 @@ Homepage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</LayoutWr
  */
 export const getStaticProps = async () => {
 	try {
-		const data = await fetchSiteConfig(false);
+		const data = await await fetchPage(false, 'homepage');
 		return { props: { data } };
 	} catch (error) {
 		return { notFound: true };
