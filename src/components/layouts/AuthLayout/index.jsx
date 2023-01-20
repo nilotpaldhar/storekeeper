@@ -17,7 +17,7 @@ import authGraphicSrc from '@public/graphics/auth.svg';
  *
  * @return {Element} The AuthLayout component.
  */
-const AuthLayout = ({ site, children, ...props }) => {
+const AuthLayout = ({ site, children, graphics, ...props }) => {
 	const imgWrapperClassNames = 'hidden xl:block min-w-[625px]';
 
 	/** Logo Config. */
@@ -53,7 +53,7 @@ const AuthLayout = ({ site, children, ...props }) => {
 			<div className={imgWrapperClassNames} />
 			<div className={`${imgWrapperClassNames} fixed inset-y-0 right-0 bg-[#fafafa]`}>
 				<div className="flex items-center w-full h-full">
-					<Image src={authGraphicSrc} alt="Auth Graphics" />
+					<Image src={graphics} alt="Graphics" />
 				</div>
 			</div>
 		</div>
@@ -66,6 +66,7 @@ const AuthLayout = ({ site, children, ...props }) => {
 AuthLayout.defaultProps = {
 	site: {},
 	children: '',
+	graphics: authGraphicSrc,
 };
 
 /**
@@ -77,6 +78,7 @@ AuthLayout.propTypes = {
 		logo: PropTypes.string,
 	}),
 	children: PropTypes.node,
+	graphics: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 export default AuthLayout;

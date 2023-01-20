@@ -19,6 +19,7 @@ export { default as Dashboard } from './regular/Dashboard';
 export { default as Dollar } from './regular/Dollar';
 export { default as DollarCircle } from './regular/DollarCircle';
 export { default as Email } from './regular/Email';
+export { default as Exclamation } from './regular/Exclamation';
 export { default as Eye } from './regular/Eye';
 export { default as Giftcard } from './regular/Giftcard';
 export { default as Headphone } from './regular/Headphone';

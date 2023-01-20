@@ -5,17 +5,16 @@ import SiteConfigQuery from '@libs/queries/SiteConfig';
 import PageSeoQuery from '@libs/queries/PageSeo';
 
 /**
- * Fetch static page data.
+ * Fetch dynamic page data.
  */
-const fetchPage = async (preview = false, slug = null) => {
-	if (isEmpty(slug)) return null;
-	const slugs = JSON.stringify([`/${slug}`, slug, `/${slug}/`]);
+const fetchPage = async (preview = false, type = null) => {
+	if (isEmpty(type)) return null;
+
 	const query = groq`
     { 
-      "page": *[_type == "page" && slug.current in ${slugs}] | order(_updatedAt desc)[0] {
+      "page": *[_type == "${type}"] | order(_updatedAt desc)[0] {
         title, 
-        "slug": slug.current, 
-        "content": pageContent, 
+        slug, 
         "seo": { ${PageSeoQuery} }
       }, 
       "siteConfig": ${SiteConfigQuery}

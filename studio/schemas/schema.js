@@ -8,6 +8,7 @@ import product from './documents/product';
 import category from './documents/category';
 import homepage from './documents/homepage';
 import shoppage from './documents/shoppage';
+import loginpage from './documents/loginpage';
 import errorpage from './documents/errorpage';
 import seoSettings from './documents/settings-seo';
 import promoSettings from './documents/settings-promo';
@@ -56,6 +57,7 @@ export default createSchema({
 		category,
 		homepage,
 		shoppage,
+		loginpage,
 		errorpage,
 		seoSettings,
 		promoSettings,

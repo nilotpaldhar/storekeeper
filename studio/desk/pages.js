@@ -1,7 +1,7 @@
 import S from '@sanity/desk-tool/structure-builder';
 import { BsCart } from 'react-icons/bs';
 import { VscBrowser } from 'react-icons/vsc';
-import { AiOutlineHome } from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineLock } from 'react-icons/ai';
 import { MdErrorOutline } from 'react-icons/md';
 
 // Homepage Menu
@@ -15,6 +15,12 @@ const shoppageMenu = S.listItem()
 	.title('Shop Page')
 	.child(S.editor().id('shoppage').schemaType('shoppage').documentId('shoppage'))
 	.icon(BsCart);
+
+// Loginpage Menu
+const loginpageMenu = S.listItem()
+	.title('Login Page')
+	.child(S.editor().id('loginpage').schemaType('loginpage').documentId('loginpage'))
+	.icon(AiOutlineLock);
 
 // Errorpage Menu
 const errorpageMenu = S.listItem()
@@ -37,7 +43,11 @@ const otherPagesMenu = S.listItem()
 export const menusMenu = S.listItem()
 	.title('Pages')
 	.id('pages')
-	.child(S.list().title('Pages').items([homepageMenu, shoppageMenu, errorpageMenu, otherPagesMenu]))
+	.child(
+		S.list()
+			.title('Pages')
+			.items([homepageMenu, shoppageMenu, loginpageMenu, errorpageMenu, otherPagesMenu])
+	)
 	.icon(VscBrowser);
 
 export default menusMenu;

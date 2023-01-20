@@ -1,8 +1,5 @@
-/* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import { getProviders } from 'next-auth/react';
-import { unstable_getServerSession } from 'next-auth/next';
-import { authOptions } from '@pages/api/auth/[...nextauth]';
 
 /** Components. */
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
@@ -11,10 +8,11 @@ import LayoutWrapper from '@ui/layouts/LayoutWrapper';
 import LoginPageTmpl from '@templates/LoginPage';
 
 /** Functions. */
-import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
+import redirectAuthUser from '@libs/auth/redirectAuthUser';
+import fetchPage from '@libs/general/dynamic-page/fetchPage';
 
 /** Helpers. */
-import isEmpty from 'lodash-es/isEmpty';
+import mapLoginErrors from '@utils/auth/mapLoginErrors';
 import parseLoginRedirectUri from '@utils/auth/parseLoginRedirectUri';
 
 /**
@@ -22,9 +20,9 @@ import parseLoginRedirectUri from '@utils/auth/parseLoginRedirectUri';
  *
  * @return {Element} The LoginPage component.
  */
-const LoginPage = ({ providers, callbackUrl }) => {
+const LoginPage = ({ providers, callbackUrl, error }) => {
 	const authProviders = Object.values(providers ?? {}).filter(({ id } = {}) => id !== 'email');
-	return <LoginPageTmpl providers={authProviders} callbackUrl={callbackUrl} />;
+	return <LoginPageTmpl providers={authProviders} callbackUrl={callbackUrl} error={error} />;
 };
 
 /**
@@ -32,6 +30,7 @@ const LoginPage = ({ providers, callbackUrl }) => {
  */
 LoginPage.defaultProps = {
 	callbackUrl: '/',
+	error: null,
 };
 
 /**
@@ -40,6 +39,7 @@ LoginPage.defaultProps = {
 LoginPage.propTypes = {
 	providers: PropTypes.shape({}).isRequired,
 	callbackUrl: PropTypes.string,
+	error: PropTypes.string,
 };
 
 /** Page Layout. */
@@ -56,21 +56,17 @@ LoginPage.getLayout = (page, data) => (
  */
 export const getServerSideProps = async ({ req, res, query }) => {
 	const callbackUrl = parseLoginRedirectUri(query?.callbackUrl);
+	const error = mapLoginErrors(query?.error);
 
-	try {
-		const session = await unstable_getServerSession(req, res, authOptions);
-		const providers = await getProviders();
-		const data = await fetchSiteConfig(false);
-
-		const props = { data, providers, callbackUrl };
-		const redirect = { permanent: false, destination: '/' };
-
-		// Redirect authenticated users
-		if (!isEmpty(session?.user)) return { redirect };
-		return { props };
-	} catch (error) {
-		return { notFound: true };
-	}
+	return redirectAuthUser(req, res, async () => {
+		try {
+			const providers = await getProviders();
+			const data = await fetchPage(false, 'loginpage');
+			return { props: { data, providers, callbackUrl, error } };
+		} catch (err) {
+			return { notFound: true };
+		}
+	});
 };
 
 export default LoginPage;

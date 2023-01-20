@@ -47,7 +47,11 @@ export const authOptions = {
 	},
 	adapter: ChecSanityAdapter(API_CLIENTS),
 	session: { strategy: 'jwt' },
-	pages: { signIn: '/login' },
+	pages: {
+		signIn: '/login',
+		error: '/login/error',
+		verifyRequest: '/login/verification',
+	},
 	theme: {
 		colorScheme: 'light',
 		brandColor: '#0059B3',
