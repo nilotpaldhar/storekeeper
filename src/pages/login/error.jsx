@@ -46,7 +46,7 @@ ErrorPage.getLayout = (page, data) => (
  *
  * @return {object} Page props.
  */
-export const getServerSideProps = async ({ req, res, query }) => {
+export const getServerSideProps = async ({ preview, req, res, query }) => {
 	const errorType = query?.error ?? 'Default';
 	const page = {
 		seo: {
@@ -57,7 +57,7 @@ export const getServerSideProps = async ({ req, res, query }) => {
 
 	return redirectAuthUser(req, res, async () => {
 		try {
-			const { siteConfig } = await fetchSiteConfig(false);
+			const { siteConfig } = await fetchSiteConfig(preview);
 			return { props: { data: { siteConfig, page }, errorType } };
 		} catch (error) {
 			return { notFound: true };

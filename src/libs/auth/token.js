@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
 
 export const verificationToken = (client) => {
-	const sanity = client?.sanity({ useCdn: false });
+	const sanity = client?.sanity({ useCdn: false, useToken: true });
 
 	/** Find verification token. */
 	const findToken = async (identifier = '', token = '') => {

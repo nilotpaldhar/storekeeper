@@ -18,7 +18,6 @@ const config = {
 	 * Authenticated request (like preview) will always bypass the CDN
 	 **/
 	useCdn: process.env.NODE_ENV === 'production',
-	token: process.env.SANITY_API_TOKEN,
 };
 
 /**
@@ -28,8 +27,9 @@ const config = {
 export const urlFor = (source) => createImageUrlBuilder(config).image(source);
 
 /** Helper function for easily switching between normal client and preview client. */
-export const getClient = ({ useCdn = true }) => {
+export const getClient = ({ useCdn = true, useToken = false }) => {
 	config.useCdn = !!useCdn;
+	config.token = useToken ? process.env.SANITY_API_TOKEN : null;
 
 	if (!config.projectId) {
 		throw Error('The Project ID is not set. Check your environment variables.');
@@ -37,6 +37,10 @@ export const getClient = ({ useCdn = true }) => {
 
 	if (!config.dataset) {
 		throw Error('The dataset name is not set. Check your environment variables.');
+	}
+
+	if (useToken && !process.env.SANITY_API_TOKEN) {
+		throw Error('The sanity API token is not set. Check your environment variables.');
 	}
 
 	return createClient(config);

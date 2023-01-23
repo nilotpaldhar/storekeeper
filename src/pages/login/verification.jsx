@@ -35,7 +35,7 @@ VerificationPage.getLayout = (page, data) => (
  *
  * @return {object} Page props.
  */
-export const getServerSideProps = async ({ req, res }) => {
+export const getServerSideProps = async ({ preview, req, res }) => {
 	const page = {
 		seo: {
 			metaTitle: 'Email Verification',
@@ -45,7 +45,7 @@ export const getServerSideProps = async ({ req, res }) => {
 
 	return redirectAuthUser(req, res, async () => {
 		try {
-			const { siteConfig } = await fetchSiteConfig(false);
+			const { siteConfig } = await fetchSiteConfig(preview);
 			return { props: { data: { siteConfig, page } } };
 		} catch (error) {
 			return { notFound: true };
