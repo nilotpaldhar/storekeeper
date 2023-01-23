@@ -54,14 +54,14 @@ LoginPage.getLayout = (page, data) => (
  *
  * @return {object} Page props.
  */
-export const getServerSideProps = async ({ req, res, query }) => {
+export const getServerSideProps = async ({ preview, req, res, query }) => {
 	const callbackUrl = parseLoginRedirectUri(query?.callbackUrl);
 	const error = mapLoginErrors(query?.error);
 
 	return redirectAuthUser(req, res, async () => {
 		try {
 			const providers = await getProviders();
-			const data = await fetchPage(false, 'loginpage');
+			const data = await fetchPage(preview, 'loginpage');
 			return { props: { data, providers, callbackUrl, error } };
 		} catch (err) {
 			return { notFound: true };

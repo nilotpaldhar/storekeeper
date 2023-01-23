@@ -22,8 +22,7 @@ const fetchPage = async (preview = false, type = null) => {
   `;
 
 	/** Fatch page data. */
-	const data = await client({ useCdn: preview }).fetch(query);
-
+	const data = await client({ useCdn: !preview, useToken: preview }).fetch(query);
 	return data?.page ? data : null;
 };
 

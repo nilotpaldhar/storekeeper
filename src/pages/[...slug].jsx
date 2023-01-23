@@ -37,7 +37,7 @@ StaticPage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</Layout
 export const getStaticPaths = async () => {
 	try {
 		const staticPaths = await fetchPaths();
-		return { paths: staticPaths ?? [], fallback: false };
+		return { paths: staticPaths ?? [], fallback: 'blocking' };
 	} catch (error) {
 		return { paths: [], fallback: false };
 	}
@@ -48,11 +48,11 @@ export const getStaticPaths = async () => {
  *
  * @return {object} Page props.
  */
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ preview, params }) => {
 	const slug = params?.slug?.join('/');
 	try {
-		const data = await fetchPage(false, slug);
-		const response = { props: { data } };
+		const data = await fetchPage(preview, slug);
+		const response = { props: { data }, revalidate: 60 };
 		return data ? response : { notFound: true };
 	} catch (error) {
 		return { notFound: true };

@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 import { groq } from 'next-sanity';
 
 export const user = (client) => {
-	const sanity = client?.sanity({ useCdn: false });
+	const sanity = client?.sanity({ useCdn: false, useToken: true });
 	const chec = client?.chec({ useSecretKey: true });
 
 	/** Remove user. */

@@ -14,7 +14,7 @@ const fetchPaths = async (preview = false) => {
 	`;
 
 	/** Fetch slugs. */
-	const pages = await client({ useCdn: preview }).fetch(query);
+	const pages = await client({ useCdn: !preview, useToken: preview }).fetch(query);
 
 	if (isEmpty(pages) || !isArray(pages)) return [];
 

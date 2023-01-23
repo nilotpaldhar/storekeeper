@@ -2,7 +2,7 @@ import { groq } from 'next-sanity';
 import user from '@libs/auth/user';
 
 export const account = (client) => {
-	const sanity = client?.sanity({ useCdn: false });
+	const sanity = client?.sanity({ useCdn: false, useToken: true });
 	const getUser = user(client).get;
 
 	/** Find account. */
