@@ -1,14 +1,17 @@
+import { BsGift } from 'react-icons/bs';
+
 export default {
 	title: 'Products',
 	name: 'product',
 	type: 'document',
+	icon: BsGift,
 	fieldsets: [
 		{
 			title: 'Commerce',
 			name: 'commerce',
 			description: 'Product data synced from Chec/Commerce.js',
 			readOnly: true,
-			options: { collapsible: true, collapsed: true },
+			options: { collapsible: true, collapsed: false },
 		},
 	],
 	fields: [
@@ -167,4 +170,10 @@ export default {
 			fieldset: 'commerce',
 		},
 	],
+	preview: {
+		select: { title: 'name' },
+		prepare({ title }) {
+			return { title };
+		},
+	},
 };
