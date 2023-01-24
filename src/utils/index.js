@@ -10,3 +10,6 @@ export { default as removeTrailingSlash } from '@utils/general/removeTrailingSla
 /** Auth. */
 export { default as mapLoginErrors } from '@utils/auth/mapLoginErrors';
 export { default as parseLoginRedirectUri } from '@utils/auth/parseLoginRedirectUri';
+
+/** Webhook. */
+export { default as validateWebhookReq } from '@utils/webhook/validateWebhookReq';

@@ -1,7 +1,10 @@
+import { BsGrid3X3Gap } from 'react-icons/bs';
+
 export default {
 	title: 'Categories',
 	name: 'category',
 	type: 'document',
+	icon: BsGrid3X3Gap,
 	fieldsets: [
 		{
 			title: 'Commerce',
@@ -12,6 +15,11 @@ export default {
 		},
 	],
 	fields: [
+		{
+			title: 'SEO / Share Settings',
+			name: 'seo',
+			type: 'seo',
+		},
 		{
 			title: 'ID',
 			name: 'categoryID',
@@ -86,4 +94,11 @@ export default {
 			fieldset: 'commerce',
 		},
 	],
+	preview: {
+		select: { title: 'title', breadcrumbs: 'breadcrumbs' },
+		prepare({ title, breadcrumbs }) {
+			const subtitle = [...breadcrumbs.map((b) => b?.title), title].join(' -> ');
+			return { title, subtitle: breadcrumbs?.length > 0 ? subtitle : '' };
+		},
+	},
 };
