@@ -8,6 +8,7 @@ import defaultSeoConf from '@config/next-seo';
 
 /** Root Styles */
 import '@styles/tailwindcss/core.scss';
+import '@smastrom/react-rating/style.css';
 import '@styles/global.scss';
 
 /** Font Configuration. */
