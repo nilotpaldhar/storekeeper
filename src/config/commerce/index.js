@@ -17,7 +17,7 @@ export const commerceConfig = {
 };
 
 /** Setup the Commerce client. */
-export const getClient = ({ useSecretKey = false }) => {
+export const getClient = ({ useSecretKey = false } = {}) => {
 	/** Warn the client if variables are missing. */
 	if (!checPublicApiKey || !checSecretApiKey) {
 		throw Error(
