@@ -79,14 +79,18 @@ const handler = async (req, res) => {
 		const productPayload = req.body?.payload;
 
 		/** Fetch product categories from sanity. */
-		const sanityCategories = await sanity.getDocuments(
-			productPayload?.categories.map(({ id }) => `category-${id}`)
-		);
+		const sanityCategories =
+			productPayload?.categories?.length > 0
+				? await sanity.getDocuments(productPayload?.categories.map(({ id }) => `category-${id}`))
+				: [];
 
 		/** Fetch related products from sanity. */
-		const sanityRelProducts = await sanity.getDocuments(
-			productPayload?.related_products?.map(({ id }) => `product-${id}`)
-		);
+		const sanityRelProducts =
+			productPayload?.related_products?.length > 0
+				? await sanity.getDocuments(
+						productPayload?.related_products?.map(({ id }) => `product-${id}`)
+				  )
+				: [];
 
 		/* ----------------------------------------------- */
 		/* Construct product and product fields object.
@@ -100,16 +104,16 @@ const handler = async (req, res) => {
 			categories,
 			relatedProducts,
 			name: productPayload?.name,
+			displayName: productPayload?.name,
 			productID: productPayload?.id,
 			sku: productPayload?.sku ?? '',
 			isActive: productPayload?.active,
 			slug: productPayload?.permalink ?? '',
-			image: mapAsset(productPayload.image),
 			price: mapPrice(productPayload.price),
 			assets: productPayload.assets.map(mapAsset),
-			description: productPayload?.description ?? '',
 			thankYouPage: productPayload?.thank_you_url ?? '',
 			variantGroups: productPayload?.variant_groups?.map(mapVariants),
+			image: productPayload.image ? mapAsset(productPayload.image) : undefined,
 			inventory: {
 				isManaged: productPayload?.inventory?.managed,
 				available: productPayload?.inventory?.available,
@@ -133,8 +137,8 @@ const handler = async (req, res) => {
 				sales: mapPrice(productPayload?.statistics?.sales),
 			},
 			seo: {
-				title: productPayload?.seo?.title,
-				description: productPayload?.seo?.description,
+				metaTitle: productPayload?.seo?.title ?? undefined,
+				metaDesc: productPayload?.seo?.description ?? undefined,
 			},
 			checkout: {
 				checkoutURL: productPayload?.checkout_url?.checkout,
@@ -146,6 +150,15 @@ const handler = async (req, res) => {
 		/* Begin Sanity product sync
     /* ------------------------------ */
 		sanityTransaction = sanityTransaction.createIfNotExists(product);
+
+		/**
+		 * Unset assets, variantGroups, categories and relatedProducts field,
+		 * to avoid patch set issues.
+		 * */
+		sanityTransaction = sanityTransaction.patch(modelId, (patch) =>
+			patch.unset(['assets', 'variantGroups', 'categories', 'relatedProducts'])
+		);
+
 		sanityTransaction = sanityTransaction.patch(modelId, (patch) => patch.set(productFields));
 		const result = await sanityTransaction.commit();
 

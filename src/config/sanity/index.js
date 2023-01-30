@@ -27,7 +27,7 @@ const config = {
 export const urlFor = (source) => createImageUrlBuilder(config).image(source);
 
 /** Helper function for easily switching between normal client and preview client. */
-export const getClient = ({ useCdn = true, useToken = false }) => {
+export const getClient = ({ useCdn = true, useToken = false } = {}) => {
 	config.useCdn = !!useCdn;
 	config.token = useToken ? process.env.SANITY_API_TOKEN : null;
 

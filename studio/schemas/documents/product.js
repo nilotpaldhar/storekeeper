@@ -16,9 +16,25 @@ export default {
 	],
 	fields: [
 		{
-			title: 'Display Name',
+			title: 'Name (display)',
 			name: 'displayName',
 			type: 'string',
+		},
+		{
+			title: 'Excerpt',
+			name: 'excerpt',
+			type: 'text',
+			rows: 4,
+		},
+		{
+			title: 'Description',
+			name: 'description',
+			type: 'portableContent',
+		},
+		{
+			title: 'SEO / Share Settings',
+			name: 'seo',
+			type: 'seo',
 		},
 		{
 			title: 'ID',
@@ -36,12 +52,6 @@ export default {
 			title: 'Slug',
 			name: 'slug',
 			type: 'string',
-			fieldset: 'commerce',
-		},
-		{
-			title: 'Description',
-			name: 'description',
-			type: 'text',
 			fieldset: 'commerce',
 		},
 		{
@@ -134,24 +144,6 @@ export default {
 					title: 'Checkout Display',
 					name: 'checkoutDisplay',
 					type: 'url',
-				},
-			],
-			fieldset: 'commerce',
-		},
-		{
-			title: 'Seo',
-			name: 'seo',
-			type: 'object',
-			fields: [
-				{
-					title: 'Title',
-					name: 'title',
-					type: 'string',
-				},
-				{
-					title: 'Description',
-					name: 'description',
-					type: 'text',
 				},
 			],
 			fieldset: 'commerce',
