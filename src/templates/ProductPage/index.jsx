@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
 /** Components. */
-import Image from '@ui/data-display/Image';
 import Tabs from '@ui/data-display/Tabs';
 import Container from '@ui/general/Container';
 import ProductContent from '@ui/commerce/ProductContent';
+import ProductImgGallery from '@ui/commerce/ProductImgGallery';
 import { PortableText } from '@portabletext/react';
 
 /**
@@ -13,6 +13,15 @@ import { PortableText } from '@portabletext/react';
  * @return {Element} The ProductPageTmpl component.
  */
 const ProductPageTmpl = ({ data }) => {
+	/** Images Gallery. */
+	const imgGallery = data?.gallery?.map((img) => ({
+		width: 800,
+		height: 800,
+		src: img?.url,
+		alt: data?.displayName ?? data?.name,
+	}));
+
+	/** Tabs Items. */
 	const tabsItems = [
 		{
 			key: 'product_desc',
@@ -35,12 +44,14 @@ const ProductPageTmpl = ({ data }) => {
 		<main className="py-10 lg:py-14">
 			<Container className="flex flex-col space-y-14 lg:space-y-20">
 				<section className="flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-8">
-					<div className="w-full lg:max-w-md xxl:max-w-xl shrink-0">
-						<Image
-							width={800}
-							height={800}
-							src={data?.image?.url}
-							alt={data?.displayName ?? data?.name}
+					<div className="w-full lg:max-w-md xxl:max-w-lg shrink-0">
+						<ProductImgGallery
+							thumbnailsGap={8}
+							gallery={imgGallery}
+							thumbnailsSize={{
+								width: 90,
+								height: 90,
+							}}
 						/>
 					</div>
 					<div className="py-1">
@@ -92,6 +103,7 @@ ProductPageTmpl.propTypes = {
 		image: PropTypes.shape({
 			url: PropTypes.string,
 		}),
+		gallery: PropTypes.arrayOf(PropTypes.shape({})),
 		variants: PropTypes.arrayOf(PropTypes.shape({})),
 		description: PropTypes.arrayOf(PropTypes.shape({})),
 	}).isRequired,
