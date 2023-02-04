@@ -20,3 +20,6 @@ export { default as validateWebhookReq } from '@utils/webhook/validateWebhookReq
 
 /** Product. */
 export { createPermalink, parsePermalink } from '@utils/product/permalink';
+
+/** Cart. */
+export { default as formatCartData } from '@utils/cart/formatCartData';
