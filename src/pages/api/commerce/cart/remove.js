@@ -3,6 +3,7 @@ import retrieveCartId from '@libs/commerce/cart/retrieveCartId';
 
 /** Helpers. */
 import isEmpty from 'lodash-es/isEmpty';
+import formatCartData from '@utils/cart/formatCartData';
 import validateReqMethod from '@utils/api/validateReqMethod';
 
 /** Removes items from the shopping cart. */
@@ -21,7 +22,7 @@ const handler = async (req, res) => {
 		try {
 			const cartId = await retrieveCartId(req, res);
 			const cart = await checClient.request(`carts/${cartId}/items/${itemId}`, 'delete');
-			return res.status(200).json({ success: true, data: cart });
+			return res.status(200).json({ success: true, data: await formatCartData(cart) });
 		} catch (error) {
 			const statusCode = error?.statusCode || 500;
 			const message = error?.data?.error?.message || 'Something went wrong';

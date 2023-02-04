@@ -14,7 +14,7 @@ import BagIcon from '@icons/regular/Bag';
 const CartAction = ({ ...props }) => (
 	<Item {...props}>
 		<HeaderIconWrapper asChild>
-			<HeaderIcon href="#" title="Cart" icon={BagIcon} count={5} />
+			<HeaderIcon href="/cart" title="Cart" icon={BagIcon} count={5} />
 		</HeaderIconWrapper>
 	</Item>
 );
