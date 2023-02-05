@@ -32,7 +32,7 @@ const ProductContActions = ({ inventory, variants }) => {
 				</div>
 			)}
 			<div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-2">
-				<Quantity min={1} max={maxQty} defaultValue={1} className="max-w-full shrink-0 xxl:w-52" />
+				<Quantity min={1} max={maxQty} defaultValue={1} className="!max-w-full shrink-0 xxl:w-52" />
 				<div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2 md:flex-1">
 					<RegularButton startIcon={CartIcon} className="px-4 shrink-0 flex-1">
 						Add to Cart
