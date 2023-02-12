@@ -1,21 +1,32 @@
 import PropTypes from 'prop-types';
+import dynamic from 'next/dynamic';
 
 /** Components. */
 import Anchor from '@ui/general/Anchor';
 import ReadMoreLess from '@ui/data-display/ReadMoreLess';
 import ProductContMeta from '@ui/commerce/ProductContent/ProductContMeta';
-import ProductContRating from '@ui/commerce/ProductContent/ProductContRating';
-import ProductContActions from '@ui/commerce/ProductContent/ProductContActions';
 
 /** Icons. */
 import DashIcon from '@icons/regular/Dash';
+
+const ProductContRating = dynamic(() => import('@ui/commerce/ProductContent/ProductContRating'));
+const ProductContActions = dynamic(() => import('@ui/commerce/ProductContent/ProductContActions'));
 
 /**
  * Render the ProductContent component.
  *
  * @return {Element} The ProductContent component.
  */
-const ProductContent = ({ title, price, excerpt, sku, categories, inventory, variants }) => (
+const ProductContent = ({
+	productId,
+	title,
+	price,
+	excerpt,
+	sku,
+	categories,
+	inventory,
+	variants,
+}) => (
 	<article>
 		<h1 className="text-xl lg:text-2xl font-semibold leading-normal">{title}</h1>
 		<div className="flex flex-col mt-4 sm:flex-row sm:items-center sm:mt-6">
@@ -35,7 +46,7 @@ const ProductContent = ({ title, price, excerpt, sku, categories, inventory, var
 				</p>
 			</div>
 		)}
-		<ProductContActions inventory={inventory} variants={variants} />
+		<ProductContActions productId={productId} inventory={inventory} variants={variants} />
 		<div className="flex flex-col space-y-5 sm:flex-row sm:space-y-0 sm:space-x-4">
 			<ProductContMeta title="SKU:">{<span>{sku}</span> || <DashIcon />}</ProductContMeta>
 			<span role="separator" className="hidden sm:block w-px h-5 leading-none bg-neutral-200" />
@@ -77,6 +88,7 @@ ProductContent.defaultProps = {
  * Prop Types.
  */
 ProductContent.propTypes = {
+	productId: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	price: PropTypes.string.isRequired,
 	excerpt: PropTypes.string,

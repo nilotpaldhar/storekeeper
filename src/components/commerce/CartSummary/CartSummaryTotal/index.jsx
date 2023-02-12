@@ -7,7 +7,7 @@ import DashIcon from '@icons/regular/Dash';
  *
  * @return {Element} The CartSummaryTotal component.
  */
-const CartSummaryTotal = ({ title, subTotal, couponDiscount, grandTotal, ...props }) => (
+const CartSummaryTotal = ({ title, subTotal, grandTotal, discountTotal, ...props }) => (
 	<section {...props}>
 		<Summary.SubTitle>{title}</Summary.SubTitle>
 		<Summary.List>
@@ -16,8 +16,8 @@ const CartSummaryTotal = ({ title, subTotal, couponDiscount, grandTotal, ...prop
 				{subTotal ? <span>{subTotal}</span> : <DashIcon />}
 			</Summary.ListItem>
 			<Summary.ListItem className="flex items-center justify-between">
-				<span>Coupon Discount</span>
-				{couponDiscount ? <span>{couponDiscount}</span> : <DashIcon />}
+				<span>Discount</span>
+				{discountTotal ? <span>{discountTotal}</span> : <DashIcon />}
 			</Summary.ListItem>
 		</Summary.List>
 		<Summary.Divider className="my-6" />
@@ -34,8 +34,8 @@ const CartSummaryTotal = ({ title, subTotal, couponDiscount, grandTotal, ...prop
 CartSummaryTotal.defaultProps = {
 	title: 'Totals',
 	subTotal: null,
-	couponDiscount: null,
 	grandTotal: null,
+	discountTotal: null,
 };
 
 /**
@@ -44,8 +44,8 @@ CartSummaryTotal.defaultProps = {
 CartSummaryTotal.propTypes = {
 	title: PropTypes.node,
 	subTotal: PropTypes.string,
-	couponDiscount: PropTypes.string,
 	grandTotal: PropTypes.string,
+	discountTotal: PropTypes.string,
 };
 
 export default CartSummaryTotal;

@@ -58,6 +58,7 @@ const ProductPageTmpl = ({ data }) => {
 						<ProductContent
 							sku={data?.sku}
 							excerpt={data?.excerpt}
+							productId={data?.checId}
 							inventory={data?.inventory}
 							categories={data?.categories}
 							variants={data?.variants || []}
@@ -81,6 +82,7 @@ ProductPageTmpl.propTypes = {
 	data: PropTypes.shape({
 		sku: PropTypes.string,
 		name: PropTypes.string,
+		checId: PropTypes.string,
 		excerpt: PropTypes.string,
 		displayName: PropTypes.string,
 		price: PropTypes.shape({

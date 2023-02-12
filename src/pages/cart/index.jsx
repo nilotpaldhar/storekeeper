@@ -1,4 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { HTTP_STATUS } from '@constants';
+import { resetCartOps } from '@store/slices/cartOps';
+import { selectCartOpsStatus } from '@store/slices/cartOps/cartOps.selectors';
+import { selectCartStatus, selectCartContents } from '@store/slices/cart/cart.selectors';
 
 /** Components & Templates. */
 import CartPageTmpl from '@templates/CartPage';
@@ -6,29 +11,35 @@ import LayoutWrapper from '@ui/layouts/LayoutWrapper';
 
 /** Functions. */
 import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
-import axios from 'axios';
+
 /**
  * Render the CartPage component.
  *
  * @return {Element} The CartPage component.
  */
 const CartPage = () => {
-	const [cart, setCart] = useState({});
+	const dispatch = useDispatch();
+
+	const cartStatus = useSelector(selectCartStatus);
+	const contents = useSelector(selectCartContents);
+	const cartOpsStatus = useSelector(selectCartOpsStatus);
 
 	useEffect(() => {
-		(async () => {
-			const cartRes = await axios.get('/api/commerce/cart');
-			setCart(cartRes?.data?.data);
-		})();
-	}, []);
+		dispatch(resetCartOps());
+	}, [dispatch]);
 
-	return <CartPageTmpl data={cart} />;
+	return (
+		<div className="min-h-[50vh]">
+			{cartStatus === HTTP_STATUS.idle || cartStatus === HTTP_STATUS.failed ? null : (
+				<CartPageTmpl
+					data={contents ?? {}}
+					loading={cartStatus === HTTP_STATUS.pending}
+					block={cartOpsStatus === HTTP_STATUS.pending}
+				/>
+			)}
+		</div>
+	);
 };
-
-/**
- * Prop Types.
- */
-CartPage.propTypes = {};
 
 /** Page Layout. */
 CartPage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</LayoutWrapper>;

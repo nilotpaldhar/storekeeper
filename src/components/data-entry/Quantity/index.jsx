@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 /** Icons. */
@@ -6,6 +5,8 @@ import PlusIcon from '@icons/regular/Plus';
 import MinusIcon from '@icons/regular/Minus';
 import ChevronUpIcon from '@icons/regular/ChevronUp';
 import ChevronDownIcon from '@icons/regular/ChevronDown';
+
+import useControllableState from '@hooks/useControllableState';
 
 /** Components Styles. */
 import styles, {
@@ -20,41 +21,23 @@ import styles, {
  * @return {Element} The Rating component.
  */
 const Quantity = ({
-	defaultValue: defaultValueProps,
+	defaultValue: defaultValueProp,
 	min,
 	max,
 	controls,
+	disabled,
 	onChange,
-	onIncrease,
-	onDecrease,
 	className,
 	...props
 }) => {
-	const defaultValue = defaultValueProps === null ? 0 : defaultValueProps;
-	const [value, setValue] = useState(defaultValue);
-
-	/** Handles increase in quantity. */
-	const handleIncrease = () => {
-		setValue((val) => {
-			const increasedVal = val + 1;
-			onChange(increasedVal);
-			onIncrease(increasedVal);
-			return increasedVal;
-		});
-	};
-
-	/** Handles decrease in quantity. */
-	const handleDecrease = () => {
-		setValue((val) => {
-			const decreasedVal = val - 1;
-			onChange(decreasedVal);
-			onDecrease(decreasedVal);
-			return decreasedVal;
-		});
-	};
+	const defaultValue = defaultValueProp === null ? 0 : defaultValueProp;
+	const [value, setValue] = useControllableState({
+		defaultProp: defaultValue,
+		onChange,
+	});
 
 	return (
-		<div className={styles({ className })} {...props}>
+		<div className={styles({ className, disabled })} {...props}>
 			<input
 				readOnly
 				type="text"
@@ -67,7 +50,7 @@ const Quantity = ({
 				<button
 					type="button"
 					className={btnStyles({ controls })}
-					onClick={handleDecrease}
+					onClick={() => setValue((val) => val - 1)}
 					disabled={min !== null && value <= min}
 				>
 					<span className="sr-only">Decrease Quantity</span>
@@ -80,7 +63,7 @@ const Quantity = ({
 				<button
 					type="button"
 					className={btnStyles({ controls })}
-					onClick={handleIncrease}
+					onClick={() => setValue((val) => val + 1)}
 					disabled={max !== null && value >= max}
 				>
 					<span className="sr-only">Increase Quantity</span>
@@ -99,13 +82,13 @@ const Quantity = ({
  * Default Props.
  */
 Quantity.defaultProps = {
-	defaultValue: null,
+	defaultValue: 0,
+	value: undefined,
 	min: 0,
 	max: null,
 	controls: 'horizontal',
+	disabled: false,
 	onChange: () => {},
-	onIncrease: () => {},
-	onDecrease: () => {},
 	className: '',
 };
 
@@ -114,12 +97,12 @@ Quantity.defaultProps = {
  */
 Quantity.propTypes = {
 	defaultValue: PropTypes.number,
+	value: PropTypes.number,
 	min: PropTypes.number,
 	max: PropTypes.number,
 	controls: PropTypes.oneOf(['horizontal', 'vertical']),
+	disabled: PropTypes.bool,
 	onChange: PropTypes.func,
-	onIncrease: PropTypes.func,
-	onDecrease: PropTypes.func,
 	className: PropTypes.string,
 };
 
