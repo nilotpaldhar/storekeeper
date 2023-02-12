@@ -13,6 +13,18 @@ export const CART_COOKIE_KEY = 'sk.cart_id';
 export const COOKIE_CONSENT_KEY = 'sk.cookie_consent';
 
 /**
+ * HTTP status states.
+ *
+ * @type {object}
+ */
+export const HTTP_STATUS = {
+	idle: 'IDLE',
+	pending: 'PENDING',
+	succeeded: 'SUCCEEDED',
+	failed: 'FAILED',
+};
+
+/**
  * The total product pages to be created initially (during build time).
  *
  * @type {number}

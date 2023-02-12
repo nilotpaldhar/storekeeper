@@ -55,11 +55,20 @@ const formatCartData = async (data = {}) => {
 		id: data?.id,
 		currency: data?.currency,
 		totalItems: data?.total_items,
-		discounts: data?.discount ?? [],
+		count: data?.total_unique_items,
 		subtotal: mapPrice(data?.subtotal),
 		checkoutUrl: data?.hosted_checkout_url,
-		totalUniqueItems: data?.total_unique_items,
 		isEmpty: !data?.total_items && !data?.total_unique_items,
+		discount:
+			data?.discount?.length === 0
+				? null
+				: {
+						type: data?.discount?.type,
+						code: data?.discount?.code,
+						value: data?.discount?.value,
+						productIds: data?.discount?.product_ids,
+						amountSaved: mapPrice(data?.discount?.amount_saved),
+				  },
 		items: await Promise.all(
 			data?.line_items?.map(async (item) => {
 				const productId = item?.product_id;

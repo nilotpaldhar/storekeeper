@@ -35,6 +35,14 @@ export default {
 			name: 'checId',
 			title: 'Commerce.js ID',
 			type: 'string',
+			readOnly: true,
+		},
+		{
+			name: 'cartId',
+			title: 'Cart ID',
+			type: 'string',
+			readOnly: true,
+			hidden: true,
 		},
 	],
 	preview: {

@@ -1,8 +1,19 @@
 import { cva } from 'class-variance-authority';
 
-export const rootStyles = cva([
-	'flex items-center justify-center px-6 py-2 min-h-[40px] max-w-max border border-neutral-200',
-]);
+export const rootStyles = cva(
+	['flex items-center justify-center px-6 py-2 min-h-[40px] max-w-max border border-neutral-200'],
+	{
+		variants: {
+			disabled: {
+				true: 'opacity-40 pointer-events-none',
+				false: '',
+			},
+		},
+		defaultVariants: {
+			disabled: false,
+		},
+	}
+);
 
 export const inputStyles = cva([
 	'block w-10 leading-none outline-none text-neutral-900 font-medium',

@@ -20,6 +20,8 @@
 			"@libs/*": ["libs/*"],
 			"@pages": ["pages"],
 			"@pages/*": ["pages/*"],
+			"@store": ["store"],
+			"@store/*": ["store/*"],
 			"@styles": ["styles"],
 			"@styles/*": ["styles/*"],
 			"@templates": ["templates"],
