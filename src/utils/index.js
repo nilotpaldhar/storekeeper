@@ -23,3 +23,7 @@ export { createPermalink, parsePermalink } from '@utils/product/permalink';
 
 /** Cart. */
 export { default as formatCartData } from '@utils/cart/formatCartData';
+export { default as formatLineItems } from '@utils/cart/formatLineItems';
+
+/** Checkout. */
+export { default as formatTokenData } from '@utils/checkout/formatTokenData';
