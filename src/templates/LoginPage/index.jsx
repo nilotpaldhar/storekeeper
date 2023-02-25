@@ -34,7 +34,7 @@ const LoginPageTmpl = ({ providers, callbackUrl, error }) => {
 					{error}
 				</Alert>
 			)}
-			<Container className="mt-20">
+			<Container className="py-20">
 				<main className="max-w-md mx-auto">
 					<section className="flex flex-col space-y-3">
 						<h1 className="flex items-center space-x-2 text-xl font-bold leading-none">

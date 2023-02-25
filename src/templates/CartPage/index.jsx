@@ -1,12 +1,22 @@
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
-import Container from '@ui/general/Container';
+import axios from 'axios';
+import { resetCheckout } from '@store/slices/checkout';
+
+/** Hooks. */
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import useToggle from '@hooks/useToggle';
 
 /** Components. */
+import Container from '@ui/general/Container';
+
 const BlockUI = dynamic(() => import('@ui/feedback/BlockUI'));
-const CartList = dynamic(() => import('@ui/commerce/CartList'));
+const LoadingUI = dynamic(() => import('@ui/feedback/LoadingUI'));
 const CartSummary = dynamic(() => import('@ui/commerce/CartSummary'));
-const LoadingBars = dynamic(() => import('@ui/Loaders/LoadingBars'));
+const CartList = dynamic(() => import('@ui/commerce/CartList'), {
+	loading: () => <LoadingUI loading />,
+});
 
 /**
  * Render the CartPageTmpl component.
@@ -14,19 +24,38 @@ const LoadingBars = dynamic(() => import('@ui/Loaders/LoadingBars'));
  * @return {Element} The CartPageTmpl component.
  */
 const CartPageTmpl = ({ data, block, loading }) => {
+	const router = useRouter();
+	const dispatch = useDispatch();
+	const [checkoutProgress, toggleCheckoutProgress] = useToggle(false);
+
 	const subtotalAmt = data?.subtotal?.raw;
 	const discountAmt = data?.discount?.amountSaved?.raw;
 	const grandTotal = discountAmt ? (subtotalAmt - discountAmt)?.toFixed(2) : subtotalAmt;
 
+	/** Create checkout token. */
+	const handleCheckout = async () => {
+		const cartId = data?.id;
+		const url = '/api/commerce/checkout/token/generate';
+
+		if (!cartId) return;
+
+		toggleCheckoutProgress(true);
+		dispatch(resetCheckout());
+
+		try {
+			const res = await axios.post(url, { cartId });
+			const token = res?.data?.token;
+			if (token) router.push(`/checkout?token=${token}`);
+		} catch (error) {
+			toggleCheckoutProgress(false);
+		}
+	};
+
 	return (
-		<main className="py-10 lg:py-14">
+		<main className={`py-10 lg:py-14 ${!data?.isEmpty ? 'min-h-screen' : ''}`}>
 			<Container>
-				{loading ? (
-					<div className="flex justify-center items-center h-[50vh]">
-						<LoadingBars />
-					</div>
-				) : (
-					<BlockUI blocking={block} className="block">
+				<LoadingUI loading={loading}>
+					<BlockUI blocking={block || checkoutProgress} className="block">
 						{data?.isEmpty ? (
 							<div className="flex flex-col items-center justify-center py-10 space-y-2 text-center lg:space-y-4">
 								<h1 className="text-xl font-normal leading-snug lg:text-2xl">
@@ -47,12 +76,13 @@ const CartPageTmpl = ({ data, block, loading }) => {
 										subTotal={data?.subtotal?.formattedWithSymbol}
 										grandTotal={`${data?.currency?.symbol}${grandTotal}`}
 										discountTotal={data?.discount?.amountSaved?.formattedWithSymbol}
+										onCheckout={handleCheckout}
 									/>
 								</section>
 							</div>
 						)}
 					</BlockUI>
-				)}
+				</LoadingUI>
 			</Container>
 		</main>
 	);
@@ -71,6 +101,7 @@ CartPageTmpl.defaultProps = {
  */
 CartPageTmpl.propTypes = {
 	data: PropTypes.shape({
+		id: PropTypes.string,
 		isEmpty: PropTypes.bool,
 		discount: PropTypes.shape({
 			amountSaved: PropTypes.shape({

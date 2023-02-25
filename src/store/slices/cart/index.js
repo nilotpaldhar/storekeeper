@@ -18,6 +18,11 @@ export const cartSlice = createSlice({
 			state.count = count;
 			state.contents = contents;
 		},
+		resetCart: (state) => {
+			state.status = HTTP_STATUS.idle;
+			state.count = 0;
+			state.contents = null;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchCart.pending, (state) => {
@@ -36,6 +41,6 @@ export const cartSlice = createSlice({
 });
 
 /** Cart Actions. */
-export const { fillCart } = cartSlice.actions;
+export const { fillCart, resetCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -37,6 +37,7 @@
 		"@chec/webhook-verifier": "^1.0.2",
 		"@next/font": "^13.0.7",
 		"@portabletext/react": "^2.0.0",
+		"@radix-ui/react-accordion": "^1.1.0",
 		"@radix-ui/react-checkbox": "^1.0.1",
 		"@radix-ui/react-collapsible": "^1.0.1",
 		"@radix-ui/react-navigation-menu": "^1.1.1",

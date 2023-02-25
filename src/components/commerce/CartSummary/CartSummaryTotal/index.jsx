@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Summary from '@ui/data-display/Summary';
 import DashIcon from '@icons/regular/Dash';
+import MinusIcon from '@icons/regular/Minus';
 
 /**
  * Render the CartSummaryTotal component.
@@ -17,7 +18,18 @@ const CartSummaryTotal = ({ title, subTotal, grandTotal, discountTotal, ...props
 			</Summary.ListItem>
 			<Summary.ListItem className="flex items-center justify-between">
 				<span>Discount</span>
-				{discountTotal ? <span>{discountTotal}</span> : <DashIcon />}
+				{discountTotal ? (
+					<span className="flex items-center space-x-1">
+						<span className="flex items-center text-xs">
+							&#40;
+							<MinusIcon className="!text-xs" />
+							&#41;
+						</span>
+						<span>{discountTotal}</span>
+					</span>
+				) : (
+					<DashIcon />
+				)}
 			</Summary.ListItem>
 		</Summary.List>
 		<Summary.Divider className="my-6" />
