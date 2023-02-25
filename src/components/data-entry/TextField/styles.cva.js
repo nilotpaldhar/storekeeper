@@ -43,11 +43,11 @@ export const inputStyles = cva(
 				],
 			},
 			disabled: {
-				true: 'bg-neutral-200 cursor-default hover:border-neutral-200',
+				true: '!bg-neutral-200 cursor-default hover:border-neutral-200',
 				false: 'bg-white',
 			},
 			readOnly: {
-				true: 'bg-neutral-100',
+				true: 'bg-neutral-100 hover:border-transparent focus:ring-transparent focus:border-transparent',
 				false: 'bg-white',
 			},
 		},

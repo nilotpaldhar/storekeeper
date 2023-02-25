@@ -14,7 +14,15 @@ import ArrowRightIcon from '@icons/regular/ArrowRight';
  *
  * @return {Element} The CartSummary component.
  */
-const CartSummary = ({ title, btnText, subTotal, grandTotal, discount, discountTotal }) => (
+const CartSummary = ({
+	title,
+	btnText,
+	subTotal,
+	grandTotal,
+	discount,
+	discountTotal,
+	onCheckout,
+}) => (
 	<Summary>
 		<Summary.Title>{title}</Summary.Title>
 		<CartSummaryDiscount className="mb-8" data={discount} />
@@ -24,7 +32,7 @@ const CartSummary = ({ title, btnText, subTotal, grandTotal, discount, discountT
 			grandTotal={grandTotal}
 			discountTotal={discountTotal}
 		/>
-		<RegularButton fullWidth endIcon={ArrowRightIcon}>
+		<RegularButton fullWidth endIcon={ArrowRightIcon} onClick={onCheckout}>
 			{btnText}
 		</RegularButton>
 	</Summary>
@@ -40,6 +48,7 @@ CartSummary.defaultProps = {
 	grandTotal: null,
 	discount: null,
 	discountTotal: null,
+	onCheckout: () => {},
 };
 
 /**
@@ -52,6 +61,7 @@ CartSummary.propTypes = {
 	grandTotal: PropTypes.string,
 	discount: PropTypes.shape({}),
 	discountTotal: PropTypes.string,
+	onCheckout: PropTypes.func,
 };
 
 export default CartSummary;
