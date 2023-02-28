@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 /** Layouts. */
 import AuthLayout from '@ui/layouts/AuthLayout';
 import PrimaryLayout from '@ui/layouts/PrimaryLayout';
+import DashboardLayout from '@ui/layouts/DashboardLayout';
 
 /** Helpers. */
 import mapSeoData from '@utils/general/mapSeoData';
@@ -27,11 +28,17 @@ const LayoutWrapper = ({ data, layoutType, children, ...props }) => {
 			<Seo {...seoData} />
 			{layoutType !== 'auth' && <Promobar {...promo} />}
 			<CookieConsent {...cookie} />
-			{layoutType === 'auth' ? (
+			{layoutType === 'auth' && (
 				<AuthLayout site={root} {...props}>
 					{children}
 				</AuthLayout>
-			) : (
+			)}
+			{layoutType === 'dashboard' && (
+				<DashboardLayout data={{ header, footer }} {...props}>
+					{children}
+				</DashboardLayout>
+			)}
+			{layoutType === 'primary' && (
 				<PrimaryLayout data={{ header, footer }} {...props}>
 					{children}
 				</PrimaryLayout>
@@ -61,7 +68,7 @@ LayoutWrapper.propTypes = {
 		root: PropTypes.shape({}),
 		seo: PropTypes.shape({}),
 	}).isRequired,
-	layoutType: PropTypes.oneOf(['primary', 'auth']),
+	layoutType: PropTypes.oneOf(['primary', 'auth', 'dashboard']),
 	children: PropTypes.node,
 };
 

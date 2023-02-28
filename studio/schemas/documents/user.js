@@ -7,18 +7,23 @@ export default {
 	icon: AiOutlineUser,
 	fields: [
 		{
-			name: 'firstName',
+			name: 'firstname',
 			title: 'First Name',
 			type: 'string',
 		},
 		{
-			name: 'lastName',
+			name: 'lastname',
 			title: 'Last Name',
 			type: 'string',
 		},
 		{
 			name: 'email',
 			title: 'Email',
+			type: 'string',
+		},
+		{
+			name: 'phone',
+			title: 'Phone',
 			type: 'string',
 		},
 		{
@@ -47,13 +52,13 @@ export default {
 	],
 	preview: {
 		select: {
-			title: 'firstName',
-			firstName: 'firstName',
-			lastName: 'lastName',
+			title: 'firstname',
+			firstname: 'firstname',
+			lastname: 'lastname',
 			subtitle: 'email',
 		},
-		prepare({ firstName = '', lastName = '', subtitle }) {
-			const title = `${firstName} ${lastName}`.trim();
+		prepare({ firstname = '', lastname = '', subtitle }) {
+			const title = `${firstname} ${lastname}`.trim();
 			return {
 				title: title || '(missing first/last name)',
 				subtitle: subtitle || '(missing email)',
