@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HTTP_STATUS } from '@constants';
-import { fetchAuthUser } from '@store/slices/user/user.thunks';
+import { fetchAuthUser, updateUser } from '@store/slices/user/user.thunks';
 
 const initialState = {
 	status: HTTP_STATUS.idle,
@@ -14,6 +14,7 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
+		/** Fetch user. */
 		builder.addCase(fetchAuthUser.pending, (state) => {
 			state.status = HTTP_STATUS.pending;
 		});
@@ -26,6 +27,18 @@ export const userSlice = createSlice({
 			state.status = HTTP_STATUS.failed;
 			state.authStatus = 'unauthenticated';
 			state.about = null;
+		});
+
+		/** Update user. */
+		builder.addCase(updateUser.pending, (state) => {
+			state.status = HTTP_STATUS.pending;
+		});
+		builder.addCase(updateUser.fulfilled, (state, action) => {
+			state.status = HTTP_STATUS.succeeded;
+			state.about = action?.payload;
+		});
+		builder.addCase(updateUser.rejected, (state) => {
+			state.status = HTTP_STATUS.failed;
 		});
 	},
 });

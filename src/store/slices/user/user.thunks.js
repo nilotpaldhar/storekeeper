@@ -7,4 +7,8 @@ export const fetchAuthUser = createAsyncThunk('user/fetchAuthUser', async () => 
 	return res?.data?.data;
 });
 
-export default fetchAuthUser;
+/** Update user details. */
+export const updateUser = createAsyncThunk('user/updateUser', async (userData) => {
+	const res = await axios.put('/api/user/update', userData);
+	return res?.data?.data;
+});

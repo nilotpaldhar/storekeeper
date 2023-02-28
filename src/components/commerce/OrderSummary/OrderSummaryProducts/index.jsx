@@ -23,8 +23,8 @@ const OrderSummaryProducts = ({ title, products, ...props }) => (
 							>
 								{product?.displayName ?? product?.name}
 							</Anchor>
-							<CloseIcon aria-label="times" className="!text-xs" />
-							<span aria-label="quantity">{product?.quantity}</span>
+							<CloseIcon className="!text-xs" />
+							<span>{product?.quantity}</span>
 						</div>
 						<div>{product?.total?.formattedWithSymbol}</div>
 					</h3>

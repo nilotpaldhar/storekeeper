@@ -1,27 +1,23 @@
-import { signOut } from 'next-auth/react';
-
 /** Components. */
-import Container from '@ui/general/Container';
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
-import RegularButton from '@ui/buttons/RegularButton';
+import DashboardHomeTmpl from '@templates/DashboardHome';
 
-/** Functions. */
+/** Hooks & Functions. */
 import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
 
 /**
- * Render the DashboardPage component.
+ * Render the DashboardHomePage component.
  *
- * @return {Element} The DashboardPage component.
+ * @return {Element} The DashboardHomePage component.
  */
-const DashboardPage = () => (
-	<Container className="flex flex-col items-center justify-center py-10 space-y-5 text-center">
-		<h1 className="text-3xl font-bold">Dashboard Page</h1>
-		<RegularButton onClick={() => signOut({ callbackUrl: '/login' })}>Logout</RegularButton>
-	</Container>
-);
+const DashboardHomePage = () => <DashboardHomeTmpl />;
 
 /** Page Layout. */
-DashboardPage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</LayoutWrapper>;
+DashboardHomePage.getLayout = (page, data) => (
+	<LayoutWrapper data={data} layoutType="dashboard">
+		{page}
+	</LayoutWrapper>
+);
 
 /**
  * Get page props.
@@ -29,12 +25,19 @@ DashboardPage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</Lay
  * @return {object} Page props.
  */
 export const getStaticProps = async ({ preview }) => {
+	const page = {
+		seo: {
+			metaTitle: 'Dashboard',
+			shareTitle: 'Dashboard',
+		},
+	};
+
 	try {
-		const data = await fetchSiteConfig(preview);
-		return { props: { data } };
+		const { siteConfig } = await fetchSiteConfig(preview);
+		return { props: { data: { siteConfig, page } } };
 	} catch (error) {
 		return { notFound: true };
 	}
 };
 
-export default DashboardPage;
+export default DashboardHomePage;

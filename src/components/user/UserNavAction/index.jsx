@@ -10,6 +10,7 @@ import DashboardIcon from '@icons/regular/Dashboard';
 
 /** Hooks. */
 import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Functions. */
@@ -22,18 +23,20 @@ import { selectUser } from '@store/slices/user/user.selectors';
  * @return {Element} The UserNavAction component.
  */
 const UserNavAction = ({ ...props }) => {
+	const { status: sessionStatus } = useSession();
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
+
 	const { status, authStatus, about } = user || {};
 	const loading = status === HTTP_STATUS.pending;
 	const authenticated = authStatus === 'authenticated';
 
 	/** Get authenticated user. */
 	useEffect(() => {
-		if (status === HTTP_STATUS.idle) {
+		if (sessionStatus === 'authenticated' && status === HTTP_STATUS.idle) {
 			dispatch(fetchAuthUser());
 		}
-	}, [dispatch, status]);
+	}, [dispatch, status, sessionStatus]);
 
 	return (
 		<div {...props}>
