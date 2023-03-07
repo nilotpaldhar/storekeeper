@@ -52,6 +52,30 @@ const fetchPage = async (preview = false, permalink = null) => {
           fileSize,
           description,
           fileExtension
+        },
+        relatedProducts[]-> {
+          sku,
+          name,
+          slug,
+          price,
+          excerpt,
+          inventory,
+          "id": _id,
+          displayName,
+          "sanityId": _id,
+          "checId": productID,
+          categories[]->{ "id": _id, slug, title },
+          image {
+            id,
+            url,
+            width,
+            height,
+            isImage,
+            filename,
+            fileSize,
+            description,
+            fileExtension
+          }
         }
       },
       "siteConfig": ${SiteConfigQuery}

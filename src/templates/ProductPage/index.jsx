@@ -5,6 +5,7 @@ import Tabs from '@ui/data-display/Tabs';
 import Container from '@ui/general/Container';
 import ProductContent from '@ui/commerce/ProductContent';
 import ProductImgGallery from '@ui/commerce/ProductImgGallery';
+import ProductCollection from '@ui/commerce/ProductCollection';
 import { PortableText } from '@portabletext/react';
 
 /**
@@ -70,6 +71,16 @@ const ProductPageTmpl = ({ data }) => {
 				<section>
 					<Tabs contentClassName="p-4 lg:p-8" items={tabsItems} />
 				</section>
+				<section>
+					<ProductCollection
+						products={data?.relatedProducts}
+						wrapperClassName="!grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4 xxl:!grid-cols-5"
+					>
+						<ProductCollection.Title align="center" className="!p-0 mb-8 border-none">
+							You May Also Like
+						</ProductCollection.Title>
+					</ProductCollection>
+				</section>
 			</Container>
 		</main>
 	);
@@ -108,6 +119,7 @@ ProductPageTmpl.propTypes = {
 		gallery: PropTypes.arrayOf(PropTypes.shape({})),
 		variants: PropTypes.arrayOf(PropTypes.shape({})),
 		description: PropTypes.arrayOf(PropTypes.shape({})),
+		relatedProducts: PropTypes.arrayOf(PropTypes.shape({})),
 	}).isRequired,
 };
 
