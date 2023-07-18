@@ -55,7 +55,7 @@ const ProductImgGallery = ({ gallery, thumbnailsSize, thumbnailsGap }) => {
 				render={{
 					buttonPrev: () => null,
 					buttonNext: () => null,
-					slide: ({ src, alt, width, height }) => (
+					slide: ({ rect: { width, height } = {}, slide: { src, alt } = {} }) => (
 						<ImgRenderer src={src} alt={alt} width={width} height={height} />
 					),
 					thumbnail: ({ rect: { width, height } = {}, slide: { src, alt } = {} }) => (

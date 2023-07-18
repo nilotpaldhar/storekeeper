@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Nunito } from '@next/font/google';
+import { Nunito } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 import { Provider } from 'react-redux';
 import { SessionProvider } from 'next-auth/react';
