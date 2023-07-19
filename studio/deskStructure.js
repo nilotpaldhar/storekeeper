@@ -1,4 +1,3 @@
-import S from '@sanity/desk-tool/structure-builder';
 import shop from './desk/shop';
 import pages from './desk/pages';
 import users from './desk/users';
@@ -27,19 +26,19 @@ const hiddenDocTypes = (listItem) =>
 		'verificationToken',
 	].includes(listItem.getId());
 
-const deskStructure = () =>
+const deskStructure = (S) =>
 	S.list()
 		.title('Website')
 		.items([
-			pages,
+			pages(S),
 			S.divider(),
-			shop,
+			shop(S),
 			S.divider(),
-			users,
+			users(S),
 			S.divider(),
-			menus,
+			menus(S),
 			S.divider(),
-			settings,
+			settings(S),
 			S.divider(),
 
 			// Filter out docs already defined above

@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const previewUrl = process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000';
-const token = process.env.SANITY_STUDIO_PREVIEW_TOKEN || '';
+const token = process.env.SANITY_STUDIO_PREVIEW_TOKEN || 'xxx';
 const previewDocTypes = ['page', 'homepage', 'shoppage', 'loginpage'];
 let rootUrl;
 
@@ -20,10 +20,11 @@ const getDocSlug = (type, doc) => {
 };
 
 /** Resolves production URL for preview. */
-const resolveProductionUrl = (doc) => {
-	const docType = doc?._type || '';
-	const slug = getDocSlug(docType, doc);
-	if (!rootUrl || !previewDocTypes.includes(docType)) return false;
+const resolveProductionUrl = async (prev, { document } = {}) => {
+	const docType = document?._type || '';
+	const slug = getDocSlug(docType, document);
+
+	if (!rootUrl || !previewDocTypes.includes(docType)) return prev;
 
 	const searchParams = new URLSearchParams();
 	searchParams.set('type', docType);

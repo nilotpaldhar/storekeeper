@@ -1,3 +1,4 @@
+import { defineField } from 'sanity';
 import { RiNavigationLine } from 'react-icons/ri';
 import { BsInfoCircle } from 'react-icons/bs';
 
@@ -21,16 +22,16 @@ export default {
 		},
 	],
 	fields: [
-		{
+		defineField({
 			name: 'navNote',
+			title: 'Note',
+			description: `On desktop, dropdowns will appear as a "mega-dropdowns". On mobile, dropdowns will appear as "accordions".`,
 			type: 'note',
 			options: {
 				icon: BsInfoCircle,
-				headline: 'Note',
-				message: `On desktop, dropdowns will appear as a "mega-dropdowns". On mobile, dropdowns will appear as "accordions".`,
 				tone: 'caution',
 			},
-		},
+		}),
 		{
 			title: 'Desktop Menu',
 			name: 'menuDesktop',

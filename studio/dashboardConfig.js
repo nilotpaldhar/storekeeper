@@ -1,20 +1,16 @@
+import { projectUsersWidget, projectInfoWidget } from '@sanity/dashboard';
+import { documentListWidget } from 'sanity-plugin-dashboard-widget-document-list';
+
 export default {
 	widgets: [
-		{
-			name: 'document-list',
-			options: {
-				title: 'Recently edited',
-				order: '_updatedAt desc',
-				limit: 10,
-				types: ['homepage', 'shoppage', 'page', 'errorpage'],
-			},
+		documentListWidget({
+			title: 'Recently edited',
+			order: '_updatedAt desc',
+			types: ['homepage', 'shoppage', 'page', 'errorpage'],
+			limit: 10,
 			layout: { width: 'auto', height: 'small' },
-		},
-		{
-			name: 'project-users',
-		},
-		{
-			name: 'project-info',
-		},
+		}),
+		projectUsersWidget(),
+		projectInfoWidget(),
 	],
 };

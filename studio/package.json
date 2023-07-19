@@ -5,26 +5,21 @@
 	"author": "Nilotpal Dhar <nilotpaldhar1997@gmail.com>",
 	"scripts": {
 		"start": "sanity start",
-		"build": "sanity build"
+		"build": "sanity build",
+		"dev": "sanity dev"
 	},
 	"dependencies": {
-		"@sanity/base": "^2.35.2",
-		"@sanity/core": "^2.35.0",
-		"@sanity/dashboard": "^2.35.2",
-		"@sanity/default-layout": "^2.35.2",
-		"@sanity/default-login": "^2.35.2",
-		"@sanity/desk-tool": "^2.35.2",
-		"@sanity/production-preview": "^2.33.2",
-		"@sanity/vision": "^2.35.2",
+		"@sanity/dashboard": "^3.1.4",
+		"@sanity/production-preview": "^2.35.3",
+		"@sanity/vision": "^3.14.2",
 		"prop-types": "^15.8.1",
-		"react": "^17.0",
-		"react-dom": "^17.0",
-		"react-icons": "^4.6.0",
-		"sanity-plugin-dashboard-widget-document-list": "^0.0.13",
-		"sanity-plugin-media-library": "^2.1.1",
-		"sanity-plugin-note-field": "^1.1.4",
-		"sanity-plugin-vercel-deploy": "^2.1.6",
-		"styled-components": "^5.2.0"
-	},
-	"devDependencies": {}
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-icons": "^4.10.1",
+		"sanity": "^3.14.2",
+		"sanity-plugin-dashboard-widget-document-list": "^1.0.1",
+		"sanity-plugin-note-field": "^2.0.2",
+		"sanity-plugin-vercel-deploy": "^3.3.4",
+		"styled-components": "^6.0.4"
+	}
 }

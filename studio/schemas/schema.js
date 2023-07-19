@@ -1,6 +1,3 @@
-import createSchema from 'part:@sanity/base/schema-creator';
-import schemaTypes from 'all:part:@sanity/base/schema-type';
-
 // Document Types
 import page from './documents/page';
 import menu from './documents/menu';
@@ -44,56 +41,53 @@ import productConditionals from './objects/product-conditionals';
 /*  ------------------------------------------ */
 /*  Your Schema documents / objects
 /*  ------------------------------------------ */
-export default createSchema({
-	// The name of our schema
-	name: 'default',
+const schema = [
+	/* ----------------- */
+	/* 1: Document types */
+	page,
+	menu,
+	product,
+	category,
+	homepage,
+	shoppage,
+	loginpage,
+	errorpage,
+	seoSettings,
+	promoSettings,
+	headerSettings,
+	footerSettings,
+	cookieSettings,
+	socialSettings,
+	generalSettings,
 
-	types: schemaTypes.concat([
-		/* ----------------- */
-		/* 1: Document types */
-		page,
-		menu,
-		product,
-		category,
-		homepage,
-		shoppage,
-		loginpage,
-		errorpage,
-		seoSettings,
-		promoSettings,
-		headerSettings,
-		footerSettings,
-		cookieSettings,
-		socialSettings,
-		generalSettings,
+	/* ------------------------------------ */
+	/* 2: Document types (User/Auth) */
+	user,
+	account,
+	verificationToken,
 
-		/* ------------------------------------ */
-		/* 2: Document types (User/Auth) */
-		user,
-		account,
-		verificationToken,
+	/* ----------------------- */
+	/* 3: Generic Object types */
+	seo,
+	asset,
+	content,
+	dropdown,
+	breadcrumb,
 
-		/* ----------------------- */
-		/* 3: Generic Object types */
-		seo,
-		asset,
-		content,
-		dropdown,
-		breadcrumb,
+	/* ----------------------- */
+	/* 4: Navigation Object types */
+	navLink,
+	navPage,
+	navProduct,
+	navCategory,
+	navDropdown,
 
-		/* ----------------------- */
-		/* 4: Navigation Object types */
-		navLink,
-		navPage,
-		navProduct,
-		navCategory,
-		navDropdown,
+	/* ----------------------- */
+	/* 5: Commerce Object types */
+	productPrice,
+	productVariant,
+	productInventory,
+	productConditionals,
+];
 
-		/* ----------------------- */
-		/* 5: Commerce Object types */
-		productPrice,
-		productVariant,
-		productInventory,
-		productConditionals,
-	]),
-});
+export default schema;

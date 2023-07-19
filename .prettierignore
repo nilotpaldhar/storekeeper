@@ -1,8 +1,10 @@
 .next
+.sanity
 .github
 next-env.d.ts
 node_modules
 yarn.lock
 package-lock.json
-# public
+public
+dist
 CHANGELOG.md

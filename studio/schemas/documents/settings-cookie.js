@@ -1,18 +1,20 @@
+import { defineField } from 'sanity';
+
 export default {
 	title: 'Cookie Consent Settings',
 	name: 'cookieSettings',
 	type: 'document',
 	fields: [
-		{
+		defineField({
 			name: 'cookiePolicyNote',
+			title: 'Important',
+			description:
+				'This displays an "implied consent" cookie notice to users to help comply with GDPR laws. It is strongly encouraged to include a link to your cookie usage and policies.',
 			type: 'note',
 			options: {
-				headline: 'Important',
-				message:
-					'This displays an "implied consent" cookie notice to users to help comply with GDPR laws. It is strongly encouraged to include a link to your cookie usage and policies.',
 				tone: 'caution',
 			},
-		},
+		}),
 		{
 			title: 'Enable Cookie Consent?',
 			name: 'enabled',
