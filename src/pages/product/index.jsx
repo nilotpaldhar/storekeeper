@@ -8,13 +8,11 @@ import fetchPage from '@libs/general/dynamic-page/fetchPage';
 import { createPermalink } from '@utils/product/permalink';
 
 const ProductsPage = ({ products }) => {
-	const collection = products
-		?.filter((p) => p?.categories?.[0]?.slug === 'headphone')
-		?.map((p) => ({
-			id: p?.id,
-			img: p?.image?.url,
-			href: `/product/${createPermalink(p?.id, p?.permalink)}`,
-		}));
+	const collection = products?.map((p) => ({
+		id: p?.id,
+		img: p?.image?.url,
+		href: `/product/${createPermalink(p?.id, p?.permalink)}`,
+	}));
 
 	return (
 		<div className="py-10">
