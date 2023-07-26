@@ -55,7 +55,7 @@ const CartPageTmpl = ({ data, block, loading }) => {
 		<main className={`py-10 lg:py-14 ${!data?.isEmpty ? 'min-h-screen' : ''}`}>
 			<Container>
 				<LoadingUI loading={loading}>
-					<BlockUI blocking={block || checkoutProgress} className="block">
+					<BlockUI blocking={block || checkoutProgress}>
 						{data?.isEmpty ? (
 							<div className="flex flex-col items-center justify-center py-10 space-y-2 text-center lg:space-y-4">
 								<h1 className="text-xl font-normal leading-snug lg:text-2xl">

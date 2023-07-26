@@ -46,7 +46,7 @@ const CookieConsent = ({ enabled, message, link, delay, className, ...props }) =
 	return show ? (
 		<div
 			className={clsx(
-				'fixed z-[100] bg-white border rounded-sm shadow-lg right-0 bottom-0 w-full sm:right-10 sm:bottom-10 sm:w-96 border-neutral-50',
+				'fixed z-[9999] bg-white border rounded-sm shadow-lg right-0 bottom-0 w-full sm:right-10 sm:bottom-10 sm:w-96 border-neutral-50',
 				className
 			)}
 			{...props}

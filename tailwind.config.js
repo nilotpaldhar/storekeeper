@@ -37,6 +37,8 @@ module.exports = {
 				xl: '1200px',
 				xxl: '1400px',
 				xxxl: '1800px',
+				'hover-hover': { raw: '(hover: hover) and (pointer: fine)' },
+				'hover-none': { raw: '(hover: none) and (pointer: none)' },
 			},
 			colors: {
 				primary: {
