@@ -66,4 +66,8 @@ export const priceStyles = cva(['font-bold mt-1'], {
 	},
 });
 
+export const stockStyles = cva([
+	'absolute top-4 left-0 bg-error-600 text-white text-xs font-bold capitalize py-1 leading-none pl-2 pr-3 rounded-r-full',
+]);
+
 export default rootStyles;

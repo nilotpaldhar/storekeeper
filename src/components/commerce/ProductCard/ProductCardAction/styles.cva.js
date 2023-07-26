@@ -2,13 +2,16 @@ import { cva } from 'class-variance-authority';
 
 export const rootStyles = cva(
 	[
-		'absolute top-4 right-4 flex flex-col items-center justify-center space-y-1 transition-opacity duration-500',
+		'hidden absolute top-4 right-4 sm:flex flex-col items-center justify-center space-y-1 transition-opacity duration-500',
 	],
 	{
 		variants: {
 			open: {
 				true: 'opacity-100 pointer-events-auto',
-				false: 'opacity-0 pointer-events-none',
+				false: [
+					'hover-hover:opacity-0 hover-hover:pointer-events-none',
+					// 'hover-none:opacity-100 hover-none:pointer-events-auto',
+				],
 			},
 		},
 		defaultVariants: {

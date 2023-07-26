@@ -1,48 +1,100 @@
-/* eslint-disable @next/next/no-img-element */
 import PropTypes from 'prop-types';
 import Container from '@ui/general/Container';
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
-import RegularButton from '@ui/buttons/RegularButton';
-import { getClient } from '@config/commerce';
 import fetchPage from '@libs/general/dynamic-page/fetchPage';
-import { createPermalink } from '@utils/product/permalink';
+
+// Experimental
+import { groq } from 'next-sanity';
+import client from '@config/sanity';
+import ProductCollection from '@ui/commerce/ProductCollection';
+import LayoutGridIcon from '@icons/regular/LayoutGrid';
+import LayoutListIcon from '@icons/regular/LayoutList';
+import useToggle from '@hooks/useToggle';
 
 const ProductsPage = ({ products }) => {
-	const collection = products?.map((p) => ({
-		id: p?.id,
-		img: p?.image?.url,
-		href: `/product/${createPermalink(p?.id, p?.permalink)}`,
-	}));
+	const [asGrid, toggleAsGrid] = useToggle(true);
 
 	return (
-		<div className="py-10">
-			<Container>
-				<div className="grid grid-cols-3 gap-10">
-					{collection?.map((product) => (
-						<div className="flex flex-col" key={product?.id}>
-							<img src={product?.img} alt="" className="w-full" />
-							<RegularButton href={product?.href} as="anchor">
-								View
-							</RegularButton>
-						</div>
-					))}
+		<Container className="py-10">
+			<ProductCollection
+				grid={asGrid}
+				products={products}
+				wrapperClassName={
+					asGrid ? '!grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4 xxl:!grid-cols-5' : ''
+				}
+			>
+				<div className="flex justify-between items-center mb-8">
+					<ProductCollection.Title align="left" className="!p-0 border-none">
+						Products
+					</ProductCollection.Title>
+					<div className="flex items-center space-x-4">
+						<button type="button" onClick={() => toggleAsGrid(false)}>
+							<LayoutListIcon />
+						</button>
+						<button type="button" onClick={() => toggleAsGrid(true)}>
+							<LayoutGridIcon />
+						</button>
+					</div>
 				</div>
-			</Container>
-		</div>
+			</ProductCollection>
+		</Container>
 	);
 };
 
 ProductsPage.propTypes = {
+	page: PropTypes.shape({
+		title: PropTypes.string,
+	}).isRequired,
 	products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 ProductsPage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</LayoutWrapper>;
 
-export const getServerSideProps = async () => {
-	const client = getClient({ useSecretKey: true });
-	const data = await fetchPage(false, 'homepage');
-	const products = await client.products.list();
-	return { props: { data, products: products.data } };
+export const getStaticProps = async ({ preview }) => {
+	try {
+		const data = await fetchPage(preview, 'shoppage');
+
+		// Fetch products [experimental]
+		const query = groq`
+      *[_type == "product" && isActive == true] | order(_updatedAt desc) {
+			  sku,
+        name,
+        slug,
+        price,
+        excerpt,
+        inventory,
+        "id": _id,
+        displayName,
+        "sanityId": _id,
+        "checId": productID,
+        categories[]->{ "id": _id, slug, title },
+				"variants": variantGroups[]{
+          id,
+          name,
+          options[]{ id, name, price, assets }
+        },
+        image {
+          id,
+          url,
+          width,
+          height,
+          isImage,
+          filename,
+          fileSize,
+          description,
+          fileExtension
+        }
+		  }
+	  `;
+		const products = await client({
+			useCdn: false,
+			useToken: false,
+		}).fetch(query);
+
+		return { props: { data, products } };
+	} catch (error) {
+		return { notFound: true };
+	}
 };
 
 export default ProductsPage;

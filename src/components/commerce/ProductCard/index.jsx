@@ -30,18 +30,31 @@ const ProductCard = ({ data, layout, className }) => {
 	const categories = data?.categories?.map((c) => c?.title)?.join(' / ');
 	const excerpt = truncateStr(data?.excerpt, 150);
 	const anchorProps = { href, target: '_blank', rel: 'noopener noreferrer' };
+	const outOfStock = data?.inventory?.isManaged && data?.inventory?.available <= 0;
+	const hasVariants = data?.variants?.length > 0;
 
 	return (
 		<article
-			onMouseEnter={toggleOpen}
-			onMouseLeave={toggleOpen}
+			onMouseEnter={!outOfStock ? toggleOpen : () => {}}
+			onMouseLeave={!outOfStock ? toggleOpen : () => {}}
 			className={styles({ className, layout })}
 		>
 			<div className={thumbnailStyles({ layout })}>
 				<Anchor className="block focus-visible:outline-none" {...anchorProps} tabIndex="-1">
 					<Image src={data?.image?.url} alt={title} width={400} height={400} />
 				</Anchor>
-				<ProductCardAction open={open} />
+				{outOfStock ? (
+					<span className="absolute top-4 left-0 bg-error-600 text-white text-xs font-bold capitalize py-1 leading-none pl-2 pr-3 rounded-r-full">
+						Out of stock
+					</span>
+				) : (
+					<ProductCardAction
+						open={open}
+						href={href}
+						productId={data?.checId}
+						hasVariants={hasVariants}
+					/>
+				)}
 			</div>
 			<div className={contentStyles({ layout })}>
 				<p className="text-xs font-bold truncate text-neutral-500">{categories || 'Unknown'}</p>
@@ -98,6 +111,11 @@ ProductCard.propTypes = {
 				title: PropTypes.string,
 			})
 		),
+		inventory: PropTypes.shape({
+			isManaged: PropTypes.bool,
+			available: PropTypes.number,
+		}),
+		variants: PropTypes.arrayOf(PropTypes.shape({})),
 	}).isRequired,
 	layout: PropTypes.oneOf(['vertical', 'horizontal']),
 	className: PropTypes.string,

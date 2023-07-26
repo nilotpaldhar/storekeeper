@@ -47,6 +47,7 @@ export { default as Slash } from './regular/Slash';
 export { default as Star } from './regular/Star';
 export { default as StarFill } from './regular/StarFill';
 export { default as TruckDelivery } from './regular/TruckDelivery';
+export { default as UnorderedList } from './regular/UnorderedList';
 export { default as User } from './regular/User';
 export { default as UserAdd } from './regular/UserAdd';
 
