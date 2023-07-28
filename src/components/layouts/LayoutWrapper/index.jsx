@@ -13,6 +13,7 @@ import mapSeoData from '@utils/general/mapSeoData';
 const Seo = dynamic(() => import('@ui/general/Seo'));
 const Promobar = dynamic(() => import('@ui/general/Promobar'));
 const CookieConsent = dynamic(() => import('@ui/general/CookieConsent'));
+const Notification = dynamic(() => import('@ui/feedback/Notification'));
 
 /**
  * Render the LayoutWrapper component.
@@ -28,6 +29,7 @@ const LayoutWrapper = ({ data, layoutType, children, ...props }) => {
 			<Seo {...seoData} />
 			{layoutType !== 'auth' && <Promobar {...promo} />}
 			<CookieConsent {...cookie} />
+			<Notification />
 			{layoutType === 'auth' && (
 				<AuthLayout site={root} {...props}>
 					{children}
