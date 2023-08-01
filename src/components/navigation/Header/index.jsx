@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import Logo from '@ui/data-display/Logo';
 import Container from '@ui/general/Container';
 import HeaderNav from '@ui/navigation/Header/HeaderNav';
-import HeaderSearch from '@ui/navigation/Header/HeaderSearch';
 import HeaderActions from '@ui/navigation/Header/HeaderActions';
 
+const HeaderSearch = dynamic(() => import('@ui/navigation/Header/HeaderSearch'));
 const MobileNav = dynamic(() => import('@ui/navigation/MobileNav'));
 
 /**
@@ -36,7 +36,7 @@ const Header = ({ data }) => {
 				<HeaderActions />
 				<MobileNav
 					data={{ site, menus: mobile?.menu }}
-					rootClassName="block order-first mr-4 xxl:hidden"
+					rootClassName="block order-first mr-2 sm:mr-4 xxl:hidden"
 					triggerClassName="flex items-center p-2 rounded text-neutral-900 hover:text-current focus-visible:outline-primary-600 focus-visible:text-primary-600"
 				/>
 			</Container>
