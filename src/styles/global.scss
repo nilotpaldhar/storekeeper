@@ -40,3 +40,8 @@ button {
 .icon {
 	@apply inline-block text-lg text-inherit leading-none;
 }
+
+// Temp solution
+input[type='search']::-webkit-search-cancel-button {
+	display: none;
+}

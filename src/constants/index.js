@@ -32,6 +32,20 @@ export const HTTP_STATUS = {
 export const PRODUCT_PATHS_LIMIT = 100;
 
 /**
+ * Algolia recent searches key.
+ *
+ * @type {string}
+ */
+export const ALGOLIA_RECENT_SEARCHES_KEY = 'RECENT_SEARCH';
+
+/**
+ * Algolia index for product query suggestions.
+ *
+ * @type {string}
+ */
+export const ALGOLIA_PRODUCTS_QUERY_SUGGESTIONS_INDEX = 'dev_products_query_suggestions';
+
+/**
  * Promo banner key.
  *
  * @type {string}
