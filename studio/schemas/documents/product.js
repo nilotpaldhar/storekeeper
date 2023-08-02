@@ -27,6 +27,18 @@ export default {
 			rows: 4,
 		},
 		{
+			title: 'Brand',
+			name: 'brand',
+			type: 'reference',
+			to: [{ type: 'brand' }],
+		},
+		{
+			title: 'Color',
+			name: 'color',
+			type: 'reference',
+			to: [{ type: 'productColor' }],
+		},
+		{
 			title: 'Description',
 			name: 'description',
 			type: 'portableContent',

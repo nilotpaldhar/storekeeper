@@ -1,6 +1,7 @@
 // Document Types
 import page from './documents/page';
 import menu from './documents/menu';
+import brand from './documents/brand';
 import product from './documents/product';
 import category from './documents/category';
 import homepage from './documents/homepage';
@@ -8,6 +9,7 @@ import shoppage from './documents/shoppage';
 import loginpage from './documents/loginpage';
 import errorpage from './documents/errorpage';
 import seoSettings from './documents/settings-seo';
+import productColor from './documents/product-color';
 import promoSettings from './documents/settings-promo';
 import headerSettings from './documents/settings-header';
 import footerSettings from './documents/settings-footer';
@@ -46,6 +48,7 @@ const schema = [
 	/* 1: Document types */
 	page,
 	menu,
+	brand,
 	product,
 	category,
 	homepage,
@@ -53,6 +56,7 @@ const schema = [
 	loginpage,
 	errorpage,
 	seoSettings,
+	productColor,
 	promoSettings,
 	headerSettings,
 	footerSettings,
