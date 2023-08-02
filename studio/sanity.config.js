@@ -6,6 +6,7 @@ import { visionTool } from '@sanity/vision';
 import { dashboardTool } from '@sanity/dashboard';
 import { noteField } from 'sanity-plugin-note-field';
 import { vercelDeployTool } from 'sanity-plugin-vercel-deploy';
+import { colorInput } from '@sanity/color-input';
 
 import schemas from './schemas/schema';
 import deskStructure from './deskStructure';
@@ -25,6 +26,7 @@ export default defineConfig({
 		visionTool(),
 		noteField(),
 		vercelDeployTool(),
+		colorInput(),
 	],
 	schema: {
 		types: schemas,

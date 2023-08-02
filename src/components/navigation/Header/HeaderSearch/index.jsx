@@ -57,7 +57,7 @@ const HeaderSearch = ({ className, ...props }) => {
 
 		detachedCancelButton: 'font-semibold text-neutral-900 hover:text-current ml-2',
 
-		panel: 'flex-1 bg-white z-10 lg:absolute lg:ring-1 lg:ring-neutral-100 lg:mt-px',
+		panel: 'flex-1 bg-white z-[1020] lg:absolute lg:ring-1 lg:ring-neutral-100 lg:mt-px',
 	};
 
 	/** Recent searches plugin. */
