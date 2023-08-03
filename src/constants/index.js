@@ -39,6 +39,13 @@ export const PRODUCT_PATHS_LIMIT = 100;
 export const ALGOLIA_RECENT_SEARCHES_KEY = 'RECENT_SEARCH';
 
 /**
+ * Algolia index name for products.
+ *
+ * @type {string}
+ */
+export const ALGOLIA_PRODUCT_INDEX = 'dev_products';
+
+/**
  * Algolia index for product query suggestions.
  *
  * @type {string}
