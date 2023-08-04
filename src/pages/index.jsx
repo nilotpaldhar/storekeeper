@@ -8,11 +8,11 @@ import LayoutWrapper from '@ui/layouts/LayoutWrapper';
 import fetchPage from '@libs/general/dynamic-page/fetchPage';
 
 /**
- * Render the Homepage component.
+ * Render the HomePage component.
  *
- * @return {Element} The Homepage component.
+ * @return {Element} The HomePage component.
  */
-const Homepage = ({ page }) => (
+const HomePage = ({ page }) => (
 	<Container className="py-10">
 		<h1 className="text-4xl font-bold text-center">{page?.title}</h1>
 	</Container>
@@ -21,14 +21,14 @@ const Homepage = ({ page }) => (
 /**
  * Prop Types.
  */
-Homepage.propTypes = {
+HomePage.propTypes = {
 	page: PropTypes.shape({
 		title: PropTypes.string,
 	}).isRequired,
 };
 
 /** Page Layout. */
-Homepage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</LayoutWrapper>;
+HomePage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</LayoutWrapper>;
 
 /**
  * Get page props.
@@ -44,4 +44,4 @@ export const getStaticProps = async ({ preview }) => {
 	}
 };
 
-export default Homepage;
+export default HomePage;

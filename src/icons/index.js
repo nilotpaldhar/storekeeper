@@ -23,6 +23,7 @@ export { default as DollarCircle } from './regular/DollarCircle';
 export { default as Email } from './regular/Email';
 export { default as Exclamation } from './regular/Exclamation';
 export { default as Eye } from './regular/Eye';
+export { default as Filter } from './regular/Filter';
 export { default as Giftcard } from './regular/Giftcard';
 export { default as Headphone } from './regular/Headphone';
 export { default as Heart } from './regular/Heart';

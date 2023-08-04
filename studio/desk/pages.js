@@ -1,33 +1,40 @@
 import { BsCart } from 'react-icons/bs';
 import { VscBrowser } from 'react-icons/vsc';
-import { AiOutlineHome, AiOutlineLock } from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineLock, AiOutlineSearch } from 'react-icons/ai';
 import { MdErrorOutline } from 'react-icons/md';
 
 // Homepage Menu
 const homepageMenu = (S) =>
 	S.listItem()
-		.title('Home Page')
+		.title('Home')
 		.child(S.editor().id('homepage').schemaType('homepage').documentId('homepage'))
 		.icon(AiOutlineHome);
 
 // Shoppage Menu
 const shoppageMenu = (S) =>
 	S.listItem()
-		.title('Shop Page')
+		.title('Shop')
 		.child(S.editor().id('shoppage').schemaType('shoppage').documentId('shoppage'))
 		.icon(BsCart);
+
+// Searchpage Menu
+const searchpageMenu = (S) =>
+	S.listItem()
+		.title('Search')
+		.child(S.editor().id('searchpage').schemaType('searchpage').documentId('searchpage'))
+		.icon(AiOutlineSearch);
 
 // Loginpage Menu
 const loginpageMenu = (S) =>
 	S.listItem()
-		.title('Login Page')
+		.title('Login')
 		.child(S.editor().id('loginpage').schemaType('loginpage').documentId('loginpage'))
 		.icon(AiOutlineLock);
 
 // Errorpage Menu
 const errorpageMenu = (S) =>
 	S.listItem()
-		.title('Error Page (404)')
+		.title('Error (404)')
 		.child(S.editor().id('errorpage').schemaType('errorpage').documentId('errorpage'))
 		.icon(MdErrorOutline);
 
@@ -54,6 +61,7 @@ export const menusMenu = (S) =>
 				.items([
 					homepageMenu(S),
 					shoppageMenu(S),
+					searchpageMenu(S),
 					loginpageMenu(S),
 					errorpageMenu(S),
 					otherPagesMenu(S),

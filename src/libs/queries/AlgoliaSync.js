@@ -20,7 +20,10 @@ const AlgoliaSyncQuery = `
     name, 
     'code': colorCode.hex
   },
-  'price': price.raw,
+  price {
+    raw,
+	  formattedWithSymbol
+  },
   slug,
   inventory,
   image { url, width, height },

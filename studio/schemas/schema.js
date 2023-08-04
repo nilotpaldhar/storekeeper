@@ -8,6 +8,7 @@ import homepage from './documents/homepage';
 import shoppage from './documents/shoppage';
 import loginpage from './documents/loginpage';
 import errorpage from './documents/errorpage';
+import searchpage from './documents/searchpage';
 import seoSettings from './documents/settings-seo';
 import productColor from './documents/product-color';
 import promoSettings from './documents/settings-promo';
@@ -55,6 +56,7 @@ const schema = [
 	shoppage,
 	loginpage,
 	errorpage,
+	searchpage,
 	seoSettings,
 	productColor,
 	promoSettings,
