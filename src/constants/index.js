@@ -25,11 +25,18 @@ export const HTTP_STATUS = {
 };
 
 /**
- * The total product pages to be created initially (during build time).
+ * Total product pages to be created initially (during build time).
  *
  * @type {number}
  */
 export const PRODUCT_PATHS_LIMIT = 100;
+
+/**
+ * Total product to be displayed in the search page.
+ *
+ * @type {number}
+ */
+export const PRODUCT_CATALOG_COUNT = 12;
 
 /**
  * Algolia recent searches key.

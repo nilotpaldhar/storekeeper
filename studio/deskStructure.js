@@ -17,6 +17,7 @@ const hiddenDocTypes = (listItem) =>
 		'shoppage',
 		'loginpage',
 		'errorpage',
+		'searchpage',
 		'seoSettings',
 		'productColor',
 		'promoSettings',
