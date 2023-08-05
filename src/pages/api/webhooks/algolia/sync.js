@@ -2,7 +2,7 @@ import indexer from 'sanity-algolia';
 import algoliasearch from 'algoliasearch';
 import getSanityClient from '@config/sanity';
 import AlgoliaSyncQuery from '@libs/queries/AlgoliaSync';
-import { ALGOLIA_PRODUCT_INDEX } from '@constants';
+import { ALGOLIA_INDEX } from '@constants';
 import validateReqMethod from '@utils/api/validateReqMethod';
 
 /** Initialize sanity client. */
@@ -27,7 +27,7 @@ const handler = async (req, res) => {
 			return res.status(401).json({ error: 'unauthorized' });
 		}
 
-		const productIndex = searchClient.initIndex(ALGOLIA_PRODUCT_INDEX);
+		const productIndex = searchClient.initIndex(ALGOLIA_INDEX.product);
 		const sanityAlgolia = indexer(
 			{
 				product: {

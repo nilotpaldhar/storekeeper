@@ -4937,6 +4937,14 @@ react-icons@^4.10.1:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.10.1.tgz#3f3b5eec1f63c1796f6a26174a1091ca6437a500"
   integrity sha512-/ngzDP/77tlCfqthiiGNZeYFACw85fUjZtLbedmJ5DTlNDIwETxhwBzdOJ21zj4iJdvc0J3y7yOsX3PpxAJzrw==
 
+react-instantsearch-hooks-router-nextjs@^6.47.3:
+  version "6.47.3"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-hooks-router-nextjs/-/react-instantsearch-hooks-router-nextjs-6.47.3.tgz#762add76fcdbc5e381159c99d664ec96e0b3c869"
+  integrity sha512-m2z9E2h65R66FtEYt32Z8XGnH2jcy2u2UlWOEQ/GIn3dwsuu7iQdyDomCMI7Z1kf6SyACVYOgQs77WPUAW7Xmw==
+  dependencies:
+    instantsearch.js "4.56.8"
+    react-instantsearch-hooks "6.47.3"
+
 react-instantsearch-hooks-web@^6.47.3:
   version "6.47.3"
   resolved "https://registry.yarnpkg.com/react-instantsearch-hooks-web/-/react-instantsearch-hooks-web-6.47.3.tgz#aad0381c72ee85dc0465a59894d1f0c16bf4e3b5"

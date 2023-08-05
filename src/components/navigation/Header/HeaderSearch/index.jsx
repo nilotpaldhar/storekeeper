@@ -17,7 +17,7 @@ import ArrowUpLeftIcon from '@icons/regular/ArrowUpLeft';
 
 /** Helpers */
 import useLazyRef from '@hooks/useLazyRef';
-import { ALGOLIA_RECENT_SEARCHES_KEY, ALGOLIA_PRODUCTS_QUERY_SUGGESTIONS_INDEX } from '@constants';
+import { ALGOLIA_RECENT_SEARCHES_KEY, ALGOLIA_INDEX } from '@constants';
 import clsx from 'clsx';
 
 /**
@@ -110,7 +110,7 @@ const HeaderSearch = ({ className, ...props }) => {
 	const getQuerySuggestionsPlugin = useLazyRef(() =>
 		createQuerySuggestionsPlugin({
 			searchClient,
-			indexName: ALGOLIA_PRODUCTS_QUERY_SUGGESTIONS_INDEX,
+			indexName: ALGOLIA_INDEX.productQuerySuggestion,
 			transformSource: ({ source, onTapAhead }) => ({
 				...source,
 				getItemUrl: ({ item }) => `/search/?query=${item.query}`,

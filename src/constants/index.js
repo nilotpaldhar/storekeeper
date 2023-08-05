@@ -13,16 +13,18 @@ export const CART_COOKIE_KEY = 'sk.cart_id';
 export const COOKIE_CONSENT_KEY = 'sk.cookie_consent';
 
 /**
- * HTTP status states.
+ * Promo banner key.
  *
- * @type {object}
+ * @type {string}
  */
-export const HTTP_STATUS = {
-	idle: 'IDLE',
-	pending: 'PENDING',
-	succeeded: 'SUCCEEDED',
-	failed: 'FAILED',
-};
+export const PROMO_BANNER_KEY = 'sk.promo_banner';
+
+/**
+ * Algolia recent searches key.
+ *
+ * @type {string}
+ */
+export const ALGOLIA_RECENT_SEARCHES_KEY = 'sk.recent_search';
 
 /**
  * Total product pages to be created initially (during build time).
@@ -39,32 +41,16 @@ export const PRODUCT_PATHS_LIMIT = 100;
 export const PRODUCT_CATALOG_COUNT = 12;
 
 /**
- * Algolia recent searches key.
+ * HTTP status states.
  *
- * @type {string}
+ * @type {object}
  */
-export const ALGOLIA_RECENT_SEARCHES_KEY = 'RECENT_SEARCH';
-
-/**
- * Algolia index name for products.
- *
- * @type {string}
- */
-export const ALGOLIA_PRODUCT_INDEX = 'dev_products';
-
-/**
- * Algolia index for product query suggestions.
- *
- * @type {string}
- */
-export const ALGOLIA_PRODUCTS_QUERY_SUGGESTIONS_INDEX = 'dev_products_query_suggestions';
-
-/**
- * Promo banner key.
- *
- * @type {string}
- */
-export const PROMO_BANNER_KEY = 'sk.promo_banner';
+export const HTTP_STATUS = {
+	idle: 'IDLE',
+	pending: 'PENDING',
+	succeeded: 'SUCCEEDED',
+	failed: 'FAILED',
+};
 
 /**
  * Checkout steps.
@@ -97,3 +83,15 @@ export const CHECKOUT_STEPS = [
 		description: 'Payment',
 	},
 ];
+
+/**
+ * Algolia index names.
+ *
+ * @type {object}
+ */
+export const ALGOLIA_INDEX = {
+	product: 'dev_products',
+	productPriceAsc: 'dev_products_price_asc',
+	productPriceDesc: 'dev_products_price_desc',
+	productQuerySuggestion: 'dev_products_query_suggestions',
+};
