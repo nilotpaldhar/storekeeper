@@ -1,3 +1,4 @@
+export { default as SortBy } from '@ui/commerce/SortBy';
 export { default as CartList } from '@ui/commerce/CartList';
 export { default as CartSummary } from '@ui/commerce/CartSummary';
 export { default as ProductCard } from '@ui/commerce/ProductCard';

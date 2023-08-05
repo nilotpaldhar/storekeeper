@@ -2,7 +2,7 @@ import algoliasearch from 'algoliasearch';
 import getSanityClient from '@config/sanity';
 import { groq } from 'next-sanity';
 import AlgoliaSyncQuery from '@libs/queries/AlgoliaSync';
-import { ALGOLIA_PRODUCT_INDEX } from '@constants';
+import { ALGOLIA_INDEX } from '@constants';
 import validateReqMethod from '@utils/api/validateReqMethod';
 
 /** Initialize sanity client. */
@@ -34,7 +34,7 @@ const handler = async (req, res) => {
 		try {
 			/** Saving algolia index with products data. */
 			const products = await sanity.fetch(query);
-			const productIndex = searchClient.initIndex(ALGOLIA_PRODUCT_INDEX);
+			const productIndex = searchClient.initIndex(ALGOLIA_INDEX.product);
 			await productIndex.saveObjects(products);
 
 			return res.status(200).json({
