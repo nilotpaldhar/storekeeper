@@ -1,4 +1,5 @@
 import { useRefinementList } from 'react-instantsearch-hooks-web';
+import { ALGOLIA_ATTRIBUTES } from '@constants';
 import FilterCategoryItem from './FilterCategoryItem';
 
 /**
@@ -7,7 +8,7 @@ import FilterCategoryItem from './FilterCategoryItem';
  * @return {Element} The FilterCategoryList component.
  */
 const FilterCategoryList = () => {
-	const { items, refine } = useRefinementList({ attribute: 'categories.title' });
+	const { items, refine } = useRefinementList({ attribute: ALGOLIA_ATTRIBUTES.categories });
 
 	return (
 		<ul className="flex flex-col space-y-3">

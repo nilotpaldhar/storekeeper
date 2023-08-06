@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 /** Components. */
 import FiltersHeader from '@ui/commerce/Filters/FiltersHeader';
 import FilterCategory from '@ui/commerce/Filters/FilterCategory';
+import FilterBrand from '@ui/commerce/Filters/FilterBrand';
 
 /**
  * Render the Filters component.
@@ -14,8 +15,9 @@ const Filters = ({ headerTitle, widgetTitles, defaultCollapsed }) => (
 		<FiltersHeader title={headerTitle} />
 		<div className="px-px py-6">
 			<div className="flex flex-col px-px py-6 space-y-6">
-				<FilterCategory
-					title={widgetTitles.category}
+				<FilterCategory title={widgetTitles.category} defaultCollapsed={defaultCollapsed} />
+				<FilterBrand
+					title={widgetTitles.brand}
 					defaultCollapsed={defaultCollapsed}
 					hasDivider={false}
 				/>
