@@ -95,3 +95,13 @@ export const ALGOLIA_INDEX = {
 	productPriceDesc: 'dev_products_price_desc',
 	productQuerySuggestion: 'dev_products_query_suggestions',
 };
+
+/**
+ * Algolia attribute names.
+ *
+ * @type {object}
+ */
+export const ALGOLIA_ATTRIBUTES = {
+	categories: 'categories.title',
+	brand: 'brand',
+};
