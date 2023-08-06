@@ -1,4 +1,5 @@
-import singletonRouter, { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import singletonRouter from 'next/router';
 import { useSelector } from 'react-redux';
 import searchClient from '@config/algolia';
 
@@ -9,23 +10,23 @@ import { createInstantSearchRouterNext } from 'react-instantsearch-hooks-router-
 import { selectProductCatalogLayout } from '@store/slices/layout/layout.selectors';
 import { ALGOLIA_INDEX, PRODUCT_CATALOG_COUNT } from '@constants';
 
-/** Components & Icons. */
-import FilterIcon from '@icons/regular/Filter';
+/** Components. */
+import Filters from '@ui/commerce/Filters';
 import Container from '@ui/general/Container';
 import RegularButton from '@ui/buttons/RegularButton';
 import HitWrapper from '@templates/SearchPage/HitWrapper';
 import SwitchLayout from '@templates/SearchPage/SwitchLayout';
 import VirtualSearchBox from '@templates/SearchPage/VirtualSearchBox';
 
+/** Icons. */
+import FilterIcon from '@icons/regular/Filter';
+
 /**
  * Render the SearchPageTmpl component.
  *
  * @return {Element} The SearchPageTmpl component.
  */
-const SearchPageTmpl = () => {
-	const router = useRouter();
-	const initialQuery = router.query?.query || '';
-
+const SearchPageTmpl = ({ initialQuery }) => {
 	/** Product catalog layout. */
 	const layout = useSelector(selectProductCatalogLayout);
 
@@ -55,6 +56,8 @@ const SearchPageTmpl = () => {
 		disabledLoadMore: 'hidden',
 	};
 
+	if (!initialQuery) return null;
+
 	return (
 		<InstantSearch
 			key={initialQuery}
@@ -70,34 +73,22 @@ const SearchPageTmpl = () => {
 
 			<main className="py-10 lg:py-14 text-neutral-900">
 				<Container className="lg:flex lg:space-x-8">
-					<aside className="hidden xl:block w-72 divide-y divide-neutral-100">
-						<div className="px-px pb-6 flex items-center justify-between text-base">
-							<div className="font-semibold">Filters:</div>
-							<div>
-								<RegularButton intent="primary-ghost" className="!px-px">
-									Clear All
-								</RegularButton>
-							</div>
-						</div>
-						{/* Refinement List */}
-						<div className="px-px py-6">
-							{/* Filter List */}
-							Filters will go here
-						</div>
+					<aside className="hidden xl:block w-72">
+						<Filters headerTitle="Filters:" defaultCollapsed={false} />
 					</aside>
 
 					<div className="flex-1">
 						<div className="xl:flex lg:items-center">
-							<div className="flex-1 flex space-x-1 text-base px-px">
+							<div className="flex flex-1 px-px space-x-1 text-base">
 								<span>Showing results for</span>
 								<span className="font-semibold">&quot;{initialQuery}&quot;</span>
 							</div>
 							<div className="flex items-center mt-6 xl:mt-0">
-								<RegularButton startIcon={FilterIcon} className="xl:hidden mr-2">
+								<RegularButton startIcon={FilterIcon} className="mr-2 xl:hidden">
 									Filters
 								</RegularButton>
 
-								<div className="ml-auto flex items-center">
+								<div className="flex items-center ml-auto">
 									<SortBy
 										items={sortItems}
 										classNames={{
@@ -110,10 +101,10 @@ const SearchPageTmpl = () => {
 									/>
 								</div>
 
-								<SwitchLayout className="flex items-center space-x-1 ml-4" />
+								<SwitchLayout className="flex items-center ml-4 space-x-1" />
 							</div>
 						</div>
-						<div className="mt-6 px-px">
+						<div className="px-px mt-6">
 							<InfiniteHits
 								showPrevious
 								hitComponent={HitWrapper}
@@ -129,6 +120,20 @@ const SearchPageTmpl = () => {
 			</main>
 		</InstantSearch>
 	);
+};
+
+/**
+ * Default Props.
+ */
+SearchPageTmpl.defaultProps = {
+	initialQuery: '',
+};
+
+/**
+ * Prop Types.
+ */
+SearchPageTmpl.propTypes = {
+	initialQuery: PropTypes.string,
 };
 
 export default SearchPageTmpl;

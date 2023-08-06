@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 
 /** Templates & Components. */
 import SearchPageTmpl from '@templates/SearchPage';
@@ -12,7 +13,12 @@ import fetchPage from '@libs/general/dynamic-page/fetchPage';
  *
  * @return {Element} The SearchPage component.
  */
-const SearchPage = () => <SearchPageTmpl />;
+const SearchPage = () => {
+	const router = useRouter();
+	const initialQuery = router.query?.query;
+
+	return <SearchPageTmpl initialQuery={initialQuery} />;
+};
 
 /**
  * Prop Types.
