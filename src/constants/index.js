@@ -102,6 +102,7 @@ export const ALGOLIA_INDEX = {
  * @type {object}
  */
 export const ALGOLIA_ATTRIBUTES = {
-	categories: 'categories.title',
+	category: 'categories.title',
 	brand: 'brand',
+	color: 'color',
 };

@@ -3,9 +3,8 @@ import { useRefinementList } from 'react-instantsearch-hooks-web';
 import { ALGOLIA_ATTRIBUTES } from '@constants';
 
 import FilterWrapper from '@ui/commerce/Filters/FilterWrapper';
+import FilterCount from '@ui/commerce/Filters/FilterCount';
 import Checkbox from '@ui/data-entry/Checkbox';
-
-import clsx from 'clsx';
 
 /**
  * Render the FilterBrand component.
@@ -29,14 +28,7 @@ const FilterBrand = ({ title, hasDivider, defaultCollapsed }) => {
 								refine(value);
 							}}
 						/>
-						<div
-							className={clsx(
-								'flex items-center justify-center w-5 h-5 bg-neutral-50 text-neutral-900 transition-colors duration-300',
-								isRefined && 'bg-primary-600 text-white'
-							)}
-						>
-							<span className="block text-xs font-normal leading-none">{count}</span>
-						</div>
+						<FilterCount count={count} isActive={isRefined} />
 					</li>
 				))}
 			</ul>

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import FilterCount from '@ui/commerce/Filters/FilterCount';
 import clsx from 'clsx';
 
 /**
@@ -7,7 +8,7 @@ import clsx from 'clsx';
  * @return {Element} The FilterCategoryItem component.
  */
 const FilterCategoryItem = ({ id, value, label, count, isActive, refine }) => (
-	<div className="flex items-center justify-between">
+	<div className="flex items-center justify-between space-x-1">
 		<label
 			htmlFor={id}
 			className={clsx(
@@ -21,18 +22,19 @@ const FilterCategoryItem = ({ id, value, label, count, isActive, refine }) => (
 				value={value}
 				checked={isActive}
 				onChange={() => refine(value)}
-				className="sr-only"
+				className="peer sr-only"
 			/>
-			<span className="block text-current select-none font-normal">{label}</span>
+			<span
+				className={clsx(
+					'block text-current select-none font-normal',
+					'peer-focus-visible:outline-1 peer-focus-visible:outline-dashed peer-focus-visible:outline-neutral-600',
+					isActive && 'peer-focus-visible:outline-primary-600'
+				)}
+			>
+				{label}
+			</span>
 		</label>
-		<div
-			className={clsx(
-				'flex items-center justify-center w-5 h-5 bg-neutral-50 text-neutral-900 transition-colors duration-300',
-				isActive && 'bg-primary-600 text-white'
-			)}
-		>
-			<span className="block text-xs font-normal leading-none">{count}</span>
-		</div>
+		<FilterCount count={count} isActive={isActive} />
 	</div>
 );
 

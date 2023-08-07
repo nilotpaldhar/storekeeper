@@ -13,6 +13,7 @@ import { ALGOLIA_INDEX, PRODUCT_CATALOG_COUNT } from '@constants';
 /** Components. */
 import Filters from '@ui/commerce/Filters';
 import Container from '@ui/general/Container';
+import LoadingUI from '@ui/feedback/LoadingUI';
 import RegularButton from '@ui/buttons/RegularButton';
 import HitWrapper from '@templates/SearchPage/HitWrapper';
 import SwitchLayout from '@templates/SearchPage/SwitchLayout';
@@ -56,69 +57,69 @@ const SearchPageTmpl = ({ initialQuery }) => {
 		disabledLoadMore: 'hidden',
 	};
 
-	if (!initialQuery) return null;
-
 	return (
-		<InstantSearch
-			key={initialQuery}
-			searchClient={searchClient}
-			indexName={ALGOLIA_INDEX.product}
-			routing={{
-				stateMapping: singleIndex(ALGOLIA_INDEX.product),
-				router: createInstantSearchRouterNext({ singletonRouter }),
-			}}
-		>
-			<Configure hitsPerPage={PRODUCT_CATALOG_COUNT} />
-			<VirtualSearchBox />
+		<LoadingUI loading={!initialQuery}>
+			<InstantSearch
+				key={initialQuery}
+				searchClient={searchClient}
+				indexName={ALGOLIA_INDEX.product}
+				routing={{
+					stateMapping: singleIndex(ALGOLIA_INDEX.product),
+					router: createInstantSearchRouterNext({ singletonRouter }),
+				}}
+			>
+				<Configure hitsPerPage={PRODUCT_CATALOG_COUNT} />
+				<VirtualSearchBox />
 
-			<main className="py-10 lg:py-14 text-neutral-900">
-				<Container className="lg:flex lg:space-x-8">
-					<aside className="hidden xl:block w-72">
-						<Filters headerTitle="Filters:" defaultCollapsed={false} />
-					</aside>
+				<main className="py-10 lg:py-14 text-neutral-900">
+					<Container className="lg:flex lg:space-x-8">
+						<aside className="hidden xl:block w-72">
+							<Filters headerTitle="Filters:" defaultCollapsed={false} />
+						</aside>
 
-					<div className="flex-1">
-						<div className="xl:flex lg:items-center">
-							<div className="flex flex-1 px-px space-x-1 text-base">
-								<span>Showing results for</span>
-								<span className="font-semibold">&quot;{initialQuery}&quot;</span>
-							</div>
-							<div className="flex items-center mt-6 xl:mt-0">
-								<RegularButton startIcon={FilterIcon} className="mr-2 xl:hidden">
-									Filters
-								</RegularButton>
+						<div className="flex-1">
+							<div className="xl:flex lg:items-center">
+								<div className="flex flex-1 px-px space-x-1 text-base">
+									<span>Showing results for</span>
+									<span className="font-semibold">&quot;{initialQuery}&quot;</span>
+								</div>
+								<div className="flex items-center mt-6 xl:mt-0">
+									<RegularButton startIcon={FilterIcon} className="mr-2 xl:hidden">
+										Filters
+									</RegularButton>
 
-								<div className="flex items-center ml-auto">
-									<SortBy
-										items={sortItems}
-										classNames={{
-											select: `
+									<div className="flex items-center ml-auto">
+										<SortBy
+											items={sortItems}
+											classNames={{
+												select: `
 												appearance-none block w-full text-sm text-neutral-900 
 												bg-white border border-neutral-100 pl-2 md:pl-4 pr-2 lg:pr-8 py-2
 												focus:outline-none focus:border-neutral-900 cursor-pointer transition duration-300
 											`,
-										}}
-									/>
-								</div>
+											}}
+										/>
+									</div>
 
-								<SwitchLayout className="flex items-center ml-4 space-x-1" />
+									<SwitchLayout className="flex items-center ml-4 space-x-1" />
+								</div>
+							</div>
+							<div className="px-px mt-6">
+								<InfiniteHits
+									showPrevious
+									hitComponent={HitWrapper}
+									classNames={infiniteHitsClassNames}
+									translations={{
+										showMoreButtonText: 'Load More',
+										showPreviousButtonText: 'Load Previous',
+									}}
+								/>
 							</div>
 						</div>
-						<div className="px-px mt-6">
-							<InfiniteHits
-								showPrevious
-								hitComponent={HitWrapper}
-								classNames={infiniteHitsClassNames}
-								translations={{
-									showMoreButtonText: 'Load More',
-									showPreviousButtonText: 'Load Previous',
-								}}
-							/>
-						</div>
-					</div>
-				</Container>
-			</main>
-		</InstantSearch>
+					</Container>
+				</main>
+			</InstantSearch>
+		</LoadingUI>
 	);
 };
 
