@@ -10,11 +10,11 @@ import FilterColorItem from './FilterColorItem';
  *
  * @return {Element} The FilterColor component.
  */
-const FilterColor = ({ title, hasDivider, defaultCollapsed }) => {
+const FilterColor = ({ title, hasDivider }) => {
 	const { items, refine } = useRefinementList({ attribute: ALGOLIA_ATTRIBUTES.color });
 
 	return (
-		<FilterWrapper title={title} hasDivider={hasDivider} defaultCollapsed={defaultCollapsed}>
+		<FilterWrapper title={title} hasDivider={hasDivider}>
 			<ul className="flex flex-col space-y-4">
 				{items.map(({ value, label, isRefined, count }) => (
 					<li key={label}>
@@ -38,7 +38,6 @@ const FilterColor = ({ title, hasDivider, defaultCollapsed }) => {
  */
 FilterColor.defaultProps = {
 	hasDivider: true,
-	defaultCollapsed: false,
 };
 
 /**
@@ -47,7 +46,6 @@ FilterColor.defaultProps = {
 FilterColor.propTypes = {
 	title: PropTypes.string.isRequired,
 	hasDivider: PropTypes.bool,
-	defaultCollapsed: PropTypes.bool,
 };
 
 export default FilterColor;

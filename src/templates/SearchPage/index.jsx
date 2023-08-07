@@ -95,7 +95,7 @@ const SearchPageTmpl = ({ initialQuery }) => {
 												select: `
 												appearance-none block w-full text-sm text-neutral-900 
 												bg-white border border-neutral-100 pl-2 md:pl-4 pr-2 lg:pr-8 py-2
-												focus:outline-none focus:border-neutral-900 cursor-pointer transition duration-300
+												focus:outline-none focus-visible:border-neutral-900 cursor-pointer transition duration-300
 											`,
 											}}
 										/>
