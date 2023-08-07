@@ -29,3 +29,6 @@ export { default as formatLineItems } from '@utils/cart/formatLineItems';
 export { default as formatTokenData } from '@utils/checkout/formatTokenData';
 export { default as getExpiryMonths } from '@utils/checkout/getExpiryMonths';
 export { default as getExpiryYears } from '@utils/checkout/getExpiryYears';
+
+/** Search. */
+export { default as parseColorFacet } from '@utils/search/parseColorFacet';

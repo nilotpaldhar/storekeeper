@@ -8,7 +8,7 @@ import FilterCategoryItem from './FilterCategoryItem';
  * @return {Element} The FilterCategoryList component.
  */
 const FilterCategoryList = () => {
-	const { items, refine } = useRefinementList({ attribute: ALGOLIA_ATTRIBUTES.categories });
+	const { items, refine } = useRefinementList({ attribute: ALGOLIA_ATTRIBUTES.category });
 
 	return (
 		<ul className="flex flex-col space-y-3">

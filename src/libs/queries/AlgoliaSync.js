@@ -16,10 +16,7 @@ const AlgoliaSyncQuery = `
     slug
   },
   'brand': brand->title,
-  color->{
-    name, 
-    'code': colorCode.hex
-  },
+  'color': color->name + ';' + color->colorCode.hex,
   price {
     raw,
 	  formattedWithSymbol
