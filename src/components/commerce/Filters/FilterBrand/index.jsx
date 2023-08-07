@@ -11,11 +11,11 @@ import Checkbox from '@ui/data-entry/Checkbox';
  *
  * @return {Element} The FilterBrand component.
  */
-const FilterBrand = ({ title, hasDivider, defaultCollapsed }) => {
+const FilterBrand = ({ title, hasDivider }) => {
 	const { items, refine } = useRefinementList({ attribute: ALGOLIA_ATTRIBUTES.brand });
 
 	return (
-		<FilterWrapper title={title} hasDivider={hasDivider} defaultCollapsed={defaultCollapsed}>
+		<FilterWrapper title={title} hasDivider={hasDivider}>
 			<ul className="flex flex-col space-y-4">
 				{items.map(({ value, label, isRefined, count }) => (
 					<li key={label} className="flex items-center justify-between">
@@ -41,7 +41,6 @@ const FilterBrand = ({ title, hasDivider, defaultCollapsed }) => {
  */
 FilterBrand.defaultProps = {
 	hasDivider: true,
-	defaultCollapsed: false,
 };
 
 /**
@@ -50,7 +49,6 @@ FilterBrand.defaultProps = {
 FilterBrand.propTypes = {
 	title: PropTypes.string.isRequired,
 	hasDivider: PropTypes.bool,
-	defaultCollapsed: PropTypes.bool,
 };
 
 export default FilterBrand;

@@ -7,8 +7,8 @@ import FilterCategoryList from './FilterCategoryList';
  *
  * @return {Element} The FilterCategory component.
  */
-const FilterCategory = ({ title, hasDivider, defaultCollapsed }) => (
-	<FilterWrapper title={title} hasDivider={hasDivider} defaultCollapsed={defaultCollapsed}>
+const FilterCategory = ({ title, hasDivider }) => (
+	<FilterWrapper title={title} hasDivider={hasDivider}>
 		<FilterCategoryList />
 	</FilterWrapper>
 );
@@ -18,7 +18,6 @@ const FilterCategory = ({ title, hasDivider, defaultCollapsed }) => (
  */
 FilterCategory.defaultProps = {
 	hasDivider: true,
-	defaultCollapsed: false,
 };
 
 /**
@@ -27,7 +26,6 @@ FilterCategory.defaultProps = {
 FilterCategory.propTypes = {
 	title: PropTypes.string.isRequired,
 	hasDivider: PropTypes.bool,
-	defaultCollapsed: PropTypes.bool,
 };
 
 export default FilterCategory;

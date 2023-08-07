@@ -105,4 +105,5 @@ export const ALGOLIA_ATTRIBUTES = {
 	category: 'categories.title',
 	brand: 'brand',
 	color: 'color',
+	price: 'price.raw',
 };
