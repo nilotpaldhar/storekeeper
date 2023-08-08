@@ -15,6 +15,7 @@ import Filters from '@ui/commerce/Filters';
 import Container from '@ui/general/Container';
 import LoadingUI from '@ui/feedback/LoadingUI';
 import RegularButton from '@ui/buttons/RegularButton';
+import RefinementList from '@ui/commerce/RefinementList';
 import HitWrapper from '@templates/SearchPage/HitWrapper';
 import SwitchLayout from '@templates/SearchPage/SwitchLayout';
 import VirtualSearchBox from '@templates/SearchPage/VirtualSearchBox';
@@ -104,6 +105,9 @@ const SearchPageTmpl = ({ initialQuery }) => {
 									<SwitchLayout className="flex items-center ml-4 space-x-1" />
 								</div>
 							</div>
+
+							<RefinementList />
+
 							<div className="px-px mt-6">
 								<InfiniteHits
 									showPrevious

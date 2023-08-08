@@ -21,6 +21,7 @@ const FilterPrice = ({ title, hasDivider }) => (
 				input: `
 					block w-full text-sm font-medium text-center py-2 text-neutral-900 bg-white transition duration-300
 					border border-neutral-100 focus:outline-none focus-visible:border-neutral-900
+					placeholder:text-neutral-400 placeholder:font-light
 				`,
 				separator: 'mx-2 self-center text-sm font-medium text-neutral-500',
 				submit: `

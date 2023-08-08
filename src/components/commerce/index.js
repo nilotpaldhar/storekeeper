@@ -7,5 +7,6 @@ export { default as OrderSummary } from '@ui/commerce/OrderSummary';
 export { default as AutoComplete } from '@ui/commerce/AutoComplete';
 export { default as CheckoutSteps } from '@ui/commerce/CheckoutSteps';
 export { default as ProductContent } from '@ui/commerce/ProductContent';
+export { default as RefinementList } from '@ui/commerce/RefinementList';
 export { default as ProductCollection } from '@ui/commerce/ProductCollection';
 export { default as ProductImgGallery } from '@ui/commerce/ProductImgGallery';
