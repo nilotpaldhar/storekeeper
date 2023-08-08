@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
 /** Templates & Components. */
+import Seo from '@ui/general/Seo';
 import SearchPageTmpl from '@templates/SearchPage';
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
 
@@ -16,8 +17,14 @@ import fetchPage from '@libs/general/dynamic-page/fetchPage';
 const SearchPage = () => {
 	const router = useRouter();
 	const initialQuery = router.query?.query;
+	const loading = !router.isReady;
 
-	return <SearchPageTmpl initialQuery={initialQuery} />;
+	return (
+		<>
+			<Seo title={initialQuery} />
+			<SearchPageTmpl loading={loading} initialQuery={initialQuery} />
+		</>
+	);
 };
 
 /**
