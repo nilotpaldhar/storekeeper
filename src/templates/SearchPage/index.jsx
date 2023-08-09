@@ -4,9 +4,9 @@ import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
 import searchClient from '@config/algolia';
-import { Configure, InfiniteHits, InstantSearch, SortBy } from 'react-instantsearch-hooks-web';
+import { Configure, InfiniteHits, InstantSearch, SortBy } from 'react-instantsearch';
 import { singleIndex } from 'instantsearch.js/es/lib/stateMappings';
-import { createInstantSearchRouterNext } from 'react-instantsearch-hooks-router-nextjs';
+import { createInstantSearchRouterNext } from 'react-instantsearch-router-nextjs';
 
 import { selectProductCatalogLayout } from '@store/slices/layout/layout.selectors';
 import { ALGOLIA_INDEX, PRODUCT_CATALOG_COUNT } from '@constants';
@@ -27,7 +27,7 @@ const MobileFilters = dynamic(() => import('@templates/SearchPage/MobileFilters'
  *
  * @return {Element} The SearchPageTmpl component.
  */
-const SearchPageTmpl = ({ loading, initialQuery }) => {
+const SearchPageTmpl = ({ loading, initialQuery, info }) => {
 	/** Product catalog layout. */
 	const layout = useSelector(selectProductCatalogLayout);
 
@@ -60,67 +60,66 @@ const SearchPageTmpl = ({ loading, initialQuery }) => {
 	return (
 		<LoadingUI loading={loading}>
 			{initialQuery ? (
-				<InstantSearch
-					key={initialQuery}
-					searchClient={searchClient}
-					indexName={ALGOLIA_INDEX.product}
-					routing={{
-						stateMapping: singleIndex(ALGOLIA_INDEX.product),
-						router: createInstantSearchRouterNext({ singletonRouter }),
-					}}
-				>
-					<Configure hitsPerPage={PRODUCT_CATALOG_COUNT} />
-					<VirtualSearchBox />
+				<div className="min-h-screen">
+					<InstantSearch
+						key={initialQuery}
+						searchClient={searchClient}
+						indexName={ALGOLIA_INDEX.product}
+						routing={{
+							stateMapping: singleIndex(ALGOLIA_INDEX.product),
+							router: createInstantSearchRouterNext({ singletonRouter }),
+						}}
+					>
+						<Configure hitsPerPage={PRODUCT_CATALOG_COUNT} />
+						<VirtualSearchBox />
 
-					<main className="py-10 lg:py-14 text-neutral-900">
-						<Container className="lg:flex lg:space-x-8">
-							<aside className="hidden xl:block w-72">
-								<Filters headerTitle="Filters:" />
-							</aside>
+						<div className="py-10 lg:py-14 text-neutral-900">
+							<Container className="lg:flex lg:space-x-8">
+								<aside className="hidden xl:block w-72">
+									<Filters headerTitle="Filters:" />
+								</aside>
 
-							<div className="flex-1">
-								<div className="xl:flex lg:items-center">
-									<div className="flex flex-1 px-px space-x-1 text-base">
-										<span>Showing results for</span>
-										<span className="font-semibold">&quot;{initialQuery}&quot;</span>
-									</div>
-									<div className="flex items-center mt-6 xl:mt-0">
-										<MobileFilters className="block mr-2 xl:hidden" />
+								<main className="flex-1">
+									<div className="xl:flex lg:items-center">
+										<div className="flex-1 px-px text-base">{info}</div>
+										<div className="flex items-center mt-6 xl:mt-0">
+											<MobileFilters className="block mr-2 xl:hidden" />
 
-										<div className="flex items-center ml-auto">
-											<SortBy
-												items={sortItems}
-												classNames={{
-													select: `
-												appearance-none block w-full text-sm text-neutral-900 
-												bg-white border border-neutral-100 pl-2 md:pl-4 pr-2 lg:pr-8 py-2
-												focus:outline-none focus-visible:border-neutral-900 cursor-pointer transition duration-300
-											`,
-												}}
-											/>
+											<div className="flex items-center ml-auto">
+												<SortBy
+													items={sortItems}
+													classNames={{
+														select: `
+														appearance-none block w-full text-sm text-neutral-900 
+														bg-white border border-neutral-100 pl-2 md:pl-4 pr-2 lg:pr-8 py-2
+														focus:outline-none focus-visible:border-neutral-900 cursor-pointer transition duration-300
+													`,
+													}}
+												/>
+											</div>
+
+											<SwitchLayout className="flex items-center ml-4 space-x-1" />
 										</div>
-
-										<SwitchLayout className="flex items-center ml-4 space-x-1" />
 									</div>
-								</div>
 
-								<RefinementList />
+									<RefinementList />
 
-								<div className="px-px mt-6">
-									<InfiniteHits
-										showPrevious
-										hitComponent={HitWrapper}
-										classNames={infiniteHitsClassNames}
-										translations={{
-											showMoreButtonText: 'Load More',
-											showPreviousButtonText: 'Load Previous',
-										}}
-									/>
-								</div>
-							</div>
-						</Container>
-					</main>
-				</InstantSearch>
+									<div className="px-px mt-6">
+										<InfiniteHits
+											showPrevious
+											hitComponent={HitWrapper}
+											classNames={infiniteHitsClassNames}
+											translations={{
+												showMoreButtonText: 'Load More',
+												showPreviousButtonText: 'Load Previous',
+											}}
+										/>
+									</div>
+								</main>
+							</Container>
+						</div>
+					</InstantSearch>
+				</div>
 			) : (
 				<main className="py-10 lg:py-14 text-neutral-900">
 					<Container className="">
@@ -138,6 +137,7 @@ const SearchPageTmpl = ({ loading, initialQuery }) => {
 SearchPageTmpl.defaultProps = {
 	loading: false,
 	initialQuery: '',
+	info: '',
 };
 
 /**
@@ -146,6 +146,7 @@ SearchPageTmpl.defaultProps = {
 SearchPageTmpl.propTypes = {
 	loading: PropTypes.bool,
 	initialQuery: PropTypes.string,
+	info: PropTypes.node,
 };
 
 export default SearchPageTmpl;

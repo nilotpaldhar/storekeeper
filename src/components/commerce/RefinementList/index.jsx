@@ -1,5 +1,5 @@
 // import PropTypes from 'prop-types';
-import { CurrentRefinements } from 'react-instantsearch-hooks-web';
+import { CurrentRefinements } from 'react-instantsearch';
 import { ALGOLIA_ATTRIBUTES } from '@constants';
 import parseColorFacet from '@utils/search/parseColorFacet';
 

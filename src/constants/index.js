@@ -34,6 +34,13 @@ export const ALGOLIA_RECENT_SEARCHES_KEY = 'sk.recent_search';
 export const PRODUCT_PATHS_LIMIT = 100;
 
 /**
+ * Total product category pages to be created initially (during build time).
+ *
+ * @type {number}
+ */
+export const PRODUCT_CATEGORY_PATHS_LIMIT = 50;
+
+/**
  * Total product to be displayed in the search page.
  *
  * @type {number}

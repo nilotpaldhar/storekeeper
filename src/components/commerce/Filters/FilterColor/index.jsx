@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useRefinementList } from 'react-instantsearch-hooks-web';
+import { useRefinementList } from 'react-instantsearch';
 import { ALGOLIA_ATTRIBUTES } from '@constants';
 
 import FilterWrapper from '@ui/commerce/Filters/FilterWrapper';

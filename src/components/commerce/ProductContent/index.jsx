@@ -56,7 +56,8 @@ const ProductContent = ({
 						{categories?.map((category, idx) => (
 							<li key={category?.id} className="flex items-center">
 								<Anchor
-									href={`/category/${category?.slug}`}
+									newWindow
+									href={`/product/collection/${category?.slug}?query=${category?.slug}`}
 									className="font-light underline text-neutral-900 hover:opacity-70 hover:text-current"
 								>
 									{category?.title}

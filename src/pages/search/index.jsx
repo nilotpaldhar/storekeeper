@@ -22,7 +22,16 @@ const SearchPage = () => {
 	return (
 		<>
 			<Seo title={initialQuery} />
-			<SearchPageTmpl loading={loading} initialQuery={initialQuery} />
+			<SearchPageTmpl
+				loading={loading}
+				initialQuery={initialQuery}
+				info={
+					<div className="flex space-x-1 text-base items center">
+						<span>Showing results for</span>
+						<span className="font-semibold">&quot;{initialQuery}&quot;</span>
+					</div>
+				}
+			/>
 		</>
 	);
 };
