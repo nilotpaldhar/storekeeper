@@ -1,9 +1,10 @@
 import { groq } from 'next-sanity';
 import client from '@config/sanity';
-import isArray from 'lodash-es/isArray';
-import isEmpty from 'lodash-es/isEmpty';
 import { PRODUCT_PATHS_LIMIT } from '@constants';
 import { createPermalink } from '@utils/product/permalink';
+
+import isArray from 'lodash-es/isArray';
+import isEmpty from 'lodash-es/isEmpty';
 
 /**
  * Fetch paths for product pages.

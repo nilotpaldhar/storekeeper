@@ -1,4 +1,4 @@
-import { useSearchBox } from 'react-instantsearch-hooks-web';
+import { useSearchBox } from 'react-instantsearch';
 
 /**
  * Render the VirtualSearchBox component.

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { ALGOLIA_ATTRIBUTES } from '@constants';
 
-import { RangeInput } from 'react-instantsearch-hooks-web';
+import { RangeInput } from 'react-instantsearch';
 import FilterWrapper from '@ui/commerce/Filters/FilterWrapper';
 
 /**

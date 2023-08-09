@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { ClearRefinements } from 'react-instantsearch-hooks-web';
+import { ClearRefinements } from 'react-instantsearch';
 
 /**
  * Render the FiltersHeader component.

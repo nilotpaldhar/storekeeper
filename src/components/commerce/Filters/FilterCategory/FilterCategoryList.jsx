@@ -1,4 +1,4 @@
-import { useRefinementList } from 'react-instantsearch-hooks-web';
+import { useRefinementList } from 'react-instantsearch';
 import { ALGOLIA_ATTRIBUTES } from '@constants';
 import FilterCategoryItem from './FilterCategoryItem';
 

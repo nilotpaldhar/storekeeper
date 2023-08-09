@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { CgFormatSlash } from 'react-icons/cg';
+// import { CgFormatSlash } from 'react-icons/cg';
+import { RxSlash } from 'react-icons/rx';
 
 /**
  * Render the Slash icon.
@@ -9,7 +10,7 @@ import { CgFormatSlash } from 'react-icons/cg';
  */
 const Slash = ({ className, ...props }) => (
 	<span className={clsx('icon', className && className)} {...props}>
-		<CgFormatSlash />
+		<RxSlash />
 	</span>
 );
 
