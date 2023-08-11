@@ -53,7 +53,7 @@ const CollectionSection = ({
 				)}
 			>
 				{showTitle && (
-					<ProductCollection.Title href={collectionHref} className="mb-8">
+					<ProductCollection.Title as="h2" href={collectionHref} className="mb-8">
 						{collection.title ? collection.title : ''}
 					</ProductCollection.Title>
 				)}

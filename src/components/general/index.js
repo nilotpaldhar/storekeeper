@@ -1,5 +1,6 @@
 export { default as Seo } from '@ui/general/Seo';
 export { default as Anchor } from '@ui/general/Anchor';
+export { default as Carousel } from '@ui/general/Carousel';
 export { default as Promobar } from '@ui/general/Promobar';
 export { default as Container } from '@ui/general/Container';
 export { default as ScrollArea } from '@ui/general/ScrollArea';

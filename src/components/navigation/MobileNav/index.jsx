@@ -29,7 +29,7 @@ const MobileNav = ({ data, className, rootClassName, triggerClassName }) => {
 			<NavTrigger onOpen={handleToggle} className={triggerClassName} />
 			<DrawerRoot
 				right={false}
-				width={360}
+				width={300}
 				isOpen={open}
 				customCrossIcon={false}
 				customBurgerIcon={false}

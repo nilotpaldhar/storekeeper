@@ -2,6 +2,7 @@ export default {
 	title: 'Page Section',
 	name: 'pageSection',
 	type: 'object',
+	options: { collapsible: true, collapsed: true },
 	fields: [
 		{
 			title: 'Title',
