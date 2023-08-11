@@ -26,6 +26,21 @@ const ProductQuery = `
 const HomePageQuery = `
   title,
   slug,
+  categories {
+    title,
+    hidden,
+    collection[]-> {
+      'id': _id,
+      title,
+      slug,
+      'image': assets[0]{
+        url,
+        width,
+        height,
+        isImage
+      }
+    } 
+  },
   'collection': {
     newProducts {
       title,

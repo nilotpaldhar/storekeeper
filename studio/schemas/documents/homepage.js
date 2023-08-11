@@ -9,7 +9,6 @@ export default {
 		{
 			title: 'Products Collection',
 			name: 'productsCollection',
-			options: { collapsible: true, collapsed: false },
 		},
 	],
 	fields: [
@@ -28,17 +27,58 @@ export default {
 			initialValue: '/',
 			readOnly: true,
 		},
+
+		// Categories
+		{
+			title: 'List of Categories',
+			name: 'categories',
+			type: 'object',
+			options: {
+				collapsible: true,
+				collapsed: true,
+			},
+			fields: [
+				{
+					name: 'title',
+					title: 'Title',
+					type: 'string',
+					description: 'required',
+					validation: (Rule) => Rule.required().error('The title is required'),
+				},
+				{
+					title: 'Hide Section',
+					name: 'hidden',
+					initialValue: false,
+					type: 'boolean',
+				},
+				{
+					title: 'Categories',
+					name: 'collection',
+					type: 'array',
+					of: [
+						{
+							type: 'reference',
+							to: [{ type: 'category' }],
+						},
+					],
+				},
+			],
+		},
+
+		// Products Collection
 		{
 			title: 'Top Rated Products',
 			name: 'topRatedProducts',
 			type: 'pageSection',
 			fieldset: 'productsCollection',
 		},
+
 		{
 			title: 'Featured Products',
 			name: 'featuredProducts',
 			type: 'object',
 			fieldset: 'productsCollection',
+			options: { collapsible: true, collapsed: true },
 			fields: [
 				{
 					title: 'List of products',
@@ -59,12 +99,15 @@ export default {
 				},
 			],
 		},
+
 		{
 			title: 'New Products',
 			name: 'newProducts',
 			type: 'pageSection',
 			fieldset: 'productsCollection',
 		},
+
+		// SEO
 		{
 			title: 'SEO / Share Settings',
 			name: 'seo',

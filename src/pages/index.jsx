@@ -12,13 +12,16 @@ import fetchHomePage from '@libs/general/dynamic-page/fetchHomePage';
  *
  * @return {Element} The HomePage component.
  */
-const HomePage = ({ page }) => <HomePageTmpl collection={page?.collection} />;
+const HomePage = ({ page }) => (
+	<HomePageTmpl categories={page?.categories} collection={page?.collection} />
+);
 
 /**
  * Prop Types.
  */
 HomePage.propTypes = {
 	page: PropTypes.shape({
+		categories: PropTypes.shape({}).isRequired,
 		collection: PropTypes.shape({}).isRequired,
 	}).isRequired,
 };

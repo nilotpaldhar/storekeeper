@@ -16,7 +16,7 @@ export const rootStyles = cva(['flex pb-5 border-b border-neutral-100'], {
 
 export const titleStyles = cva(
 	[
-		'relative text-base md:text-lg text-neutral-900 font-medium uppercase leading-tight tracking-widest',
+		'relative text-base md:text-lg text-neutral-900 font-medium capitalize leading-tight tracking-widest',
 		'after:block after:absolute after:top-[73px] after:left-0 after:w-full after:h-px after:bg-primary-600',
 	],
 	{
