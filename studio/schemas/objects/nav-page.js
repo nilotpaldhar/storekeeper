@@ -17,7 +17,7 @@ export default {
 			title: 'Page',
 			name: 'page',
 			type: 'reference',
-			to: [{ type: 'homepage' }, { type: 'shoppage' }, { type: 'page' }],
+			to: [{ type: 'homepage' }, { type: 'page' }],
 			validation: (Rule) => Rule.required().error('The page is required'),
 			options: { disableNew: true },
 		},

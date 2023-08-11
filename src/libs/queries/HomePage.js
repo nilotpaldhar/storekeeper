@@ -1,0 +1,64 @@
+import PageSeoQuery from '@libs/queries/PageSeo';
+
+const ProductQuery = `
+  "id": _id,
+  "sanityId": _id,
+  "checId": productID,
+  isActive,
+  name,
+  displayName,
+  categories[]->{ 
+    "id": _id, 
+    title,
+    slug
+  },
+  'brand': brand->title,
+  price {
+    raw,
+    formattedWithSymbol
+  },
+  slug,
+  inventory,
+  image { url, width, height },
+  "variants": variantGroups[]{ id }
+`;
+
+const HomePageQuery = `
+  title,
+  slug,
+  'collection': {
+    newProducts {
+      title,
+      hidden,
+      'link': linkedPage->{
+        slug,
+        'type': _type,
+        'checId': productID
+      },
+      products[]->{
+        ${ProductQuery}
+      }
+    },
+    topRatedProducts {
+      title,
+      hidden,
+      'link': linkedPage->{
+        slug,
+        'type': _type,
+        'checId': productID
+      },
+      products[]->{
+        ${ProductQuery}
+      }
+    },
+    featuredProducts {
+      hidden,
+      products[]->{
+        ${ProductQuery}
+      }
+    }
+  },
+  "seo": { ${PageSeoQuery} }
+`;
+
+export default HomePageQuery;

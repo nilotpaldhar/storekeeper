@@ -6,7 +6,7 @@ export default {
 		documentListWidget({
 			title: 'Recently edited',
 			order: '_updatedAt desc',
-			types: ['homepage', 'shoppage', 'page', 'errorpage'],
+			types: ['homepage', 'page', 'errorpage'],
 			limit: 10,
 			layout: { width: 'auto', height: 'small' },
 		}),
