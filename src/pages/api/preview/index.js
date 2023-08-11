@@ -2,7 +2,7 @@ import trimSlashes from '@utils/general/trimSlashes';
 
 /** Parses preview path. */
 const parsePreviewPath = (type, slug) => {
-	const pageTypes = ['page', 'shoppage', 'loginpage'];
+	const pageTypes = ['page', 'loginpage'];
 	if (pageTypes.includes(type) && slug) return `/${trimSlashes(slug)}`;
 	return '/';
 };

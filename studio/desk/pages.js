@@ -1,4 +1,3 @@
-import { BsCart } from 'react-icons/bs';
 import { VscBrowser } from 'react-icons/vsc';
 import { AiOutlineHome, AiOutlineLock, AiOutlineSearch } from 'react-icons/ai';
 import { MdErrorOutline } from 'react-icons/md';
@@ -9,13 +8,6 @@ const homepageMenu = (S) =>
 		.title('Home')
 		.child(S.editor().id('homepage').schemaType('homepage').documentId('homepage'))
 		.icon(AiOutlineHome);
-
-// Shoppage Menu
-const shoppageMenu = (S) =>
-	S.listItem()
-		.title('Shop')
-		.child(S.editor().id('shoppage').schemaType('shoppage').documentId('shoppage'))
-		.icon(BsCart);
 
 // Searchpage Menu
 const searchpageMenu = (S) =>
@@ -60,7 +52,6 @@ export const menusMenu = (S) =>
 				.title('Pages')
 				.items([
 					homepageMenu(S),
-					shoppageMenu(S),
 					searchpageMenu(S),
 					loginpageMenu(S),
 					errorpageMenu(S),

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const previewUrl = process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000';
 const token = process.env.SANITY_STUDIO_PREVIEW_TOKEN || 'xxx';
-const previewDocTypes = ['page', 'homepage', 'shoppage', 'loginpage'];
+const previewDocTypes = ['page', 'homepage', 'loginpage'];
 let rootUrl;
 
 try {
@@ -14,7 +14,6 @@ try {
 /** Get document slug by type. */
 const getDocSlug = (type, doc) => {
 	if (type === 'page') return doc?.slug?.current;
-	if (type === 'shoppage') return 'shop';
 	if (type === 'loginpage') return 'login';
 	return '';
 };

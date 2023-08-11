@@ -5,6 +5,13 @@ export default {
 	name: 'homepage',
 	type: 'document',
 	icon: AiOutlineHome,
+	fieldsets: [
+		{
+			title: 'Products Collection',
+			name: 'productsCollection',
+			options: { collapsible: true, collapsed: false },
+		},
+	],
 	fields: [
 		{
 			name: 'title',
@@ -20,6 +27,43 @@ export default {
 			type: 'string',
 			initialValue: '/',
 			readOnly: true,
+		},
+		{
+			title: 'Top Rated Products',
+			name: 'topRatedProducts',
+			type: 'pageSection',
+			fieldset: 'productsCollection',
+		},
+		{
+			title: 'Featured Products',
+			name: 'featuredProducts',
+			type: 'object',
+			fieldset: 'productsCollection',
+			fields: [
+				{
+					title: 'List of products',
+					name: 'products',
+					type: 'array',
+					of: [
+						{
+							type: 'reference',
+							to: [{ type: 'product' }],
+						},
+					],
+				},
+				{
+					title: 'Hide Section',
+					name: 'hidden',
+					initialValue: false,
+					type: 'boolean',
+				},
+			],
+		},
+		{
+			title: 'New Products',
+			name: 'newProducts',
+			type: 'pageSection',
+			fieldset: 'productsCollection',
 		},
 		{
 			title: 'SEO / Share Settings',

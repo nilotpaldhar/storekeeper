@@ -5,7 +5,6 @@ import brand from './documents/brand';
 import product from './documents/product';
 import category from './documents/category';
 import homepage from './documents/homepage';
-import shoppage from './documents/shoppage';
 import loginpage from './documents/loginpage';
 import errorpage from './documents/errorpage';
 import searchpage from './documents/searchpage';
@@ -29,6 +28,7 @@ import asset from './objects/asset';
 import content from './objects/content';
 import dropdown from './objects/dropdown';
 import breadcrumb from './objects/breadcrumb';
+import pageSection from './objects/page-section';
 
 import navLink from './objects/nav-link';
 import navPage from './objects/nav-page';
@@ -53,7 +53,6 @@ const schema = [
 	product,
 	category,
 	homepage,
-	shoppage,
 	loginpage,
 	errorpage,
 	searchpage,
@@ -79,6 +78,7 @@ const schema = [
 	content,
 	dropdown,
 	breadcrumb,
+	pageSection,
 
 	/* ----------------------- */
 	/* 4: Navigation Object types */
