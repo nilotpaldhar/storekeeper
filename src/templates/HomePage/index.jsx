@@ -2,8 +2,10 @@ import PropTypes from 'prop-types';
 
 /** Components. */
 import Container from '@ui/general/Container';
+import InfoSection from '@templates/HomePage/InfoSection';
 import CollectionSection from '@templates/HomePage/CollectionSection';
 import CategoriesSection from '@templates/HomePage/CategoriesSection';
+import NewsletterSection from '@templates/HomePage/NewsletterSection';
 
 /**
  * Render the HomePageTmpl component.
@@ -24,6 +26,8 @@ const HomePageTmpl = ({ categories, collection }) => {
 				<CollectionSection collection={topRatedProducts} />
 				<CollectionSection collection={newProducts} />
 			</Container>
+			<NewsletterSection />
+			<InfoSection />
 		</main>
 	);
 };
