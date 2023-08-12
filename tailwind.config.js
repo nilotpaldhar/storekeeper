@@ -115,6 +115,8 @@ module.exports = {
 			},
 			boxShadow: {
 				'product-card': '0px 14px 40px rgba(0, 0, 0, 0.04)',
+				'newsletter-container':
+					'0px 9px 28px 8px rgba(0, 0, 0, 0.04), 0px 6px 16px 0px rgba(0, 0, 0, 0.04), 0px 3px 6px -4px rgba(0, 0, 0, 0.04)',
 			},
 		},
 	},
