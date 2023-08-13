@@ -23,6 +23,27 @@ const ProductQuery = `
   "variants": variantGroups[]{ id }
 `;
 
+const OfferQuery = `
+  'id': _key,
+  title,
+  content,
+  thumbnail,
+  contentAlignment,
+  link {
+    text,
+    url-> {
+      "id": _id,
+      'type': _type,
+      "sanityId": _id,
+      "checId": productID,
+      'slug' : select(
+        defined(slug.current) => slug.current,
+        !defined(slug.current) => slug
+      )
+    }
+  }
+`;
+
 const HomePageQuery = `
   title,
   slug,
@@ -40,6 +61,12 @@ const HomePageQuery = `
         isImage
       }
     } 
+  },
+  offers {
+    hidden,
+    collection[] {
+      ${OfferQuery}
+    }
   },
   'collection': {
     newProducts {

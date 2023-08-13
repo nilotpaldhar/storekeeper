@@ -46,6 +46,7 @@ const HeaderSearch = ({ className, ...props }) => {
 		clearButton:
 			'text-neutral-400 hover:text-neutral-900 transition-colors duration-300 [&>svg]:w-5 [&>svg]:h-5',
 
+		detachedOverlay: 'relative z-[9999]',
 		detachedContainer: 'fixed inset-0 flex flex-col divide-y divide-neutral-100 font-[nunito]',
 		detachedFormContainer: 'flex bg-white h-20 px-5',
 

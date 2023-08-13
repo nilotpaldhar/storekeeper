@@ -13,8 +13,8 @@ export default {
 	],
 	fields: [
 		{
-			name: 'title',
 			title: 'Title',
+			name: 'title',
 			type: 'string',
 			description: 'required',
 			initialValue: 'Home Page',
@@ -30,7 +30,7 @@ export default {
 
 		// Categories
 		{
-			title: 'List of Categories',
+			title: 'Categories',
 			name: 'categories',
 			type: 'object',
 			options: {
@@ -52,7 +52,7 @@ export default {
 					type: 'boolean',
 				},
 				{
-					title: 'Categories',
+					title: 'List of Categories',
 					name: 'collection',
 					type: 'array',
 					of: [
@@ -61,6 +61,31 @@ export default {
 							to: [{ type: 'category' }],
 						},
 					],
+				},
+			],
+		},
+
+		// Offers or discounts
+		{
+			title: 'Offers',
+			name: 'offers',
+			type: 'object',
+			options: {
+				collapsible: true,
+				collapsed: true,
+			},
+			fields: [
+				{
+					title: 'Hide Section',
+					name: 'hidden',
+					initialValue: false,
+					type: 'boolean',
+				},
+				{
+					title: 'List of Offers',
+					name: 'collection',
+					type: 'array',
+					of: [{ type: 'offer' }],
 				},
 			],
 		},

@@ -13,7 +13,7 @@ import fetchHomePage from '@libs/general/dynamic-page/fetchHomePage';
  * @return {Element} The HomePage component.
  */
 const HomePage = ({ page }) => (
-	<HomePageTmpl categories={page?.categories} collection={page?.collection} />
+	<HomePageTmpl categories={page?.categories} collection={page?.collection} offers={page?.offers} />
 );
 
 /**
@@ -23,6 +23,7 @@ HomePage.propTypes = {
 	page: PropTypes.shape({
 		categories: PropTypes.shape({}).isRequired,
 		collection: PropTypes.shape({}).isRequired,
+		offers: PropTypes.shape({}).isRequired,
 	}).isRequired,
 };
 
@@ -35,11 +36,14 @@ HomePage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</LayoutWr
  * @return {object} Page props.
  */
 export const getStaticProps = async ({ preview }) => {
+	const revalidate = 10;
+
 	try {
 		const data = await fetchHomePage(preview);
-		return { props: { data } };
+		const response = { props: { data }, revalidate };
+		return data ? response : { notFound: true, revalidate };
 	} catch (error) {
-		return { notFound: true };
+		return { notFound: true, revalidate };
 	}
 };
 
