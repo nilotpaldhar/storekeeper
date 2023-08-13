@@ -25,6 +25,7 @@ import verificationToken from './documents/verificationToken';
 // Object Types
 import seo from './objects/seo';
 import asset from './objects/asset';
+import offer from './objects/offer';
 import content from './objects/content';
 import dropdown from './objects/dropdown';
 import breadcrumb from './objects/breadcrumb';
@@ -75,6 +76,7 @@ const schema = [
 	/* 3: Generic Object types */
 	seo,
 	asset,
+	offer,
 	content,
 	dropdown,
 	breadcrumb,

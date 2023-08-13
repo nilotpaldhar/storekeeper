@@ -47,6 +47,8 @@ const CategoriesSection = ({ title, collection, hidden, className, ...props }) =
 		},
 	];
 
+	if (hidden) return null;
+
 	return (
 		<section className={clsx('py-10 xl:py-14', className)} {...props}>
 			<h2 className="text-center text-base md:text-lg text-neutral-900 font-medium capitalize leading-tight tracking-widest">
