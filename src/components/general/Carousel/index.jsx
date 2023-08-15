@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 import SlickSlider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 
@@ -7,29 +8,39 @@ import 'slick-carousel/slick/slick.css';
  *
  * @return {Element} The Carousel component.
  */
-const Carousel = ({
-	speed,
-	dots,
-	arrows,
-	infinite,
-	slidesToShow,
-	slidesToScroll,
-	breakpoints,
-	children,
-	...props
-}) => (
-	<SlickSlider
-		speed={speed}
-		dots={dots}
-		arrows={arrows}
-		infinite={infinite}
-		slidesToShow={slidesToShow}
-		slidesToScroll={slidesToScroll}
-		responsive={breakpoints}
-		{...props}
-	>
-		{children}
-	</SlickSlider>
+const Carousel = forwardRef(
+	(
+		{
+			speed,
+			dots,
+			arrows,
+			infinite,
+			autoplay,
+			slidesToShow,
+			autoplaySpeed,
+			slidesToScroll,
+			breakpoints,
+			children,
+			...props
+		},
+		forwardedRef
+	) => (
+		<SlickSlider
+			ref={forwardedRef}
+			speed={speed}
+			dots={dots}
+			arrows={arrows}
+			infinite={infinite}
+			autoplay={autoplay}
+			slidesToShow={slidesToShow}
+			autoplaySpeed={autoplaySpeed}
+			slidesToScroll={slidesToScroll}
+			responsive={breakpoints}
+			{...props}
+		>
+			{children}
+		</SlickSlider>
+	)
 );
 
 /**
@@ -40,7 +51,9 @@ Carousel.defaultProps = {
 	dots: false,
 	arrows: false,
 	infinite: false,
+	autoplay: false,
 	slidesToShow: 1,
+	autoplaySpeed: 1000,
 	slidesToScroll: 1,
 	breakpoints: [],
 	children: '',
@@ -54,7 +67,9 @@ Carousel.propTypes = {
 	dots: PropTypes.bool,
 	arrows: PropTypes.bool,
 	infinite: PropTypes.bool,
+	autoplay: PropTypes.bool,
 	slidesToShow: PropTypes.number,
+	autoplaySpeed: PropTypes.number,
 	slidesToScroll: PropTypes.number,
 	breakpoints: PropTypes.arrayOf(
 		PropTypes.shape({

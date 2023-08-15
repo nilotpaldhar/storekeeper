@@ -17,8 +17,6 @@ export default {
 			title: 'Content',
 			name: 'content',
 			type: 'array',
-			// description: 'max 50 characters',
-			// validation: (Rule) => Rule.max(50).error(`The content shouldn't be more than 50 characters`),
 			of: [
 				{
 					title: 'Block',
@@ -53,6 +51,7 @@ export default {
 					{ title: 'Right', value: 'right' },
 				],
 				layout: 'radio',
+				direction: 'horizontal',
 			},
 			initialValue: 'left',
 		},

@@ -5,6 +5,7 @@ export { default as mapSeoData } from '@utils/general/mapSeoData';
 export { default as trimSlashes } from '@utils/general/trimSlashes';
 export { default as truncateStr } from '@utils/general/truncateStr';
 export { default as isDateExpired } from '@utils/general/isDateExpired';
+export { default as createLinkHref } from '@utils/general/createLinkHref';
 export { default as mapSocialIcons } from '@utils/general/mapSocialIcons';
 export { default as removeTrailingSlash } from '@utils/general/removeTrailingSlash';
 

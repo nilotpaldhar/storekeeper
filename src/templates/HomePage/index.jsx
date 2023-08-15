@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Container from '@ui/general/Container';
 import OfferCard from '@ui/commerce/OfferCard';
 import ProductCard from '@ui/commerce/ProductCard';
+import BannerSlider from '@ui/commerce/BannerSlider';
 
 import InfoSection from '@templates/HomePage/InfoSection';
 import CollectionSection from '@templates/HomePage/CollectionSection';
@@ -20,13 +21,16 @@ const PlaceHolderDeal = () => (
  *
  * @return {Element} The HomePageTmpl component.
  */
-const HomePageTmpl = ({ categories, collection, offers }) => {
+const HomePageTmpl = ({ banners, categories, offers, collection }) => {
 	const { topRatedProducts, newProducts, featuredProducts } = collection;
 
 	return (
 		<main>
-			{/* Banner will go here */}
-			<section className="bg-neutral-50 h-[80vh]" />
+			{!banners?.hidden && banners?.collection?.length > 0 && (
+				<section className="">
+					<BannerSlider items={banners?.collection} />
+				</section>
+			)}
 
 			<Container>
 				<CategoriesSection
@@ -76,10 +80,18 @@ const HomePageTmpl = ({ categories, collection, offers }) => {
  * Prop Types.
  */
 HomePageTmpl.propTypes = {
+	banners: PropTypes.shape({
+		hidden: PropTypes.bool,
+		collection: PropTypes.arrayOf(PropTypes.shape({})),
+	}).isRequired,
 	categories: PropTypes.shape({
 		title: PropTypes.string,
 		collection: PropTypes.arrayOf(PropTypes.shape({})),
 		hidden: PropTypes.bool,
+	}).isRequired,
+	offers: PropTypes.shape({
+		hidden: PropTypes.bool,
+		collection: PropTypes.arrayOf(PropTypes.shape({})),
 	}).isRequired,
 	collection: PropTypes.shape({
 		topRatedProducts: PropTypes.shape({}),
@@ -92,10 +104,6 @@ HomePageTmpl.propTypes = {
 				})
 			),
 		}),
-	}).isRequired,
-	offers: PropTypes.shape({
-		hidden: PropTypes.bool,
-		collection: PropTypes.arrayOf(PropTypes.shape({})),
 	}).isRequired,
 };
 
