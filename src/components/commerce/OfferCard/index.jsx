@@ -10,7 +10,7 @@ import ArrowRightIcon from '@icons/regular/ArrowRight';
 
 /** Helpers & Styles. */
 import { urlFor } from '@config/sanity';
-import { createPermalink } from '@utils/product/permalink';
+import createLinkHref from '@utils/general/createLinkHref';
 import styles, {
 	wrapper,
 	contentBox,
@@ -18,14 +18,6 @@ import styles, {
 	contentText,
 	anchor,
 } from '@ui/commerce/OfferCard/styles.cva';
-
-/** Creates offer href. */
-const createLinkHref = (type, data = {}) => {
-	if (type === 'page') return `/${data.slug}`;
-	if (type === 'category') return `/product/collection/${data.slug}?query=${data.slug}`;
-	if (type === 'product') return `/product/${createPermalink(data.checId, data.slug)}`;
-	return null;
-};
 
 /**
  * Render the OfferCard component.

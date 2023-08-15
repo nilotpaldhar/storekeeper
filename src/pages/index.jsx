@@ -13,7 +13,12 @@ import fetchHomePage from '@libs/general/dynamic-page/fetchHomePage';
  * @return {Element} The HomePage component.
  */
 const HomePage = ({ page }) => (
-	<HomePageTmpl categories={page?.categories} collection={page?.collection} offers={page?.offers} />
+	<HomePageTmpl
+		banners={page?.banners}
+		categories={page?.categories}
+		offers={page?.offers}
+		collection={page?.collection}
+	/>
 );
 
 /**
@@ -21,9 +26,10 @@ const HomePage = ({ page }) => (
  */
 HomePage.propTypes = {
 	page: PropTypes.shape({
+		banners: PropTypes.shape({}).isRequired,
 		categories: PropTypes.shape({}).isRequired,
-		collection: PropTypes.shape({}).isRequired,
 		offers: PropTypes.shape({}).isRequired,
+		collection: PropTypes.shape({}).isRequired,
 	}).isRequired,
 };
 

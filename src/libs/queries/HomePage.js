@@ -44,9 +44,38 @@ const OfferQuery = `
   }
 `;
 
+const BannerQuery = `
+  'id': _key,
+  title,
+  'desc': description,
+  price,
+  thumbnail,
+  backdrop,
+  contentAlignment,
+  link {
+    text,
+    resource-> {
+      "id": _id,
+      'type': _type,
+      "sanityId": _id,
+      "checId": productID,
+      'slug' : select(
+        defined(slug.current) => slug.current,
+        !defined(slug.current) => slug
+      )
+    }
+  }
+`;
+
 const HomePageQuery = `
   title,
   slug,
+  banners {
+    hidden,
+    collection[] {
+      ${BannerQuery}
+    }
+  },
   categories {
     title,
     hidden,

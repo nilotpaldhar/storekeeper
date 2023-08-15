@@ -26,6 +26,7 @@ import verificationToken from './documents/verificationToken';
 import seo from './objects/seo';
 import asset from './objects/asset';
 import offer from './objects/offer';
+import banner from './objects/banner';
 import content from './objects/content';
 import dropdown from './objects/dropdown';
 import breadcrumb from './objects/breadcrumb';
@@ -77,6 +78,7 @@ const schema = [
 	seo,
 	asset,
 	offer,
+	banner,
 	content,
 	dropdown,
 	breadcrumb,

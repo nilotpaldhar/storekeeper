@@ -28,6 +28,31 @@ export default {
 			readOnly: true,
 		},
 
+		// Banners
+		{
+			title: 'Banners',
+			name: 'banners',
+			type: 'object',
+			options: {
+				collapsible: true,
+				collapsed: true,
+			},
+			fields: [
+				{
+					title: 'Hide Section',
+					name: 'hidden',
+					initialValue: false,
+					type: 'boolean',
+				},
+				{
+					title: 'List of Banners',
+					name: 'collection',
+					type: 'array',
+					of: [{ type: 'banner' }],
+				},
+			],
+		},
+
 		// Categories
 		{
 			title: 'Categories',
