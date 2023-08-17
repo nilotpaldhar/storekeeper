@@ -17,6 +17,7 @@ const HomePage = ({ page }) => (
 		banners={page?.banners}
 		categories={page?.categories}
 		offers={page?.offers}
+		specialOffer={page?.specialOffer}
 		collection={page?.collection}
 	/>
 );
@@ -29,6 +30,7 @@ HomePage.propTypes = {
 		banners: PropTypes.shape({}).isRequired,
 		categories: PropTypes.shape({}).isRequired,
 		offers: PropTypes.shape({}).isRequired,
+		specialOffer: PropTypes.shape({}).isRequired,
 		collection: PropTypes.shape({}).isRequired,
 	}).isRequired,
 };

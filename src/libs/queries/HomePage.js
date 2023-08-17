@@ -1,26 +1,26 @@
 import PageSeoQuery from '@libs/queries/PageSeo';
 
-const ProductQuery = `
-  "id": _id,
-  "sanityId": _id,
-  "checId": productID,
-  isActive,
-  name,
-  displayName,
-  categories[]->{ 
-    "id": _id, 
-    title,
-    slug
-  },
-  'brand': brand->title,
-  price {
-    raw,
-    formattedWithSymbol
-  },
-  slug,
-  inventory,
-  image { url, width, height },
-  "variants": variantGroups[]{ id }
+const BannerQuery = `
+  'id': _key,
+  title,
+  'desc': description,
+  price,
+  thumbnail,
+  backdrop,
+  contentAlignment,
+  link {
+    text,
+    resource-> {
+      "id": _id,
+      'type': _type,
+      "sanityId": _id,
+      "checId": productID,
+      'slug' : select(
+        defined(slug.current) => slug.current,
+        !defined(slug.current) => slug
+      )
+    }
+  }
 `;
 
 const OfferQuery = `
@@ -44,27 +44,27 @@ const OfferQuery = `
   }
 `;
 
-const BannerQuery = `
-  'id': _key,
-  title,
-  'desc': description,
-  price,
-  thumbnail,
-  backdrop,
-  contentAlignment,
-  link {
-    text,
-    resource-> {
-      "id": _id,
-      'type': _type,
-      "sanityId": _id,
-      "checId": productID,
-      'slug' : select(
-        defined(slug.current) => slug.current,
-        !defined(slug.current) => slug
-      )
-    }
-  }
+const ProductQuery = `
+  "id": _id,
+  "sanityId": _id,
+  "checId": productID,
+  isActive,
+  name,
+  displayName,
+  categories[]->{ 
+    "id": _id, 
+    title,
+    slug
+  },
+  'brand': brand->title,
+  price {
+    raw,
+    formattedWithSymbol
+  },
+  slug,
+  inventory,
+  image { url, width, height },
+  "variants": variantGroups[]{ id }
 `;
 
 const HomePageQuery = `
@@ -96,6 +96,28 @@ const HomePageQuery = `
     collection[] {
       ${OfferQuery}
     }
+  },
+  specialOffer {
+    title,
+    description,
+    thumbnail,
+    date,
+    price {
+      original,
+      discount,
+      saved
+    },
+    product-> {
+      "id": _id,
+      "sanityId": _id,
+      "checId": productID,
+      name,
+      displayName,
+      slug,
+      statistics,
+      inventory
+    },
+    hidden
   },
   'collection': {
     newProducts {

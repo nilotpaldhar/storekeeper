@@ -115,6 +115,13 @@ export default {
 			],
 		},
 
+		// Special Offer
+		{
+			title: 'Special Offer',
+			name: 'specialOffer',
+			type: 'specialOffer',
+		},
+
 		// Products Collection
 		{
 			title: 'Top Rated Products',
