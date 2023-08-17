@@ -21,6 +21,7 @@ export { default as validateWebhookReq } from '@utils/webhook/validateWebhookReq
 
 /** Product. */
 export { createPermalink, parsePermalink } from '@utils/product/permalink';
+export { default as calcStockPercent } from '@utils/product/calcStockPercent';
 
 /** Cart. */
 export { default as formatCartData } from '@utils/cart/formatCartData';

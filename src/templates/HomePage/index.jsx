@@ -7,27 +7,23 @@ import ProductCard from '@ui/commerce/ProductCard';
 import BannerSlider from '@ui/commerce/BannerSlider';
 
 import InfoSection from '@templates/HomePage/InfoSection';
+import SpecialOffer from '@templates/HomePage/SpecialOffer';
 import CollectionSection from '@templates/HomePage/CollectionSection';
 import CategoriesSection from '@templates/HomePage/CategoriesSection';
 import NewsletterSection from '@templates/HomePage/NewsletterSection';
-
-// Temp
-const PlaceHolderDeal = () => (
-	<div className="bg-neutral-50 p-4 text-xl h-full min-h-[600px]">Deal Card</div>
-);
 
 /**
  * Render the HomePageTmpl component.
  *
  * @return {Element} The HomePageTmpl component.
  */
-const HomePageTmpl = ({ banners, categories, offers, collection }) => {
+const HomePageTmpl = ({ banners, categories, offers, specialOffer, collection }) => {
 	const { topRatedProducts, newProducts, featuredProducts } = collection;
 
 	return (
 		<main>
 			{!banners?.hidden && banners?.collection?.length > 0 && (
-				<section className="">
+				<section>
 					<BannerSlider items={banners?.collection} />
 				</section>
 			)}
@@ -55,10 +51,12 @@ const HomePageTmpl = ({ banners, categories, offers, collection }) => {
 
 				<section className="py-10 xl:py-14">
 					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5">
-						<div className="row-span-2 col-span-2 md:col-span-3 lg:col-span-2 xxl:col-span-1">
-							{/* Deal of the day will go here */}
-							<PlaceHolderDeal />
-						</div>
+						{!specialOffer?.hidden && (
+							<div className="row-span-2 col-span-2 md:col-span-3 lg:col-span-2 xxl:col-span-1">
+								<SpecialOffer data={specialOffer} />
+							</div>
+						)}
+
 						{!featuredProducts?.hidden &&
 							featuredProducts.products.map((product) => (
 								<div key={product.id}>
@@ -92,6 +90,9 @@ HomePageTmpl.propTypes = {
 	offers: PropTypes.shape({
 		hidden: PropTypes.bool,
 		collection: PropTypes.arrayOf(PropTypes.shape({})),
+	}).isRequired,
+	specialOffer: PropTypes.shape({
+		hidden: PropTypes.bool,
 	}).isRequired,
 	collection: PropTypes.shape({
 		topRatedProducts: PropTypes.shape({}),

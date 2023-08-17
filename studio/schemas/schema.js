@@ -31,6 +31,7 @@ import content from './objects/content';
 import dropdown from './objects/dropdown';
 import breadcrumb from './objects/breadcrumb';
 import pageSection from './objects/page-section';
+import specialOffer from './objects/specialOffer';
 
 import navLink from './objects/nav-link';
 import navPage from './objects/nav-page';
@@ -83,6 +84,7 @@ const schema = [
 	dropdown,
 	breadcrumb,
 	pageSection,
+	specialOffer,
 
 	/* ----------------------- */
 	/* 4: Navigation Object types */
