@@ -14,7 +14,8 @@ const fetchPage = async (preview = false, type = null) => {
     { 
       "page": *[_type == "${type}"] | order(_updatedAt desc)[0] {
         title, 
-        slug, 
+        slug,
+        description,
         "seo": { ${PageSeoQuery} }
       }, 
       "siteConfig": ${SiteConfigQuery}

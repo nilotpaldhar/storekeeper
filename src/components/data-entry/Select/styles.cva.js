@@ -4,7 +4,7 @@ export const triggerStyles = cva([
 	'form-input w-full flex items-center justify-between p-3 border border-neutral-200 transition duration-300 bg-white',
 	'hover:border-neutral-900 hover:text-current focus:ring-primary-600 focus:border-primary-600',
 	'text-sm text-neutral-700 font-normal leading-tight whitespace-nowrap overflow-hidden select-none',
-	'data-[disabled]:bg-neutral-200 data-[disabled]:hover:border-neutral-200',
+	'data-[disabled]:bg-neutral-100 data-[disabled]:hover:border-neutral-200',
 ]);
 
 export const contentStyles = cva([
