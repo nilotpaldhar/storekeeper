@@ -10,14 +10,19 @@ export default {
 			title: 'Title',
 			name: 'title',
 			type: 'string',
-			description: 'Text to Display',
+			description: 'required',
 			validation: (Rule) => Rule.required().error('The title is required'),
 		},
 		{
 			title: 'Items',
 			name: 'items',
 			type: 'array',
-			of: [{ type: 'navLink' }, { type: 'navPage' }],
+			of: [
+				{ type: 'navLink' },
+				{ type: 'navPage' },
+				{ type: 'navProduct' },
+				{ type: 'navCategory' },
+			],
 		},
 	],
 	preview: {

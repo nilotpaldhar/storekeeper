@@ -11,7 +11,6 @@ export default {
 			name: 'title',
 			type: 'string',
 			description: 'Text to Display',
-			validation: (Rule) => Rule.required().error('The title is required'),
 		},
 		{
 			title: 'Page',

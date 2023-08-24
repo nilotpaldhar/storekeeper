@@ -1,9 +1,9 @@
 import PageSeoQuery from '@libs/queries/PageSeo';
 
 const BannerQuery = `
-  'id': _key,
+  "id": _key,
   title,
-  'desc': description,
+  "desc": description,
   price,
   thumbnail,
   backdrop,
@@ -12,10 +12,10 @@ const BannerQuery = `
     text,
     resource-> {
       "id": _id,
-      'type': _type,
+      "type": _type,
       "sanityId": _id,
       "checId": productID,
-      'slug' : select(
+      "slug": select(
         defined(slug.current) => slug.current,
         !defined(slug.current) => slug
       )
@@ -24,7 +24,7 @@ const BannerQuery = `
 `;
 
 const OfferQuery = `
-  'id': _key,
+  "id": _key,
   title,
   content,
   thumbnail,
@@ -33,10 +33,10 @@ const OfferQuery = `
     text,
     url-> {
       "id": _id,
-      'type': _type,
+      "type": _type,
       "sanityId": _id,
       "checId": productID,
-      'slug' : select(
+      "slug": select(
         defined(slug.current) => slug.current,
         !defined(slug.current) => slug
       )
@@ -56,7 +56,7 @@ const ProductQuery = `
     title,
     slug
   },
-  'brand': brand->title,
+  "brand": brand->title,
   price {
     raw,
     formattedWithSymbol
@@ -80,10 +80,10 @@ const HomePageQuery = `
     title,
     hidden,
     collection[]-> {
-      'id': _id,
+      "id": _id,
       title,
       slug,
-      'image': assets[0]{
+      "image": assets[0]{
         url,
         width,
         height,
@@ -119,14 +119,14 @@ const HomePageQuery = `
     },
     hidden
   },
-  'collection': {
+  "collection": {
     newProducts {
       title,
       hidden,
-      'link': linkedPage->{
+      "link": linkedPage->{
         slug,
-        'type': _type,
-        'checId': productID
+        "type": _type,
+        "checId": productID
       },
       products[]->{
         ${ProductQuery}
@@ -135,10 +135,10 @@ const HomePageQuery = `
     topRatedProducts {
       title,
       hidden,
-      'link': linkedPage->{
+      "link": linkedPage->{
         slug,
-        'type': _type,
-        'checId': productID
+        "type": _type,
+        "checId": productID
       },
       products[]->{
         ${ProductQuery}

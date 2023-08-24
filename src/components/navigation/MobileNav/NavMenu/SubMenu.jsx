@@ -47,7 +47,7 @@ const SubMenu = ({ data, collapsible }) => {
 											<MenuLink
 												data={childItem}
 												className={clsx(
-													'block px-12 text-sm font-light text-neutral-700',
+													'block !px-12 text-sm font-light text-neutral-700',
 													itemClassNames
 												)}
 											/>

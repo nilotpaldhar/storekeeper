@@ -4,7 +4,7 @@ import LinkQuery from '@libs/queries/Link';
 const MenuQuery = `
   title,
   "slug": slug.current,
-  "menu": items[]{ 
+  "menu": items[]{
     ${LinkQuery}
     "items": items[]{ 
       ${LinkQuery}

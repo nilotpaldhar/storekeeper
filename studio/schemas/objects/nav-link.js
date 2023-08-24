@@ -10,7 +10,7 @@ export default {
 			title: 'Title',
 			name: 'title',
 			type: 'string',
-			description: 'Text to Display',
+			description: 'required',
 			validation: (Rule) => Rule.required().error('The title is required'),
 		},
 		{

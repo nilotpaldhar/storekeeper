@@ -24,7 +24,13 @@ export default {
 			title: 'Nav Items',
 			name: 'items',
 			type: 'array',
-			of: [{ type: 'navLink' }, { type: 'navPage' }, { type: 'navDropdown' }],
+			of: [
+				{ type: 'navLink' },
+				{ type: 'navPage' },
+				{ type: 'navProduct' },
+				{ type: 'navCategory' },
+				{ type: 'navDropdown' },
+			],
 		},
 	],
 };

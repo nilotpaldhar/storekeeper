@@ -13,10 +13,12 @@ export default {
 			description: 'Text to Display',
 		},
 		{
-			title: 'Page',
-			name: 'page',
+			title: 'Category',
+			name: 'linkedCategory',
 			type: 'reference',
 			to: [{ type: 'category' }],
+			validation: (Rule) => Rule.required().error('The category is required'),
+			options: { disableNew: true },
 		},
 	],
 	preview: {
