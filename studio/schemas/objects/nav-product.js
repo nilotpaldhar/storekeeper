@@ -13,10 +13,12 @@ export default {
 			description: 'Text to Display',
 		},
 		{
-			title: 'Page',
-			name: 'page',
+			title: 'Product',
+			name: 'linkedProduct',
 			type: 'reference',
 			to: [{ type: 'product' }],
+			validation: (Rule) => Rule.required().error('The product is required'),
+			options: { disableNew: true },
 		},
 	],
 	preview: {

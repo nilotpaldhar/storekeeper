@@ -71,7 +71,12 @@ export default {
 			title: 'Menu Items',
 			name: 'navBlockMenuItems1',
 			type: 'array',
-			of: [{ type: 'navLink' }, { type: 'navPage' }],
+			of: [
+				{ type: 'navLink' },
+				{ type: 'navPage' },
+				{ type: 'navProduct' },
+				{ type: 'navCategory' },
+			],
 			fieldset: 'navBlock1',
 		},
 
@@ -87,7 +92,12 @@ export default {
 			title: 'Menu Items',
 			name: 'navBlockMenuItems2',
 			type: 'array',
-			of: [{ type: 'navLink' }, { type: 'navPage' }],
+			of: [
+				{ type: 'navLink' },
+				{ type: 'navPage' },
+				{ type: 'navProduct' },
+				{ type: 'navCategory' },
+			],
 			fieldset: 'navBlock2',
 		},
 
@@ -103,7 +113,12 @@ export default {
 			title: 'Menu Items',
 			name: 'navBlockMenuItems3',
 			type: 'array',
-			of: [{ type: 'navLink' }, { type: 'navPage' }],
+			of: [
+				{ type: 'navLink' },
+				{ type: 'navPage' },
+				{ type: 'navProduct' },
+				{ type: 'navCategory' },
+			],
 			fieldset: 'navBlock3',
 		},
 

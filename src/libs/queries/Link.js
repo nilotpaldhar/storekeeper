@@ -1,11 +1,31 @@
 /** Link Query. */
 const LinkQuery = `
   "id": _key,
-  isExternal,
   "type": _type,
-  "label": title,
+  "isExternal": select(
+    defined(isExternal) => isExternal,
+    false
+  ),
+  "label": select(
+    !defined(title) && _type == "navPage" => page->title,
+    !defined(title) && _type == "navProduct" => linkedProduct->name,
+    !defined(title) && _type == "navCategory" => linkedCategory->title,
+    title
+  ),
   "href": url.current,
-  "page": page-> { "type": _type, title, slug },
+  "resource": select(
+    _type == "navPage" => page->{
+      "slug": select(
+        defined(slug.current) => slug.current, slug
+      )
+    },
+    _type == "navProduct" => linkedProduct->{ 
+      "checId": productID, slug 
+    },
+    _type == "navCategory" => linkedCategory->{ 
+      slug
+    },
+  ),
 `;
 
 export default LinkQuery;
