@@ -40,7 +40,11 @@ const ProductCard = ({ data, layout, className }) => {
 			className={styles({ className, layout })}
 		>
 			<div className={thumbnailStyles({ layout })}>
-				<Anchor className="block focus-visible:outline-none" {...anchorProps} tabIndex="-1">
+				<Anchor
+					className="block focus-visible:outline-none bg-neutral-50"
+					{...anchorProps}
+					tabIndex="-1"
+				>
 					<Image src={data?.image?.url} alt={title} width={400} height={400} />
 				</Anchor>
 				{outOfStock ? (

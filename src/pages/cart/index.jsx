@@ -29,7 +29,7 @@ const CartPage = () => {
 	}, [dispatch]);
 
 	return (
-		<div className="min-h-[50vh]">
+		<div className="min-h-screen">
 			{cartStatus === HTTP_STATUS.idle || cartStatus === HTTP_STATUS.failed ? null : (
 				<CartPageTmpl
 					data={contents ?? {}}

@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
 
-export const rootStyles = cva('relative max-w-max mx-auto');
+export const rootStyles = cva('relative max-w-max mx-auto bg-neutral-50');
 
 export const wrapper = cva('absolute top-2/4 transform -translate-y-2/4 max-w-max px-6 py-4 z-10', {
 	variants: {
