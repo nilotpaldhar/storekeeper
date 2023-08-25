@@ -9,7 +9,11 @@ import { useDispatch } from 'react-redux';
 import useToggle from '@hooks/useToggle';
 
 /** Components. */
+import Empty from '@ui/feedback/Empty';
 import Container from '@ui/general/Container';
+import RegularButton from '@ui/buttons/RegularButton';
+import ArrowLeftIcon from '@icons/regular/ArrowLeft';
+import emptyCartImg from '@public/empty-cart.svg';
 
 const BlockUI = dynamic(() => import('@ui/feedback/BlockUI'));
 const LoadingUI = dynamic(() => import('@ui/feedback/LoadingUI'));
@@ -57,14 +61,23 @@ const CartPageTmpl = ({ data, block, loading }) => {
 				<LoadingUI loading={loading}>
 					<BlockUI blocking={block || checkoutProgress}>
 						{data?.isEmpty ? (
-							<div className="flex flex-col items-center justify-center py-10 space-y-2 text-center lg:space-y-4">
-								<h1 className="text-xl font-normal leading-snug lg:text-2xl">
-									Your cart is empty!
-								</h1>
-								<p className="text-sm leading-normal lg:text-base">
-									Explore our wide selection and find something you like
-								</p>
-							</div>
+							<Empty
+								className="py-24"
+								imgSrc={emptyCartImg}
+								title="Your cart is empty!"
+								description={
+									<>
+										<span className="block">
+											Once you add something to your cart, it will appear here.
+										</span>
+										<span className="block">Ready to get started?</span>
+									</>
+								}
+							>
+								<RegularButton as="anchor" href="/" className="px-8" startIcon={ArrowLeftIcon}>
+									Continue Shopping
+								</RegularButton>
+							</Empty>
 						) : (
 							<div className="flex flex-col space-y-10 xl:flex-row xl:space-x-8 xl:space-y-0">
 								<section className="flex-1">

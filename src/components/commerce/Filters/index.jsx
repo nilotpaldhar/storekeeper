@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useInstantSearch } from 'react-instantsearch';
 
 /** Components. */
 import FiltersHeader from '@ui/commerce/Filters/FiltersHeader';
@@ -12,19 +13,25 @@ import FilterPrice from '@ui/commerce/Filters/FilterPrice';
  *
  * @return {Element} The Filters component.
  */
-const Filters = ({ headerTitle, widgetTitles }) => (
-	<div>
-		<FiltersHeader title={headerTitle} />
-		<div className="px-px py-6">
-			<div className="flex flex-col px-px py-6 space-y-6">
-				<FilterCategory title={widgetTitles.category} />
-				<FilterBrand title={widgetTitles.brand} />
-				<FilterColor title={widgetTitles.color} />
-				<FilterPrice title={widgetTitles.price} hasDivider={false} />
-			</div>
+const Filters = ({ headerTitle, widgetTitles }) => {
+	const { results } = useInstantSearch();
+
+	return (
+		<div>
+			<FiltersHeader title={headerTitle} />
+			{results.nbHits > 0 && (
+				<div className="px-px py-6">
+					<div className="flex flex-col px-px py-6 space-y-6">
+						<FilterCategory title={widgetTitles.category} />
+						<FilterBrand title={widgetTitles.brand} />
+						<FilterColor title={widgetTitles.color} />
+						<FilterPrice title={widgetTitles.price} hasDivider={false} />
+					</div>
+				</div>
+			)}
 		</div>
-	</div>
-);
+	);
+};
 
 /**
  * Default Props.
