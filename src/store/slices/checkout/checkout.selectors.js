@@ -15,3 +15,4 @@ export const selectCheckoutActiveStep = createDraftSafeSelector(
 	selectCheckout,
 	({ activeStep }) => activeStep
 );
+export const selectCheckoutError = createDraftSafeSelector(selectCheckout, ({ error }) => error);

@@ -1,8 +1,10 @@
 import { HTTP_STATUS } from '@constants';
 
-/** Components & Templates. */
+/** Components. */
 import Container from '@ui/general/Container';
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
+import CheckoutSuccess from '@ui/commerce/CheckoutSuccess';
+import CheckoutFail from '@ui/commerce/CheckoutFail';
 
 /** Hooks. */
 import { useEffect } from 'react';
@@ -11,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 /** Functions. */
 import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
 import { resetCheckout } from '@store/slices/checkout';
+import { selectlastOrderContent } from '@store/slices/lastOrder/lastOrder.selectors';
 import {
 	selectCheckoutStatus,
 	selectCheckoutFulfilled,
@@ -25,6 +28,7 @@ const CheckoutSuccessPage = () => {
 	const dispatch = useDispatch();
 	const status = useSelector(selectCheckoutStatus);
 	const fulfilled = useSelector(selectCheckoutFulfilled);
+	const lastOrder = useSelector(selectlastOrderContent);
 
 	/** Reset checkout. */
 	useEffect(() => {
@@ -33,10 +37,16 @@ const CheckoutSuccessPage = () => {
 		}
 	}, [dispatch, status, fulfilled]);
 
+	if (!lastOrder) {
+		return <CheckoutFail title="Oh no, something went wrong!" description={null} />;
+	}
+
 	return (
-		<Container className="py-10">
-			<h1 className="text-4xl font-bold text-center">Checkout Success</h1>
-		</Container>
+		<main className="py-10 lg:py-14">
+			<Container>
+				{lastOrder ? <CheckoutSuccess data={lastOrder} /> : <div>No Order</div>}
+			</Container>
+		</main>
 	);
 };
 

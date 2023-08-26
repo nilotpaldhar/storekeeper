@@ -15,18 +15,18 @@ const OrderSummaryProducts = ({ title, products, ...props }) => (
 			{products?.map((product) => (
 				<Summary.ListItem key={product?.id}>
 					<h3 className="flex items-center justify-between">
-						<div className="flex flex-wrap items-center space-x-2">
+						<div className="flex flex-wrap space-x-2 items-center overflow-hidden">
 							<Anchor
 								href={`/product/${product?.permalink}`}
 								title={product?.displayName ?? product?.name}
-								className="text-neutral-900 hover:text-current font-medium max-w-[120px] whitespace-nowrap overflow-hidden text-ellipsis"
+								className="flex-1 text-neutral-900 hover:text-current font-medium max-w-[45ch] whitespace-nowrap overflow-hidden text-ellipsis"
 							>
 								{product?.displayName ?? product?.name}
 							</Anchor>
 							<CloseIcon className="!text-xs" />
 							<span>{product?.quantity}</span>
 						</div>
-						<div>{product?.total?.formattedWithSymbol}</div>
+						<div className="ml-5">{product?.total?.formattedWithSymbol}</div>
 					</h3>
 				</Summary.ListItem>
 			))}

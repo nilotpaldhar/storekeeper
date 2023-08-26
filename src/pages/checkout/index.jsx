@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import { HTTP_STATUS } from '@constants';
 
 /** Components & Templates. */
-import Alert from '@ui/feedback/Alert';
-import Anchor from '@ui/general/Anchor';
+import CheckoutFail from '@ui/commerce/CheckoutFail';
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
 import CheckoutPageTmpl from '@templates/CheckoutPage';
 
@@ -18,6 +18,7 @@ import {
 	selectCheckoutStatus,
 	selectCheckoutContents,
 	selectCheckoutFulfilled,
+	selectCheckoutError,
 } from '@store/slices/checkout/checkout.selectors';
 
 /**
@@ -25,14 +26,15 @@ import {
  *
  * @return {Element} The CheckoutPage component.
  */
-const CheckoutPage = () => {
+const CheckoutPage = ({ query }) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
-	const token = router?.query?.token;
+	const token = query?.token;
 	const status = useSelector(selectCheckoutStatus);
 	const contents = useSelector(selectCheckoutContents);
 	const fulfilled = useSelector(selectCheckoutFulfilled);
+	const error = useSelector(selectCheckoutError);
 
 	/** Initiate checkout process. */
 	useEffect(() => {
@@ -48,28 +50,33 @@ const CheckoutPage = () => {
 		}
 	}, [router, status, fulfilled]);
 
+	/** Empty token */
+	if (!token) {
+		return <CheckoutFail title="There is no token present!" description={null} />;
+	}
+
+	/** Checkout failed */
+	if (status === HTTP_STATUS.failed) {
+		return <CheckoutFail title={error} description={null} defaultError={!error} />;
+	}
+
 	return (
-		<div className="min-h-[50vh]">
-			{status === HTTP_STATUS.failed ? (
-				<Alert type="error" align="center" className="!py-3">
-					<div className="flex items-center space-x-2">
-						<p>Checkout error! Sorry something went wrong.</p>
-						<Anchor
-							href="/cart"
-							className="font-semibold text-current underline hover:text-current"
-						>
-							Try Again
-						</Anchor>
-					</div>
-				</Alert>
-			) : (
-				<CheckoutPageTmpl
-					data={contents ?? {}}
-					loading={status === HTTP_STATUS.pending || status === HTTP_STATUS.idle || fulfilled}
-				/>
-			)}
+		<div className="min-h-[80vh]">
+			<CheckoutPageTmpl
+				data={contents ?? {}}
+				loading={status === HTTP_STATUS.pending || status === HTTP_STATUS.idle || fulfilled}
+			/>
 		</div>
 	);
+};
+
+/**
+ * Prop Types.
+ */
+CheckoutPage.propTypes = {
+	query: PropTypes.shape({
+		token: PropTypes.string,
+	}).isRequired,
 };
 
 /** Page Layout. */
@@ -80,7 +87,7 @@ CheckoutPage.getLayout = (page, data) => <LayoutWrapper data={data}>{page}</Layo
  *
  * @return {object} Page props.
  */
-export const getStaticProps = async ({ preview }) => {
+export const getServerSideProps = async ({ preview, query }) => {
 	const page = {
 		seo: {
 			metaTitle: 'Checkout',
@@ -90,7 +97,7 @@ export const getStaticProps = async ({ preview }) => {
 
 	try {
 		const { siteConfig } = await fetchSiteConfig(preview);
-		return { props: { data: { siteConfig, page } } };
+		return { props: { data: { siteConfig, page, query } } };
 	} catch (error) {
 		return { notFound: true };
 	}
