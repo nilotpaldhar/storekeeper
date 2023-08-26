@@ -1,4 +1,5 @@
 /** General. */
+export { default as mapPrice } from '@utils/general/mapPrice';
 export { default as isBrowser } from '@utils/general/isBrowser';
 export { default as isValidUrl } from '@utils/general/isValidUrl';
 export { default as mapSeoData } from '@utils/general/mapSeoData';
@@ -28,6 +29,7 @@ export { default as formatCartData } from '@utils/cart/formatCartData';
 export { default as formatLineItems } from '@utils/cart/formatLineItems';
 
 /** Checkout. */
+export { default as formatOrder } from '@utils/checkout/formatOrder';
 export { default as formatTokenData } from '@utils/checkout/formatTokenData';
 export { default as getExpiryMonths } from '@utils/checkout/getExpiryMonths';
 export { default as getExpiryYears } from '@utils/checkout/getExpiryYears';

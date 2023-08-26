@@ -10,9 +10,21 @@ import OrderSummaryProducts from '@ui/commerce/OrderSummary/OrderSummaryProducts
  *
  * @return {Element} The OrderSummary component.
  */
-const OrderSummary = ({ title, products, subtotal, discount, tax, shipping, total }) => (
+const OrderSummary = ({
+	title,
+	displayTitle,
+	products,
+	subtotal,
+	discount,
+	tax,
+	shipping,
+	total,
+	contentPrefix,
+	contentSuffix,
+}) => (
 	<Summary>
-		<Summary.Title>{title}</Summary.Title>
+		{displayTitle && <Summary.Title>{title}</Summary.Title>}
+		{contentPrefix && <div>{contentPrefix}</div>}
 		<OrderSummaryProducts className="mb-8" products={products} />
 		<OrderSummaryPrice
 			subtotal={subtotal}
@@ -21,6 +33,7 @@ const OrderSummary = ({ title, products, subtotal, discount, tax, shipping, tota
 			shipping={shipping}
 			total={total}
 		/>
+		{contentSuffix && <div>{contentSuffix}</div>}
 	</Summary>
 );
 
@@ -29,12 +42,15 @@ const OrderSummary = ({ title, products, subtotal, discount, tax, shipping, tota
  */
 OrderSummary.defaultProps = {
 	title: 'Your Order',
+	displayTitle: true,
 	products: [],
 	subtotal: null,
 	discount: null,
 	tax: null,
 	shipping: null,
 	total: null,
+	contentPrefix: '',
+	contentSuffix: '',
 };
 
 /**
@@ -42,12 +58,15 @@ OrderSummary.defaultProps = {
  */
 OrderSummary.propTypes = {
 	title: PropTypes.node,
+	displayTitle: PropTypes.bool,
 	products: PropTypes.arrayOf(PropTypes.shape({})),
 	subtotal: PropTypes.string,
 	discount: PropTypes.string,
 	tax: PropTypes.string,
 	shipping: PropTypes.string,
 	total: PropTypes.string,
+	contentPrefix: PropTypes.node,
+	contentSuffix: PropTypes.node,
 };
 
 export default OrderSummary;

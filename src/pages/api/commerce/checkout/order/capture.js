@@ -1,5 +1,6 @@
 import getChecClient from '@config/commerce';
 import validateReqMethod from '@utils/api/validateReqMethod';
+import formatOrder from '@utils/checkout/formatOrder';
 import isEmpty from 'lodash-es/isEmpty';
 
 /** Captures an order with payment. */
@@ -18,7 +19,10 @@ const handler = async (req, res) => {
 
 		try {
 			const data = await checClient.checkout.capture(tokenId, payload);
-			return res.status(200).json({ success: true, data });
+			return res.status(200).json({
+				success: true,
+				data: await formatOrder(data),
+			});
 		} catch (error) {
 			const statusCode = error?.statusCode || 500;
 			const message = error?.data?.error?.message || 'Something went wrong';

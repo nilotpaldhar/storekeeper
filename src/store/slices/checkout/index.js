@@ -8,6 +8,7 @@ const initialState = {
 	activeStep: null,
 	contents: null,
 	order: null,
+	error: null,
 };
 
 /** Checkout Slice. */
@@ -36,6 +37,7 @@ export const checkoutSlice = createSlice({
 			state.contents = null;
 			state.activeStep = null;
 			state.fulfilled = false;
+			state.error = null;
 		},
 	},
 	extraReducers: (builder) => {
@@ -48,8 +50,9 @@ export const checkoutSlice = createSlice({
 			state.activeStep = CHECKOUT_STEPS[0];
 			state.contents = action.payload;
 		});
-		builder.addCase(initCheckout.rejected, (state) => {
+		builder.addCase(initCheckout.rejected, (state, action) => {
 			state.status = HTTP_STATUS.failed;
+			state.error = action.payload;
 		});
 
 		/** Place order. */
@@ -63,9 +66,10 @@ export const checkoutSlice = createSlice({
 			state.contents = null;
 			state.activeStep = null;
 		});
-		builder.addCase(placeOrder.rejected, (state) => {
+		builder.addCase(placeOrder.rejected, (state, action) => {
 			state.status = HTTP_STATUS.failed;
 			state.fulfilled = false;
+			state.error = action.payload;
 		});
 	},
 });

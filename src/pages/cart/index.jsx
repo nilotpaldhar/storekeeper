@@ -28,15 +28,25 @@ const CartPage = () => {
 		dispatch(resetCartOps());
 	}, [dispatch]);
 
+	if (cartStatus === HTTP_STATUS.idle) {
+		return null;
+	}
+
+	if (cartStatus === HTTP_STATUS.failed) {
+		return (
+			<div className="min-h-screen">
+				<div>Failed to load data</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className="min-h-screen">
-			{cartStatus === HTTP_STATUS.idle || cartStatus === HTTP_STATUS.failed ? null : (
-				<CartPageTmpl
-					data={contents ?? {}}
-					loading={cartStatus === HTTP_STATUS.pending}
-					block={cartOpsStatus === HTTP_STATUS.pending}
-				/>
-			)}
+			<CartPageTmpl
+				data={contents ?? {}}
+				loading={cartStatus === HTTP_STATUS.pending}
+				block={cartOpsStatus === HTTP_STATUS.pending}
+			/>
 		</div>
 	);
 };

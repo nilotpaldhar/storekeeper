@@ -44,6 +44,7 @@ export { default as OrderedList } from './regular/OrderedList';
 export { default as PaperPlane } from './regular/PaperPlane';
 export { default as Phone } from './regular/Phone';
 export { default as Plus } from './regular/Plus';
+export { default as Reload } from './regular/Reload';
 export { default as Search } from './regular/Search';
 export { default as ShieldCheck } from './regular/ShieldCheck';
 export { default as Slash } from './regular/Slash';
