@@ -1,32 +1,42 @@
 import getChecClient from '@config/commerce';
-import retrieveCartId from '@libs/commerce/cart/retrieveCartId';
+import getCartData from '@libs/commerce/cart/getCartData';
 
 /** Helpers. */
 import formatCartData from '@utils/cart/formatCartData';
 import validateReqMethod from '@utils/api/validateReqMethod';
 
-/** Add discount code to cart. */
-const handler = async (req, res) => {
-	const supportedMethods = ['POST'];
-	const checClient = getChecClient({ useSecretKey: false });
-	const discountCode = req?.body?.discountCode;
+const supportedMethods = ['POST'];
+const checClient = getChecClient({ useSecretKey: false });
 
-	return validateReqMethod(req, res, supportedMethods, async () => {
+/** Add discount code to cart. */
+const handler = async (req, res) =>
+	validateReqMethod(req, res, supportedMethods, async () => {
+		const discountCode = req?.body?.discountCode;
+
 		if (!discountCode) {
-			return res.status(422).json({ error: 'Invalid discount code' });
+			res.status(422).json({
+				error: 'Invalid discount code',
+			});
+			return;
 		}
 
 		try {
-			const cartId = await retrieveCartId(req, res);
+			const { id } = await getCartData(req, res);
 			const data = { discount_code: discountCode };
-			const cart = await checClient.request(`carts/${cartId}`, 'put', data);
-			return res.status(200).json({ success: true, data: await formatCartData(cart) });
+			const cart = await checClient.request(`carts/${id}`, 'put', data);
+
+			res.status(200).json({
+				success: true,
+				data: await formatCartData(cart),
+			});
 		} catch (error) {
 			const statusCode = error?.statusCode || 500;
 			const message = error?.data?.error?.message || 'Something went wrong';
-			return res.status(statusCode).json({ error: message });
+
+			res.status(statusCode).json({
+				error: message,
+			});
 		}
 	});
-};
 
 export default handler;
