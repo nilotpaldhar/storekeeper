@@ -1,5 +1,5 @@
 import getChecClient from '@config/commerce';
-import retrieveCartId from '@libs/commerce/cart/retrieveCartId';
+import getCartData from '@libs/commerce/cart/getCartData';
 
 /** Helpers. */
 import isEmpty from 'lodash-es/isEmpty';
@@ -7,35 +7,41 @@ import toNumber from 'lodash-es/toNumber';
 import formatCartData from '@utils/cart/formatCartData';
 import validateReqMethod from '@utils/api/validateReqMethod';
 
-/** Removes items from the shopping cart. */
-const handler = async (req, res) => {
-	const supportedMethods = ['PUT'];
-	const checClient = getChecClient({ useSecretKey: false });
-	const itemId = req?.body?.itemId;
-	const productData = {
-		quantity: toNumber(req?.body?.quantity) || 1,
-		options: req?.body?.options ?? {},
-	};
+const supportedMethods = ['PUT'];
+const checClient = getChecClient({ useSecretKey: false });
 
-	return validateReqMethod(req, res, supportedMethods, async () => {
+/** Removes items from the shopping cart. */
+const handler = async (req, res) =>
+	validateReqMethod(req, res, supportedMethods, async () => {
+		const itemId = req?.body?.itemId;
+		const productData = {
+			quantity: toNumber(req?.body?.quantity) || 1,
+			options: req?.body?.options ?? {},
+		};
+
 		if (isEmpty(itemId)) {
-			return res.status(422).json({
+			res.status(422).json({
 				error: 'The given data was invalid.',
 			});
+			return;
 		}
 
 		try {
-			const cartId = await retrieveCartId(req, res);
-			const cart = await checClient.request(`carts/${cartId}/items/${itemId}`, 'put', productData);
-			return res.status(200).json({ success: true, data: await formatCartData(cart) });
+			const { id } = await getCartData(req, res);
+			const cart = await checClient.request(`carts/${id}/items/${itemId}`, 'put', productData);
+
+			res.status(200).json({
+				success: true,
+				data: await formatCartData(cart),
+			});
 		} catch (error) {
 			const statusCode = error?.statusCode || 500;
 			const message = error?.data?.error?.message || 'Something went wrong';
-			return res.status(statusCode).json({
+
+			res.status(statusCode).json({
 				error: statusCode === 404 ? 'Cart item not found with the given ID' : message,
 			});
 		}
 	});
-};
 
 export default handler;

@@ -37,7 +37,7 @@ export const removeCartItem = async (id) => {
 
 /** Clear cart contents(client side only). */
 export const clearCart = async () => {
-	const res = await axios.post(`${BASE_URL}/clear`);
+	const res = await axios.delete(`${BASE_URL}/clear`);
 	return res?.data?.data ?? null;
 };
 
@@ -51,6 +51,6 @@ export const addCartDiscount = async (discountCode) => {
 
 /** Remove discount from cart (client side only). */
 export const removeCartDiscount = async () => {
-	const res = await axios.post(`${BASE_URL}/discount/remove`);
+	const res = await axios.delete(`${BASE_URL}/discount/remove`);
 	return res?.data?.data ?? null;
 };

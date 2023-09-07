@@ -2,18 +2,21 @@ import getChecClient from '@config/commerce';
 import validateReqMethod from '@utils/api/validateReqMethod';
 import isEmpty from 'lodash-es/isEmpty';
 
+const supportedMethods = ['GET'];
+const checClient = getChecClient({ useSecretKey: false });
+
 /** Get shipping subdivisions based on country. */
-const handler = async (req, res) => {
-	const supportedMethods = ['GET'];
-	const checClient = getChecClient({ useSecretKey: false });
+const handler = async (req, res) =>
+	validateReqMethod(req, res, supportedMethods, async () => {
+		/** Checkout Token ID & Country Code. */
+		const tokenId = req.query?.id;
+		const countryCode = req.query?.country;
 
-	/** Checkout Token ID & Country Code. */
-	const tokenId = req.query?.id;
-	const countryCode = req.query?.country;
-
-	return validateReqMethod(req, res, supportedMethods, async () => {
 		if (isEmpty(tokenId) || isEmpty(countryCode)) {
-			return res.status(422).json({ error: 'The given data was invalid.' });
+			res.status(422).json({
+				error: 'The given data was invalid.',
+			});
+			return;
 		}
 
 		try {
@@ -26,16 +29,18 @@ const handler = async (req, res) => {
 				name,
 			}));
 
-			return res.status(200).json({
+			res.status(200).json({
 				success: true,
 				data: { subdivisions, html: data?.html },
 			});
 		} catch (error) {
 			const statusCode = error?.statusCode || 500;
 			const message = error?.data?.error?.message || 'Something went wrong';
-			return res.status(statusCode).json({ error: message });
+
+			res.status(statusCode).json({
+				error: message,
+			});
 		}
 	});
-};
 
 export default handler;
