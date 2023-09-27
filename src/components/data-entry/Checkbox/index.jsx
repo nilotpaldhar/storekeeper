@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 /** Components. */
@@ -19,70 +19,75 @@ import styles, {
  *
  * @return {Element} The Checkbox component.
  */
-const Checkbox = ({
-	id,
-	name,
-	value,
-	label,
-	required,
-	disabled,
-	labelPlacement,
-	defaultChecked,
-	onCheckedChange,
-	className,
-	labelClassName,
-	checkboxClassName,
-	indicatorClassName,
-	...props
-}) => {
-	const idSuffix = useId();
-	const checkboxID = id ? `${id}-${idSuffix}` : idSuffix;
-
-	/** Label Node. */
-	const labelNode = (
-		<label
-			htmlFor={checkboxID}
-			className={labelStyles({
-				disabled,
-				placement: labelPlacement,
-				className: labelClassName,
-			})}
-		>
-			{label}
-		</label>
-	);
-
-	/** Checkbox Root Config. */
-	const config = {
-		name,
-		value,
-		required,
-		disabled,
-		id: checkboxID,
-		defaultChecked,
-		onCheckedChange,
-		className: checkboxStyles({
+const Checkbox = forwardRef(
+	(
+		{
+			id,
+			name,
+			value,
+			label,
+			required,
 			disabled,
-			className: checkboxClassName,
-		}),
-		...props,
-	};
+			labelPlacement,
+			defaultChecked,
+			onCheckedChange,
+			className,
+			labelClassName,
+			checkboxClassName,
+			indicatorClassName,
+			...props
+		},
+		forwardedRef
+	) => {
+		const idSuffix = useId();
+		const checkboxID = id ? `${id}-${idSuffix}` : idSuffix;
 
-	return (
-		<div className={styles({ className })}>
-			{label && labelPlacement === 'left' && labelNode}
-			<RadixCheckbox.Root {...config}>
-				<RadixCheckbox.Indicator
-					forceMount
-					className={indicatorStyles({ className: indicatorClassName })}
-				>
-					<CheckIcon className="!text-xs" />
-				</RadixCheckbox.Indicator>
-			</RadixCheckbox.Root>
-			{label && labelPlacement === 'right' && labelNode}
-		</div>
-	);
-};
+		/** Label Node. */
+		const labelNode = (
+			<label
+				htmlFor={checkboxID}
+				className={labelStyles({
+					disabled,
+					placement: labelPlacement,
+					className: labelClassName,
+				})}
+			>
+				{label}
+			</label>
+		);
+
+		/** Checkbox Root Config. */
+		const config = {
+			name,
+			value,
+			required,
+			disabled,
+			id: checkboxID,
+			defaultChecked,
+			onCheckedChange,
+			className: checkboxStyles({
+				disabled,
+				className: checkboxClassName,
+			}),
+			...props,
+		};
+
+		return (
+			<div className={styles({ className })}>
+				{label && labelPlacement === 'left' && labelNode}
+				<RadixCheckbox.Root {...config} ref={forwardedRef}>
+					<RadixCheckbox.Indicator
+						forceMount
+						className={indicatorStyles({ className: indicatorClassName })}
+					>
+						<CheckIcon className="!text-xs" />
+					</RadixCheckbox.Indicator>
+				</RadixCheckbox.Root>
+				{label && labelPlacement === 'right' && labelNode}
+			</div>
+		);
+	}
+);
 
 /**
  * Default Props.
@@ -107,7 +112,7 @@ Checkbox.defaultProps = {
  */
 Checkbox.propTypes = {
 	name: PropTypes.string,
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	label: PropTypes.node,
 	required: PropTypes.bool,
 	disabled: PropTypes.bool,

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 
 /** Components. */
 import { Root as RadixRadioRoot } from '@radix-ui/react-radio-group';
@@ -12,37 +13,46 @@ import styles from '@ui/data-entry/Radio/styles.cva';
  *
  * @return {Element} The Radio component.
  */
-const Radio = ({
-	name,
-	value,
-	children,
-	disabled,
-	required,
-	className,
-	orientation,
-	defaultValue,
-	onValueChange,
-	...props
-}) => {
-	/** Radio Config. */
-	const config = {
-		name,
-		value,
-		disabled,
-		required,
-		orientation,
-		defaultValue,
-		onValueChange,
-		className: styles({
+const Radio = forwardRef(
+	(
+		{
+			name,
+			value,
+			children,
 			disabled,
+			required,
 			className,
 			orientation,
-		}),
-		...props,
-	};
+			defaultValue,
+			onValueChange,
+			...props
+		},
+		forwardedRef
+	) => {
+		/** Radio Config. */
+		const config = {
+			name,
+			value,
+			disabled,
+			required,
+			orientation,
+			defaultValue,
+			onValueChange,
+			className: styles({
+				disabled,
+				className,
+				orientation,
+			}),
+			...props,
+		};
 
-	return <RadixRadioRoot {...config}>{children}</RadixRadioRoot>;
-};
+		return (
+			<RadixRadioRoot ref={forwardedRef} {...config}>
+				{children}
+			</RadixRadioRoot>
+		);
+	}
+);
 
 /**
  * Sub Components.
