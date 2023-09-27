@@ -20,6 +20,7 @@ export const inputStyles = cva(
 		'text-sm',
 		'transition',
 		'font-normal',
+		'resize-none',
 		'duration-300',
 		'leading-tight',
 		'text-neutral-700',

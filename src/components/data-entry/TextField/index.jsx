@@ -40,8 +40,7 @@ const TextField = forwardRef(
 		const fieldID = id ? `${id}-${idSuffix}` : idSuffix;
 
 		/** Input Config. */
-		const inputConfig = {
-			type,
+		const config = {
 			required,
 			disabled,
 			readOnly,
@@ -56,6 +55,9 @@ const TextField = forwardRef(
 			...props,
 		};
 
+		const component =
+			type === 'textarea' ? <textarea {...config} /> : <input type={type} {...config} />;
+
 		return (
 			<div className={styles({ className })}>
 				{label ? (
@@ -64,10 +66,10 @@ const TextField = forwardRef(
 							{label}
 							{required && <sup>*</sup>}
 						</span>
-						<input {...inputConfig} />
+						{component}
 					</label>
 				) : (
-					<input {...inputConfig} />
+					component
 				)}
 				{error && isString(error) && (
 					<small className={helperStyles({ className: 'text-error-600 font-semibold' })}>
@@ -126,6 +128,7 @@ TextField.propTypes = {
 		'search',
 		'number',
 		'password',
+		'textarea',
 		'datetime-local',
 	]),
 };
