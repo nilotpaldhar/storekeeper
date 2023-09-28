@@ -4,6 +4,7 @@ import { forwardRef } from 'react';
 /** Components. */
 import { Root as RadixRadioRoot } from '@radix-ui/react-radio-group';
 import RadioItem from '@ui/data-entry/Radio/RadioItem';
+import RadioBox from '@ui/data-entry/Radio/RadioBox';
 
 /** Component Styles. */
 import styles from '@ui/data-entry/Radio/styles.cva';
@@ -58,6 +59,7 @@ const Radio = forwardRef(
  * Sub Components.
  */
 Radio.Item = RadioItem;
+Radio.Box = RadioBox;
 
 /**
  * Default Props.

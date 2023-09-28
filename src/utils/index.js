@@ -21,6 +21,7 @@ export { default as parseLoginRedirectUri } from '@utils/auth/parseLoginRedirect
 export { default as validateWebhookReq } from '@utils/webhook/validateWebhookReq';
 
 /** Product. */
+export { default as checkInventory } from '@utils/product/checkInventory';
 export { createPermalink, parsePermalink } from '@utils/product/permalink';
 export { default as calcStockPercent } from '@utils/product/calcStockPercent';
 

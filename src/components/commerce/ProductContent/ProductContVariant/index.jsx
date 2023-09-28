@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Select from '@ui/data-entry/Select';
+import Radio from '@ui/data-entry/Radio';
 
 /**
  * Render the ProductContVariant component.
@@ -7,17 +7,24 @@ import Select from '@ui/data-entry/Select';
  * @return {Element} The ProductContVariant component.
  */
 const ProductContVariant = ({ id, label, options, disabled, onValueChange }) => (
-	<div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
-		<span className="block sm:w-28 text-sm leading-tight font-semibold shrink-0">{label}:</span>
+	<div className="flex flex-col space-y-3 sm:flex-row sm:items-start sm:space-y-0 sm:space-x-2">
+		<span className="block sm:w-28 text-sm leading-tight font-semibold shrink-0 sm:py-1.5">
+			{label}:
+		</span>
 		{options?.length > 0 && (
 			<div className="flex-1">
-				<Select id={id} onValueChange={onValueChange} disabled={disabled}>
+				<Radio
+					id={id}
+					className="flex-wrap !space-x-0 gap-2"
+					onValueChange={onValueChange}
+					disabled={disabled}
+				>
 					{options?.map((option) => (
-						<Select.Item key={option?.id} value={option?.id}>
+						<Radio.Box key={option?.id} id={option?.id} value={option?.id}>
 							{option?.name}
-						</Select.Item>
+						</Radio.Box>
 					))}
-				</Select>
+				</Radio>
 			</div>
 		)}
 	</div>
