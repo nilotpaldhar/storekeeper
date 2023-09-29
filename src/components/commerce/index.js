@@ -9,6 +9,7 @@ export { default as OrderSummary } from '@ui/commerce/OrderSummary';
 export { default as CheckoutFail } from '@ui/commerce/CheckoutFail';
 export { default as AutoComplete } from '@ui/commerce/AutoComplete';
 export { default as ProductSpecs } from '@ui/commerce/ProductSpecs';
+export { default as ProductShare } from '@ui/commerce/ProductShare';
 export { default as CheckoutSteps } from '@ui/commerce/CheckoutSteps';
 export { default as AddressSummary } from '@ui/commerce/AddressSummary';
 export { default as ProductContent } from '@ui/commerce/ProductContent';

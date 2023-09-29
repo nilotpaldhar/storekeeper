@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 /** Components & Icons. */
 import Alert from '@ui/feedback/Alert';
@@ -11,9 +12,13 @@ import ProductContMeta from '@ui/commerce/ProductContent/ProductContMeta';
 import DashIcon from '@icons/regular/Dash';
 
 import checkInventory from '@utils/product/checkInventory';
+import createCanonicalUrl from '@utils/general/createCanonicalUrl';
 
+const ProductShare = dynamic(() => import('@ui/commerce/ProductShare'));
 const ProductContRating = dynamic(() => import('@ui/commerce/ProductContent/ProductContRating'));
-const ProductContActions = dynamic(() => import('@ui/commerce/ProductContent/ProductContActions'));
+const ProductContActions = dynamic(() => import('@ui/commerce/ProductContent/ProductContActions'), {
+	loading: () => <p>Loading...</p>,
+});
 
 /**
  * Render the ProductContent component.
@@ -30,6 +35,8 @@ const ProductContent = ({
 	inventory,
 	variants,
 }) => {
+	const router = useRouter();
+
 	const [loading, setLoading] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [stockStatus, setStockStatus] = useState('');
@@ -111,6 +118,9 @@ const ProductContent = ({
 						<DashIcon />
 					)}
 				</ProductContMeta>
+			</div>
+			<div className="mt-6 sm:mt-8">
+				<ProductShare title={title} url={createCanonicalUrl(router?.asPath)} />
 			</div>
 		</article>
 	);

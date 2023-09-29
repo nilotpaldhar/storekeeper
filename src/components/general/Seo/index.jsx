@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 /** Helpers. */
-import trimSlashes from '@utils/general/trimSlashes';
+import createCanonicalUrl from '@utils/general/createCanonicalUrl';
 
 /**
  * Render the Seo component.
@@ -34,9 +34,7 @@ const Seo = ({
 	const favicons = [];
 
 	/** Create canonical URL. */
-	const currentLocation = typeof window !== 'undefined' ? window?.location?.origin : '';
-	const siteUrl = trimSlashes(domain || currentLocation);
-	const canonicalUrl = siteUrl + (router.asPath === '/' ? '' : router.asPath).split('?')[0];
+	const canonicalUrl = createCanonicalUrl(router.asPath, domain);
 
 	/** Favicon. */
 	if (favicon) {

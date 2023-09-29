@@ -8,6 +8,8 @@ export { default as truncateStr } from '@utils/general/truncateStr';
 export { default as isDateExpired } from '@utils/general/isDateExpired';
 export { default as createLinkHref } from '@utils/general/createLinkHref';
 export { default as mapSocialIcons } from '@utils/general/mapSocialIcons';
+export { default as createCanonicalUrl } from '@utils/general/createCanonicalUrl';
+export { default as copyTextToClipboard } from '@utils/general/copyTextToClipboard';
 export { default as removeTrailingSlash } from '@utils/general/removeTrailingSlash';
 
 /** API. */
