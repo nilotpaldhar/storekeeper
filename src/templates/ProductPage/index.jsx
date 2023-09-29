@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 /** Components. */
 import Tabs from '@ui/data-display/Tabs';
 import Container from '@ui/general/Container';
+import ProductSpecs from '@ui/commerce/ProductSpecs';
 import ProductContent from '@ui/commerce/ProductContent';
 import ProductImgGallery from '@ui/commerce/ProductImgGallery';
 import ProductCollection from '@ui/commerce/ProductCollection';
@@ -23,23 +24,35 @@ const ProductPageTmpl = ({ data }) => {
 	}));
 
 	/** Tabs Items. */
-	const tabsItems = [
-		{
-			key: 'product_desc',
-			label: <span>Description</span>,
-			children: (
-				<div className="prose-sm prose prose-neutral max-w-none">
-					<PortableText value={data?.description} />
-				</div>
-			),
-		},
-		{
-			key: 'product_reviews',
-			label: <span>Reviews</span>,
-			disabled: true,
-			children: '',
-		},
-	];
+	const getTabsItems = () => {
+		const tabsItems = [];
+
+		if (data?.description?.length > 0) {
+			tabsItems.push({
+				key: 'product_desc',
+				label: <span>Description</span>,
+				children: (
+					<div className="prose-sm md:prose prose-neutral md:max-w-none">
+						<PortableText value={data?.description} />
+					</div>
+				),
+			});
+		}
+
+		if (data?.additionalInfo?.length > 0) {
+			tabsItems.push({
+				key: 'product_additional_info',
+				label: <span>Additional Information</span>,
+				children: (
+					<div>
+						<ProductSpecs list={data?.additionalInfo ?? []} />
+					</div>
+				),
+			});
+		}
+
+		return tabsItems;
+	};
 
 	return (
 		<main className="py-10 lg:py-14">
@@ -68,9 +81,11 @@ const ProductPageTmpl = ({ data }) => {
 						/>
 					</div>
 				</section>
-				<section>
-					<Tabs contentClassName="p-4 lg:p-8" items={tabsItems} />
-				</section>
+				{(data?.description?.length > 0 || data?.additionalInfo?.length > 0) && (
+					<section>
+						<Tabs contentClassName="p-6 lg:p-8" items={getTabsItems()} />
+					</section>
+				)}
 				<section>
 					<ProductCollection
 						products={data?.relatedProducts}
@@ -119,6 +134,7 @@ ProductPageTmpl.propTypes = {
 		gallery: PropTypes.arrayOf(PropTypes.shape({})),
 		variants: PropTypes.arrayOf(PropTypes.shape({})),
 		description: PropTypes.arrayOf(PropTypes.shape({})),
+		additionalInfo: PropTypes.arrayOf(PropTypes.shape({})),
 		relatedProducts: PropTypes.arrayOf(PropTypes.shape({})),
 	}).isRequired,
 };

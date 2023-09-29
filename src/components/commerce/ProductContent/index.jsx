@@ -75,8 +75,8 @@ const ProductContent = ({
 					{errorMsg && <Alert type="error">{errorMsg}</Alert>}
 					{stockStatus === 'OUT_OF_STOCK' && (
 						<div className="flex flex-col space-y-1 text-error-600">
-							<h2 className="text-2xl font-semibold leading-normal">Sold Out</h2>
-							<p className="text-base font-light">This item is currently out of stock</p>
+							<h2 className="text-xl lg:text-2xl font-semibold leading-normal">Sold Out</h2>
+							<p className="text-sm lg:text-base font-light">This item is currently out of stock</p>
 						</div>
 					)}
 					{stockStatus === 'IN_STOCK' && (

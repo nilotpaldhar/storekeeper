@@ -39,6 +39,7 @@ import navProduct from './objects/nav-product';
 import navCategory from './objects/nav-category';
 import navDropdown from './objects/nav-dropdown';
 
+import productSpec from './objects/product-spec';
 import productPrice from './objects/product-price';
 import productVariant from './objects/product-variant';
 import productInventory from './objects/product-inventory';
@@ -96,6 +97,7 @@ const schema = [
 
 	/* ----------------------- */
 	/* 5: Commerce Object types */
+	productSpec,
 	productPrice,
 	productVariant,
 	productInventory,

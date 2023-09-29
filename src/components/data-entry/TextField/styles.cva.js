@@ -48,7 +48,7 @@ export const inputStyles = cva(
 				false: 'bg-white',
 			},
 			readOnly: {
-				true: 'bg-neutral-100 hover:border-transparent focus:ring-transparent focus:border-transparent',
+				true: '!bg-neutral-100 border-transparent hover:border-transparent focus:ring-transparent focus:border-transparent',
 				false: 'bg-white',
 			},
 		},

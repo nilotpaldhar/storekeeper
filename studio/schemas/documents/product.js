@@ -44,6 +44,12 @@ export default {
 			type: 'portableContent',
 		},
 		{
+			title: 'Additional Information',
+			name: 'additionalInfo',
+			type: 'array',
+			of: [{ type: 'productSpec' }],
+		},
+		{
 			title: 'SEO / Share Settings',
 			name: 'seo',
 			type: 'seo',

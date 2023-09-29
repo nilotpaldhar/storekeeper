@@ -53,6 +53,11 @@ const fetchPage = async (preview = false, permalink = null) => {
           description,
           fileExtension
         },
+        additionalInfo[]{
+          'key': _key,
+          name,
+          value
+        },
         relatedProducts[]-> {
           sku,
           name,
