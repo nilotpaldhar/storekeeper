@@ -13,7 +13,6 @@ const fetchPage = async (preview = false, permalink = null) => {
 	const query = groq`
     { 
       "page": *[_type == "product" && isActive == true && productID == $id && slug == $slug][0]{
-        seo,
         sku,
         name,
         slug,
@@ -53,6 +52,11 @@ const fetchPage = async (preview = false, permalink = null) => {
           description,
           fileExtension
         },
+        additionalInfo[]{
+          'key': _key,
+          name,
+          value
+        },
         relatedProducts[]-> {
           sku,
           name,
@@ -76,6 +80,13 @@ const fetchPage = async (preview = false, permalink = null) => {
             description,
             fileExtension
           }
+        },
+        seo {
+          metaTitle,
+          metaDesc,
+          shareTitle,
+          shareDesc,
+          "shareGraphic": shareGraphic.asset->url,
         }
       },
       "siteConfig": ${SiteConfigQuery}

@@ -8,10 +8,13 @@ import isEmpty from 'lodash-es/isEmpty';
  */
 const mapSeoData = (root, siteSeo, pageSeo) => {
 	const getOGImages = (ogImgSite, ogImgPage) => {
-		const images = [];
-		if (!isEmpty(ogImgPage)) images.push({ url: ogImgPage, width: 1200, height: 630 });
-		if (!isEmpty(ogImgSite)) images.push({ url: ogImgSite, width: 1200, height: 630 });
-		return images;
+		const width = 1200;
+		const height = 630;
+
+		if (!isEmpty(ogImgPage)) return [{ url: ogImgPage, width, height }];
+		if (!isEmpty(ogImgSite)) return [{ url: ogImgSite, width, height }];
+
+		return [];
 	};
 
 	const data = {

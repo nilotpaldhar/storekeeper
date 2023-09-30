@@ -8,6 +8,8 @@ export { default as truncateStr } from '@utils/general/truncateStr';
 export { default as isDateExpired } from '@utils/general/isDateExpired';
 export { default as createLinkHref } from '@utils/general/createLinkHref';
 export { default as mapSocialIcons } from '@utils/general/mapSocialIcons';
+export { default as createCanonicalUrl } from '@utils/general/createCanonicalUrl';
+export { default as copyTextToClipboard } from '@utils/general/copyTextToClipboard';
 export { default as removeTrailingSlash } from '@utils/general/removeTrailingSlash';
 
 /** API. */
@@ -21,6 +23,7 @@ export { default as parseLoginRedirectUri } from '@utils/auth/parseLoginRedirect
 export { default as validateWebhookReq } from '@utils/webhook/validateWebhookReq';
 
 /** Product. */
+export { default as checkInventory } from '@utils/product/checkInventory';
 export { createPermalink, parsePermalink } from '@utils/product/permalink';
 export { default as calcStockPercent } from '@utils/product/calcStockPercent';
 

@@ -7,6 +7,7 @@ import * as cart from '@store/slices/cartOps/cartOps.thunks';
 import { selectCartOpsType, selectCartOpsStatus } from '@store/slices/cartOps/cartOps.selectors';
 
 /** Components. */
+import Alert from '@ui/feedback/Alert';
 import Quantity from '@ui/data-entry/Quantity';
 import RegularButton from '@ui/buttons/RegularButton';
 import ProductContVariant from '@ui/commerce/ProductContent/ProductContVariant';
@@ -14,6 +15,23 @@ import ProductContVariant from '@ui/commerce/ProductContent/ProductContVariant';
 /** Icons. */
 import CartIcon from '@icons/regular/Cart';
 import HeartIcon from '@icons/regular/Heart';
+
+/** Checks validity of options. */
+const isValidOptions = (options = {}, variants = []) => {
+	const invalidItems = [];
+	const optionKeys = Object.keys(options);
+
+	variants.forEach((variant) => {
+		if (!optionKeys.includes(variant?.id)) {
+			invalidItems.push(variant);
+		}
+	});
+
+	return {
+		isValid: invalidItems.length === 0,
+		invalidItems,
+	};
+};
 
 /**
  * Render the ProductContActions component.
@@ -28,9 +46,11 @@ const ProductContActions = ({ productId, inventory, variants }) => {
 	const status = useSelector(selectCartOpsStatus);
 
 	const [qty, setQty] = useState(1);
+	const [errorMsg, setErrorMsg] = useState('');
 	const [options, setOptions] = useState({});
 	const [loading, setLoading] = useState(false);
 
+	const hasVariants = variants?.length > 0;
 	const maxQty = inventory?.isManaged ? inventory?.available : null;
 
 	useEffect(() => {
@@ -44,6 +64,15 @@ const ProductContActions = ({ productId, inventory, variants }) => {
 
 	/** Add product to cart. */
 	const handleAddToCart = () => {
+		if (hasVariants) {
+			const { isValid, invalidItems } = isValidOptions(options, variants);
+			if (!isValid) {
+				const error = `Please select a ${invalidItems.map((i) => i.name).join(', ')}`;
+				setErrorMsg(error);
+				return;
+			}
+		}
+
 		dispatch(
 			cart.addCartItem({
 				id: productId,
@@ -54,8 +83,13 @@ const ProductContActions = ({ productId, inventory, variants }) => {
 	};
 
 	return (
-		<div className="py-8 my-8 border-y border-neutral-100">
-			{variants?.length > 0 && (
+		<div>
+			{errorMsg && (
+				<div className="mb-6">
+					<Alert type="error">{errorMsg}</Alert>
+				</div>
+			)}
+			{hasVariants && (
 				<div className="flex flex-col mb-6 space-y-6">
 					{variants?.map((variant) => (
 						<ProductContVariant
@@ -65,6 +99,7 @@ const ProductContActions = ({ productId, inventory, variants }) => {
 							label={variant?.name}
 							options={variant?.options}
 							onValueChange={(val) => {
+								setErrorMsg('');
 								setOptions({ ...options, [variant?.id]: val });
 							}}
 						/>
