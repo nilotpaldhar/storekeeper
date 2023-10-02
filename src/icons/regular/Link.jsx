@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { FiLink2 } from 'react-icons/fi';
+import { RiShareFill } from 'react-icons/ri';
 
 /**
  * Render the Link icon.
@@ -9,7 +9,7 @@ import { FiLink2 } from 'react-icons/fi';
  */
 const Link = ({ className, ...props }) => (
 	<span className={clsx('icon', className && className)} {...props}>
-		<FiLink2 />
+		<RiShareFill />
 	</span>
 );
 

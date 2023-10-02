@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { AiFillFacebook } from 'react-icons/ai';
+import { RiFacebookFill } from 'react-icons/ri';
 
 /**
  * Render the Facebook icon.
@@ -9,7 +9,7 @@ import { AiFillFacebook } from 'react-icons/ai';
  */
 const Facebook = ({ className, ...props }) => (
 	<span className={clsx('icon', className && className)} {...props}>
-		<AiFillFacebook />
+		<RiFacebookFill />
 	</span>
 );
 

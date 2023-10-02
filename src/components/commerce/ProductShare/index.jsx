@@ -9,7 +9,7 @@ import { FacebookShareButton, TwitterShareButton, EmailShareButton } from 'next-
 import LinkIcon from '@icons/regular/Link';
 import TwitterIcon from '@icons/social/Twitter';
 import FacebookIcon from '@icons/social/Facebook';
-import EmailFilledIcon from '@icons/regular/EmailFilled';
+import EmailIcon from '@icons/regular/Email';
 
 /**
  * Render the ProductShare component.
@@ -56,7 +56,7 @@ const ProductShare = ({ url, title, ...props }) => {
 				trigger={
 					<ShareItem>
 						<EmailShareButton subject={titlePrefix} body={`${title}. Here's the link`} url={url}>
-							<EmailFilledIcon className="!text-base" />
+							<EmailIcon className="!text-base" />
 						</EmailShareButton>
 					</ShareItem>
 				}

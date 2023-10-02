@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { AiOutlineGoogle } from 'react-icons/ai';
+import { RiGoogleFill } from 'react-icons/ri';
 
 /**
  * Render the Google icon.
@@ -9,7 +9,7 @@ import { AiOutlineGoogle } from 'react-icons/ai';
  */
 const Google = ({ className, ...props }) => (
 	<span className={clsx('icon', className && className)} {...props}>
-		<AiOutlineGoogle />
+		<RiGoogleFill />
 	</span>
 );
 
