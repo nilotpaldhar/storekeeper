@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { AiOutlineMail } from 'react-icons/ai';
+import { RiMailFill } from 'react-icons/ri';
 
 /**
  * Render the Email icon.
@@ -9,7 +9,7 @@ import { AiOutlineMail } from 'react-icons/ai';
  */
 const Email = ({ className, ...props }) => (
 	<span className={clsx('icon', className && className)} {...props}>
-		<AiOutlineMail />
+		<RiMailFill />
 	</span>
 );
 

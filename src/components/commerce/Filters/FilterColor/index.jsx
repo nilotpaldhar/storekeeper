@@ -16,7 +16,7 @@ const FilterColor = ({ title, hasDivider }) => {
 	return (
 		<FilterWrapper title={title} hasDivider={hasDivider}>
 			<ul className="flex flex-col space-y-4">
-				{items.map(({ value, label, isRefined, count }) => (
+				{items?.map(({ value, label, isRefined, count }) => (
 					<li key={label}>
 						<FilterColorItem
 							id={`color-${value}`}

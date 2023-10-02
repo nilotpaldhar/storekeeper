@@ -68,7 +68,7 @@ const ProductPageTmpl = ({ data }) => {
 							}}
 						/>
 					</div>
-					<div className="py-1">
+					<div className="flex-1 py-1">
 						<ProductContent
 							sku={data?.sku}
 							excerpt={data?.excerpt}

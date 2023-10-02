@@ -25,6 +25,7 @@ const ProductImgGallery = ({ gallery, thumbnailsSize, thumbnailsGap }) => {
 			padding: 0,
 			vignette: false,
 			borderRadius: 0,
+			position: 'bottom',
 			imageFit: 'cover',
 			gap: thumbnailsGap,
 			width: thumbnailsSize?.width,
@@ -50,7 +51,7 @@ const ProductImgGallery = ({ gallery, thumbnailsSize, thumbnailsGap }) => {
 	};
 
 	return (
-		<div className="max-w-full">
+		<div className="product-img-gallery max-w-full">
 			<Lightbox
 				render={{
 					buttonPrev: () => null,

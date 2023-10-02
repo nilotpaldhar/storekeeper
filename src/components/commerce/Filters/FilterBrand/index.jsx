@@ -17,7 +17,7 @@ const FilterBrand = ({ title, hasDivider }) => {
 	return (
 		<FilterWrapper title={title} hasDivider={hasDivider}>
 			<ul className="flex flex-col space-y-4">
-				{items.map(({ value, label, isRefined, count }) => (
+				{items?.map(({ value, label, isRefined, count }) => (
 					<li key={label} className="flex items-center justify-between">
 						<Checkbox
 							id={`brand-${value}`}

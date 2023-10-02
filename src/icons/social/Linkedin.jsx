@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { AiFillLinkedin } from 'react-icons/ai';
+import { RiLinkedinFill } from 'react-icons/ri';
 
 /**
  * Render the Linkedin icon.
@@ -9,7 +9,7 @@ import { AiFillLinkedin } from 'react-icons/ai';
  */
 const Linkedin = ({ className, ...props }) => (
 	<span className={clsx('icon', className && className)} {...props}>
-		<AiFillLinkedin />
+		<RiLinkedinFill />
 	</span>
 );
 
