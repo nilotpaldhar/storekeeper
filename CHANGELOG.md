@@ -1,4 +1,13 @@
-# 0.1.0 (2023-09-30)
+# [0.2.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.1.0...v0.2.0) (2023-10-02)
+
+
+### Features
+
+* **product:** add individual product page ([023067c](https://github.com/nilotpaldhar/storekeeper/commit/023067caf3cdafbe7b5c9140fbdd49306a87b56c)), closes [#36](https://github.com/nilotpaldhar/storekeeper/issues/36)
+
+
+
+# [0.1.0](https://github.com/nilotpaldhar/storekeeper/compare/7f3164139f271572a480545e6e0680718f89ab16...v0.1.0) (2023-09-30)
 
 
 ### Bug Fixes
