@@ -35,6 +35,7 @@ const CartPageTmpl = ({ data, block, loading }) => {
 	const subtotalAmt = data?.subtotal?.raw;
 	const discountAmt = data?.discount?.amountSaved?.raw;
 	const grandTotal = discountAmt ? (subtotalAmt - discountAmt)?.toFixed(2) : subtotalAmt;
+	const cartTitle = `Cart Summary (${data?.totalItems} ${data?.totalItems > 1 ? 'items' : 'item'})`;
 
 	/** Create checkout token. */
 	const handleCheckout = async () => {
@@ -79,18 +80,21 @@ const CartPageTmpl = ({ data, block, loading }) => {
 								</RegularButton>
 							</Empty>
 						) : (
-							<div className="flex flex-col space-y-10 xl:flex-row xl:space-x-8 xl:space-y-0">
-								<section className="flex-1">
+							<div className="grid grid-cols-12 gap-6">
+								<section className="col-span-12 md:col-span-8 lg:col-span-8">
 									<CartList collection={data?.items} currency={data?.currency} />
 								</section>
-								<section className="flex-1 xl:max-w-xs">
-									<CartSummary
-										discount={data?.discount}
-										subTotal={data?.subtotal?.formattedWithSymbol}
-										grandTotal={`${data?.currency?.symbol}${grandTotal}`}
-										discountTotal={data?.discount?.amountSaved?.formattedWithSymbol}
-										onCheckout={handleCheckout}
-									/>
+								<section className="col-span-12 md:col-span-4 lg:col-span-4">
+									<div className="md:sticky top-6">
+										<CartSummary
+											title={cartTitle}
+											discount={data?.discount}
+											subTotal={data?.subtotal?.formattedWithSymbol}
+											grandTotal={`${data?.currency?.symbol}${grandTotal}`}
+											discountTotal={data?.discount?.amountSaved?.formattedWithSymbol}
+											onCheckout={handleCheckout}
+										/>
+									</div>
 								</section>
 							</div>
 						)}
@@ -127,6 +131,7 @@ CartPageTmpl.propTypes = {
 			symbol: PropTypes.string,
 		}),
 		items: PropTypes.arrayOf(PropTypes.shape({})),
+		totalItems: PropTypes.number,
 		subtotal: PropTypes.shape({
 			raw: PropTypes.number,
 			formatted: PropTypes.string,

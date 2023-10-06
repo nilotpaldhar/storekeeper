@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCartDiscount, removeCartDiscount } from '@store/slices/cartOps/cartOps.thunks';
 
 /** Components & Icons. */
-import Summary from '@ui/data-display/Summary';
 import TextField from '@ui/data-entry/TextField';
 import RegularButton from '@ui/buttons/RegularButton';
+import TagsIcon from '@icons/regular/Tags';
 import CloseIcon from '@icons/regular/Close';
-import { useState } from 'react';
 
 /**
  * Render the CartSummaryDiscount component.
@@ -26,42 +26,47 @@ const CartSummaryDiscount = ({ title, data, ...props }) => {
 	};
 
 	return (
-		<section {...props}>
-			<Summary.SubTitle>{title}</Summary.SubTitle>
+		<div className="flex flex-col space-y-4" {...props}>
+			<div className="flex items-center space-x-1">
+				<TagsIcon className="!text-base -rotate-90" />
+				<span className="text-sm font-semibold">{title}</span>
+			</div>
 			{data && (
-				<Summary.List className="!space-y-2 mb-5">
-					<Summary.ListItem className="flex items-center space-x-1">
-						<button
-							type="button"
-							onClick={() => dispatch(removeCartDiscount())}
-							className="flex items-center text-neutral-900 hover:text-current hover:opacity-80"
-						>
-							<span className="sr-only">Remove Coupon</span>
-							<CloseIcon className="!text-base" />
-						</button>
-						<div className="flex items-center space-x-1">
-							<span className="font-medium">{data?.code}</span>
-							<span className="text-neutral-500">is applied</span>
-						</div>
-					</Summary.ListItem>
-				</Summary.List>
+				<div className="flex items-center space-x-2">
+					<button
+						type="button"
+						onClick={() => dispatch(removeCartDiscount())}
+						className="flex items-center text-neutral-900 hover:text-current hover:opacity-80"
+					>
+						<span className="sr-only">Remove Coupon</span>
+						<CloseIcon className="!text-base" />
+					</button>
+					<div className="flex items-center space-x-1 text-xs">
+						<span className="font-normal">{data?.code}</span>
+						<span className="text-neutral-500">is applied</span>
+					</div>
+				</div>
 			)}
 			{!data && (
-				<form onSubmit={addDiscount}>
-					<div className="flex items-center space-x-2 max-w-xl">
-						<TextField
-							required
-							id="couponCode"
-							value={discountCode}
-							inputClassName="h-10"
-							placeholder="Enter your code"
-							onChange={(evt) => setDiscountCode(evt.target.value)}
-						/>
-						<RegularButton type="submit">Apply</RegularButton>
-					</div>
-				</form>
+				<div>
+					<form onSubmit={addDiscount}>
+						<div className="flex items-start space-x-1 max-w-xs">
+							<TextField
+								required
+								id="couponCode"
+								value={discountCode}
+								inputClassName="h-8"
+								placeholder="Enter your code"
+								onChange={(evt) => setDiscountCode(evt.target.value)}
+							/>
+							<RegularButton type="submit" className="!min-h-[32px]">
+								Apply
+							</RegularButton>
+						</div>
+					</form>
+				</div>
 			)}
-		</section>
+		</div>
 	);
 };
 
@@ -69,7 +74,7 @@ const CartSummaryDiscount = ({ title, data, ...props }) => {
  * Default Props.
  */
 CartSummaryDiscount.defaultProps = {
-	title: 'Promotion',
+	title: 'Promotions',
 	data: null,
 };
 
