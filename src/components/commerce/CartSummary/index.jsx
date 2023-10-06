@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
 
-/** Components. */
-import Summary from '@ui/data-display/Summary';
+/** Components & Icons. */
+import Box from '@ui/data-display/Box';
+import PriceRecap from '@ui/commerce/PriceRecap';
 import RegularButton from '@ui/buttons/RegularButton';
-import CartSummaryTotal from '@ui/commerce/CartSummary/CartSummaryTotal';
 import CartSummaryDiscount from '@ui/commerce/CartSummary/CartSummaryDiscount';
-
-/** Icons. */
 import ArrowRightIcon from '@icons/regular/ArrowRight';
 
 /**
@@ -22,20 +20,22 @@ const CartSummary = ({
 	discount,
 	discountTotal,
 	onCheckout,
+	...props
 }) => (
-	<Summary>
-		<Summary.Title>{title}</Summary.Title>
-		<CartSummaryDiscount className="mb-8" data={discount} />
-		<CartSummaryTotal
-			className="mb-6"
-			subTotal={subTotal}
-			grandTotal={grandTotal}
-			discountTotal={discountTotal}
-		/>
-		<RegularButton fullWidth endIcon={ArrowRightIcon} onClick={onCheckout}>
-			{btnText}
-		</RegularButton>
-	</Summary>
+	<Box {...props}>
+		<Box.Title className="!px-3 lg:!px-5">{title}</Box.Title>
+		<Box.Block className="px-3 lg:px-5">
+			<CartSummaryDiscount data={discount} />
+		</Box.Block>
+		<Box.Divider />
+		<PriceRecap subTotal={subTotal} grandTotal={grandTotal} discount={discountTotal} />
+		<Box.Divider />
+		<Box.Block className="px-3 lg:px-5">
+			<RegularButton fullWidth endIcon={ArrowRightIcon} onClick={onCheckout}>
+				{btnText}
+			</RegularButton>
+		</Box.Block>
+	</Box>
 );
 
 /**

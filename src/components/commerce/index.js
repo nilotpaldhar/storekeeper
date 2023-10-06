@@ -5,7 +5,6 @@ export { default as OfferCard } from '@ui/commerce/OfferCard';
 export { default as CartSummary } from '@ui/commerce/CartSummary';
 export { default as ProductCard } from '@ui/commerce/ProductCard';
 export { default as BannerSlider } from '@ui/commerce/BannerSlider';
-export { default as OrderSummary } from '@ui/commerce/OrderSummary';
 export { default as CheckoutFail } from '@ui/commerce/CheckoutFail';
 export { default as AutoComplete } from '@ui/commerce/AutoComplete';
 export { default as ProductSpecs } from '@ui/commerce/ProductSpecs';

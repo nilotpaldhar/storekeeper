@@ -51,6 +51,8 @@ export { default as ShieldCheck } from './regular/ShieldCheck';
 export { default as Slash } from './regular/Slash';
 export { default as Star } from './regular/Star';
 export { default as StarFill } from './regular/StarFill';
+export { default as Tag } from './regular/Tag';
+export { default as Tags } from './regular/Tags';
 export { default as Trash } from './regular/Trash';
 export { default as TruckDelivery } from './regular/TruckDelivery';
 export { default as UnorderedList } from './regular/UnorderedList';

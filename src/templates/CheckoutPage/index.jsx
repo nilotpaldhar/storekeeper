@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import Container from '@ui/general/Container';
 
 const LoadingUI = dynamic(() => import('@ui/feedback/LoadingUI'));
-const OrderSummary = dynamic(() => import('@ui/commerce/OrderSummary'));
+const OrderRecap = dynamic(() => import('@ui/commerce/OrderRecap'));
 const CheckoutSteps = dynamic(() => import('@ui/commerce/CheckoutSteps'), {
 	loading: () => <LoadingUI loading />,
 });
@@ -15,34 +15,31 @@ const CheckoutSteps = dynamic(() => import('@ui/commerce/CheckoutSteps'), {
  *
  * @return {Element} The CheckoutPageTmpl component.
  */
-const CheckoutPageTmpl = ({ data, loading }) => {
-	const { raw: taxRaw, formattedWithSymbol: taxWithSymbol } = data?.tax?.amount ?? {};
-	const { raw: shippingRaw, formattedWithSymbol: shippingWithSymbol } = data?.shipping?.price ?? {};
-
-	return (
-		<main className="py-10 lg:py-14 min-h-screen">
-			<Container>
-				<LoadingUI loading={loading}>
-					<div className="flex flex-col space-y-10 xl:flex-row xl:space-x-8 xl:space-y-0">
-						<section className="flex-1">
-							<CheckoutSteps tokenId={data?.id} />
-						</section>
-						<section className="flex-1 xl:max-w-xs">
-							<OrderSummary
+const CheckoutPageTmpl = ({ data, loading }) => (
+	<main className="py-10 lg:py-14 min-h-screen">
+		<Container>
+			<LoadingUI loading={loading}>
+				<div className="flex flex-col space-y-10 xl:flex-row xl:space-x-8 xl:space-y-0">
+					<section className="flex-1">
+						<CheckoutSteps tokenId={data?.id} />
+					</section>
+					<section className="flex-1 xl:max-w-sm">
+						<div className="md:sticky top-6">
+							<OrderRecap
 								products={data?.items}
-								tax={taxRaw > 0 ? taxWithSymbol : null}
-								total={data?.totalDue?.formattedWithSymbol}
-								subtotal={data?.subtotal?.formattedWithSymbol}
-								shipping={shippingRaw > 0 ? shippingWithSymbol : null}
+								subTotal={data?.subtotal?.formattedWithSymbol}
+								tax={data?.tax?.amount?.formattedWithSymbol}
 								discount={data?.discount?.amountSaved?.formattedWithSymbol}
+								shipping={data?.shipping?.price?.formattedWithSymbol}
+								grandTotal={data?.totalDue?.formattedWithSymbol}
 							/>
-						</section>
-					</div>
-				</LoadingUI>
-			</Container>
-		</main>
-	);
-};
+						</div>
+					</section>
+				</div>
+			</LoadingUI>
+		</Container>
+	</main>
+);
 
 /**
  * Default Props.
