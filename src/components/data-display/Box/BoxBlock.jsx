@@ -7,7 +7,7 @@ import { clsx } from 'clsx';
  * @return {Element} The BoxBlock component.
  */
 const BoxBlock = ({ as: Component, children, className, ...props }) => (
-	<Component className={clsx('p-5 to-current', className)} {...props}>
+	<Component className={clsx('p-5 text-current', className)} {...props}>
 		{children}
 	</Component>
 );

@@ -20,6 +20,7 @@ export { default as Dash } from './regular/Dash';
 export { default as Dashboard } from './regular/Dashboard';
 export { default as Dollar } from './regular/Dollar';
 export { default as DollarCircle } from './regular/DollarCircle';
+export { default as Edit } from './regular/Edit';
 export { default as Email } from './regular/Email';
 export { default as Exclamation } from './regular/Exclamation';
 export { default as Eye } from './regular/Eye';

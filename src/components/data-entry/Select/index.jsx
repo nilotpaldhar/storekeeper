@@ -1,5 +1,6 @@
-import { useId, forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { useId, forwardRef } from 'react';
+import isString from 'lodash-es/isString';
 
 /** Components. */
 import * as RadixSelect from '@radix-ui/react-select';
@@ -9,7 +10,7 @@ import SelectItem from '@ui/data-entry/Select/SelectItem';
 import ChevronDownIcon from '@icons/regular/ChevronDown';
 
 /** Component Styles. */
-import {
+import styles, {
 	triggerStyles,
 	contentStyles,
 	labelStyles,
@@ -22,13 +23,16 @@ import {
  * @return {Element} The Select component.
  */
 const Select = forwardRef(
-	({ id, label, placeholder, required, disabled, children, ...props }, forwardedRef) => {
+	(
+		{ id, label, placeholder, required, error, disabled, children, wrapperClassName, ...props },
+		forwardedRef
+	) => {
 		const idSuffix = useId();
 		const fieldID = id ? `${id}-${idSuffix}` : idSuffix;
 
 		return (
 			<RadixSelect.Root required={required} disabled={disabled} {...props}>
-				<div>
+				<div className={styles({ className: wrapperClassName })}>
 					{label && (
 						<label htmlFor={fieldID} className={labelStyles()}>
 							<span className={labelTextStyles()}>
@@ -37,12 +41,21 @@ const Select = forwardRef(
 							</span>
 						</label>
 					)}
-					<RadixSelect.Trigger ref={forwardedRef} className={triggerStyles()} id={fieldID}>
+					<RadixSelect.Trigger
+						ref={forwardedRef}
+						className={triggerStyles({ error: Boolean(error) })}
+						id={fieldID}
+					>
 						<RadixSelect.Value placeholder={placeholder} />
 						<RadixSelect.Icon className="flex items-center leading-none pl-3">
 							<ChevronDownIcon className="!text-sm" />
 						</RadixSelect.Icon>
 					</RadixSelect.Trigger>
+					{error && isString(error) && (
+						<small className="px-px leading-tight text-xs text-error-600 font-semibold">
+							{error}
+						</small>
+					)}
 				</div>
 				<RadixSelect.Portal>
 					<RadixSelect.Content className={contentStyles()} position="popper" sideOffset={5}>
@@ -66,8 +79,10 @@ Select.defaultProps = {
 	label: null,
 	placeholder: 'Choose an option',
 	required: false,
+	error: false,
 	disabled: false,
 	children: '',
+	wrapperClassName: '',
 };
 
 /**
@@ -78,8 +93,10 @@ Select.propTypes = {
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
 	required: PropTypes.bool,
+	error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 	disabled: PropTypes.bool,
 	children: PropTypes.node,
+	wrapperClassName: PropTypes.string,
 };
 
 export default Select;

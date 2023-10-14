@@ -94,7 +94,7 @@ const CartListItem = ({ data }) => {
 					/>
 				</div>
 				<div className="mt-4 md:mt-0 md:ml-4 w-full">
-					<div className="h-12 md:h-full border-t md:border-none border-dashed border-neutral-100">
+					<div className="h-12 md:h-full border-t md:border-none border-dashed border-neutral-200">
 						<div className="flex items-center h-full md:space-x-4">
 							<button
 								type="button"
@@ -106,7 +106,7 @@ const CartListItem = ({ data }) => {
 							</button>
 							<div
 								role="separator"
-								className="md:hidden w-px h-full border-r border-dashed border-neutral-100"
+								className="md:hidden w-px h-full border-r border-dashed border-neutral-200"
 							/>
 							<button
 								type="button"

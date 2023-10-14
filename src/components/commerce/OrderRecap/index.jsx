@@ -22,7 +22,9 @@ const OrderRecap = ({
 	...props
 }) => (
 	<Box {...props}>
-		<Box.Title className="!px-3 lg:!px-5">{title}</Box.Title>
+		<Box.Title className="!px-3 lg:!px-5" as="h2">
+			{title}
+		</Box.Title>
 		<ScrollArea height={products?.length > 3 ? 300 : null}>
 			<div>
 				<Box.Block className="px-3 lg:px-5">

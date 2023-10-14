@@ -1,86 +1,71 @@
 import PropTypes from 'prop-types';
-import { CHECKOUT_STEPS } from '@constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { nextStep, prevStep, fillOrder } from '@store/slices/checkout';
-import { placeOrder } from '@store/slices/checkout/checkout.thunks';
-import { selectCheckoutActiveStep } from '@store/slices/checkout/checkout.selectors';
+import { useDispatch } from 'react-redux';
+import { goTo } from '@store/slices/checkoutSteps';
 
-/** Components. */
-import Stepper from '@ui/navigation/Stepper';
-import Accordion from '@ui/data-display/Accordion';
-
-/** Checkout steps components. */
-import CheckoutStepOne from '@ui/commerce/CheckoutSteps/CheckoutStepOne';
-import CheckoutStepTwo from '@ui/commerce/CheckoutSteps/CheckoutStepTwo';
-import CheckoutStepThree from '@ui/commerce/CheckoutSteps/CheckoutStepThree';
-import CheckoutStepFour from '@ui/commerce/CheckoutSteps/CheckoutStepFour';
+/** Components */
+import FillAddress from '@ui/commerce/CheckoutSteps/FillAddress';
+import FillUserDetails from '@ui/commerce/CheckoutSteps/FillUserDetails';
+import FillPaymentDetails from '@ui/commerce/CheckoutSteps/FillPaymentDetails';
+import FillDeliveryOptions from '@ui/commerce/CheckoutSteps/FillDeliveryOptions';
+import CheckoutStepsWrapper from '@ui/commerce/CheckoutSteps/CheckoutStepsWrapper';
 
 /**
  * Render the CheckoutSteps component.
  *
  * @return {Element} The CheckoutSteps component.
  */
-const CheckoutSteps = ({ tokenId }) => {
+const CheckoutSteps = ({ steps, activeStep, onSubmit }) => {
 	const dispatch = useDispatch();
-	const activeStep = useSelector(selectCheckoutActiveStep);
-	const forms = [CheckoutStepOne, CheckoutStepTwo, CheckoutStepThree, CheckoutStepFour];
 
-	/** Checkout steps. */
-	const steps = CHECKOUT_STEPS.map((step, idx) => ({
-		label: step?.description,
-		StepForm: forms[idx],
+	const stepComponents = [FillUserDetails, FillAddress, FillDeliveryOptions, FillPaymentDetails];
+	const stepsWithComp = steps.map((step, index) => ({
+		stepComponent: stepComponents[index],
 		...step,
 	}));
 
-	/** Progress checkout steps & place order. */
-	const handleSubmit = (data) => {
-		const lastStepID = CHECKOUT_STEPS[CHECKOUT_STEPS.length - 1].id;
-		const lastStep = activeStep?.id === lastStepID;
-
-		dispatch(fillOrder(data));
-		if (lastStep) dispatch(placeOrder());
-		if (!lastStep) dispatch(nextStep());
-	};
-
 	return (
-		<div>
-			<Stepper active={activeStep?.sn} steps={steps} />
-			<div className="mt-10 lg:mt-14">
-				<Accordion value={activeStep?.sn}>
-					{steps?.map(({ id, sn, label, StepForm }) => (
-						<Accordion.Item key={id} value={sn} disabled={activeStep?.id !== id}>
-							<Accordion.Label>
-								<div className="flex items-center space-x-1">
-									<span>{sn}.</span>
-									<span>{label}</span>
-								</div>
-							</Accordion.Label>
-							<Accordion.Content>
-								<StepForm
-									tokenId={tokenId}
-									onSubmit={handleSubmit}
-									onBack={() => dispatch(prevStep())}
-								/>
-							</Accordion.Content>
-						</Accordion.Item>
-					))}
-				</Accordion>
-			</div>
+		<div className="flex flex-col space-y-5">
+			{stepsWithComp.map(({ id, description, completed, stepComponent: StepComponent }, index) => (
+				<CheckoutStepsWrapper
+					key={id}
+					title={description}
+					open={id === activeStep.id || completed}
+					disabled={id === activeStep.id || !completed}
+					onOpenChange={() => dispatch(goTo(index))}
+				>
+					<StepComponent onSubmit={onSubmit} completed={id !== activeStep.id && completed} />
+				</CheckoutStepsWrapper>
+			))}
 		</div>
 	);
 };
 
 /**
- * Prop Types.
+ * Default Props.
  */
 CheckoutSteps.defaultProps = {
-	tokenId: null,
+	steps: [],
+	activeStep: {},
+	onSubmit: () => {},
 };
+
 /**
  * Prop Types.
  */
 CheckoutSteps.propTypes = {
-	tokenId: PropTypes.string,
+	steps: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string,
+			description: PropTypes.string,
+			completed: PropTypes.bool,
+		})
+	),
+	activeStep: PropTypes.shape({
+		id: PropTypes.string,
+		description: PropTypes.string,
+		completed: PropTypes.bool,
+	}),
+	onSubmit: PropTypes.func,
 };
 
 export default CheckoutSteps;

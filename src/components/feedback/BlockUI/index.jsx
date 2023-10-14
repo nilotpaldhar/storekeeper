@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import LoadingBars from '@ui/Loaders/LoadingBars';
+import LoadingDots from '@ui/Loaders/LoadingDots';
 import { clsx } from 'clsx';
 
 /**
@@ -20,7 +20,7 @@ const BlockUI = ({ blocking, children }) => (
 			<div className="absolute top-2/4 left-0 right-0 transform -translate-y-2/4 z-[10001]">
 				<span className="sr-only">Loading...</span>
 				<div aria-hidden className="flex justify-center items-center z-[1011]">
-					<LoadingBars />
+					<LoadingDots />
 				</div>
 			</div>
 		</div>

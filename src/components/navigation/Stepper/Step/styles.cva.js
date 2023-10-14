@@ -1,72 +1,46 @@
 import { cva } from 'class-variance-authority';
 
-const rootStyles = cva(['flex flex-col', 'md:flex-row md:items-center'], {
-	variants: {
-		lastStep: {
-			true: 'w-max',
-			false: 'lg:w-full',
-		},
-	},
-	defaultVariants: {
-		lastStep: false,
-	},
-});
-
-export const contentStyles = cva(['flex items-center space-x-2']);
-
-export const iconStyles = cva(
-	['shrink-0 flex items-center justify-center w-5 h-5 rounded-full text-xs'],
-	{
-		variants: {
-			status: {
-				wait: 'bg-neutral-100 text-neutral-400 font-light',
-				finish: 'bg-primary-600 text-white font-semibold',
-				process: 'bg-primary-600 text-white font-semibold',
-			},
-		},
-		defaultVariants: {
-			status: 'wait',
-		},
-	}
-);
-
-export const labelStyles = cva(
-	['overflow-hidden shrink-0 whitespace-nowrap text-ellipsis leading-relaxed select-none'],
-	{
-		variants: {
-			status: {
-				wait: 'text-neutral-400 font-light',
-				finish: 'text-neutral-900 font-medium',
-				process: 'text-neutral-900 font-medium',
-			},
-		},
-		defaultVariants: {
-			status: 'wait',
-		},
-	}
-);
-
-export const lineStyles = cva(
+const rootStyles = cva(
 	[
-		'w-[2px] h-8 my-2 ml-[10px]',
-		'md:w-[2px] md:h-5 md:mx-4 md:transform md:rotate-12',
-		'lg:w-full lg:h-[2px] lg:rotate-0 lg:mx-6 xxl:mx-10',
+		'flex items-center select-none',
+		'after:border-t after:border-dashed after:border-neutral-300 after:w-5 sm:after:w-10 after:h-px after:ml-3 after:-translate-y-0.5',
 	],
 	{
 		variants: {
 			lastStep: {
-				true: 'hidden',
-				false: 'block',
+				true: 'after:hidden',
+				false: 'after:block',
 			},
-			status: {
-				wait: 'bg-neutral-100',
-				finish: 'bg-primary-600',
-				process: 'bg-neutral-100',
+		},
+		defaultVariants: {},
+		lastStep: false,
+	}
+);
+
+export const btnStyles = cva(
+	[
+		'text-[8px] sm:text-xs font-semibold leading-none uppercase tracking-normal transition duration-300',
+		'after:block after:w-full after:h-px after:mt-1 after:origin-left after:transition after:duration-300',
+	],
+	{
+		variants: {
+			active: {
+				true: [
+					'text-primary-600 hover:text-primary-600 pointer-events-none',
+					'after:opacity-100 after:scale-100 after:bg-primary-600',
+				],
+				false: [
+					'text-neutral-900 hover:text-neutral-900',
+					'after:opacity-0 after:scale-0 after:bg-transparent',
+				],
+			},
+			disabled: {
+				true: 'opacity-50',
+				false: 'opacity-100',
 			},
 		},
 		defaultVariants: {
-			lastStep: false,
-			status: 'wait',
+			active: false,
 		},
 	}
 );

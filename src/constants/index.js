@@ -66,28 +66,56 @@ export const HTTP_STATUS = {
  */
 export const CHECKOUT_STEPS = [
 	{
-		sn: 1,
-		id: 'c45b6234-d3dc-42b2-9210-2e6a9a91b233',
-		key: 'fill_customer_details',
-		description: 'Customer',
+		id: 'fill_user_details',
+		label: 'User',
+		description: 'User Details',
+		completed: false,
 	},
 	{
-		sn: 2,
-		id: '723cd491-7f61-4b6a-93ae-d3bc58aa07e3',
-		key: 'fill_delivery_address',
-		description: 'Delivery Address',
+		id: 'fill_address',
+		label: 'Address',
+		description: 'Shipping Address',
+		completed: false,
 	},
 	{
-		sn: 3,
-		id: 'b91dd84d-182a-4582-ab2b-3bfbd8829ea1',
-		key: 'fill_shipping_options',
-		description: 'Shipping Options',
+		id: 'fill_shipping_options',
+		label: 'Delivery',
+		description: 'Delivery Methods',
+		completed: false,
 	},
 	{
-		sn: 4,
-		id: '5f9784f7-056c-4bac-8410-42c8e5a5a5dd',
-		key: 'fill_payment_details',
-		description: 'Payment',
+		id: 'fill_payment_details',
+		label: 'Payment',
+		description: 'Payment Options',
+		completed: false,
+	},
+];
+
+/**
+ * Available payment gateways.
+ *
+ * @type {array}
+ */
+export const PAYMENT_GATEWAYS = [
+	{
+		id: 'test_gateway',
+		title: 'Test Gateway',
+		description: 'Description',
+	},
+	{
+		id: 'stripe',
+		title: 'Credit / Debit Card',
+		description: 'Description',
+	},
+	{
+		id: 'upi',
+		title: 'UPI',
+		description: 'Pay by any UPI app',
+	},
+	{
+		id: 'net_banking',
+		title: 'Net Banking',
+		description: 'This instrument has low success, use UPI or cards for better experience',
 	},
 ];
 

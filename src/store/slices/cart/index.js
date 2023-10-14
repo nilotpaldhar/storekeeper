@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HTTP_STATUS } from '@constants';
-import { fetchCart } from '@store/slices/cart/cart.thunks';
+import { fetchCart, clearCart } from '@store/slices/cart/cart.thunks';
 
 const initialState = {
 	status: HTTP_STATUS.idle,
@@ -18,13 +18,10 @@ export const cartSlice = createSlice({
 			state.count = count;
 			state.contents = contents;
 		},
-		resetCart: (state) => {
-			state.status = HTTP_STATUS.idle;
-			state.count = 0;
-			state.contents = null;
-		},
+		resetCart: () => initialState,
 	},
 	extraReducers: (builder) => {
+		/** Fetch cart */
 		builder.addCase(fetchCart.pending, (state) => {
 			state.status = HTTP_STATUS.pending;
 		});
@@ -35,6 +32,20 @@ export const cartSlice = createSlice({
 			state.contents = contents;
 		});
 		builder.addCase(fetchCart.rejected, (state) => {
+			state.status = HTTP_STATUS.failed;
+		});
+
+		/** Clear cart */
+		builder.addCase(clearCart.pending, (state) => {
+			state.status = HTTP_STATUS.pending;
+		});
+		builder.addCase(clearCart.fulfilled, (state, action) => {
+			const { count, ...contents } = action.payload ?? {};
+			state.status = HTTP_STATUS.succeeded;
+			state.count = count;
+			state.contents = contents;
+		});
+		builder.addCase(clearCart.rejected, (state) => {
 			state.status = HTTP_STATUS.failed;
 		});
 	},
