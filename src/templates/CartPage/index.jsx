@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
-import { resetCheckout } from '@store/slices/checkout';
 
 /** Hooks. */
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import useToggle from '@hooks/useToggle';
+import { reset as resetCheckout } from '@store/slices/checkout';
 
 /** Components. */
 import Empty from '@ui/feedback/Empty';

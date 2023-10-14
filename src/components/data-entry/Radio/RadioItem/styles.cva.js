@@ -16,7 +16,7 @@ export const rootStyles = cva(
 			disabled: {
 				true: [
 					/** Default State. */
-					'opacity-50',
+					'opacity-50 select-none',
 					/** Checked State. */
 					'data-[state=checked]:border-neutral-300 data-[state=checked]:bg-neutral-300',
 					/** Unchecked State. */
@@ -60,7 +60,7 @@ export const labelStyles = cva(
 	{
 		variants: {
 			placement: { right: 'pl-2', left: 'pr-2' },
-			disabled: { true: 'opacity-70 select-none pointer-events-none cursor-none', false: '' },
+			disabled: { true: 'opacity-50 select-none pointer-events-none !cursor-none', false: '' },
 		},
 		defaultVariants: {
 			disabled: false,

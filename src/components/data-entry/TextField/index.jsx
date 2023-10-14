@@ -1,16 +1,8 @@
 import PropTypes from 'prop-types';
 import { useId, forwardRef } from 'react';
+import TextFieldWrapper from '@ui/data-entry/TextField/Wrapper';
 
-/** Helpers. */
-import isString from 'lodash-es/isString';
-
-/** Component Styles. */
-import styles, {
-	labelStyles,
-	inputStyles,
-	labelTextStyles,
-	helperStyles,
-} from '@ui/data-entry/TextField/styles.cva';
+import { inputStyles } from '@ui/data-entry/TextField/styles.cva';
 
 /**
  * Render the TextField component.
@@ -55,31 +47,24 @@ const TextField = forwardRef(
 			...props,
 		};
 
-		const component =
-			type === 'textarea' ? <textarea {...config} /> : <input type={type} {...config} />;
+		const renderInput = () => {
+			if (type === 'textarea') return <textarea {...config} />;
+			return <input type={type} {...config} />;
+		};
 
 		return (
-			<div className={styles({ className })}>
-				{label ? (
-					<label htmlFor={fieldID} className={labelStyles({ className: labelClassName })}>
-						<span className={labelTextStyles({ className: labelTextClassName })}>
-							{label}
-							{required && <sup>*</sup>}
-						</span>
-						{component}
-					</label>
-				) : (
-					component
-				)}
-				{error && isString(error) && (
-					<small className={helperStyles({ className: 'text-error-600 font-semibold' })}>
-						{error}
-					</small>
-				)}
-				{helperText && (
-					<small className={helperStyles({ className: 'text-neutral-900' })}>{helperText}</small>
-				)}
-			</div>
+			<TextFieldWrapper
+				id={fieldID}
+				label={label}
+				error={error}
+				helperText={helperText}
+				className={className}
+				labelClassName={labelClassName}
+				labelTextClassName={labelTextClassName}
+				required={required}
+			>
+				{renderInput()}
+			</TextFieldWrapper>
 		);
 	}
 );

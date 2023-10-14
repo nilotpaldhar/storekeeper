@@ -5,7 +5,7 @@ export const rootStyles = cva('relative flex items-center px-4 py-2', {
 		type: {
 			info: 'bg-primary-50 text-primary-600',
 			success: 'bg-success-50 text-success-600',
-			warning: 'bg-warning-50 text-warning-600',
+			warning: 'bg-warning-50 text-warning-700',
 			error: 'bg-error-50 text-error-600',
 		},
 		closable: {
@@ -45,7 +45,7 @@ export const contentStyles = cva('ml-3 text-sm font-semibold');
 
 export const btnStyles = cva([
 	'absolute top-1/2 right-4 transform -translate-y-2/4 flex items-center justify-center w-5 h-5 shrink-0 rounded-full text-current transition duration-300',
-	'hover:opacity-70',
+	'hover:opacity-70 hover:text-current',
 	'focus-visible:outline-current focus-visible:outline-dashed',
 ]);
 

@@ -14,12 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 /** Functions. */
 import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
 import { initCheckout } from '@store/slices/checkout/checkout.thunks';
-import {
-	selectCheckoutStatus,
-	selectCheckoutContents,
-	selectCheckoutFulfilled,
-	selectCheckoutError,
-} from '@store/slices/checkout/checkout.selectors';
+import * as selectors from '@store/slices/checkout/checkout.selectors';
 
 /**
  * Render the CheckoutPage component.
@@ -31,10 +26,10 @@ const CheckoutPage = ({ query }) => {
 	const dispatch = useDispatch();
 
 	const token = query?.token;
-	const status = useSelector(selectCheckoutStatus);
-	const contents = useSelector(selectCheckoutContents);
-	const fulfilled = useSelector(selectCheckoutFulfilled);
-	const error = useSelector(selectCheckoutError);
+	const status = useSelector(selectors.selectStatus);
+	const contents = useSelector(selectors.selectContents);
+	const fulfilled = useSelector(selectors.selectFulfilled);
+	const error = useSelector(selectors.selectError);
 
 	/** Initiate checkout process. */
 	useEffect(() => {

@@ -1,8 +1,9 @@
-export { default as SortBy } from '@ui/commerce/SortBy';
 export { default as Filters } from '@ui/commerce/Filters';
 export { default as CartList } from '@ui/commerce/CartList';
 export { default as OfferCard } from '@ui/commerce/OfferCard';
 export { default as CartSummary } from '@ui/commerce/CartSummary';
+export { default as AddressList } from '@ui/commerce/AddressList';
+export { default as AddressForm } from '@ui/commerce/AddressForm';
 export { default as ProductCard } from '@ui/commerce/ProductCard';
 export { default as BannerSlider } from '@ui/commerce/BannerSlider';
 export { default as CheckoutFail } from '@ui/commerce/CheckoutFail';

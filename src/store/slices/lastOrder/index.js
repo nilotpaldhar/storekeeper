@@ -12,10 +12,11 @@ export const lastOrderSlice = createSlice({
 		fillLastOrder: (state, action) => {
 			state.content = action.payload;
 		},
+		reset: () => initialState,
 	},
 });
 
 /** Checkout Actions. */
-export const { fillLastOrder } = lastOrderSlice.actions;
+export const { fillLastOrder, reset } = lastOrderSlice.actions;
 
 export default lastOrderSlice.reducer;

@@ -9,7 +9,7 @@ import { clsx } from 'clsx';
 const BoxTitle = ({ as: Component, children, className, ...props }) => (
 	<Component
 		className={clsx(
-			'text-sm font-semibold text-current px-5 py-3 border-b border-dashed border-neutral-100',
+			'text-sm font-semibold text-current px-5 py-3 border-b border-dashed border-neutral-200',
 			className
 		)}
 		{...props}

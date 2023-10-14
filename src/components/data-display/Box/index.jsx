@@ -12,7 +12,7 @@ import BoxDivider from '@ui/data-display/Box/BoxDivider';
  * @return {Element} The Box component.
  */
 const Box = ({ as: Component, children, className, ...props }) => (
-	<Component className={clsx('border border-dashed border-neutral-100', className)} {...props}>
+	<Component className={clsx('border border-dashed border-neutral-200', className)} {...props}>
 		{children}
 	</Component>
 );

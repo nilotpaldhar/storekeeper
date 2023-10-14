@@ -7,7 +7,7 @@ const supportedMethods = ['POST'];
 const checClient = getChecClient({ useSecretKey: false });
 
 /** Validates and adds shipping option to checkout token. */
-const handler = async (req, res) => {
+const handler = async (req, res) =>
 	validateReqMethod(req, res, supportedMethods, async () => {
 		/** Checkout Token ID && Tax Zone Details. */
 		const tokenId = req.body?.id;
@@ -40,6 +40,5 @@ const handler = async (req, res) => {
 			});
 		}
 	});
-};
 
 export default handler;

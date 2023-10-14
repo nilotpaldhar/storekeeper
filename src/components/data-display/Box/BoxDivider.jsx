@@ -9,7 +9,7 @@ import { clsx } from 'clsx';
 const BoxDivider = ({ className, ...props }) => (
 	<div
 		role="separator"
-		className={clsx('border-t border-dashed border-neutral-100', className)}
+		className={clsx('border-t border-dashed border-neutral-200', className)}
 		{...props}
 	/>
 );

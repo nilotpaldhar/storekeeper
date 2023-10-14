@@ -12,12 +12,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 /** Functions. */
 import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
-import { resetCheckout } from '@store/slices/checkout';
+import { reset as resetCheckout } from '@store/slices/checkout';
 import { selectlastOrderContent } from '@store/slices/lastOrder/lastOrder.selectors';
-import {
-	selectCheckoutStatus,
-	selectCheckoutFulfilled,
-} from '@store/slices/checkout/checkout.selectors';
+import * as selectors from '@store/slices/checkout/checkout.selectors';
 
 /**
  * Render the CheckoutSuccessPage component.
@@ -26,8 +23,8 @@ import {
  */
 const CheckoutSuccessPage = () => {
 	const dispatch = useDispatch();
-	const status = useSelector(selectCheckoutStatus);
-	const fulfilled = useSelector(selectCheckoutFulfilled);
+	const status = useSelector(selectors.selectStatus);
+	const fulfilled = useSelector(selectors.selectFulfilled);
 	const lastOrder = useSelector(selectlastOrderContent);
 
 	/** Reset checkout. */

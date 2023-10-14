@@ -19,7 +19,7 @@ const Logo = ({ href, src, alt, width, height, srcSanity, className, ...props })
 		className
 	);
 
-	const logoSrc = srcSanity ? urlFor(src).url() : src;
+	const logoSrc = src && srcSanity ? urlFor(src).url() : src;
 
 	return (
 		<Anchor href={href} className={classNames} {...props}>

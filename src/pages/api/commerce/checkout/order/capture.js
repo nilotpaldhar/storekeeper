@@ -7,7 +7,7 @@ const supportedMethods = ['POST'];
 const checClient = getChecClient({ useSecretKey: false });
 
 /** Captures an order with payment. */
-const handler = async (req, res) => {
+const handler = async (req, res) =>
 	validateReqMethod(req, res, supportedMethods, async () => {
 		/** Checkout Token ID && Order Payload. */
 		const tokenId = req?.body?.id;
@@ -36,6 +36,5 @@ const handler = async (req, res) => {
 			});
 		}
 	});
-};
 
 export default handler;
