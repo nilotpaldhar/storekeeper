@@ -135,12 +135,12 @@ module.exports = {
 
 				// Modal
 				'modal-content-enter': {
-					from: { opacity: 0, transform: 'translate(-50%, -10%) scale(0.96)' },
-					to: { opacity: 1, transform: 'translate(-50%, 0%) scale(1)' },
+					from: { opacity: 0, transform: 'translate(-50%, -48%) scale(0.96)' },
+					to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
 				},
 				'modal-content-exit': {
-					from: { opacity: 1, transform: 'translate(-50%, 0%) scale(1)' },
-					to: { opacity: 0, transform: 'translate(-50%, -10%) scale(0.96)' },
+					from: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+					to: { opacity: 0, transform: 'translate(-50%, -48%) scale(0.96)' },
 				},
 			},
 			animation: {
