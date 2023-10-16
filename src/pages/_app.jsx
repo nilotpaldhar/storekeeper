@@ -24,6 +24,8 @@ const nunito = Nunito({
 	weight: ['300', '400', '500', '600', '700', '800'],
 });
 
+const fontStyle = `html { font-family: ${nunito.style.fontFamily}; }`;
+
 /**
  * Render the App component.
  *
@@ -46,6 +48,10 @@ const App = ({ Component, pageProps }) => {
 		<Provider store={store}>
 			<SessionProvider session={session}>
 				<DefaultSeo {...defaultSeoConf} />
+				{/* eslint-disable-next-line react/no-unknown-property */}
+				<style jsx global>
+					{fontStyle}
+				</style>
 				<div className={`${nunito.variable} ${nunito.className} h-full`}>
 					{getLayout(<Component {...restSiteData} {...restPageProps} />, {
 						...siteConfig,

@@ -36,7 +36,7 @@ const MobileNav = ({ data, className, rootClassName, triggerClassName }) => {
 				onStateChange={handleStateChange}
 				menuClassName="bg-white shadow-xl"
 				className={clsx('fixed top-0 left-0 h-full', className)}
-				overlayClassName="!bg-black !bg-opacity-10 top-0 left-0"
+				overlayClassName="!bg-black/20 backdrop-blur-sm top-0 left-0"
 			>
 				<NavBody
 					menus={menus}

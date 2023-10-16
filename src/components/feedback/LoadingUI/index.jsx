@@ -10,13 +10,13 @@ const LoadingUI = ({ loading, height, children, ...props }) => (
 	<div aria-busy={loading} {...props}>
 		{loading ? (
 			<div
-				className="flex items-center justify-center"
+				className="flex items-center justify-center animate-fade-in"
 				style={{ height: height ? `${height}px` : '80vh' }}
 			>
 				<LoadingDots />
 			</div>
 		) : (
-			children
+			<div className="animate-fade-in">{children}</div>
 		)}
 	</div>
 );

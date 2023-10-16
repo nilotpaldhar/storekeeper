@@ -118,6 +118,46 @@ module.exports = {
 				'newsletter-container':
 					'0px 9px 28px 8px rgba(0, 0, 0, 0.04), 0px 6px 16px 0px rgba(0, 0, 0, 0.04), 0px 3px 6px -4px rgba(0, 0, 0, 0.04)',
 			},
+			keyframes: {
+				// Generic
+				'fade-in': { from: { opacity: 0 }, to: { opacity: 1 } },
+				'fade-out': { from: { opacity: 1 }, to: { opacity: 0 } },
+
+				// Collapsible
+				'collapsible-slide-up': {
+					from: { height: 'var(--radix-collapsible-content-height)' },
+					to: { height: 0 },
+				},
+				'collapsible-slide-down': {
+					from: { height: 0 },
+					to: { height: 'var(--radix-collapsible-content-height)' },
+				},
+
+				// Modal
+				'modal-content-enter': {
+					from: { opacity: 0, transform: 'translate(-50%, -10%) scale(0.96)' },
+					to: { opacity: 1, transform: 'translate(-50%, 0%) scale(1)' },
+				},
+				'modal-content-exit': {
+					from: { opacity: 1, transform: 'translate(-50%, 0%) scale(1)' },
+					to: { opacity: 0, transform: 'translate(-50%, -10%) scale(0.96)' },
+				},
+			},
+			animation: {
+				// Generic
+				'fade-in': 'fade-in 500ms cubic-bezier(0.4, 0, 0.2, 1)',
+				'fade-out': 'fade-out 500ms cubic-bezier(0.4, 0, 0.2, 1)',
+
+				// Collapsible
+				'collapsible-slide-up': 'collapsible-slide-up 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+				'collapsible-slide-down': 'collapsible-slide-down 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+
+				// Modal
+				'modal-overlay-enter': 'fade-in 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+				'modal-overlay-exit': 'fade-out 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+				'modal-content-enter': 'modal-content-enter 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+				'modal-content-exit': 'modal-content-exit 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+			},
 		},
 	},
 	variants: {
