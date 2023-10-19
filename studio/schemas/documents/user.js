@@ -49,6 +49,13 @@ export default {
 			readOnly: true,
 			hidden: true,
 		},
+		{
+			name: 'wishlistId',
+			title: 'Wishlist ID',
+			type: 'string',
+			readOnly: true,
+			hidden: true,
+		},
 	],
 	preview: {
 		select: {
