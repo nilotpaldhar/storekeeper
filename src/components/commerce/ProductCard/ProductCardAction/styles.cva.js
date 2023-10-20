@@ -8,10 +8,9 @@ export const rootStyles = cva(
 		variants: {
 			open: {
 				true: 'opacity-100 pointer-events-auto',
-				false: [
-					'hover-hover:opacity-0 hover-hover:pointer-events-none',
-					// 'hover-none:opacity-100 hover-none:pointer-events-auto',
-				],
+				false: 'opacity-100 pointer-events-auto',
+				// true: 'opacity-100 pointer-events-auto',
+				// false: ['hover-hover:opacity-0 hover-hover:pointer-events-none'],
 			},
 		},
 		defaultVariants: {
@@ -20,9 +19,16 @@ export const rootStyles = cva(
 	}
 );
 
-export const btnStyles = cva([
-	'w-8 h-8 flex items-center justify-center bg-white text-neutral-900 transition duration-300',
-	'hover:bg-primary-600 hover:text-white',
-]);
+export const btnStyles = cva(['w-8 h-8 flex items-center justify-center transition duration-300'], {
+	variants: {
+		active: {
+			true: 'bg-primary-600 text-white hover:bg-primary-500 hover:text-white',
+			false: 'bg-white text-neutral-900 hover:text-neutral-900',
+		},
+	},
+	defaultVariants: {
+		active: false,
+	},
+});
 
 export default rootStyles;

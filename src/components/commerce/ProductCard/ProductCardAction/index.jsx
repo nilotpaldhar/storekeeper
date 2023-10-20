@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+
 import * as cart from '@store/slices/cartOps/cartOps.thunks';
 
-/** Components. */
+/** Components & Icons. */
+import WishlistBtn from '@ui/commerce/ProductCard/ProductCardAction/WishlistBtn';
 import CartIcon from '@icons/regular/Cart';
 import UnorderedListIcon from '@icons/regular/UnorderedList';
-import HeartIcon from '@icons/regular/Heart';
 
 /** Styles. */
 import styles, { btnStyles } from '@ui/commerce/ProductCard/ProductCardAction/styles.cva';
@@ -30,10 +31,7 @@ const ProductCardAction = ({ productId, open, hasVariants, href, className, ...p
 
 	return (
 		<div className={styles({ className, open })} {...props}>
-			<button type="button" className={btnStyles()} tabIndex="-1">
-				<span className="sr-only">add to wishlist</span>
-				<HeartIcon className="!text-base" />
-			</button>
+			<WishlistBtn productId={`product-${productId}`} />
 			<button type="button" className={btnStyles()} tabIndex="-1" onClick={handleAddToCart}>
 				<span className="sr-only">{hasVariants ? 'select variants' : 'add to cart'}</span>
 				{hasVariants ? (

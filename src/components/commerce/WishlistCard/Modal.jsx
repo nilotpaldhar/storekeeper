@@ -1,21 +1,31 @@
 import PropTypes from 'prop-types';
+import dynamic from 'next/dynamic';
+
+import { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { removeWishlistItem } from '@store/slices/wishlistOps/wishlistOps.thunks';
 
 import Modal from '@ui/feedback/Modal';
 import Image from '@ui/data-display/Image';
-import Quantity from '@ui/data-entry/Quantity';
-import ScrollArea from '@ui/general/ScrollArea';
 import RegularButton from '@ui/buttons/RegularButton';
-import WishlistCardVariant from '@ui/commerce/WishlistCard/Variant';
-
 import CartIcon from '@icons/regular/Cart';
 
+const WishlistCardAction = dynamic(() => import('@ui/commerce/WishlistCard/Action'));
+
 /**
- * Render the WishlistCardAction component.
+ * Render the WishlistCardModal component.
  *
- * @return {Element} The WishlistCardRemove component.
+ * @return {Element} The WishlistCardModal component.
  */
-const WishlistCardAction = ({ thumbnail, title, price, variants }) => {
-	const hasVariants = variants?.length > 0;
+const WishlistCardModal = ({ productIds, thumbnail, title, price, variants }) => {
+	const dispatch = useDispatch();
+	const [open, setOpen] = useState(false);
+
+	/** Close modal and remove product from wishlist. */
+	const handleCompleteAddToCart = useCallback(() => {
+		setOpen(false);
+		dispatch(removeWishlistItem(productIds?.sanity));
+	}, [productIds?.sanity, dispatch]);
 
 	const trigger = (
 		<RegularButton fullWidth startIcon={CartIcon} intent="primary-ghost">
@@ -24,9 +34,9 @@ const WishlistCardAction = ({ thumbnail, title, price, variants }) => {
 	);
 
 	return (
-		<Modal trigger={trigger}>
+		<Modal trigger={trigger} open={open} onOpenChange={setOpen}>
 			<div className="flex flex-col space-y-6">
-				<div className="flex items-start space-x-4 pb-4 border-b border-neutral-100">
+				<div className="flex items-start space-x-4 pb-4 border-b border-neutral-100 pr-4">
 					<div className="shrink-0 w-20 bg-neutral-50">
 						<Image src={thumbnail} alt={title} width={80} height={80} />
 					</div>
@@ -37,26 +47,11 @@ const WishlistCardAction = ({ thumbnail, title, price, variants }) => {
 						</p>
 					</div>
 				</div>
-				{hasVariants && (
-					<ScrollArea height={variants?.length > 2 ? 140 : null}>
-						<div className="flex flex-col space-y-4">
-							{variants?.map((variant) => (
-								<WishlistCardVariant
-									id={variant?.id}
-									key={variant?.id}
-									// disabled={}
-									label={variant?.name}
-									options={variant?.options}
-									// onValueChange={(val) => { }}
-								/>
-							))}
-						</div>
-					</ScrollArea>
-				)}
-				<div className="flex items-center space-x-3">
-					<Quantity min={1} max={50} defaultValue={1} disabled={false} onChange={() => {}} />
-					<RegularButton fullWidth>Done</RegularButton>
-				</div>
+				<WishlistCardAction
+					productIds={productIds}
+					variants={variants}
+					onComplete={handleCompleteAddToCart}
+				/>
 			</div>
 		</Modal>
 	);
@@ -65,14 +60,18 @@ const WishlistCardAction = ({ thumbnail, title, price, variants }) => {
 /**
  * Default Props.
  */
-WishlistCardAction.defaultProps = {
+WishlistCardModal.defaultProps = {
 	variants: [],
 };
 
 /**
  * Prop Types.
  */
-WishlistCardAction.propTypes = {
+WishlistCardModal.propTypes = {
+	productIds: PropTypes.shape({
+		sanity: PropTypes.string,
+		chec: PropTypes.string,
+	}).isRequired,
 	thumbnail: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	price: PropTypes.shape({
@@ -88,4 +87,4 @@ WishlistCardAction.propTypes = {
 	),
 };
 
-export default WishlistCardAction;
+export default WishlistCardModal;

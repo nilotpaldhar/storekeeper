@@ -16,7 +16,7 @@ const LoadingUI = ({ loading, height, children, ...props }) => (
 				<LoadingDots />
 			</div>
 		) : (
-			<div className="animate-fade-in">{children}</div>
+			children
 		)}
 	</div>
 );

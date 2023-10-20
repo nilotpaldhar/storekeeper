@@ -2,9 +2,8 @@ import PropTypes from 'prop-types';
 
 import Anchor from '@ui/general/Anchor';
 import Image from '@ui/data-display/Image';
-
+import WishlistCardModal from '@ui/commerce/WishlistCard/Modal';
 import WishlistCardRemove from '@ui/commerce/WishlistCard/Remove';
-import WishlistCardAction from '@ui/commerce/WishlistCard/Action';
 
 import { createPermalink } from '@utils/product/permalink';
 import { clsx } from 'clsx';
@@ -33,7 +32,7 @@ const WishlistCard = ({ data, className }) => {
 					<Image src={data?.image?.url} alt={title} width={400} height={400} />
 				</Anchor>
 				<div className="opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300">
-					<WishlistCardRemove />
+					<WishlistCardRemove productIds={{ sanity: data?.sanityId, chec: data?.checId }} />
 				</div>
 			</div>
 			<div className="text-neutral-900 px-2 md:px-5 pt-3 sm:pt-4 py-2 text-center overflow-hidden">
@@ -51,11 +50,15 @@ const WishlistCard = ({ data, className }) => {
 				</p>
 				<div role="separator" className="h-px w-full bg-neutral-100" />
 				<div className="mt-2">
-					<WishlistCardAction
+					<WishlistCardModal
 						title={title}
 						price={data?.price}
 						variants={data?.variants}
 						thumbnail={data?.image?.url}
+						productIds={{
+							sanity: data?.sanityId,
+							chec: data?.checId,
+						}}
 					/>
 				</div>
 			</div>
@@ -76,6 +79,7 @@ WishlistCard.defaultProps = {
 WishlistCard.propTypes = {
 	data: PropTypes.shape({
 		checId: PropTypes.string,
+		sanityId: PropTypes.string,
 		name: PropTypes.string,
 		slug: PropTypes.string,
 		displayName: PropTypes.string,
