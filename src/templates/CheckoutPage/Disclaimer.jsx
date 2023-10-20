@@ -6,7 +6,7 @@ import ExclamationIcon from '@icons/regular/Exclamation';
  * @return {Element} The Disclaimer component.
  */
 const Disclaimer = () => (
-	<div className="flex flex-col space-y-3 text-sm p-3 lg:p-5 bg-warning-50 text-warning-700">
+	<div className="flex flex-col space-y-3 text-xs p-3 lg:p-5 bg-warning-50 text-warning-700">
 		<div className="flex items-center space-x-2">
 			<span
 				aria-label="exclamation-circle"
@@ -21,7 +21,7 @@ const Disclaimer = () => (
 			sensitive information, such as credit or debit card details. Please use the following card for
 			testing:
 		</p>
-		<ul className="flex flex-col space-y-1.5 text-xs">
+		<ul className="flex flex-col space-y-1.5">
 			<li className="flex items-baseline space-x-1 font-semibold">
 				<span>Name:</span>
 				<span>Any name</span>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { AiOutlineLoading } from 'react-icons/ai';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 /**
  * Render the Loading icon.
@@ -9,7 +9,7 @@ import { AiOutlineLoading } from 'react-icons/ai';
  */
 const Loading = ({ className, ...props }) => (
 	<span className={clsx('icon', className && className)} {...props}>
-		<AiOutlineLoading />
+		<AiOutlineLoading3Quarters />
 	</span>
 );
 

@@ -6,6 +6,13 @@
 export const CART_COOKIE_KEY = 'sk.cart_id';
 
 /**
+ * Wishlist cookie key.
+ *
+ * @type {string}
+ */
+export const WISHLIST_COOKIE_KEY = 'sk.wishlist_id';
+
+/**
  * Cookie consent key.
  *
  * @type {string}

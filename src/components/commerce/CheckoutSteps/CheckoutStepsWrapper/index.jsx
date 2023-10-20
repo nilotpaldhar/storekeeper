@@ -24,7 +24,7 @@ const CheckoutStepsWrapper = ({ open, onOpenChange, title, btnText, disabled, ch
 					</RegularButton>
 				</Collapsible.Trigger>
 			</Box.Title>
-			<Collapsible.Content className="collapsibleContent">
+			<Collapsible.Content className="overflow-hidden data-[state=open]:animate-collapsible-slide-down data-[state=closed]:animate-collapsible-slide-up">
 				<Box.Block>{children}</Box.Block>
 			</Collapsible.Content>
 		</Box>

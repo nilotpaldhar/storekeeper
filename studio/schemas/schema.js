@@ -4,6 +4,7 @@ import menu from './documents/menu';
 import brand from './documents/brand';
 import product from './documents/product';
 import category from './documents/category';
+import wishlist from './documents/wishlist';
 import homepage from './documents/homepage';
 import loginpage from './documents/loginpage';
 import errorpage from './documents/errorpage';
@@ -56,6 +57,7 @@ const schema = [
 	brand,
 	product,
 	category,
+	wishlist,
 	homepage,
 	loginpage,
 	errorpage,

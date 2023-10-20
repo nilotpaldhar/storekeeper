@@ -61,7 +61,7 @@ const UserDetails = ({ onSubmit }) => {
 			<RegularButton fullWidth onClick={handleClick}>
 				Continue
 			</RegularButton>
-			<Alert type="warning">
+			<Alert type="info">
 				<div className="flex flex-col space-y-1">
 					<div className="font-semibold">Please Note</div>
 					<div className="text-xs font-normal">
