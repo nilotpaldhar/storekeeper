@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/nilotpaldhar/storekeeper/compare/v0.3.0...v0.3.1) (2023-10-27)
+
+
+### Bug Fixes
+
+* **cart:** update cart and wishlist reducer to enhance the CRUD operations ([6ed65f1](https://github.com/nilotpaldhar/storekeeper/commit/6ed65f12a783fccc85687d6423b9ab55e8063024))
+
+
+
 # [0.3.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.2.0...v0.3.0) (2023-10-20)
 
 
