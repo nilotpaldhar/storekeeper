@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { HTTP_STATUS } from '@constants';
 import { fetchWishlist } from '@store/slices/wishlist/wishlist.thunks';
 import { selectStatus } from '@store/slices/wishlist/wishlist.selectors';
-import { HTTP_STATUS } from '@constants';
 
 /** Components & Icons */
 import { Item, Link as HeaderIconWrapper } from '@radix-ui/react-navigation-menu';

@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { updateCartItem, removeCartItem } from '@store/slices/cartOps/cartOps.thunks';
+import { useDispatch, useSelector } from 'react-redux';
+
+import * as actions from '@store/slices/cartOps/cartOps.thunks';
+import { selectIsPending } from '@store/slices/cartOps/cartOps.selectors';
 
 /** Components & Icons. */
 import Anchor from '@ui/general/Anchor';
 import Image from '@ui/data-display/Image';
 import Quantity from '@ui/data-entry/Quantity';
+import Button from './Button';
 
 /**
  * Render the CartListItem component.
@@ -14,17 +17,38 @@ import Quantity from '@ui/data-entry/Quantity';
  */
 const CartListItem = ({ data }) => {
 	const dispatch = useDispatch();
+	const loading = useSelector((state) => selectIsPending(state, data?.id));
+
 	const title = data?.displayName ?? data?.name;
 	const href = `/product/${data?.permalink}`;
 
 	/** Increase/Decrease Quantity. */
 	const handleQtyChange = (qty) => {
-		dispatch(updateCartItem({ id: data?.id, quantity: qty }));
+		dispatch(
+			actions.updateCartItem({
+				id: data?.id,
+				quantity: qty,
+			})
+		);
+	};
+
+	/** Save item to wishlist. */
+	const handleSave = () => {
+		dispatch(
+			actions.moveToWishlist({
+				id: data?.id,
+				sanityId: `product-${data?.productId}`,
+			})
+		);
 	};
 
 	/** Remove item from cart. */
-	const removeItem = () => {
-		dispatch(removeCartItem(data?.id));
+	const handleRemove = () => {
+		dispatch(
+			actions.removeCartItem({
+				id: data?.id,
+			})
+		);
 	};
 
 	const getMaxInventory = ({ variant, inventory } = {}) => {
@@ -87,6 +111,7 @@ const CartListItem = ({ data }) => {
 				<div className="w-full md:shrink-0 md:w-[125px] px-3 md:px-0">
 					<Quantity
 						min={1}
+						disabled={loading}
 						className="!max-w-full"
 						onChange={handleQtyChange}
 						max={getMaxInventory(data)}
@@ -96,25 +121,20 @@ const CartListItem = ({ data }) => {
 				<div className="mt-4 md:mt-0 md:ml-4 w-full">
 					<div className="h-12 md:h-full border-t md:border-none border-dashed border-neutral-200">
 						<div className="flex items-center h-full md:space-x-4">
-							<button
-								type="button"
-								className="h-full flex-1 md:flex-none outline-none text-primary-600 hover:text-primary-500 opacity-40 pointer-events-none"
-							>
-								<span className="text-xs md:text-sm uppercase font-bold leading-none">
-									Save for later
-								</span>
-							</button>
+							<Button disabled={loading} onClick={handleSave}>
+								Save for later
+							</Button>
 							<div
 								role="separator"
 								className="md:hidden w-px h-full border-r border-dashed border-neutral-200"
 							/>
-							<button
-								type="button"
-								className="h-full flex-1 md:flex-none outline-none text-error-600 hover:text-error-500"
-								onClick={removeItem}
+							<Button
+								disabled={loading}
+								onClick={handleRemove}
+								className="text-error-600 hover:text-error-500"
 							>
-								<span className="text-xs md:text-sm uppercase font-bold leading-none">Remove</span>
-							</button>
+								Remove
+							</Button>
 						</div>
 					</div>
 				</div>

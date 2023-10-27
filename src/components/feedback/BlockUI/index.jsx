@@ -12,14 +12,14 @@ const BlockUI = ({ blocking, children }) => (
 		{children}
 		<div
 			className={clsx(
-				'absolute inset-0 h-full overflow-hidden focus:outline-none z-[1010] transition-all duration-150',
+				'absolute inset-0 h-full overflow-hidden focus:outline-none transition-all duration-150',
 				!blocking && 'invisible pointer-events-none opacity-0'
 			)}
 		>
 			<div className="w-full h-full opacity-90 bg-white" />
-			<div className="absolute top-2/4 left-0 right-0 transform -translate-y-2/4 z-[10001]">
+			<div className="absolute top-2/4 left-0 right-0 transform -translate-y-2/4">
 				<span className="sr-only">Loading...</span>
-				<div aria-hidden className="flex justify-center items-center z-[1011]">
+				<div aria-hidden className="flex justify-center items-center">
 					<LoadingDots />
 				</div>
 			</div>

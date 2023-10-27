@@ -1,69 +1,82 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fillCart } from '@store/slices/cart';
-import * as cartApi from '@libs/commerce/cart/helpers';
 import toast from 'react-hot-toast';
 
-export const addCartItem = createAsyncThunk('cart/addCartItem', async (item, { dispatch }) => {
-	const { id, quantity, options } = item ?? {};
+import { fillCart } from '@store/slices/cart';
+import { fillWishlist } from '@store/slices/wishlist';
+import * as cartApi from '@libs/commerce/cart/helpers';
+import { addWishlistItem } from '@libs/commerce/wishlist/helpers';
 
-	try {
-		const cart = await cartApi.addCartItem(id, quantity, options);
-		dispatch(fillCart(cart));
-		toast.success('Product added to cart');
-	} catch (err) {
-		toast.error('Failed to add product to cart');
+export const addCartItem = createAsyncThunk(
+	'cartOps/addCartItem',
+	async (item, { dispatch, rejectWithValue }) => {
+		const { id, quantity, options } = item ?? {};
+
+		try {
+			const cart = await cartApi.addCartItem(id, quantity, options);
+			dispatch(fillCart(cart));
+			toast.success('Product added to cart');
+			return cart;
+		} catch (err) {
+			const message = err?.response?.data?.error ?? 'Failed to add product to cart';
+			toast.error(message);
+			return rejectWithValue(message);
+		}
 	}
-});
+);
 
 export const updateCartItem = createAsyncThunk(
-	'cart/updateCartItem',
-	async (item, { dispatch }) => {
+	'cartOps/updateCartItem',
+	async (item, { dispatch, rejectWithValue }) => {
 		const { id, quantity, options } = item ?? {};
 
 		try {
 			const cart = await cartApi.updateCartItem(id, quantity, options);
 			dispatch(fillCart(cart));
+			return cart;
 		} catch (err) {
-			toast.error('Failed to update cart. Please try again');
+			const message = err?.response?.data?.error ?? 'Failed to update cart. Please try again';
+			toast.error(message);
+			return rejectWithValue(message);
 		}
 	}
 );
 
 export const removeCartItem = createAsyncThunk(
-	'cart/removeCartItem',
-	async (itemId, { dispatch }) => {
+	'cartOps/removeCartItem',
+	async (item, { dispatch, rejectWithValue }) => {
+		const { id } = item ?? {};
+
 		try {
-			const cart = await cartApi.removeCartItem(itemId);
+			const cart = await cartApi.removeCartItem(id);
 			dispatch(fillCart(cart));
 			toast.success('Product removed from cart');
+			return cart;
 		} catch (err) {
-			toast.error('Failed to remove product from cart');
+			const message = err?.response?.data?.error ?? 'Failed to remove product from cart';
+			toast.error(message);
+			return rejectWithValue(message);
 		}
 	}
 );
 
-export const addCartDiscount = createAsyncThunk(
-	'cart/addCartDiscount',
-	async (discountCode, { dispatch }) => {
-		try {
-			const cart = await cartApi.addCartDiscount(discountCode);
-			dispatch(fillCart(cart));
-			toast.success('Discount code added');
-		} catch (err) {
-			toast.error('Failed to add discount code. Please check your discount code');
-		}
-	}
-);
+export const moveToWishlist = createAsyncThunk(
+	'cartOps/moveToWishlist',
+	async (item, { dispatch, rejectWithValue }) => {
+		const { id, sanityId } = item ?? {};
 
-export const removeCartDiscount = createAsyncThunk(
-	'cart/removeCartDiscount',
-	async (_, { dispatch }) => {
 		try {
-			const cart = await cartApi.removeCartDiscount();
+			const wishlist = await addWishlistItem(sanityId);
+			dispatch(fillWishlist(wishlist));
+
+			const cart = await cartApi.removeCartItem(id);
 			dispatch(fillCart(cart));
-			toast.success('Discount code removed');
+
+			toast.success('Product moved to wishlist');
+			return cart;
 		} catch (err) {
-			toast.error('Failed to remove discount code');
+			const message = err?.response?.data?.error ?? 'Failed to move product to wishlist';
+			toast.error(message);
+			return rejectWithValue(message);
 		}
 	}
 );

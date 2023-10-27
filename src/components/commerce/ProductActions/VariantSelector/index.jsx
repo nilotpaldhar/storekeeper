@@ -1,16 +1,19 @@
 import PropTypes from 'prop-types';
 import Radio from '@ui/data-entry/Radio';
+import styles, { labelStyles, optionsStyles } from './styles.cva';
 
 /**
- * Render the WishlistCardVariant component.
+ * Render the VariantSelector component.
  *
- * @return {Element} The WishlistCardVariant component.
+ * @return {Element} The VariantSelector component.
  */
-const WishlistCardVariant = ({ id, label, options, disabled, onValueChange }) => (
-	<div className="flex flex-col space-y-2 pb-1">
-		<p className="text-sm leading-tight font-semibold">{label}:</p>
+const VariantSelector = ({ id, label, options, disabled, orientation, onValueChange }) => (
+	<div className={styles({ orientation })}>
+		<div className={labelStyles({ orientation })}>
+			<span className="block text-sm leading-tight font-semibold">{label}:</span>
+		</div>
 		{options?.length > 0 && (
-			<div className="flex-1">
+			<div className={optionsStyles({ orientation })}>
 				<Radio
 					id={id}
 					className="flex-wrap !space-x-0 gap-2"
@@ -31,18 +34,17 @@ const WishlistCardVariant = ({ id, label, options, disabled, onValueChange }) =>
 /**
  * Default Props.
  */
-WishlistCardVariant.defaultProps = {
+VariantSelector.defaultProps = {
 	options: [],
 	disabled: false,
+	orientation: 'vertical',
 	onValueChange: () => {},
 };
 
 /**
  * Prop Types.
  */
-WishlistCardVariant.propTypes = {
-	disabled: PropTypes.bool,
-	onValueChange: PropTypes.func,
+VariantSelector.propTypes = {
 	id: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 	options: PropTypes.arrayOf(
@@ -51,6 +53,9 @@ WishlistCardVariant.propTypes = {
 			name: PropTypes.string,
 		})
 	),
+	disabled: PropTypes.bool,
+	orientation: PropTypes.oneOf(['vertical', 'horizontal']),
+	onValueChange: PropTypes.func,
 };
 
-export default WishlistCardVariant;
+export default VariantSelector;

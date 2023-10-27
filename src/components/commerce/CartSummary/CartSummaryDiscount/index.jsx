@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCartDiscount, removeCartDiscount } from '@store/slices/cartOps/cartOps.thunks';
+import { addCartDiscount, removeCartDiscount } from '@store/slices/cart/cart.thunks';
 
 /** Components & Icons. */
 import TextField from '@ui/data-entry/TextField';

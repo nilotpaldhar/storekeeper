@@ -70,10 +70,12 @@ const ProductPageTmpl = ({ data }) => {
 					</div>
 					<div className="flex-1 py-1">
 						<ProductContent
+							productIds={{
+								chec: data?.checId,
+								sanity: data?.sanityId,
+							}}
 							sku={data?.sku}
 							excerpt={data?.excerpt}
-							productId={data?.checId}
-							inventory={data?.inventory}
 							categories={data?.categories}
 							variants={data?.variants || []}
 							title={data?.displayName ?? data?.name}
@@ -109,6 +111,7 @@ ProductPageTmpl.propTypes = {
 		sku: PropTypes.string,
 		name: PropTypes.string,
 		checId: PropTypes.string,
+		sanityId: PropTypes.string,
 		excerpt: PropTypes.string,
 		displayName: PropTypes.string,
 		price: PropTypes.shape({

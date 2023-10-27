@@ -1,14 +1,19 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit';
+import { HTTP_STATUS } from '@constants';
 
 export const selectWishlistOps = (state) => state.wishlistOps;
 
-export const selectStatus = createDraftSafeSelector(selectWishlistOps, ({ status }) => status);
-
-export const selectOpsType = createDraftSafeSelector(selectWishlistOps, ({ type }) => type);
-
-export const selectIdentifier = createDraftSafeSelector(
+export const selectRequests = createDraftSafeSelector(
 	selectWishlistOps,
-	({ identifier }) => identifier
+	({ requests }) => requests
 );
 
-export const selectError = createDraftSafeSelector(selectWishlistOps, ({ error }) => error);
+export const selectStatus = createDraftSafeSelector(
+	[(state) => state.wishlistOps?.requests, (_, id) => id],
+	(requests, id) => requests?.[id]?.status
+);
+
+export const selectIsPending = createDraftSafeSelector(
+	[(state) => state.wishlistOps?.requests, (_, id) => id],
+	(requests, id) => requests?.[id]?.status === HTTP_STATUS.pending
+);

@@ -13,7 +13,7 @@ export const selectContents = createDraftSafeSelector(selectWishlist, ({ content
 export const selectError = createDraftSafeSelector(selectWishlist, ({ error }) => error);
 
 export const selectIsWishlisted = createDraftSafeSelector(
-	[(state) => state.wishlist?.contents?.items, (state, id) => id],
+	[(state) => state.wishlist?.contents?.items, (_, id) => id],
 	(items, itemId) => {
 		if (!isEmpty(items) && !isEmpty(itemId)) {
 			const itemIndex = items?.findIndex((item) => item?.id === itemId);

@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 import Anchor from '@ui/general/Anchor';
 import ArrowRightIcon from '@icons/regular/ArrowRight';
-import styles, {
-	titleStyles,
-	linkStyles,
-} from '@ui/commerce/ProductCollection/ProductCollectionTitle/styles.cva';
+import styles, { titleStyles, linkStyles } from './styles.cva';
 
 /**
  * Render the ProductCollectionTitle component.

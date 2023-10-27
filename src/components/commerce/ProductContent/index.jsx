@@ -1,23 +1,20 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-/** Components & Icons. */
-import Alert from '@ui/feedback/Alert';
 import Anchor from '@ui/general/Anchor';
 import LoadingUI from '@ui/feedback/LoadingUI';
 import ReadMoreLess from '@ui/data-display/ReadMoreLess';
 import ProductContMeta from '@ui/commerce/ProductContent/ProductContMeta';
 import DashIcon from '@icons/regular/Dash';
 
-import checkInventory from '@utils/product/checkInventory';
 import createCanonicalUrl from '@utils/general/createCanonicalUrl';
+import { useCallback } from 'react';
 
 const ProductShare = dynamic(() => import('@ui/commerce/ProductShare'));
 const ProductContRating = dynamic(() => import('@ui/commerce/ProductContent/ProductContRating'));
-const ProductContActions = dynamic(() => import('@ui/commerce/ProductContent/ProductContActions'), {
-	loading: () => <p>Loading...</p>,
+const ProductActions = dynamic(() => import('@ui/commerce/ProductActions'), {
+	loading: () => <LoadingUI loading height={120} />,
 });
 
 /**
@@ -25,37 +22,12 @@ const ProductContActions = dynamic(() => import('@ui/commerce/ProductContent/Pro
  *
  * @return {Element} The ProductContent component.
  */
-const ProductContent = ({
-	productId,
-	title,
-	price,
-	excerpt,
-	sku,
-	categories,
-	inventory,
-	variants,
-}) => {
+const ProductContent = ({ productIds, title, price, excerpt, sku, categories, variants }) => {
 	const router = useRouter();
 
-	const [loading, setLoading] = useState(false);
-	const [errorMsg, setErrorMsg] = useState('');
-	const [stockStatus, setStockStatus] = useState('');
-	const [updatedInventory, setUpdatedInventory] = useState(null);
-
-	/** Check inventory status. */
-	const fetchInventory = useCallback(async () => {
-		setLoading(true);
-		const data = await checkInventory(productId);
-
-		setLoading(false);
-		setStockStatus(data.status);
-		setUpdatedInventory(data.inventory);
-		setErrorMsg(data.error);
-	}, [productId]);
-
-	useEffect(() => {
-		fetchInventory();
-	}, [fetchInventory]);
+	const redirectToCart = useCallback(() => {
+		router.push('/cart');
+	}, [router]);
 
 	return (
 		<article>
@@ -78,22 +50,12 @@ const ProductContent = ({
 				</div>
 			)}
 			<div className="py-8 my-8 border-y border-neutral-100">
-				<LoadingUI loading={loading || !stockStatus} height={60}>
-					{errorMsg && <Alert type="error">{errorMsg}</Alert>}
-					{stockStatus === 'OUT_OF_STOCK' && (
-						<div className="flex flex-col space-y-1 text-error-600">
-							<h2 className="text-xl lg:text-2xl font-semibold leading-normal">Sold Out</h2>
-							<p className="text-sm lg:text-base font-light">This item is currently out of stock</p>
-						</div>
-					)}
-					{stockStatus === 'IN_STOCK' && (
-						<ProductContActions
-							productId={productId}
-							inventory={updatedInventory || inventory}
-							variants={variants}
-						/>
-					)}
-				</LoadingUI>
+				<ProductActions
+					productIds={productIds}
+					variants={variants}
+					variantOrientation="horizontal"
+					onSuccessAddToCart={redirectToCart}
+				/>
 			</div>
 			<div className="flex flex-col space-y-5 sm:flex-row sm:space-y-0 sm:space-x-4">
 				<ProductContMeta title="SKU:">{<span>{sku}</span> || <DashIcon />}</ProductContMeta>
@@ -141,7 +103,7 @@ ProductContent.defaultProps = {
  * Prop Types.
  */
 ProductContent.propTypes = {
-	productId: PropTypes.string.isRequired,
+	productIds: PropTypes.shape({}).isRequired,
 	title: PropTypes.string.isRequired,
 	price: PropTypes.string.isRequired,
 	excerpt: PropTypes.string,

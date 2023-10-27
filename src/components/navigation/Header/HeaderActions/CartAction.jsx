@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCart } from '@store/slices/cart/cart.thunks';
-import { selectCartStatus, selectCartCount } from '@store/slices/cart/cart.selectors';
+
 import { HTTP_STATUS } from '@constants';
+import { fetchCart } from '@store/slices/cart/cart.thunks';
+import { selectStatus, selectCount } from '@store/slices/cart/cart.selectors';
 
 /** Components */
 import { Item, Link as HeaderIconWrapper } from '@radix-ui/react-navigation-menu';
@@ -18,8 +19,9 @@ import BagIcon from '@icons/regular/Bag';
  */
 const CartAction = ({ ...props }) => {
 	const dispatch = useDispatch();
-	const count = useSelector(selectCartCount);
-	const status = useSelector(selectCartStatus);
+
+	const count = useSelector(selectCount);
+	const status = useSelector(selectStatus);
 
 	useEffect(() => {
 		if (status === HTTP_STATUS.idle) {

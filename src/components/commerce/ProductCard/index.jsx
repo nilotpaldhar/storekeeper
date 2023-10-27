@@ -1,20 +1,23 @@
 import PropTypes from 'prop-types';
 
-/** Components. */
 import Anchor from '@ui/general/Anchor';
 import Image from '@ui/data-display/Image';
-import ProductCardAction from '@ui/commerce/ProductCard/ProductCardAction';
+import RegularButton from '@ui/buttons/RegularButton';
+import WishlistBtn from '@ui/commerce/ProductCard/WishlistBtn';
 
-/** Helpers & Styles. */
-import { createPermalink } from '@utils/product/permalink';
-import useToggle from '@hooks/useToggle';
+import CartIcon from '@icons/regular/Cart';
+import UnorderedListIcon from '@icons/regular/UnorderedList';
+
 import truncateStr from '@utils/general/truncateStr';
+import { createPermalink } from '@utils/product/permalink';
+
 import styles, {
-	thumbnailStyles,
-	contentStyles,
 	titleStyles,
-	priceStyles,
-} from '@ui/commerce/ProductCard/styles.cva';
+	contentStyles,
+	thubnailStyles,
+	btnWrapperStyles,
+	wishlistWrapperStyles,
+} from './styles.cva';
 
 /**
  * Render the ProductCard component.
@@ -22,8 +25,6 @@ import styles, {
  * @return {Element} The ProductCard component.
  */
 const ProductCard = ({ data, layout, className }) => {
-	const [open, toggleOpen] = useToggle(false);
-
 	const title = data?.displayName ?? data?.name;
 	const permalink = createPermalink(data?.checId, data?.slug);
 	const href = permalink ? `/product/${permalink}` : null;
@@ -34,50 +35,58 @@ const ProductCard = ({ data, layout, className }) => {
 	const hasVariants = data?.variants?.length > 0;
 
 	return (
-		<article
-			onMouseEnter={!outOfStock ? toggleOpen : () => {}}
-			onMouseLeave={!outOfStock ? toggleOpen : () => {}}
-			className={styles({ className, layout })}
-		>
-			<div className={thumbnailStyles({ layout })}>
+		<article className={styles({ className, layout })}>
+			<div className={thubnailStyles({ layout })}>
+				<div className={wishlistWrapperStyles()}>
+					<WishlistBtn id={data?.sanityId} />
+				</div>
 				<Anchor
-					className="block focus-visible:outline-none bg-neutral-50"
+					className="flex justify-center items-center focus-visible:outline-none bg-neutral-50"
 					{...anchorProps}
-					tabIndex="-1"
 				>
 					<Image src={data?.image?.url} alt={title} width={400} height={400} />
 				</Anchor>
-				{outOfStock ? (
-					<span className="absolute top-4 left-0 bg-error-600 text-white text-xs font-bold capitalize py-1 leading-none pl-2 pr-3 rounded-r-full">
-						Out of stock
-					</span>
-				) : (
-					<ProductCardAction
-						open={open}
-						href={href}
-						productId={data?.checId}
-						hasVariants={hasVariants}
-					/>
-				)}
 			</div>
-			<div className={contentStyles({ layout })}>
-				<p className="text-xs font-bold truncate text-neutral-500">{categories || 'Unknown'}</p>
-				<h2 className={titleStyles({ layout })} title={title}>
-					<Anchor
-						className="block w-full font-medium text-current truncate hover:text-current focus-visible:outline-dashed"
-						{...anchorProps}
-					>
-						{title}
-					</Anchor>
-				</h2>
-				{layout === 'horizontal' && excerpt && (
-					<p className="hidden my-1 text-xs leading-relaxed md:block md:text-sm md:my-2">
-						{excerpt}
+			<div className="flex-1 px-2 md:px-4 pt-2 md:pt-3 pb-4 md:pb-5 overflow-hidden">
+				<div className={contentStyles({ layout })}>
+					<p className="w-full text-xs font-normal text-neutral-500 truncate">
+						{categories || 'Unknown'}
 					</p>
-				)}
-				<p className={priceStyles({ layout })}>
-					<data value={data?.price?.raw}>{data?.price?.formattedWithSymbol}</data>
-				</p>
+					<h2 className={titleStyles({ layout })} title={title}>
+						<Anchor
+							className="block w-full font-medium text-current truncate hover:text-current focus-visible:outline-dashed"
+							{...anchorProps}
+						>
+							{title}
+						</Anchor>
+					</h2>
+					{layout === 'horizontal' && excerpt && (
+						<p className="hidden text-sm leading-relaxed md:block">{excerpt}</p>
+					)}
+					<p className="text-sm font-medium text-neutral-900">
+						<data value={data?.price?.raw}>{data?.price?.formattedWithSymbol}</data>
+					</p>
+				</div>
+				<div className={btnWrapperStyles({ layout })}>
+					{outOfStock ? (
+						<RegularButton fullWidth intent="dark-ghost" className="border border-red-600" disabled>
+							<span className="text-xs uppercase text-red-600">Out of Stock</span>
+						</RegularButton>
+					) : (
+						<RegularButton
+							fullWidth
+							as="anchor"
+							intent="dark-ghost"
+							className="border border-neutral-100"
+							startIcon={hasVariants ? UnorderedListIcon : CartIcon}
+							{...anchorProps}
+						>
+							<span className="block w-full truncate text-xs uppercase">
+								{hasVariants ? 'Select Options' : 'Buy Now'}
+							</span>
+						</RegularButton>
+					)}
+				</div>
 			</div>
 		</article>
 	);
@@ -96,7 +105,9 @@ ProductCard.defaultProps = {
  */
 ProductCard.propTypes = {
 	data: PropTypes.shape({
+		id: PropTypes.string,
 		checId: PropTypes.string,
+		sanityId: PropTypes.string,
 		name: PropTypes.string,
 		slug: PropTypes.string,
 		displayName: PropTypes.string,
