@@ -1,40 +1,48 @@
 import PropTypes from 'prop-types';
-import dynamic from 'next/dynamic';
-
 import { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { removeWishlistItem } from '@store/slices/wishlistOps/wishlistOps.thunks';
+import { useSelector } from 'react-redux';
+
+import { selectIsPending } from '@store/slices/cartOps/cartOps.selectors';
 
 import Modal from '@ui/feedback/Modal';
 import Image from '@ui/data-display/Image';
 import RegularButton from '@ui/buttons/RegularButton';
+import ProductActions from '@ui/commerce/ProductActions';
+
 import CartIcon from '@icons/regular/Cart';
 
-const WishlistCardAction = dynamic(() => import('@ui/commerce/WishlistCard/Action'));
-
 /**
- * Render the WishlistCardModal component.
+ * Render the MoveToCart component.
  *
- * @return {Element} The WishlistCardModal component.
+ * @return {Element} The MoveToCart component.
  */
-const WishlistCardModal = ({ productIds, thumbnail, title, price, variants }) => {
-	const dispatch = useDispatch();
+const MoveToCart = ({ productIds, thumbnail, title, price, variants, onComplete }) => {
 	const [open, setOpen] = useState(false);
+	const isPending = useSelector((state) => selectIsPending(state, productIds.chec));
 
-	/** Close modal and remove product from wishlist. */
-	const handleCompleteAddToCart = useCallback(() => {
+	const handleOpenChange = (val) => {
+		if (isPending) return;
+		setOpen(val);
+	};
+
+	const handleMoveToCart = useCallback(() => {
 		setOpen(false);
-		dispatch(removeWishlistItem(productIds?.sanity));
-	}, [productIds?.sanity, dispatch]);
+		onComplete();
+	}, [onComplete]);
 
 	const trigger = (
-		<RegularButton fullWidth startIcon={CartIcon} intent="primary-ghost">
-			<span className="truncate">Move To Cart</span>
+		<RegularButton
+			fullWidth
+			startIcon={CartIcon}
+			intent="primary-ghost"
+			onClick={() => setOpen(true)}
+		>
+			<span className="block w-full truncate">Move To Cart</span>
 		</RegularButton>
 	);
 
 	return (
-		<Modal trigger={trigger} open={open} onOpenChange={setOpen}>
+		<Modal trigger={trigger} open={open} onOpenChange={handleOpenChange}>
 			<div className="flex flex-col space-y-6">
 				<div className="flex items-start space-x-4 pb-4 border-b border-neutral-100 pr-4">
 					<div className="shrink-0 w-20 bg-neutral-50">
@@ -47,10 +55,13 @@ const WishlistCardModal = ({ productIds, thumbnail, title, price, variants }) =>
 						</p>
 					</div>
 				</div>
-				<WishlistCardAction
+				<ProductActions
 					productIds={productIds}
 					variants={variants}
-					onComplete={handleCompleteAddToCart}
+					cartBtnIcon={null}
+					cartBtnText="Done"
+					hideWishlistBtn
+					onSuccessAddToCart={handleMoveToCart}
 				/>
 			</div>
 		</Modal>
@@ -60,14 +71,15 @@ const WishlistCardModal = ({ productIds, thumbnail, title, price, variants }) =>
 /**
  * Default Props.
  */
-WishlistCardModal.defaultProps = {
+MoveToCart.defaultProps = {
 	variants: [],
+	onComplete: () => {},
 };
 
 /**
  * Prop Types.
  */
-WishlistCardModal.propTypes = {
+MoveToCart.propTypes = {
 	productIds: PropTypes.shape({
 		sanity: PropTypes.string,
 		chec: PropTypes.string,
@@ -78,13 +90,8 @@ WishlistCardModal.propTypes = {
 		raw: PropTypes.number,
 		formattedWithSymbol: PropTypes.string,
 	}).isRequired,
-	variants: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.string,
-			name: PropTypes.string,
-			options: PropTypes.arrayOf(PropTypes.shape({})),
-		})
-	),
+	variants: PropTypes.arrayOf(PropTypes.shape({})),
+	onComplete: PropTypes.func,
 };
 
-export default WishlistCardModal;
+export default MoveToCart;

@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
+
 import { fillWishlist } from '@store/slices/wishlist';
 import * as wishlistApi from '@libs/commerce/wishlist/helpers';
-import toast from 'react-hot-toast';
 
 export const addWishlistItem = createAsyncThunk(
 	'wishlistOps/addWishlistItem',

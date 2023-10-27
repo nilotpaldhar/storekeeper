@@ -48,8 +48,8 @@ const SearchPageTmpl = ({ loading, initialQuery, info }) => {
 
 		list: `w-full grid ${
 			layout === 'list'
-				? 'grid-cols-1 gap-y-8'
-				: 'grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 xxl:grid-cols-4 md:gap-x-5 md:gap-y-10 xl:gap-y-12'
+				? 'grid-cols-1 gap-y-6 md:gap-y-8'
+				: 'grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-8 lg:gap-y-10 xxl:grid-cols-4 xxxl:gap-x-5'
 		}`,
 
 		loadPrevious: clsx(

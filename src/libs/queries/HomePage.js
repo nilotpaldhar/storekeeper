@@ -1,4 +1,5 @@
 import PageSeoQuery from '@libs/queries/PageSeo';
+import { ProductCollectionQuery as ProductQuery } from '@libs/queries/Product';
 
 const BannerQuery = `
   "id": _key,
@@ -42,29 +43,6 @@ const OfferQuery = `
       )
     }
   }
-`;
-
-const ProductQuery = `
-  "id": _id,
-  "sanityId": _id,
-  "checId": productID,
-  isActive,
-  name,
-  displayName,
-  categories[]->{ 
-    "id": _id, 
-    title,
-    slug
-  },
-  "brand": brand->title,
-  price {
-    raw,
-    formattedWithSymbol
-  },
-  slug,
-  inventory,
-  image { url, width, height },
-  "variants": variantGroups[]{ id }
 `;
 
 const HomePageQuery = `

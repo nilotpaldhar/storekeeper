@@ -1,8 +1,11 @@
-import { groq } from 'next-sanity';
 import client from '@config/sanity';
-import isEmpty from 'lodash-es/isEmpty';
+import { groq } from 'next-sanity';
+
 import SiteConfigQuery from '@libs/queries/SiteConfig';
+import { ProductQuery } from '@libs/queries/Product';
 import { parsePermalink } from '@utils/product/permalink';
+
+import isEmpty from 'lodash-es/isEmpty';
 
 /**
  * Fetch product page data.
@@ -10,84 +13,11 @@ import { parsePermalink } from '@utils/product/permalink';
 const fetchPage = async (preview = false, permalink = null) => {
 	const options = { useCdn: !preview, useToken: preview };
 	const { id, slug } = parsePermalink(permalink) ?? {};
+
 	const query = groq`
     { 
       "page": *[_type == "product" && isActive == true && productID == $id && slug == $slug][0]{
-        sku,
-        name,
-        slug,
-        price,
-        excerpt,
-        inventory,
-        displayName,
-        description,
-        conditionals,
-        "sanityId": _id,
-        "checId": productID,
-        categories[]->{ "id": _id, slug, title },
-        "variants": variantGroups[]{
-          id,
-          name,
-          options[]{ id, name, price, assets }
-        },
-        "gallery": assets[]{
-          id,
-          url,
-          width,
-          height,
-          isImage,
-          filename,
-          fileSize,
-          description,
-          fileExtension
-        },
-        image {
-          id,
-          url,
-          width,
-          height,
-          isImage,
-          filename,
-          fileSize,
-          description,
-          fileExtension
-        },
-        additionalInfo[]{
-          'key': _key,
-          name,
-          value
-        },
-        relatedProducts[]-> {
-          sku,
-          name,
-          slug,
-          price,
-          excerpt,
-          inventory,
-          "id": _id,
-          displayName,
-          "sanityId": _id,
-          "checId": productID,
-          categories[]->{ "id": _id, slug, title },
-          image {
-            id,
-            url,
-            width,
-            height,
-            isImage,
-            filename,
-            fileSize,
-            description,
-            fileExtension
-          }
-        },
-        seo {
-          metaTitle,
-          metaDesc,
-          shareTitle,
-          shareDesc,
-          "shareGraphic": shareGraphic.asset->url,
-        }
+        ${ProductQuery}
       },
       "siteConfig": ${SiteConfigQuery}
     }

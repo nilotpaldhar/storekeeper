@@ -1,19 +1,29 @@
 import PropTypes from 'prop-types';
+
 import ProductCard from '@ui/commerce/ProductCard';
-import ProductCollectionTitle from '@ui/commerce/ProductCollection/ProductCollectionTitle';
-import styles, { wrapperStyles } from '@ui/commerce/ProductCollection/styles.cva';
+import ProductCollectionTitle from '@ui/commerce/ProductCollection/Title';
+
+import styles, { wrapperStyles } from './styles.cva';
 
 /**
  * Render the ProductCollection component.
  *
  * @return {Element} The ProductCollection component.
  */
-const ProductCollection = ({ products, grid, children, className, wrapperClassName }) => (
+const ProductCollection = ({
+	grid,
+	products,
+	item: Item,
+	itemProps,
+	children,
+	className,
+	wrapperClassName,
+}) => (
 	<div className={styles({ className })}>
 		<div>{children}</div>
 		<div className={wrapperStyles({ className: wrapperClassName, grid })}>
 			{products?.map((product) => (
-				<ProductCard key={product?.id} layout={grid ? 'vertical' : 'horizontal'} data={product} />
+				<Item key={product?.id} data={product} {...itemProps} />
 			))}
 		</div>
 	</div>
@@ -28,8 +38,10 @@ ProductCollection.Title = ProductCollectionTitle;
  * Default Props.
  */
 ProductCollection.defaultProps = {
-	products: [],
 	grid: true,
+	products: [],
+	item: ProductCard,
+	itemProps: {},
 	children: '',
 	className: '',
 	wrapperClassName: '',
@@ -39,12 +51,14 @@ ProductCollection.defaultProps = {
  * Prop Types.
  */
 ProductCollection.propTypes = {
+	grid: PropTypes.bool,
 	products: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string,
 		})
 	),
-	grid: PropTypes.bool,
+	item: PropTypes.elementType,
+	itemProps: PropTypes.shape({}),
 	children: PropTypes.node,
 	className: PropTypes.string,
 	wrapperClassName: PropTypes.string,

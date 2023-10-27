@@ -1,16 +1,20 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { HTTP_STATUS } from '@constants';
-import { resetCartOps } from '@store/slices/cartOps';
-import { selectCartOpsStatus } from '@store/slices/cartOps/cartOps.selectors';
-import { selectCartStatus, selectCartContents } from '@store/slices/cart/cart.selectors';
+import { REQUEST_TYPES } from '@store/slices/cart';
+import { fetchCart } from '@store/slices/cart/cart.thunks';
+import * as cartSelector from '@store/slices/cart/cart.selectors';
+import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
 
 /** Components & Templates. */
+import Empty from '@ui/feedback/Empty';
 import CartPageTmpl from '@templates/CartPage';
+import Container from '@ui/general/Container';
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
+import RegularButton from '@ui/buttons/RegularButton';
+import ReloadIcon from '@icons/regular/Reload';
 
-/** Functions. */
-import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
+import errorImg from '@public/error.svg';
 
 /**
  * Render the CartPage component.
@@ -20,22 +24,37 @@ import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
 const CartPage = () => {
 	const dispatch = useDispatch();
 
-	const cartStatus = useSelector(selectCartStatus);
-	const contents = useSelector(selectCartContents);
-	const cartOpsStatus = useSelector(selectCartOpsStatus);
+	const status = useSelector(cartSelector.selectStatus);
+	const contents = useSelector(cartSelector.selectContents);
+	const requestType = useSelector(cartSelector.selectRequestType);
+	const errorMsg = useSelector(cartSelector.selectError);
 
-	useEffect(() => {
-		dispatch(resetCartOps());
-	}, [dispatch]);
-
-	if (cartStatus === HTTP_STATUS.idle) {
+	if (status === HTTP_STATUS.idle) {
 		return null;
 	}
 
-	if (cartStatus === HTTP_STATUS.failed) {
+	if (
+		status === HTTP_STATUS.failed &&
+		(requestType === REQUEST_TYPES.FETCH_CART || requestType === REQUEST_TYPES.CLEAR_CART)
+	) {
 		return (
-			<div className="min-h-screen">
-				<div>Failed to load data</div>
+			<div className="min-h-screen flex items-center justify-center">
+				<Container>
+					<Empty
+						imgSrc={errorImg}
+						imgProps={{ alt: 'fail', width: 200, height: 200 }}
+						title={errorMsg || 'Failed to load cart'}
+						description={null}
+					>
+						<RegularButton
+							startIcon={ReloadIcon}
+							className="px-8"
+							onClick={() => dispatch(fetchCart())}
+						>
+							Try Again
+						</RegularButton>
+					</Empty>
+				</Container>
 			</div>
 		);
 	}
@@ -44,8 +63,15 @@ const CartPage = () => {
 		<div className="min-h-screen">
 			<CartPageTmpl
 				data={contents ?? {}}
-				loading={cartStatus === HTTP_STATUS.pending}
-				block={cartOpsStatus === HTTP_STATUS.pending}
+				loading={
+					status === HTTP_STATUS.pending &&
+					(requestType === REQUEST_TYPES.FETCH_CART || requestType === REQUEST_TYPES.CLEAR_CART)
+				}
+				block={
+					status === HTTP_STATUS.pending &&
+					(requestType === REQUEST_TYPES.ADD_CART_DISCOUNT ||
+						requestType === REQUEST_TYPES.REMOVE_CART_DISCOUNT)
+				}
 			/>
 		</div>
 	);

@@ -28,6 +28,7 @@ export { default as Filter } from './regular/Filter';
 export { default as Giftcard } from './regular/Giftcard';
 export { default as Headphone } from './regular/Headphone';
 export { default as Heart } from './regular/Heart';
+export { default as HeartFill } from './regular/HeartFill';
 export { default as Home } from './regular/Home';
 export { default as Info } from './regular/Info';
 export { default as InfoCircle } from './regular/InfoCircle';

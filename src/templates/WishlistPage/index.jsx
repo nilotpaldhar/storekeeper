@@ -7,11 +7,11 @@ import Container from '@ui/general/Container';
 import RegularButton from '@ui/buttons/RegularButton';
 import ArrowLeftIcon from '@icons/regular/ArrowLeft';
 
-import clsx from 'clsx';
 import emptyCartImg from '@public/empty-cart.svg';
 
 const LoadingUI = dynamic(() => import('@ui/feedback/LoadingUI'));
 const WishlistCard = dynamic(() => import('@ui/commerce/WishlistCard'));
+const ProductCollection = dynamic(() => import('@ui/commerce/ProductCollection'));
 
 /**
  * Render the WishlistPageTmpl component.
@@ -47,19 +47,12 @@ const WishlistPageTmpl = ({ data, loading }) => (
 								{data?.totalItems} {data?.totalItems > 1 ? 'Items' : 'Item'}
 							</span>
 						</h1>
-						<div
-							className={clsx(
-								'grid grid-cols-2 gap-x-4 gap-y-6',
-								'md:grid-cols-3 md:gap-x-4 md:gap-y-8',
-								'lg:grid-cols-4 lg:gap-x-6 lg:gap-y-10',
-								'xl:grid-cols-5 xl:gap-x-8 xl:gap-y-12'
-							)}
-						>
-							{data?.items?.map((item) => (
-								<div key={item?.id}>
-									<WishlistCard data={item} />
-								</div>
-							))}
+						<div className="">
+							<ProductCollection
+								products={data?.items}
+								item={WishlistCard}
+								wrapperClassName="lg:!grid-cols-4 xxl:!grid-cols-5 xxl:!gap-x-10 xxl:!gap-y-12"
+							/>
 						</div>
 					</div>
 				)}

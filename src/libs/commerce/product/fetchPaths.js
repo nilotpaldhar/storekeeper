@@ -1,5 +1,6 @@
-import { groq } from 'next-sanity';
 import client from '@config/sanity';
+import { groq } from 'next-sanity';
+
 import { PRODUCT_PATHS_LIMIT } from '@constants';
 import { createPermalink } from '@utils/product/permalink';
 
@@ -11,6 +12,7 @@ import isEmpty from 'lodash-es/isEmpty';
  */
 const fetchPaths = async (preview = false, limit = PRODUCT_PATHS_LIMIT) => {
 	const options = { useCdn: !preview, useToken: preview };
+
 	const query = groq`
     *[_type == "product" && defined(productID) && isActive == true] | order(_updatedAt desc) {
 			"id": productID, slug

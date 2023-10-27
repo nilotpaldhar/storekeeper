@@ -1,12 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { HTTP_STATUS } from '@constants';
+
 import { fetchWishlist } from '@store/slices/wishlist/wishlist.thunks';
 import * as wishlistSelector from '@store/slices/wishlist/wishlist.selectors';
 
-import { HTTP_STATUS } from '@constants';
-
 /** Components & Templates. */
+import Empty from '@ui/feedback/Empty';
+import Container from '@ui/general/Container';
+import ReloadIcon from '@icons/regular/Reload';
+import RegularButton from '@ui/buttons/RegularButton';
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
 import WishlistPageTmpl from '@templates/WishlistPage';
+
+import errorImg from '@public/error.svg';
 
 /** Functions. */
 import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
@@ -29,14 +35,23 @@ const WishlistPage = () => {
 
 	if (status === HTTP_STATUS.failed) {
 		return (
-			<div className="min-h-screen">
-				<div>
-					<span>{errorMsg || 'Failed to load wishlist'}</span>
-					<br />
-					<button type="button" onClick={() => dispatch(fetchWishlist())}>
-						Try Again
-					</button>
-				</div>
+			<div className="min-h-screen flex items-center justify-center">
+				<Container>
+					<Empty
+						imgSrc={errorImg}
+						imgProps={{ alt: 'fail', width: 200, height: 200 }}
+						title={errorMsg || 'Failed to load cart'}
+						description={null}
+					>
+						<RegularButton
+							startIcon={ReloadIcon}
+							className="px-8"
+							onClick={() => dispatch(fetchWishlist())}
+						>
+							Try Again
+						</RegularButton>
+					</Empty>
+				</Container>
 			</div>
 		);
 	}

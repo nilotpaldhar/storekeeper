@@ -24,16 +24,13 @@ const createWishlist = async () => {
 	return { id, ...defaultData };
 };
 
-const createQuery = (compact = false) => {
-	if (compact) {
-		return groq`
-			*[_type == "wishlist" && _id == $id][0]{
-				"id": _id,
-			}
-		`;
-	}
+/**
+ * Get wishlisted products.
+ */
+const getWishlistData = async (req, res) => {
+	const wishlistId = await retrieveWishlistId(req, res);
 
-	return groq`
+	const query = groq`
 		*[_type == "wishlist" && _id == $id][0]{
 			"id": _id,
 			"totalItems": coalesce(count(items), 0),
@@ -43,14 +40,6 @@ const createQuery = (compact = false) => {
 			}
 		}
 	`;
-};
-
-/**
- * Get wishlisted products.
- */
-const getWishlistData = async (req, res, compact = false) => {
-	const wishlistId = await retrieveWishlistId(req, res);
-	const query = createQuery(compact);
 
 	const wishlist = await sanity.fetch(query, { id: wishlistId });
 
