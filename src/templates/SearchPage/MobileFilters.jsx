@@ -34,7 +34,7 @@ const MobileFilters = ({ className }) => {
 				onStateChange={handleStateChange}
 				menuClassName="bg-white shadow-xl"
 				className="fixed top-0 left-0 h-full"
-				overlayClassName="!bg-black !bg-opacity-10 top-0 left-0"
+				overlayClassName="!bg-black/20 backdrop-blur-sm top-0 left-0"
 			>
 				<div className="py-6 px-8">
 					<Filters headerTitle="Filters:" />

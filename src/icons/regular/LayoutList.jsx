@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { IoListSharp } from 'react-icons/io5';
+import { AiOutlineUnorderedList } from 'react-icons/ai';
 
 /**
  * Render the LayoutList icon.
@@ -9,7 +9,7 @@ import { IoListSharp } from 'react-icons/io5';
  */
 const LayoutList = ({ className, ...props }) => (
 	<span className={clsx('icon', className && className)} {...props}>
-		<IoListSharp />
+		<AiOutlineUnorderedList />
 	</span>
 );
 

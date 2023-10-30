@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
 import searchClient from '@config/algolia';
-import { Configure, InfiniteHits, InstantSearch, SortBy } from 'react-instantsearch';
+import { Configure, InfiniteHits, InstantSearch, SortBy, PoweredBy } from 'react-instantsearch';
 import { singleIndex } from 'instantsearch.js/es/lib/stateMappings';
 import { createInstantSearchRouterNext } from 'react-instantsearch-router-nextjs';
 
@@ -12,16 +12,19 @@ import { selectProductCatalogLayout } from '@store/slices/layout/layout.selector
 import { ALGOLIA_INDEX, PRODUCT_CATALOG_COUNT } from '@constants';
 
 /** Components. */
-import { Empty } from '@ui/feedback';
+import Empty from '@ui/feedback/Empty';
 import Filters from '@ui/commerce/Filters';
 import Container from '@ui/general/Container';
 import LoadingUI from '@ui/feedback/LoadingUI';
-import FallBack from '@templates/SearchPage/FallBack';
 import RefinementList from '@ui/commerce/RefinementList';
+
+import FallBack from '@templates/SearchPage/FallBack';
 import HitWrapper from '@templates/SearchPage/HitWrapper';
+import HitSkeleton from '@templates/SearchPage/HitSkeleton';
 import SwitchLayout from '@templates/SearchPage/SwitchLayout';
 import VirtualSearchBox from '@templates/SearchPage/VirtualSearchBox';
 import NoResultsBoundary from '@templates/SearchPage/NoResultsBoundary';
+
 import clsx from 'clsx';
 
 const MobileFilters = dynamic(() => import('@templates/SearchPage/MobileFilters'));
@@ -79,6 +82,7 @@ const SearchPageTmpl = ({ loading, initialQuery, info }) => {
 							stateMapping: singleIndex(ALGOLIA_INDEX.product),
 							router: createInstantSearchRouterNext({ singletonRouter }),
 						}}
+						future={{ preserveSharedStateOnUnmount: true }}
 					>
 						<Configure hitsPerPage={PRODUCT_CATALOG_COUNT} />
 						<VirtualSearchBox />
@@ -93,7 +97,12 @@ const SearchPageTmpl = ({ loading, initialQuery, info }) => {
 
 								<main className="flex-1">
 									<div className="xl:flex lg:items-center">
-										<div className="flex-1 px-px text-base">{info}</div>
+										<div className="flex items-center justify-between gap-3 flex-wrap flex-1 px-px text-base xl:mr-4">
+											<div>{info}</div>
+											<div className="w-full max-w-[114px]">
+												<PoweredBy theme="light" classNames={{ root: 'w-full', link: 'block' }} />
+											</div>
+										</div>
 										<NoResultsBoundary fallback={null}>
 											<div className="flex items-center mt-6 xl:mt-0">
 												<MobileFilters className="block mr-2 xl:hidden" />
@@ -103,15 +112,15 @@ const SearchPageTmpl = ({ loading, initialQuery, info }) => {
 														items={sortItems}
 														classNames={{
 															select: `
-														appearance-none block w-full text-sm text-neutral-900 
-														bg-white border border-neutral-100 pl-2 md:pl-4 pr-2 lg:pr-8 py-2
-														focus:outline-none focus-visible:border-neutral-900 cursor-pointer transition duration-300
-													`,
+																appearance-none block w-full text-sm text-neutral-900 
+																bg-white border border-neutral-100 pl-2 md:pl-4 pr-2 lg:pr-8 py-2
+																focus:outline-none focus-visible:border-neutral-900 cursor-pointer transition duration-300
+															`,
 														}}
 													/>
 												</div>
 
-												<SwitchLayout className="flex items-center ml-4 space-x-1" />
+												<SwitchLayout className="flex items-center ml-4 space-x-2" />
 											</div>
 										</NoResultsBoundary>
 									</div>
@@ -122,6 +131,9 @@ const SearchPageTmpl = ({ loading, initialQuery, info }) => {
 
 									<div className="px-px mt-6">
 										<NoResultsBoundary fallback={<FallBack />}>
+											<div className="mb-6">
+												<HitSkeleton grid={layout === 'grid'} />
+											</div>
 											<InfiniteHits
 												showPrevious
 												hitComponent={HitWrapper}
