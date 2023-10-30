@@ -1,5 +1,4 @@
-import { useRefinementList } from 'react-instantsearch';
-import { ALGOLIA_ATTRIBUTES } from '@constants';
+import PropTypes from 'prop-types';
 import FilterCategoryItem from './FilterCategoryItem';
 
 /**
@@ -7,25 +6,37 @@ import FilterCategoryItem from './FilterCategoryItem';
  *
  * @return {Element} The FilterCategoryList component.
  */
-const FilterCategoryList = () => {
-	const { items, refine } = useRefinementList({ attribute: ALGOLIA_ATTRIBUTES.category });
+const FilterCategoryList = ({ items, refine }) => (
+	<ul className="flex flex-col space-y-3">
+		{items.map(({ label, value, count, isRefined }) => (
+			<li key={label}>
+				<FilterCategoryItem
+					id={`category-${value}`}
+					value={value}
+					label={label}
+					count={count}
+					isActive={isRefined}
+					refine={refine}
+				/>
+			</li>
+		))}
+	</ul>
+);
 
-	return (
-		<ul className="flex flex-col space-y-3">
-			{items.map(({ label, value, count, isRefined }) => (
-				<li key={label}>
-					<FilterCategoryItem
-						id={`category-${value}`}
-						value={value}
-						label={label}
-						count={count}
-						isActive={isRefined}
-						refine={refine}
-					/>
-				</li>
-			))}
-		</ul>
-	);
+/**
+ * Default Props.
+ */
+FilterCategoryList.defaultProps = {
+	items: [],
+	refine: () => {},
+};
+
+/**
+ * Prop Types.
+ */
+FilterCategoryList.propTypes = {
+	items: PropTypes.arrayOf(PropTypes.shape({})),
+	refine: PropTypes.func,
 };
 
 export default FilterCategoryList;

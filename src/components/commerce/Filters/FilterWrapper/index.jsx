@@ -1,19 +1,24 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-
-/** Icons. */
+import FilterWrapperTitle from './Title';
+import FilterWrapperBody from './Body';
 
 /**
  * Render the FilterWrapper component.
  *
  * @return {Element} The FilterWrapper component.
  */
-const FilterWrapper = ({ title, hasDivider, className, children, ...props }) => (
+const FilterWrapper = ({ hasDivider, className, children, ...props }) => (
 	<div className={clsx('pb-6', hasDivider && 'border-b border-neutral-100', className)} {...props}>
-		<h3 className="block font-semibold text-lg leading-snug">{title}</h3>
-		<div className="pt-6 px-px">{children}</div>
+		{children}
 	</div>
 );
+
+/**
+ * Sub Components
+ */
+FilterWrapper.Title = FilterWrapperTitle;
+FilterWrapper.Body = FilterWrapperBody;
 
 /**
  * Default Props.
@@ -28,7 +33,6 @@ FilterWrapper.defaultProps = {
  * Prop Types.
  */
 FilterWrapper.propTypes = {
-	title: PropTypes.string.isRequired,
 	hasDivider: PropTypes.bool,
 	children: PropTypes.node,
 	className: PropTypes.string,

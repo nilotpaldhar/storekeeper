@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { IoAppsSharp } from 'react-icons/io5';
+import { BiSolidGrid } from 'react-icons/bi';
 
 /**
  * Render the LayoutGrid icon.
@@ -9,7 +9,7 @@ import { IoAppsSharp } from 'react-icons/io5';
  */
 const LayoutGrid = ({ className, ...props }) => (
 	<span className={clsx('icon', className && className)} {...props}>
-		<IoAppsSharp />
+		<BiSolidGrid />
 	</span>
 );
 

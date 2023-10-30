@@ -24,7 +24,7 @@ const SwitchLayout = ({ className }) => {
 			<RegularButton
 				startIcon={LayoutListIcon}
 				intent="dark-ghost"
-				className={clsx('!px-1', layout === 'grid' && 'opacity-30')}
+				className={clsx('!px-0', layout === 'grid' && 'opacity-30')}
 				onClick={() => {
 					dispatch(toggleProductCatalogLayout('list'));
 				}}
@@ -32,7 +32,7 @@ const SwitchLayout = ({ className }) => {
 			<RegularButton
 				startIcon={LayoutGridIcon}
 				intent="dark-ghost"
-				className={clsx('!px-1', layout === 'list' && 'opacity-30')}
+				className={clsx('!px-0', layout === 'list' && 'opacity-30')}
 				onClick={() => {
 					dispatch(toggleProductCatalogLayout('grid'));
 				}}
