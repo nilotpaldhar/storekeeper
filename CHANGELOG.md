@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.3.1...v0.4.0) (2023-10-30)
+
+
+### Features
+
+* **search:** add the loading skeleton on the search page ([f94eabd](https://github.com/nilotpaldhar/storekeeper/commit/f94eabdb97d6a68a5fa929db77a1fe0a9af46edf))
+
+
+
 ## [0.3.1](https://github.com/nilotpaldhar/storekeeper/compare/v0.3.0...v0.3.1) (2023-10-27)
 
 
