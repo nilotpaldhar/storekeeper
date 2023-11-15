@@ -53,7 +53,7 @@ const AuthLayout = ({ site, children, graphics, ...props }) => {
 			<div className={imgWrapperClassNames} />
 			<div className={`${imgWrapperClassNames} fixed inset-y-0 right-0 bg-[#fafafa]`}>
 				<div className="flex items-center w-full h-full">
-					<Image src={graphics} alt="Graphics" />
+					<Image src={graphics} alt="Graphics" priority />
 				</div>
 			</div>
 		</div>

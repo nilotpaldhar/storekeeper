@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 
 /** Components. */
+import { PortableText } from '@portabletext/react';
+
 import Tabs from '@ui/data-display/Tabs';
+import Image from '@ui/data-display/Image';
 import Container from '@ui/general/Container';
 import ProductSpecs from '@ui/commerce/ProductSpecs';
 import ProductContent from '@ui/commerce/ProductContent';
 import ProductImgGallery from '@ui/commerce/ProductImgGallery';
 import ProductCollection from '@ui/commerce/ProductCollection';
-import { PortableText } from '@portabletext/react';
 
 /**
  * Render the ProductPageTmpl component.
@@ -17,9 +19,9 @@ import { PortableText } from '@portabletext/react';
 const ProductPageTmpl = ({ data }) => {
 	/** Images Gallery. */
 	const imgGallery = data?.gallery?.map((img) => ({
-		width: 800,
-		height: 800,
-		src: img?.url,
+		width: 400,
+		height: 400,
+		src: img?.url ?? '/placeholder.png',
 		alt: data?.displayName ?? data?.name,
 	}));
 
@@ -57,16 +59,28 @@ const ProductPageTmpl = ({ data }) => {
 	return (
 		<main className="py-10 lg:py-14">
 			<Container className="flex flex-col space-y-14 lg:space-y-20">
-				<section className="flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-8">
+				<section className="flex flex-col items-start space-y-8 lg:flex-row lg:space-y-0 lg:space-x-8">
 					<div className="w-full lg:max-w-md xxl:max-w-lg shrink-0">
-						<ProductImgGallery
-							thumbnailsGap={8}
-							gallery={imgGallery}
-							thumbnailsSize={{
-								width: 90,
-								height: 90,
-							}}
-						/>
+						{imgGallery?.length > 1 ? (
+							<ProductImgGallery
+								thumbnailsGap={8}
+								gallery={imgGallery}
+								thumbnailsSize={{
+									width: 90,
+									height: 90,
+								}}
+							/>
+						) : (
+							<div className="relative aspect-square bg-neutral-50 border border-neutral-50">
+								<Image
+									fill
+									priority
+									src={imgGallery[0]?.src}
+									alt={imgGallery[0]?.alt}
+									sizes="(min-width: 1400px) 510px, (min-width: 1000px) 446px, (min-width: 780px) 686px, (min-width: 580px) 506px, calc(100vw - 34px)"
+								/>
+							</div>
+						)}
 					</div>
 					<div className="flex-1 py-1">
 						<ProductContent

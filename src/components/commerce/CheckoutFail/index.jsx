@@ -17,7 +17,7 @@ const CheckoutFail = ({ title, description, defaultError, ...props }) => (
 		<Container>
 			<Empty
 				imgSrc={orderFailImg}
-				imgProps={{ alt: 'fail', width: 200, height: 200 }}
+				imgProps={{ alt: 'fail', width: 200, height: 200, priority: true }}
 				title={defaultError ? 'Oh no, payment failed!' : title}
 				description={
 					defaultError ? (

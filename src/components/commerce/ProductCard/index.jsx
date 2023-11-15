@@ -44,7 +44,12 @@ const ProductCard = ({ data, layout, className }) => {
 					className="flex justify-center items-center focus-visible:outline-none bg-neutral-50"
 					{...anchorProps}
 				>
-					<Image src={data?.image?.url} alt={title} width={400} height={400} />
+					<Image
+						src={data?.image?.url ?? '/placeholder.png'}
+						alt={title}
+						width={400}
+						height={400}
+					/>
 				</Anchor>
 			</div>
 			<div className="flex-1 px-2 md:px-4 pt-2 md:pt-3 pb-4 md:pb-5 overflow-hidden">

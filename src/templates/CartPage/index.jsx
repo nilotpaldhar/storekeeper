@@ -65,6 +65,7 @@ const CartPageTmpl = ({ data, block, loading }) => {
 							<Empty
 								className="py-24"
 								imgSrc={emptyCartImg}
+								imgProps={{ alt: 'empty', priority: true }}
 								title="Your cart is empty!"
 								description={
 									<>

@@ -39,7 +39,7 @@ const WishlistPage = () => {
 				<Container>
 					<Empty
 						imgSrc={errorImg}
-						imgProps={{ alt: 'fail', width: 200, height: 200 }}
+						imgProps={{ alt: 'fail', width: 200, height: 200, priority: true }}
 						title={errorMsg || 'Failed to load cart'}
 						description={null}
 					>

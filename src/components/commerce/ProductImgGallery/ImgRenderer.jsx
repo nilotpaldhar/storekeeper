@@ -6,8 +6,10 @@ import Image from '@ui/data-display/Image';
  *
  * @return {Element} The ImgRenderer component.
  */
-const ImgRenderer = ({ src, alt, width, height }) =>
-	src ? <Image src={src} alt={alt ?? ''} width={width} height={height} priority /> : null;
+const ImgRenderer = ({ src, alt, width, height, ...props }) =>
+	src ? (
+		<Image src={src} alt={alt ?? ''} width={width} height={height} priority {...props} />
+	) : null;
 
 /**
  * Default Props.
