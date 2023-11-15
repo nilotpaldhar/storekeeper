@@ -63,7 +63,12 @@ const SpecialOffer = ({ data }) => {
 					<h3 className="text-2xl leading-snug font-bold">{title}</h3>
 				</div>
 				<div className="relative h-80 mt-8">
-					<Image src={imgSrc} alt="Offer Image" fill />
+					<Image
+						fill
+						src={imgSrc}
+						alt="Offer Image"
+						sizes="(min-width: 1400px) 307px, (min-width: 1200px) 544px, (min-width: 1000px) 454px, (min-width: 780px) 576px, (min-width: 580px) 508px, calc(100vw - 32px)"
+					/>
 				</div>
 				<div className="mt-4 px-4 sm:px-6">
 					<div className="flex flex-col space-y-2 py-2">

@@ -26,6 +26,7 @@ const WishlistPageTmpl = ({ data, loading }) => (
 					<Empty
 						className="py-24"
 						imgSrc={emptyCartImg}
+						imgProps={{ alt: 'empty', priority: true }}
 						title="Your wishlist is empty!"
 						description={
 							<span className="block text-center">

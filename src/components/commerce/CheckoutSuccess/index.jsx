@@ -27,7 +27,7 @@ const CheckoutSuccess = ({ title, description, data }) => {
 				title={title}
 				imgSrc={orderSuccessImg}
 				description={description}
-				imgProps={{ alt: 'order success', width: 200, height: 200 }}
+				imgProps={{ alt: 'order success', width: 200, height: 200, priority: true }}
 			/>
 			<div className="flex flex-col space-y-14 max-w-xl mx-auto mt-16">
 				<Box>

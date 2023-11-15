@@ -23,7 +23,9 @@ const Logo = ({ href, src, alt, width, height, srcSanity, className, ...props })
 
 	return (
 		<Anchor href={href} className={classNames} {...props}>
-			<Image src={logoSrc} alt={alt} width={width} height={height} priority />
+			<div style={{ width: `${width}px`, height: `${height}px` }} className="relative">
+				<Image src={logoSrc} alt={alt} fill priority />
+			</div>
 		</Anchor>
 	);
 };

@@ -41,7 +41,7 @@ const ProductImgGallery = ({ gallery, thumbnailsSize, thumbnailsGap }) => {
 		},
 		styles: {
 			thumbnail: { backgroundColor },
-			container: { backgroundColor },
+			container: { backgroundColor: '#F5F5F5' },
 			thumbnailsContainer: {
 				padding: '0',
 				backgroundColor,
@@ -56,11 +56,11 @@ const ProductImgGallery = ({ gallery, thumbnailsSize, thumbnailsGap }) => {
 				render={{
 					buttonPrev: () => null,
 					buttonNext: () => null,
-					slide: ({ rect: { width, height } = {}, slide: { src, alt } = {} }) => (
-						<ImgRenderer src={src} alt={alt} width={width} height={height} />
+					slide: ({ slide: { src, alt } = {} }) => (
+						<ImgRenderer src={src} alt={alt} width={400} height={400} sizes="400px" />
 					),
 					thumbnail: ({ rect: { width, height } = {}, slide: { src, alt } = {} }) => (
-						<ImgRenderer src={src} alt={alt} width={width} height={height} />
+						<ImgRenderer src={src} alt={alt} width={width} height={height} sizes="100px" />
 					),
 				}}
 				{...lightboxConf}
