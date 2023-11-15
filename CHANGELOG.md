@@ -1,3 +1,12 @@
+## [0.4.2](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.1...v0.4.2) (2023-11-15)
+
+
+### Bug Fixes
+
+* **image:** add appropriate sizes attribute to images ([51c4395](https://github.com/nilotpaldhar/storekeeper/commit/51c43959ded2ad5a3707093884d73f311ca33bef))
+
+
+
 ## [0.4.1](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.0...v0.4.1) (2023-11-02)
 
 
@@ -34,15 +43,6 @@
 * **wishlist:** add wishlist API ([e2de8e2](https://github.com/nilotpaldhar/storekeeper/commit/e2de8e2d15a3a66c46cfe55314b724ecf8fc481e))
 * **wishlist:** add wishlist card component ([2fd9f9c](https://github.com/nilotpaldhar/storekeeper/commit/2fd9f9c8bcfdbdb6d0f0a11512ee855514d31428)), closes [#119](https://github.com/nilotpaldhar/storekeeper/issues/119)
 * **wishlist:** add wishlist page ([65deee7](https://github.com/nilotpaldhar/storekeeper/commit/65deee73532abf677c111d74ae7dcbe0e53e845a)), closes [#117](https://github.com/nilotpaldhar/storekeeper/issues/117)
-
-
-
-# [0.2.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.1.0...v0.2.0) (2023-10-02)
-
-
-### Features
-
-* **product:** add individual product page ([023067c](https://github.com/nilotpaldhar/storekeeper/commit/023067caf3cdafbe7b5c9140fbdd49306a87b56c)), closes [#36](https://github.com/nilotpaldhar/storekeeper/issues/36)
 
 
 
