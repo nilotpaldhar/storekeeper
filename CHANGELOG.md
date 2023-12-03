@@ -1,3 +1,12 @@
+# [0.5.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.2...v0.5.0) (2023-12-03)
+
+
+### Features
+
+* **webhook:** add a webhook to handle new users created during the checkout process ([723a80c](https://github.com/nilotpaldhar/storekeeper/commit/723a80c86869782025bd504b5f1d6fbb195ff8be))
+
+
+
 ## [0.4.2](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.1...v0.4.2) (2023-11-15)
 
 
@@ -31,18 +40,6 @@
 ### Bug Fixes
 
 * **cart:** update cart and wishlist reducer to enhance the CRUD operations ([6ed65f1](https://github.com/nilotpaldhar/storekeeper/commit/6ed65f12a783fccc85687d6423b9ab55e8063024))
-
-
-
-# [0.3.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.2.0...v0.3.0) (2023-10-20)
-
-
-### Features
-
-* **modal:** add the modal component ([583e921](https://github.com/nilotpaldhar/storekeeper/commit/583e921b85194e80f60034f9a81f2ca46c951e5d)), closes [#118](https://github.com/nilotpaldhar/storekeeper/issues/118)
-* **wishlist:** add wishlist API ([e2de8e2](https://github.com/nilotpaldhar/storekeeper/commit/e2de8e2d15a3a66c46cfe55314b724ecf8fc481e))
-* **wishlist:** add wishlist card component ([2fd9f9c](https://github.com/nilotpaldhar/storekeeper/commit/2fd9f9c8bcfdbdb6d0f0a11512ee855514d31428)), closes [#119](https://github.com/nilotpaldhar/storekeeper/issues/119)
-* **wishlist:** add wishlist page ([65deee7](https://github.com/nilotpaldhar/storekeeper/commit/65deee73532abf677c111d74ae7dcbe0e53e845a)), closes [#117](https://github.com/nilotpaldhar/storekeeper/issues/117)
 
 
 
