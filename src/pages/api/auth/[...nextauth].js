@@ -38,11 +38,36 @@ export const authOptions = {
 		}),
 	],
 	callbacks: {
-		async jwt({ token, account }) {
+		async jwt({ token, account, user }) {
 			if (account?.access_token) {
 				token.accessToken = account.access_token;
 			}
+
+			if (user) {
+				token.sanityId = user.id;
+				token.checId = user.checId;
+				token.firstname = user.firstname ?? '';
+				token.lastname = user.lastname ?? '';
+				token.phone = user.phone ?? '';
+			}
+
 			return token;
+		},
+		async session({ session, token }) {
+			if (token) {
+				const userData = {
+					sanityId: token.sanityId,
+					checId: token.checId,
+					email: token.email,
+					firstname: token.firstname,
+					lastname: token.lastname,
+					phone: token.phone,
+				};
+
+				session.user = userData;
+			}
+
+			return session;
 		},
 	},
 	adapter: ChecSanityAdapter(API_CLIENTS),
