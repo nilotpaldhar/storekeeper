@@ -79,8 +79,6 @@ export const user = (client) => {
 			/** Build user object (sanity). */
 			const userObjSanity = {
 				email,
-				firstname: name,
-				lastname: '',
 				image,
 				emailVerified: emailVerified ?? '',
 			};
@@ -93,7 +91,7 @@ export const user = (client) => {
 					...rest
 				} = await sanity.patch(id).set(userObjSanity).commit();
 				await chec.request(`customers/${checId}`, 'put', userObjChec);
-				return { id: userId, name: firstname, ...rest };
+				return { id: userId, name: firstname, checId, firstname, ...rest };
 			} catch (error) {
 				throw new Error("Can't update user. Something went wrong");
 			}

@@ -1,4 +1,7 @@
-import { HTTP_STATUS } from '@constants';
+import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
+import { fillUser } from '@store/slices/user';
 
 /** Components. */
 import LoadingUI from '@ui/feedback/LoadingUI';
@@ -8,35 +11,23 @@ import RegularButton from '@ui/buttons/RegularButton';
 import LockIcon from '@icons/regular/Lock';
 import DashboardIcon from '@icons/regular/Dashboard';
 
-/** Hooks. */
-import { useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useDispatch, useSelector } from 'react-redux';
-
-/** Functions. */
-import { fetchAuthUser } from '@store/slices/user/user.thunks';
-import { selectUser } from '@store/slices/user/user.selectors';
-
 /**
  * Render the UserNavAction component.
  *
  * @return {Element} The UserNavAction component.
  */
 const UserNavAction = ({ ...props }) => {
-	const { status: sessionStatus } = useSession();
 	const dispatch = useDispatch();
-	const user = useSelector(selectUser);
+	const { status, data } = useSession();
 
-	const { status, authStatus, about } = user || {};
-	const loading = status === HTTP_STATUS.pending;
-	const authenticated = authStatus === 'authenticated';
+	const loading = status === 'loading';
+	const authenticated = status === 'authenticated';
+	const about = data?.user;
 
-	/** Get authenticated user. */
+	/** Fill authenticated user data. */
 	useEffect(() => {
-		if (sessionStatus === 'authenticated' && status === HTTP_STATUS.idle) {
-			dispatch(fetchAuthUser());
-		}
-	}, [dispatch, status, sessionStatus]);
+		dispatch(fillUser({ status, user: data?.user }));
+	}, [dispatch, status, data?.user]);
 
 	return (
 		<div {...props}>
