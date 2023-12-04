@@ -6,5 +6,5 @@ export { default as SearchPageTmpl } from '@templates/SearchPage';
 export { default as ProductPageTmpl } from '@templates/ProductPage';
 export { default as CheckoutPageTmpl } from '@templates/CheckoutPage';
 export { default as DashboardHomeTmpl } from '@templates/DashboardHome';
-export { default as DashboardAccTmpl } from '@templates/DashboardAccount';
+export { default as DashboardProfileTmpl } from '@templates/DashboardProfile';
 export { default as LoginVerificationTmpl } from '@templates/LoginVerification';

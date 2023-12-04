@@ -38,11 +38,12 @@ export const authOptions = {
 		}),
 	],
 	callbacks: {
-		async jwt({ token, account, user }) {
+		async jwt({ token, account, user, trigger, session }) {
 			if (account?.access_token) {
 				token.accessToken = account.access_token;
 			}
 
+			/** Pass user data to token */
 			if (user) {
 				token.sanityId = user.id;
 				token.checId = user.checId;
@@ -51,9 +52,18 @@ export const authOptions = {
 				token.phone = user.phone ?? '';
 			}
 
+			/** Update session */
+			if (trigger === 'update' && session?.sanityId && session?.checId) {
+				token.firstname = session.firstname ?? '';
+				token.lastname = session.lastname ?? '';
+				token.phone = session.phone ?? '';
+				token.email = session.email;
+			}
+
 			return token;
 		},
 		async session({ session, token }) {
+			/** Pass token to session */
 			if (token) {
 				const userData = {
 					sanityId: token.sanityId,
