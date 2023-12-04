@@ -6,6 +6,7 @@ export { default as ArrowUp } from './regular/ArrowUp';
 export { default as ArrowUpLeft } from './regular/ArrowUpLeft';
 export { default as ArrowUpRight } from './regular/ArrowUpRight';
 export { default as Bag } from './regular/Bag';
+export { default as Box } from './regular/Box';
 export { default as Cart } from './regular/Cart';
 export { default as Check } from './regular/Check';
 export { default as ChevronDown } from './regular/ChevronDown';

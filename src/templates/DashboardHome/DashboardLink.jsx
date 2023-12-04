@@ -1,39 +1,36 @@
 import PropTypes from 'prop-types';
 import Anchor from '@ui/general/Anchor';
-import { cva } from 'class-variance-authority';
-
-const styles = cva([
-	'flex flex-col items-center justify-center space-y-2 text-neutral-900 border border-neutral-50 bg-white',
-	'hover:text-current hover:bg-neutral-50 transition-colors duration-300 focus-visible:outline-dashed',
-	'md:space-y-4 h-32 md:h-40 xl:h-48',
-]);
+import ChevronRightIcon from '@icons/regular/ChevronRight';
+import { clsx } from 'clsx';
 
 /**
  * Render the DashboardLink component.
  *
  * @return {Element} The DashboardLink component.
  */
-const DashboardLink = ({ href, icon: Icon, children, className, ...props }) => {
-	const content = (
-		<>
-			{Icon && <Icon className="!text-3xl md:!text-4xl xl:!text-5xl" />}
-			<span className="text-sm md:text-base font-normal leading-none">{children}</span>
-		</>
-	);
-
-	if (!href)
-		return (
-			<button type="button" className={styles({ className })} {...props}>
-				{content}
-			</button>
-		);
-
-	return (
-		<Anchor href={href} className={styles({ className })} {...props}>
-			{content}
-		</Anchor>
-	);
-};
+const DashboardLink = ({ href, icon: Icon, title, description, ...props }) => (
+	<Anchor
+		href={href}
+		className={clsx(
+			'flex items-center w-full px-3 py-4 space-x-4',
+			'border border-neutral-100 transition duration-300 hover:bg-neutral-50/50',
+			'lg:flex-col lg:justify-center lg:space-x-0 lg:space-y-3 lg:h-full lg:p-3.5'
+		)}
+		{...props}
+	>
+		{Icon && <Icon className="!text-xl !text-neutral-500" />}
+		<div
+			className={clsx(
+				'flex-1 flex flex-col space-y-1 justify-center leading-none',
+				'lg:flex-initial lg:space-y-2 lg:items-center lg:text-center'
+			)}
+		>
+			<span className="block text-sm font-semibold text-neutral-900">{title}</span>
+			<span className="block text-xs font-light text-neutral-500">{description}</span>
+		</div>
+		<ChevronRightIcon className="lg:!hidden !text-xs !text-neutral-500" />
+	</Anchor>
+);
 
 /**
  * Default Props.
@@ -41,8 +38,8 @@ const DashboardLink = ({ href, icon: Icon, children, className, ...props }) => {
 DashboardLink.defaultProps = {
 	href: null,
 	icon: null,
-	children: '',
-	className: '',
+	title: '',
+	description: '',
 };
 
 /**
@@ -51,8 +48,8 @@ DashboardLink.defaultProps = {
 DashboardLink.propTypes = {
 	href: PropTypes.string,
 	icon: PropTypes.elementType,
-	children: PropTypes.node,
-	className: PropTypes.string,
+	title: PropTypes.string,
+	description: PropTypes.string,
 };
 
 export default DashboardLink;
