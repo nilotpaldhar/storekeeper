@@ -1,6 +1,9 @@
 import checConfig from '@config/commerce';
 import protectedApiRoute from '@libs/auth/protectedApiRoute';
+
 import isEmpty from 'lodash-es/isEmpty';
+import { ValidationError } from 'yup';
+import { addressValidator } from '@libs/validation/user';
 import formatAddress from '@utils/user/formatAddress';
 
 const supportedMethods = ['GET', 'PUT', 'DELETE'];
@@ -37,30 +40,38 @@ const handler = async (req, res) =>
 
 		/** Update customer address */
 		if (reqMethod === 'PUT') {
-			const payload = req?.body?.payload;
-
-			if (isEmpty(payload)) {
-				res.status(422).json({ error: 'The given data was invalid.' });
-				return;
-			}
-
-			const updatedAddress = {
-				name: payload?.fullname,
-				street: payload?.street1,
-				street_2: payload?.street2,
-				town_city: payload?.city,
-				postal_zip_code: payload?.zip,
-				county_state: payload?.region,
-				country: payload?.country,
-				delivery_instructions: payload?.notes,
-				default_shipping: payload?.defaultShipping,
-				default_billing: payload?.defaultBilling,
-			};
-
 			try {
+				const payload = await addressValidator.validate(req?.body?.payload, {
+					stripUnknown: true,
+				});
+
+				const updatedAddress = {
+					name: payload?.fullname,
+					street: payload?.street1,
+					street_2: payload?.street2,
+					town_city: payload?.city,
+					postal_zip_code: payload?.zip,
+					county_state: payload?.region,
+					country: payload?.country,
+					delivery_instructions: payload?.notes,
+					default_shipping: payload?.defaultShipping,
+					default_billing: payload?.defaultBilling,
+				};
+
 				const data = await checClient.request(checEndpoint, 'put', updatedAddress);
-				res.status(200).json({ success: true, data: formatAddress(data) });
+
+				res.status(200).json({
+					success: true,
+					data: formatAddress(data),
+				});
 			} catch (error) {
+				if (error instanceof ValidationError) {
+					res.status(422).json({
+						error: 'The given data was invalid.',
+					});
+					return;
+				}
+
 				handleError(error, res);
 			}
 		}

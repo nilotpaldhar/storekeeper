@@ -44,6 +44,7 @@ export { default as MapPin } from './regular/MapPin';
 export { default as Menu } from './regular/Menu';
 export { default as Minus } from './regular/Minus';
 export { default as MoneyBill } from './regular/MoneyBill';
+export { default as More } from './regular/More';
 export { default as OrderedList } from './regular/OrderedList';
 export { default as PaperPlane } from './regular/PaperPlane';
 export { default as Phone } from './regular/Phone';

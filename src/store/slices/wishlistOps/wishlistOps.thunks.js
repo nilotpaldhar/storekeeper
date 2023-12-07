@@ -10,7 +10,7 @@ export const addWishlistItem = createAsyncThunk(
 		try {
 			const wishlist = await wishlistApi.addWishlistItem(itemId);
 			dispatch(fillWishlist(wishlist));
-			toast.success('Product added to wishlist');
+			toast.success('The product has been successfully added to your wishlist');
 			return wishlist;
 		} catch (err) {
 			const message = err?.response?.data?.error ?? 'Failed to add product to wishlist';
@@ -26,7 +26,7 @@ export const removeWishlistItem = createAsyncThunk(
 		try {
 			const wishlist = await wishlistApi.removeWishlistItem(itemId);
 			dispatch(fillWishlist(wishlist));
-			toast.success('Product removed from wishlist');
+			toast.success('The product has been removed from your wishlist');
 			return wishlist;
 		} catch (err) {
 			const message = err?.response?.data?.error ?? 'Failed to remove product from wishlist';

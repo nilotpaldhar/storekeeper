@@ -35,7 +35,9 @@ const handler = async (req, res) =>
 			});
 		} catch (error) {
 			if (error instanceof ValidationError) {
-				return res.status(422).json({ error: 'Invalid data' });
+				return res.status(422).json({
+					error: 'The given data was invalid.',
+				});
 			}
 
 			const statusCode = error?.statusCode || 500;

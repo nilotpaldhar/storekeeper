@@ -7,4 +7,5 @@ export { default as ProductPageTmpl } from '@templates/ProductPage';
 export { default as CheckoutPageTmpl } from '@templates/CheckoutPage';
 export { default as DashboardHomeTmpl } from '@templates/DashboardHome';
 export { default as DashboardProfileTmpl } from '@templates/DashboardProfile';
+export { default as DashboardAddressTmpl } from '@templates/DashboardAddress';
 export { default as LoginVerificationTmpl } from '@templates/LoginVerification';

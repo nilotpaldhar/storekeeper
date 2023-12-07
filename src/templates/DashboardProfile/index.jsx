@@ -22,6 +22,10 @@ const DashboardProfileTmpl = () => {
 	const authStatus = useSelector(selectUserAuthStatus);
 	const user = useSelector(selectUserAbout);
 
+	const handleInit = () => setErrMsg('');
+	const handleSuccess = (data) => update(data?.user);
+	const handleFailure = (data) => setErrMsg(data?.message);
+
 	return (
 		<>
 			<DashboardMHeader href="/dashboard">Edit Profile</DashboardMHeader>
@@ -37,15 +41,15 @@ const DashboardProfileTmpl = () => {
 						firstname={user?.firstname}
 						lastname={user?.lastname}
 						phone={user?.phone}
-						onInit={() => setErrMsg('')}
-						onSuccess={(data) => update(data?.user)}
-						onFail={(data) => setErrMsg(data?.message)}
+						onInit={handleInit}
+						onSuccess={handleSuccess}
+						onFail={handleFailure}
 					/>
 					<EmailForm
 						email={user?.email}
-						onInit={() => setErrMsg('')}
-						onSuccess={(data) => update(data?.user)}
-						onFail={(data) => setErrMsg(data?.message)}
+						onInit={handleInit}
+						onSuccess={handleSuccess}
+						onFail={handleFailure}
 					/>
 				</div>
 			</LoadingUI>
