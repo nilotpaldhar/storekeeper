@@ -25,7 +25,7 @@ export const user = (client) => {
 	const findUser = async (key = '_id', value = '') => {
 		let userSanity;
 		const query = groq`*[_type == "user" && ${key} == $value]{
-      "id": _id, "name": firstname, firstname, lastname, email, emailVerified, image, checId
+      "id": _id, "name": firstname, firstname, lastname, email, emailVerified, image, checId, phone
     }[0]`;
 
 		try {

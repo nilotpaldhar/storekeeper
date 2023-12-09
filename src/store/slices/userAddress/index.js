@@ -5,6 +5,7 @@ import * as actions from '@store/slices/userAddress/userAddress.thunks';
 const initialState = {
 	status: HTTP_STATUS.idle,
 	collection: [],
+	pagination: {},
 	error: null,
 };
 
@@ -23,9 +24,25 @@ export const userAddressSlice = createSlice({
 		});
 		builder.addCase(actions.fetchAddresses.fulfilled, (state, action) => {
 			state.status = HTTP_STATUS.succeeded;
-			state.collection = action.payload;
+			state.collection = action.payload.collection;
+			state.pagination = action.payload?.pagination;
 		});
 		builder.addCase(actions.fetchAddresses.rejected, (state, action) => {
+			state.status = HTTP_STATUS.failed;
+			state.error = action.payload;
+		});
+
+		/** Load More Addresses. */
+		builder.addCase(actions.loadMoreAddresses.pending, (state) => {
+			state.status = HTTP_STATUS.pending;
+			state.error = null;
+		});
+		builder.addCase(actions.loadMoreAddresses.fulfilled, (state, action) => {
+			state.status = HTTP_STATUS.succeeded;
+			state.collection = [...state.collection, ...action.payload.collection];
+			state.pagination = action.payload?.pagination;
+		});
+		builder.addCase(actions.loadMoreAddresses.rejected, (state, action) => {
 			state.status = HTTP_STATUS.failed;
 			state.error = action.payload;
 		});

@@ -11,6 +11,11 @@ export const selectCollection = createDraftSafeSelector(
 	({ collection }) => collection
 );
 
+export const selectPagination = createDraftSafeSelector(
+	selectUserAddress,
+	({ pagination }) => pagination
+);
+
 export const selectDefaultShipping = createDraftSafeSelector(
 	selectUserAddress,
 	({ collection }) => collection?.filter((a) => a.defaultShipping)[0]

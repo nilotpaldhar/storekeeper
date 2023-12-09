@@ -14,7 +14,7 @@ export const addCartItem = createAsyncThunk(
 		try {
 			const cart = await cartApi.addCartItem(id, quantity, options);
 			dispatch(fillCart(cart));
-			toast.success('Product added to cart');
+			toast.success('The product has been successfully added to your cart');
 			return cart;
 		} catch (err) {
 			const message = err?.response?.data?.error ?? 'Failed to add product to cart';
@@ -49,7 +49,7 @@ export const removeCartItem = createAsyncThunk(
 		try {
 			const cart = await cartApi.removeCartItem(id);
 			dispatch(fillCart(cart));
-			toast.success('Product removed from cart');
+			toast.success('The product has been removed from your cart');
 			return cart;
 		} catch (err) {
 			const message = err?.response?.data?.error ?? 'Failed to remove product from cart';
@@ -71,7 +71,7 @@ export const moveToWishlist = createAsyncThunk(
 			const cart = await cartApi.removeCartItem(id);
 			dispatch(fillCart(cart));
 
-			toast.success('Product moved to wishlist');
+			toast.success('The product has been moved to your wishlist');
 			return cart;
 		} catch (err) {
 			const message = err?.response?.data?.error ?? 'Failed to move product to wishlist';
