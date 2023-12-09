@@ -1,3 +1,15 @@
+# [0.6.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.5.0...v0.6.0) (2023-12-09)
+
+
+### Features
+
+* **dashboard:** add dashboard layout ([44cdd05](https://github.com/nilotpaldhar/storekeeper/commit/44cdd059739bfaafe637d7194d4435a3dc299359))
+* **dashboard:** add profile page on dashboard ([d85782e](https://github.com/nilotpaldhar/storekeeper/commit/d85782eba3b019b5b65e88f8e5bd7ca239849951))
+* **dashboard:** add the address management page on the dashboard ([45ea9ab](https://github.com/nilotpaldhar/storekeeper/commit/45ea9abfcdeb212814a5b9c849fbc84dd65e2730))
+* **dashboard:** add the order management page on the dashboard ([3291be3](https://github.com/nilotpaldhar/storekeeper/commit/3291be3434b10765fd3108e0f7d05558f5140fed))
+
+
+
 # [0.5.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.2...v0.5.0) (2023-12-03)
 
 
@@ -31,15 +43,6 @@
 ### Features
 
 * **search:** add the loading skeleton on the search page ([f94eabd](https://github.com/nilotpaldhar/storekeeper/commit/f94eabdb97d6a68a5fa929db77a1fe0a9af46edf))
-
-
-
-## [0.3.1](https://github.com/nilotpaldhar/storekeeper/compare/v0.3.0...v0.3.1) (2023-10-27)
-
-
-### Bug Fixes
-
-* **cart:** update cart and wishlist reducer to enhance the CRUD operations ([6ed65f1](https://github.com/nilotpaldhar/storekeeper/commit/6ed65f12a783fccc85687d6423b9ab55e8063024))
 
 
 
