@@ -6,8 +6,6 @@ import * as selectors from '@store/slices/userAddress/userAddress.selectors';
 import { HTTP_STATUS } from '@constants';
 
 import Empty from '@ui/feedback/Empty';
-import Alert from '@ui/feedback/Alert';
-import LoadingUI from '@ui/feedback/LoadingUI';
 import AddressBox from '@ui/dashboard/AddressBox';
 import AddressForm from '@ui/commerce/AddressForm';
 import RegularButton from '@ui/buttons/RegularButton';
@@ -28,7 +26,6 @@ const DashboardAddressTmpl = () => {
 	const status = useSelector(selectors.selectStatus);
 	const addresses = useSelector(selectors.selectCollection);
 	const pagination = useSelector(selectors.selectPagination);
-	const errMsg = useSelector(selectors.selectError);
 
 	const [uiState, setUiState] = useState('DEFAULT');
 	const [addressToEdit, setAddressToEdit] = useState({});
@@ -36,10 +33,6 @@ const DashboardAddressTmpl = () => {
 	const resetUiState = () => setUiState('DEFAULT');
 
 	useEffect(() => {
-		if (status === HTTP_STATUS.idle) {
-			dispatch(actions.fetchAddresses());
-		}
-
 		if (status === HTTP_STATUS.succeeded) {
 			resetUiState();
 		}
@@ -48,113 +41,91 @@ const DashboardAddressTmpl = () => {
 	return (
 		<>
 			<DashboardMHeader href="/dashboard">Manage Addresses</DashboardMHeader>
-			<LoadingUI
-				loading={status === HTTP_STATUS.idle || status === HTTP_STATUS.pending}
-				height={400}
-			>
-				{status === HTTP_STATUS.failed && errMsg ? (
-					<Alert type="error">
-						<div className="flex space-x-1.5 items-center">
-							<span>{errMsg}.</span>
-							<button
-								type="button"
-								className="text-current hover:text-current font-semibold underline"
-								onClick={() => dispatch(actions.fetchAddresses())}
-							>
-								Try Again!
-							</button>
-						</div>
-					</Alert>
-				) : (
-					<>
-						<div className="flex flex-wrap items-center justify-between gap-4">
-							<DashboardHeading className="hidden md:block">Manage Addresses</DashboardHeading>
-							<div className="flex-1 md:flex-initial">
-								<RegularButton
-									fullWidth
-									intent="dark-ghost"
-									startIcon={PlusIcon}
-									onClick={() => setUiState('NEW_ADDRESS')}
-									className="border border-neutral-200 border-dashed"
-									disabled={uiState !== 'DEFAULT'}
-								>
-									Add New Address
-								</RegularButton>
-							</div>
-						</div>
+			<>
+				<div className="flex flex-wrap items-center justify-between gap-4">
+					<DashboardHeading className="hidden md:block">Manage Addresses</DashboardHeading>
+					<div className="flex-1 md:flex-initial">
+						<RegularButton
+							fullWidth
+							intent="dark-ghost"
+							startIcon={PlusIcon}
+							onClick={() => setUiState('NEW_ADDRESS')}
+							className="border border-neutral-200 border-dashed"
+							disabled={uiState !== 'DEFAULT'}
+						>
+							Add New Address
+						</RegularButton>
+					</div>
+				</div>
 
-						{uiState === 'DEFAULT' && (
-							<div className="mt-8">
-								{status === HTTP_STATUS.succeeded && addresses.length > 0 ? (
-									<>
-										<ul className="flex flex-col space-y-4">
-											{addresses?.map((address) => (
-												<li key={address?.id}>
-													<AddressBox
-														data={address}
-														editable
-														onEdit={(addressToUpdate) => {
-															setAddressToEdit(addressToUpdate);
-															setUiState('EDIT_ADDRESS');
-														}}
-														onDelete={(addressIdToDelete) =>
-															dispatch(actions.deleteAddress(addressIdToDelete))
-														}
-													/>
-												</li>
-											))}
-										</ul>
-										{pagination?.currentPage < pagination?.totalPages && (
-											<div className="mt-8 lg:mt-12">
-												<RegularButton
-													fullWidth
-													intent="primary-ghost"
-													startIcon={ChevronDownIcon}
-													onClick={() =>
-														dispatch(actions.loadMoreAddresses(pagination.currentPage + 1))
-													}
-												>
-													Load More
-												</RegularButton>
-											</div>
-										)}
-									</>
-								) : (
-									<Empty
-										className="my-32"
-										title="No result!"
-										description="It appears that you haven't saved any address yet."
-									/>
+				{uiState === 'DEFAULT' && (
+					<div className="mt-8">
+						{status === HTTP_STATUS.succeeded && addresses.length > 0 ? (
+							<>
+								<ul className="flex flex-col space-y-4">
+									{addresses?.map((address) => (
+										<li key={address?.id}>
+											<AddressBox
+												data={address}
+												editable
+												onEdit={(addressToUpdate) => {
+													setAddressToEdit(addressToUpdate);
+													setUiState('EDIT_ADDRESS');
+												}}
+												onDelete={(addressIdToDelete) =>
+													dispatch(actions.deleteAddress(addressIdToDelete))
+												}
+											/>
+										</li>
+									))}
+								</ul>
+								{pagination?.currentPage < pagination?.totalPages && (
+									<div className="mt-8 lg:mt-12">
+										<RegularButton
+											fullWidth
+											intent="primary-ghost"
+											startIcon={ChevronDownIcon}
+											onClick={() =>
+												dispatch(actions.loadMoreAddresses(pagination.currentPage + 1))
+											}
+										>
+											Load More
+										</RegularButton>
+									</div>
 								)}
-							</div>
+							</>
+						) : (
+							<Empty
+								className="my-32"
+								title="No result!"
+								description="It appears that you haven't saved any address yet."
+							/>
 						)}
-
-						{uiState === 'NEW_ADDRESS' && (
-							<div className="mt-8">
-								<AddressForm
-									onCancel={resetUiState}
-									onSubmit={(address) => dispatch(actions.createAddress(address))}
-								/>
-							</div>
-						)}
-
-						{uiState === 'EDIT_ADDRESS' && (
-							<div className="mt-8">
-								<AddressForm
-									defaultValues={addressToEdit}
-									onCancel={resetUiState}
-									onDelete={() => dispatch(actions.deleteAddress(addressToEdit?.id))}
-									onSubmit={(address) =>
-										dispatch(
-											actions.updateAddress({ addressId: addressToEdit?.id, payload: address })
-										)
-									}
-								/>
-							</div>
-						)}
-					</>
+					</div>
 				)}
-			</LoadingUI>
+
+				{uiState === 'NEW_ADDRESS' && (
+					<div className="mt-8">
+						<AddressForm
+							onCancel={resetUiState}
+							onSubmit={(address) => dispatch(actions.createAddress(address))}
+						/>
+					</div>
+				)}
+
+				{uiState === 'EDIT_ADDRESS' && (
+					<div className="mt-8">
+						<AddressForm
+							defaultValues={addressToEdit}
+							onCancel={resetUiState}
+							onDelete={() => dispatch(actions.deleteAddress(addressToEdit?.id))}
+							onSubmit={(address) =>
+								dispatch(actions.updateAddress({ addressId: addressToEdit?.id, payload: address }))
+							}
+						/>
+					</div>
+				)}
+			</>
 		</>
 	);
 };

@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { signOut } from 'next-auth/react';
+
 import MenuLink from '@ui/dashboard/DashboardNav/MenuLink';
 import { clsx } from 'clsx';
 
@@ -9,11 +11,8 @@ import { clsx } from 'clsx';
  */
 const DashboardNav = ({ menus, ...props }) => (
 	<nav {...props}>
-		{menus?.map((menu, index) => (
-			<ul
-				key={menu?.id}
-				className={clsx('py-5', index + 1 < menus?.length && 'border-b border-b-neutral-100')}
-			>
+		{menus?.map((menu) => (
+			<ul key={menu?.id} className="py-5 border-b border-b-neutral-100">
 				{menu?.title && (
 					<li className="block text-xs font-light uppercase text-neutral-500">{menu?.title}</li>
 				)}
@@ -30,6 +29,11 @@ const DashboardNav = ({ menus, ...props }) => (
 				)}
 			</ul>
 		))}
+		<ul className="py-5">
+			<li>
+				<MenuLink onClick={() => signOut()}>Logout</MenuLink>
+			</li>
+		</ul>
 	</nav>
 );
 

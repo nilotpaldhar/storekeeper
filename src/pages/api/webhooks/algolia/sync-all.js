@@ -15,7 +15,7 @@ const searchClient = algoliasearch(
 );
 
 const handler = async (req, res) => {
-	const supportedMethods = ['GET'];
+	const supportedMethods = ['POST'];
 	const secretToken = req.query?.token;
 
 	const query = groq`*[ _type == "product" && isActive == true  && !(_id in path('drafts.**'))] {

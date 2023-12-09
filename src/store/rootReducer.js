@@ -4,6 +4,8 @@ import { combineReducers } from '@reduxjs/toolkit';
 import layoutReducer from '@store/slices/layout';
 
 import userReducer from '@store/slices/user';
+import userOrderReducer from '@store/slices/userOrder';
+import userOrdersReducer from '@store/slices/userOrders';
 import userAddressReducer from '@store/slices/userAddress';
 
 import cartReducer from '@store/slices/cart';
@@ -20,6 +22,8 @@ export const rootReducer = combineReducers({
 	layout: layoutReducer,
 
 	user: userReducer,
+	userOrder: userOrderReducer,
+	userOrders: userOrdersReducer,
 	userAddress: userAddressReducer,
 
 	cart: cartReducer,

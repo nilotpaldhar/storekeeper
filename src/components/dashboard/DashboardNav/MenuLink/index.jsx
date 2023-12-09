@@ -13,6 +13,14 @@ const MenuLink = ({ href, children, className, ...props }) => {
 	const router = useRouter();
 	const active = router.asPath === href;
 
+	if (!href) {
+		return (
+			<button type="button" className={styles({ className })} {...props}>
+				{children}
+			</button>
+		);
+	}
+
 	return (
 		<Anchor href={href} className={styles({ active, className })} {...props}>
 			{children}
@@ -24,7 +32,7 @@ const MenuLink = ({ href, children, className, ...props }) => {
  * Default Props.
  */
 MenuLink.defaultProps = {
-	href: '/',
+	href: null,
 	children: '',
 	className: '',
 };

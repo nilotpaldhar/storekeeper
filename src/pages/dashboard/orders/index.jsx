@@ -1,22 +1,22 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchAddresses } from '@store/slices/userAddress/userAddress.thunks';
-import { selectStatus, selectError } from '@store/slices/userAddress/userAddress.selectors';
+import { fetchOrders } from '@store/slices/userOrders/userOrders.thunks';
+import { selectStatus, selectError } from '@store/slices/userOrders/userOrders.selectors';
 import { HTTP_STATUS } from '@constants';
 
 import Alert from '@ui/feedback/Alert';
 import LoadingUI from '@ui/feedback/LoadingUI';
 import LayoutWrapper from '@ui/layouts/LayoutWrapper';
-import DashboardAddressTmpl from '@templates/DashboardAddress';
+import DashboardOrdersTmpl from '@templates/DashboardOrders';
 import fetchSiteConfig from '@libs/general/site-config/fetchSiteConfig';
 
 /**
- * Render the DashboardAddressPage component.
+ * Render the DashboardOrdersPage component.
  *
- * @return {Element} The DashboardAddressPage component.
+ * @return {Element} The DashboardOrdersPage component.
  */
-const DashboardAddressPage = () => {
+const DashboardOrdersPage = () => {
 	const dispatch = useDispatch();
 
 	const status = useSelector(selectStatus);
@@ -24,7 +24,7 @@ const DashboardAddressPage = () => {
 
 	useEffect(() => {
 		if (status === HTTP_STATUS.idle) {
-			dispatch(fetchAddresses());
+			dispatch(fetchOrders());
 		}
 	}, [status, dispatch]);
 
@@ -33,25 +33,25 @@ const DashboardAddressPage = () => {
 			{status === HTTP_STATUS.failed && errMsg ? (
 				<Alert type="error">
 					<div className="flex space-x-1.5 items-center">
-						<span>{errMsg}.</span>
+						<span>{errMsg} - </span>
 						<button
 							type="button"
+							onClick={() => dispatch(fetchOrders())}
 							className="text-current hover:text-current font-semibold underline"
-							onClick={() => dispatch(fetchAddresses())}
 						>
 							Try Again!
 						</button>
 					</div>
 				</Alert>
 			) : (
-				<DashboardAddressTmpl />
+				<DashboardOrdersTmpl />
 			)}
 		</LoadingUI>
 	);
 };
 
 /** Page Layout. */
-DashboardAddressPage.getLayout = (page, data) => (
+DashboardOrdersPage.getLayout = (page, data) => (
 	<LayoutWrapper data={data} layoutType="dashboard">
 		{page}
 	</LayoutWrapper>
@@ -65,8 +65,8 @@ DashboardAddressPage.getLayout = (page, data) => (
 export const getStaticProps = async ({ preview }) => {
 	const page = {
 		seo: {
-			metaTitle: 'Manage Addresses',
-			shareTitle: 'Manage Addresses',
+			metaTitle: 'Order History',
+			shareTitle: 'Order History',
 		},
 	};
 
@@ -78,4 +78,4 @@ export const getStaticProps = async ({ preview }) => {
 	}
 };
 
-export default DashboardAddressPage;
+export default DashboardOrdersPage;
