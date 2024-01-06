@@ -3,10 +3,6 @@ import getWishlistData from '@libs/commerce/wishlist/getWishlistData';
 
 const sanity = client({ useCdn: false, useToken: true });
 
-// product-prod_7ZAMo10OMEwNJ4 -> Noise Buds VS102 Truly Wireless Bluetooth
-// product-prod_8XxzoBKnxK5PQA -> Boult Audio Thunder Bluetooth
-// product-prod_LvJjoPKvWdwe0n -> boAt Airdopes 131 Bluetooth Headset
-
 /**
  * Remove item from wishlist.
  */

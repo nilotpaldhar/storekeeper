@@ -15,8 +15,8 @@ import resolveProductionUrl from './resolveProductionUrl';
 
 export default defineConfig({
 	title: 'storekeeper',
-	projectId: 'becnbc49',
-	dataset: 'production',
+	projectId: process.env.SANITY_STUDIO_SANITY_PROJECT_ID,
+	dataset: process.env.SANITY_STUDIO_DATASET,
 	document: {
 		productionUrl: resolveProductionUrl,
 	},
