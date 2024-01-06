@@ -5,6 +5,7 @@ const nextConfig = {
 			{ protocol: 'https', hostname: 'cdn.sanity.io' },
 			{ protocol: 'https', hostname: 'cdn.chec.io' },
 		],
+		unoptimized: process.env.IMAGE_OPTIMIZATION === 'off',
 	},
 };
 

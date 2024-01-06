@@ -1,0 +1,110 @@
+const BANNER_BASE_IMG_URL = 'https://ik.imagekit.io/haio54fgp/storekeeper/homepage/banners';
+
+const homepage = {
+	seo: {
+		shareTitle: 'Online Shopping Site for Mobiles, Electronics & More',
+		metaTitle: 'Online Shopping Site for Mobiles, Electronics & More',
+	},
+	banners: [
+		{
+			title: 'Watches that show much more than just time.',
+			description:
+				'Tincidunt ut accumsan ac pharetra cum. Justo diam enim sit sit mattis eu pellentesque. Libero pretium, arcu ut viverra sed enim vitae erat commodo.',
+			category: 'watches',
+			price: { amount: 6.99, prefix: 'Starts At' },
+			contentAlignment: 'left',
+			backdrop: `${BANNER_BASE_IMG_URL}/01/backdrop`,
+			thumbnail: `${BANNER_BASE_IMG_URL}/01/thumbnail`,
+		},
+		{
+			title: 'Upgrade to the latest smartphone today!',
+			description:
+				'Sed tristique, libero et rutrum finibus, ipsum urna hendrerit augue, quis iaculis magna metus quis leo. Nunc vel efficitur nulla, vel mattis venenatis',
+			category: 'mobiles',
+			price: { amount: 180, prefix: 'Starts At' },
+			contentAlignment: 'left',
+			backdrop: `${BANNER_BASE_IMG_URL}/02/backdrop`,
+			thumbnail: `${BANNER_BASE_IMG_URL}/02/thumbnail`,
+		},
+		{
+			title: "Don't settle for less when you can have it all",
+			description:
+				'Nam gravida nisi a consectetur efficitur. Praesent nisi felis, posuere porttitor faucibus a, aliquet vitae libero. Nulla commodo id nulla id pretium.',
+			category: 'computers-and-laptops',
+			price: { amount: 349.99, prefix: 'Starts At' },
+			contentAlignment: 'left',
+			backdrop: `${BANNER_BASE_IMG_URL}/03/backdrop`,
+			thumbnail: `${BANNER_BASE_IMG_URL}/03/thumbnail`,
+		},
+	],
+	newProducts: [
+		'vivo V29e 5G (Artistic Red, 128 GB) (8 GB RAM)',
+		'SONY X75L 108 cm (43 inch) Ultra HD (4K) LED Smart Google TV 2023 Edition  (KD-43X75L)',
+		'APPLE iPhone 12 (Green, 64 GB)',
+		'MSI Katana 17 Intel Core i7 12th Gen 12650H - (16 GB/1 TB SSD/Windows 11 Home/8 GB Graphics/NVIDIA GeForce RTX 4060/144 Hz) Katana 17 B12VFK-668IN Gaming Laptop  (17.3 Inch, Black, 2.6 Kg)',
+		'SAMSUNG Series 4 59 cm (24 inch) HD Ready LED TV  (UA24K4100ARLXL)',
+		'boAt Stone 1200F with upto 9 Hours Battery, IPX7 and RGB LEDs 14 W Bluetooth Speaker',
+		'Analog-Digital Watch - For Men 38071PP02',
+		'realme Techlife Buds T100 with up to 28 Hours Playback & AI ENC for Calls Bluetooth Headset  (Black, True Wireless)',
+		'Noise Icon 3 1.91" Display with Bluetooth Calling, Metallic finish & Voice Assistant Smartwatch',
+		'ORAIMO 20000 mAh Power Bank (12 w, Fast Charging)',
+		'Stunners 4.0 Analog Watch - For Men 3255NM02',
+		'realme Buds Wireless 2 Neo with Type-C Fast Charge & Bass Boost+ Bluetooth Headset  (Blue, In the Ear)',
+		'HP V236w 64 GB Pen Drive',
+		'ZEBRONICS Zeb Dynamic Bluetooth Wireless Headphone With Mic 34*H Playback, Call Function. Bluetooth Headset  (Blue, On the Ear)',
+		'Acer Aspire 3 Intel Core i3 12th Gen 1215U - (8 GB/512 GB SSD/Windows 11 Home) A315-59 Thin and Light Laptop  (15.6 inch, Pure Silver, 1.7 Kg)',
+		'boAt Stone 350 10 W Bluetooth Speaker',
+		'BOSCH 364 L Frost Free Triple Door 3 Star Convertible Refrigerator',
+		'Seagate One Touch with Password Protection for Windows & Mac with 3 years Data Recovery Services - Portable 2 TB External Hard Disk Drive (HDD) (Light Blue)',
+		'Aroma NB119 Titanium - 48 Hours Playtime Bluetooth Neckband Bluetooth Headset  (Green, In the Ear)',
+		'Acer Advanced I Series 80.01 cm (32 inch) HD Ready LED Smart Google TV 2023 Edition with 1.5GB RAM, 16GB Storage, 30W Dolby Audio  (AR32GR2841HDFL)',
+	],
+	topRatedProducts: [
+		'Volt Analog Watch - For Men 77085PP03',
+		'Godrej 180 L Direct Cool Single Door 2 Star Refrigerator',
+		'vivo X90 (Asteroid Black, 256 GB) (8 GB RAM)',
+		'JBL Tune 520 BT 57Hr Playtime, Pure Bass, Multi Connect Bluetooth Headset, BT 5.3LE Bluetooth Headset  (Black, On the Ear)',
+		'Lenovo Intel Core i7 12th Gen 1255U - (16 GB/512 GB SSD/Windows 11 Home) V15 G3 IAP Thin and Light Laptop  (15.6 Inch, Iron Grey, 1.7 Kg)',
+		'G-Shock Analog-Digital Watch - For Men G1159 (GM-2100-1ADR)',
+		'SAMSUNG Galaxy Book 2 Intel Core i5 12th Gen 1235U - (16 GB/512 GB SSD/Windows 11 Home) NP550 Thin and Light Laptop  (15.6 Inch, Graphite, 1.80 Kg, With MS Office)',
+		'Realme Book Prime Intel Core i5 11th Gen 11320H - (8 GB/512 GB SSD/Windows 11 Home) CloudPro002 Thin and Light Laptop  (14 Inch, Grey, 1.47 Kg)',
+		'ZEBRONICS Zeb-Astra 20 Wireless BT v5.0 Portable Speaker with TWS, 10H Backup, 10 W Bluetooth PA Speaker',
+		"Fastrack Optimus with 1.43'' AMOLED Display with AOD(466x466)|BT Calling|Calculator|IP68 Smartwatch",
+		'Analog Watch - For Men PE000017K',
+		'SAMSUNG Original 25W, Type C Power Adaptor compatible for all Samsung Devices (Super Fast Charge 3.0)',
+		'SAMSUNG Galaxy F34 5G (Orchid Violet, 128 GB) (6 GB RAM)',
+		'MSI GT77 Titan Intel Core i9 12th Gen Intel® Core™ i9-12900HX-16 Cores - (64 GB/2 TB SSD/Windows 11 Home/16 GB Graphics/NVIDIA GeForce RTX 3080Ti/120 Hz/175 W) GT77 12UHS-054IN Gaming Laptop  (17.3 inch, Black, 3.3 kg)',
+		'DELL MS3220 Wired Laser Mouse (USB 2.0, Grey)',
+		'Mi A series 80 cm (32 inch) HD Ready LED Smart Google TV 2023 Edition with HD |Dolby Audio | DTS:HD | Vivid Picture Engine',
+		'LG 80 cm (32 inch) HD Ready LED Smart WebOS TV  (32LM565BPTA)',
+		'Lenovo IdeaPad Slim 5i Intel Intel Core i5 11th Gen 1135G7 - (16 GB/512 GB SSD/Windows 11 Home) Thin and Light Laptop  (15.6 Inch, Graphite Grey, 2.48 kg, With MS Office)',
+		'OPPO F23 5G (Bold Gold, 256 GB) (8 GB RAM)',
+		'SAMSUNG 80 cm (32 Inch) HD Ready LED Smart Tizen TV 2022 Edition with Bezel-free Design  (UA32T4380AKXXL)',
+	],
+	featuredProducts: [
+		'APPLE AirPods Pro (2nd generation) with Active Noise Cancellation, Spatial Audio Bluetooth Headset  (White, True Wireless)',
+		'Boult Audio Astra with Quad Mic ENC, 48Hrs Battery, Low Latency Gaming, Made in India, 5.3v Bluetooth Headset  (White Opal, True Wireless)',
+		'SONY 310AP Wired Headset  (Blue, On the Ear)',
+		'Thomson Alpha 60 cm (24 Inch) HD Ready LED Smart Linux TV 2023 Edition with 20 W Sound Output  (24Alpha001)',
+		'SF Ocean Series Analog-Digital Watch - For Men NP77045PP02',
+		'LG 242 L Frost Free Double Door 3 Star Refrigerator with Smart Inverter',
+	],
+	specialOffer: {
+		title: 'Special Offer',
+		description: 'Experience the luxury of gaming with MSI Katana',
+		price: {
+			discount: 1199.99,
+			original: 1499.99,
+			saved: 300,
+		},
+		product:
+			'MSI Katana 17 Intel Core i7 12th Gen 12650H - (16 GB/1 TB SSD/Windows 11 Home/8 GB Graphics/NVIDIA GeForce RTX 4060/144 Hz) Katana 17 B12VFK-668IN Gaming Laptop  (17.3 Inch, Black, 2.6 Kg)',
+		date: {
+			end: '2024-12-31T16:13:00.000Z',
+			start: '2024-10-14T02:43:08.516Z',
+		},
+		thumbnail: 'https://ik.imagekit.io/haio54fgp/storekeeper/homepage/special-offer/thumbnail',
+	},
+};
+
+export default homepage;

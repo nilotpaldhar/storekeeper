@@ -9,7 +9,7 @@ import DashIcon from '@icons/regular/Dash';
  */
 const AddressSummary = ({ title, customer, address, ...props }) => {
 	const { firstname, lastname, email, phone } = customer;
-	const { street, street2, townCity, state, zip, country } = address;
+	const { street1, street2, city, region, zip, country } = address;
 
 	return (
 		<Box {...props}>
@@ -34,12 +34,12 @@ const AddressSummary = ({ title, customer, address, ...props }) => {
 					</div>
 					<div className="text-center mt-4">
 						<span>
-							<span>{street}</span>
+							<span>{street1}</span>
 							{street2 && <span className="ml-1">{street2}</span>}&#44;
 						</span>
-						{townCity && <span className="ml-1">{townCity}&#44;</span>}
+						{city && <span className="ml-1">{city}&#44;</span>}
 						<span className="ml-1">
-							<span>{state}</span>
+							<span>{region}</span>
 							<span className="ml-1">{zip}</span>&#44;
 						</span>
 						{country && <span className="ml-1">{country}</span>}
@@ -68,10 +68,10 @@ AddressSummary.propTypes = {
 		phone: PropTypes.string,
 	}).isRequired,
 	address: PropTypes.shape({
-		street: PropTypes.string,
+		street1: PropTypes.string,
 		street2: PropTypes.string,
-		townCity: PropTypes.string,
-		state: PropTypes.string,
+		city: PropTypes.string,
+		region: PropTypes.string,
 		zip: PropTypes.string,
 		country: PropTypes.string,
 	}).isRequired,

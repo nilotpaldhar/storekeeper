@@ -89,7 +89,7 @@ const handler = async (req, res) => {
 			productPayload?.related_products?.length > 0
 				? await sanity.getDocuments(
 						productPayload?.related_products?.map(({ id }) => `product-${id}`)
-				  )
+					)
 				: [];
 
 		/* ----------------------------------------------- */

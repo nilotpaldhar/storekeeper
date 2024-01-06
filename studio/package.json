@@ -2,7 +2,7 @@
 	"name": "storekeeper",
 	"version": "0.0.0",
 	"private": true,
-	"author": "Nilotpal Dhar <nilotpaldhar1997@gmail.com>",
+	"author": "Nilotpal Dhar <contact.nilotpaldhar@gmail.com>",
 	"scripts": {
 		"start": "sanity start",
 		"build": "sanity build",
@@ -12,15 +12,15 @@
 		"@sanity/color-input": "^3.1.0",
 		"@sanity/dashboard": "^3.1.6",
 		"@sanity/production-preview": "^2.35.3",
-		"@sanity/vision": "^3.20.2",
+		"@sanity/vision": "^3.23.4",
 		"prop-types": "^15.8.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.12.0",
-		"sanity": "^3.20.2",
+		"sanity": "^3.23.4",
 		"sanity-plugin-dashboard-widget-document-list": "^1.0.1",
 		"sanity-plugin-note-field": "^2.0.2",
 		"sanity-plugin-vercel-deploy": "^3.3.4",
-		"styled-components": "^6.1.1"
+		"styled-components": "^6.1.6"
 	}
 }

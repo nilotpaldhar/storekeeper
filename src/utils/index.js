@@ -1,4 +1,5 @@
 /** General. */
+export { default as mapAsset } from '@utils/general/mapAsset';
 export { default as mapPrice } from '@utils/general/mapPrice';
 export { default as isBrowser } from '@utils/general/isBrowser';
 export { default as isValidUrl } from '@utils/general/isValidUrl';

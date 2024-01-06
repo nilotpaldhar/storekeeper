@@ -1,0 +1,205 @@
+const blockContent = [
+	{
+		_key: '5ff327928510',
+		_type: 'block',
+		children: [{ _key: '33e66bda284a0', _type: 'span', marks: [], text: '10 mm Drivers' }],
+		markDefs: [],
+		style: 'h2',
+	},
+	{
+		_key: '2ac403e39e36',
+		_type: 'block',
+		children: [
+			{ _key: '54df773df2640', _type: 'span', marks: [], text: 'Et facilis iste ' },
+			{
+				_key: '54df773df2641',
+				_type: 'span',
+				marks: ['em'],
+				text: 'Aut perferendis et consequatur delectus qui ipsum doloremque',
+			},
+			{
+				_key: '54df773df2642',
+				_type: 'span',
+				marks: [],
+				text: '. Rem assumenda autem qui rerum nemoab dolores. Et nostr consequaturAd tenetur et aspernatur natus nam rerum Quis ut expedita velit et dolorum eligendi ea voluptatem voluptatem. Vel inventore aliquam aut aliquam evenietaut quaerat sed blanditiis nemo. Qui veritatis solutaea nobis ut repellendus omnis',
+			},
+		],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: 'a4a0e5b41cd4',
+		_type: 'block',
+		children: [{ _key: '66875ebe3613', _type: 'span', marks: [], text: '' }],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: '0790238f4408',
+		_type: 'block',
+		children: [{ _key: '5745b8168d90', _type: 'span', marks: [], text: '' }],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: '73dcbdea6197',
+		_type: 'block',
+		children: [{ _key: '4e77c834bb7e', _type: 'span', marks: [], text: 'Lightweight' }],
+		markDefs: [],
+		style: 'h2',
+	},
+	{
+		_key: '1f091293c028',
+		_type: 'block',
+		children: [
+			{
+				_key: '7829ed85b86b0',
+				_type: 'span',
+				marks: [],
+				text: 'Ad reprehenderit nulla et quia quamet rerum 33 architecto dolores. Id quisquam nostrumAd similique et soluta officia ut ipsum voluptatem et voluptatem voluptas sed asperiores totam in dolor galisum! Eum quia accusantium et veniam necessitatibusSit modi sed harum maiores sit sapiente reprehenderit aut quia illo eum eligendi architecto. Ut explicabo eius eos corporis voluptatesEa itaque est quidem eligendi et enim tempora id voluptatem corrupti At consequatur illum.',
+			},
+		],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: '5bb04065a6b6',
+		_type: 'block',
+		children: [{ _key: '8708c24ec51c0', _type: 'span', marks: [], text: '' }],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: '99306fe3a17b',
+		_type: 'block',
+		children: [{ _key: '94e4f4968775', _type: 'span', marks: [], text: '' }],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: '4061f81f3d46',
+		_type: 'block',
+		children: [
+			{
+				_key: 'a3b609a7db2c',
+				_type: 'span',
+				marks: [],
+				text: 'Hawk-inspired Design',
+			},
+		],
+		markDefs: [],
+		style: 'h2',
+	},
+	{
+		_key: 'e1899f7a8291',
+		_type: 'block',
+		children: [
+			{
+				_key: '5372054a57060',
+				_type: 'span',
+				marks: [],
+				text: 'Aut iusto culpaAb sunt non earum odit id cupiditate corporis. Qui iste delenitiEt molestiae qui labore error! Et iste mollitia est doloremque dolorem ',
+			},
+			{
+				_key: '5372054a57061',
+				_type: 'span',
+				marks: ['strong'],
+				text: 'Non quas aut aperiam modi non ipsam quis qui voluptas natus',
+			},
+			{
+				_key: '5372054a57062',
+				_type: 'span',
+				marks: [],
+				text: ' est nobis sapiente? 33 nisi dolorem eum voluptatibus aliasEx debitis vel asperiores dolorum non amet nulla ut necessitatibus commodi.',
+			},
+		],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: 'd410fab067bd',
+		_type: 'block',
+		children: [{ _key: 'd274c243e81c', _type: 'span', marks: [], text: '' }],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: 'c8485e05ed9b',
+		_type: 'block',
+		children: [{ _key: 'ffc925ea516d', _type: 'span', marks: [], text: '' }],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: '199b7918f5c0',
+		_type: 'block',
+		children: [
+			{
+				_key: '49763f3981e7',
+				_type: 'span',
+				marks: [],
+				text: 'Adequate Cable Length',
+			},
+		],
+		markDefs: [],
+		style: 'h2',
+	},
+	{
+		_key: 'f831c156f48f',
+		_type: 'block',
+		children: [
+			{
+				_key: '179badb9f77c0',
+				_type: 'span',
+				marks: [],
+				text: 'Qui quia provident et numquam dignissimosut consequuntur. Qui inventore dignissimosVel minus est maxime nisi id laboriosam accusamus non inventore ratione quo porro laboriosam. Ut deserunt solutaSed rerum qui incidunt iure id error nobis. Qui architecto architecto non suscipit adipisciAut fugiat in expedita explicabo sit minima dicta sit omnis dolore.',
+			},
+		],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: '7059259806dc',
+		_type: 'block',
+		children: [{ _key: 'e2e1255cbc4e', _type: 'span', marks: [], text: '' }],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: '38a1d02a4393',
+		_type: 'block',
+		children: [{ _key: '208c4232f621', _type: 'span', marks: [], text: '' }],
+		markDefs: [],
+		style: 'normal',
+	},
+	{
+		_key: 'd53cb3ab7de3',
+		_type: 'block',
+		children: [{ _key: 'fbaec4274d07', _type: 'span', marks: [], text: 'Built-in Mic' }],
+		markDefs: [],
+		style: 'h2',
+	},
+	{
+		_key: '1bc81d4da05e',
+		_type: 'block',
+		children: [
+			{ _key: '08972ff1b8710', _type: 'span', marks: [], text: 'Et soluta nihil ' },
+			{
+				_key: '08972ff1b8711',
+				_type: 'span',
+				marks: ['em'],
+				text: 'Sed dolorem in aspernatur earum id harum incidunt et atque error',
+			},
+			{
+				_key: '08972ff1b8712',
+				_type: 'span',
+				marks: [],
+				text: '? Est esse assumendaUt voluptates et nemo tempora eos minima voluptatibus. Aut dignissimos sintAut tenetur 33 iusto rerum 33 sequi animi 33 numquam voluptatem non error odio. Ut dolorem error ut tempore officiaest quasi.',
+			},
+		],
+		markDefs: [],
+		style: 'normal',
+	},
+];
+
+export default blockContent;
