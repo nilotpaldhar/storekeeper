@@ -1,3 +1,12 @@
+# [0.7.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.6.0...v0.7.0) (2024-01-06)
+
+
+### Features
+
+* add mock data for testing ([a4e4a35](https://github.com/nilotpaldhar/storekeeper/commit/a4e4a3513c25621840f3abf5af89d81a538a6425))
+
+
+
 # [0.6.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.5.0...v0.6.0) (2023-12-09)
 
 
@@ -34,15 +43,6 @@
 ### Bug Fixes
 
 * **error-page:** modify the error page layout ([1214417](https://github.com/nilotpaldhar/storekeeper/commit/12144178ba3ed5cf54f4659dd624e0c6e765c220))
-
-
-
-# [0.4.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.3.1...v0.4.0) (2023-10-30)
-
-
-### Features
-
-* **search:** add the loading skeleton on the search page ([f94eabd](https://github.com/nilotpaldhar/storekeeper/commit/f94eabdb97d6a68a5fa929db77a1fe0a9af46edf))
 
 
 
