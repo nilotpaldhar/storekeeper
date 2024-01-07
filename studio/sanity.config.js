@@ -14,9 +14,10 @@ import dashboardConfig from './dashboardConfig';
 import resolveProductionUrl from './resolveProductionUrl';
 
 export default defineConfig({
+	basePath: '/',
 	title: 'storekeeper',
-	projectId: process.env.SANITY_STUDIO_SANITY_PROJECT_ID,
-	dataset: process.env.SANITY_STUDIO_DATASET,
+	projectId: process.env.SANITY_STUDIO_SANITY_PROJECT_ID || '',
+	dataset: process.env.SANITY_STUDIO_DATASET || '',
 	document: {
 		productionUrl: resolveProductionUrl,
 	},
