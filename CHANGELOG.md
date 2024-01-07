@@ -1,3 +1,12 @@
+## [0.7.2](https://github.com/nilotpaldhar/storekeeper/compare/v0.7.1...v0.7.2) (2024-01-07)
+
+
+### Bug Fixes
+
+* remove postinstall script ([826c804](https://github.com/nilotpaldhar/storekeeper/commit/826c8045520b8db40b36ff422026b38c1cec47af))
+
+
+
 ## [0.7.1](https://github.com/nilotpaldhar/storekeeper/compare/v0.7.0...v0.7.1) (2024-01-07)
 
 
@@ -34,15 +43,6 @@
 ### Features
 
 * **webhook:** add a webhook to handle new users created during the checkout process ([723a80c](https://github.com/nilotpaldhar/storekeeper/commit/723a80c86869782025bd504b5f1d6fbb195ff8be))
-
-
-
-## [0.4.2](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.1...v0.4.2) (2023-11-15)
-
-
-### Bug Fixes
-
-* **image:** add appropriate sizes attribute to images ([51c4395](https://github.com/nilotpaldhar/storekeeper/commit/51c43959ded2ad5a3707093884d73f311ca33bef))
 
 
 
