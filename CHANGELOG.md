@@ -1,3 +1,12 @@
+## [0.7.1](https://github.com/nilotpaldhar/storekeeper/compare/v0.7.0...v0.7.1) (2024-01-07)
+
+
+### Bug Fixes
+
+* **sanity-studio:** remove the 'document-list-widget', which has caused the Sanity Studio to crash ([d6028dd](https://github.com/nilotpaldhar/storekeeper/commit/d6028dd19029ce4ad496d9eb9845ff0401ecfdff))
+
+
+
 # [0.7.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.6.0...v0.7.0) (2024-01-06)
 
 
@@ -34,15 +43,6 @@
 ### Bug Fixes
 
 * **image:** add appropriate sizes attribute to images ([51c4395](https://github.com/nilotpaldhar/storekeeper/commit/51c43959ded2ad5a3707093884d73f311ca33bef))
-
-
-
-## [0.4.1](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.0...v0.4.1) (2023-11-02)
-
-
-### Bug Fixes
-
-* **error-page:** modify the error page layout ([1214417](https://github.com/nilotpaldhar/storekeeper/commit/12144178ba3ed5cf54f4659dd624e0c6e765c220))
 
 
 
