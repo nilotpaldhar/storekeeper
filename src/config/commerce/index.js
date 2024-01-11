@@ -1,20 +1,8 @@
 import CommerceSDK from '@chec/commerce.js';
+import { checPublicApiKey, checSecretApiKey, checConfig } from '@config/commerce/constants';
 
-/** Chec API Keys. */
-const checPublicApiKey = process.env.CHEC_PUBLIC_API_KEY;
-const checSecretApiKey = process.env.CHEC_SECRET_API_KEY;
 const devEnv = process.env.NODE_ENV === 'development';
-
-/** Provide Commerce configuration options. */
-export const commerceConfig = {
-	axiosConfig: {
-		headers: {
-			'X-Chec-Agent': 'commerce.js/v2',
-			'Chec-Version': '2022-07-21',
-		},
-	},
-	allowSecretKey: false,
-};
+const commerceConfig = checConfig;
 
 /** Setup the Commerce client. */
 export const getClient = ({ useSecretKey = false } = {}) => {
