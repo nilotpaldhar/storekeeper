@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import formatOrder from '@utils/checkout/formatOrder';
 
 import { clearCart } from '@store/slices/cart/cart.thunks';
 import { reset as resetCheckoutSteps } from '@store/slices/checkoutSteps';
@@ -34,11 +35,12 @@ export const placeOrder = createAsyncThunk(
 
 		try {
 			const order = await captureOrder(data);
+			const formatedOrder = await formatOrder(order);
 
 			dispatch(clearCart());
-			dispatch(fillLastOrder(order));
+			dispatch(fillLastOrder(formatedOrder));
 
-			return order;
+			return formatedOrder;
 		} catch (err) {
 			const message = err?.response?.data?.error;
 			return rejectWithValue(message || null);
