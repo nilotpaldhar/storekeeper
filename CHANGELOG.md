@@ -1,3 +1,12 @@
+## [0.7.3](https://github.com/nilotpaldhar/storekeeper/compare/v0.7.2...v0.7.3) (2024-01-11)
+
+
+### Bug Fixes
+
+* **checkout:** fix checkout client error ([933aa13](https://github.com/nilotpaldhar/storekeeper/commit/933aa13eef3922fcaef283f484047756e8bc5e09))
+
+
+
 ## [0.7.2](https://github.com/nilotpaldhar/storekeeper/compare/v0.7.1...v0.7.2) (2024-01-07)
 
 
@@ -34,15 +43,6 @@
 * **dashboard:** add profile page on dashboard ([d85782e](https://github.com/nilotpaldhar/storekeeper/commit/d85782eba3b019b5b65e88f8e5bd7ca239849951))
 * **dashboard:** add the address management page on the dashboard ([45ea9ab](https://github.com/nilotpaldhar/storekeeper/commit/45ea9abfcdeb212814a5b9c849fbc84dd65e2730))
 * **dashboard:** add the order management page on the dashboard ([3291be3](https://github.com/nilotpaldhar/storekeeper/commit/3291be3434b10765fd3108e0f7d05558f5140fed))
-
-
-
-# [0.5.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.2...v0.5.0) (2023-12-03)
-
-
-### Features
-
-* **webhook:** add a webhook to handle new users created during the checkout process ([723a80c](https://github.com/nilotpaldhar/storekeeper/commit/723a80c86869782025bd504b5f1d6fbb195ff8be))
 
 
 
