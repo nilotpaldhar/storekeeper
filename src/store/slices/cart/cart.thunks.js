@@ -1,13 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
 import * as cartApi from '@libs/commerce/cart/helpers';
+import parseErrMsg from '@store/utils/parseErrMsg';
 
 export const fetchCart = createAsyncThunk('cart/fetchCart', async (_, { rejectWithValue }) => {
 	try {
 		const contents = await cartApi.getCart();
 		return contents;
 	} catch (err) {
-		const message = err?.response?.data?.error;
+		const message = parseErrMsg(err);
 		return rejectWithValue(message);
 	}
 });
@@ -17,7 +18,7 @@ export const clearCart = createAsyncThunk('cart/clearCart', async (_, { rejectWi
 		const contents = await cartApi.clearCart();
 		return contents;
 	} catch (err) {
-		const message = err?.response?.data?.error;
+		const message = parseErrMsg(err);
 		return rejectWithValue(message);
 	}
 });
@@ -30,9 +31,11 @@ export const addCartDiscount = createAsyncThunk(
 			toast.success('Discount code added');
 			return contents;
 		} catch (err) {
-			const message =
-				err?.response?.data?.error ??
-				'Failed to add discount code. Please check your discount code';
+			const message = parseErrMsg(
+				err,
+				'Failed to add discount code. Please check your discount code'
+			);
+
 			toast.error(message);
 			return rejectWithValue(message);
 		}
@@ -47,7 +50,7 @@ export const removeCartDiscount = createAsyncThunk(
 			toast.success('Discount code removed');
 			return contents;
 		} catch (err) {
-			const message = err?.response?.data?.error ?? 'Failed to remove discount code';
+			const message = parseErrMsg(err, 'Failed to remove discount code');
 			toast.error(message);
 			return rejectWithValue(message);
 		}

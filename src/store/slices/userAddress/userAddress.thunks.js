@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
+import parseErrMsg from '@store/utils/parseErrMsg';
 
 const BASE_URL = '/api/user/addresses';
 
@@ -25,7 +26,7 @@ export const fetchAddresses = createAsyncThunk(
 				},
 			};
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || 'Failed to load addresses');
 		}
 	}
@@ -52,7 +53,7 @@ export const loadMoreAddresses = createAsyncThunk(
 				},
 			};
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || 'Failed to load addresses');
 		}
 	}
@@ -67,7 +68,7 @@ export const createAddress = createAsyncThunk(
 			toast.success('The address has been successfully added');
 			return res?.data?.data;
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || 'Failed to create address');
 		}
 	}
@@ -82,7 +83,7 @@ export const updateAddress = createAsyncThunk(
 			toast.success('The address has been updated successfully');
 			return res?.data?.data;
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || 'Failed to update address');
 		}
 	}
@@ -97,7 +98,7 @@ export const deleteAddress = createAsyncThunk(
 			toast.success('The address has been deleted successfully');
 			return addressId;
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || 'Failed to delete address');
 		}
 	}
