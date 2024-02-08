@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
 
 import { fillWishlist } from '@store/slices/wishlist';
+import parseErrMsg from '@store/utils/parseErrMsg';
 import * as wishlistApi from '@libs/commerce/wishlist/helpers';
 
 export const addWishlistItem = createAsyncThunk(
@@ -13,7 +14,7 @@ export const addWishlistItem = createAsyncThunk(
 			toast.success('The product has been successfully added to your wishlist');
 			return wishlist;
 		} catch (err) {
-			const message = err?.response?.data?.error ?? 'Failed to add product to wishlist';
+			const message = parseErrMsg(err, 'Failed to add product to wishlist');
 			toast.error(message);
 			return rejectWithValue(message);
 		}
@@ -29,7 +30,7 @@ export const removeWishlistItem = createAsyncThunk(
 			toast.success('The product has been removed from your wishlist');
 			return wishlist;
 		} catch (err) {
-			const message = err?.response?.data?.error ?? 'Failed to remove product from wishlist';
+			const message = parseErrMsg(err, 'Failed to remove product from wishlist');
 			toast.error(message);
 			return rejectWithValue(message);
 		}

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import parseErrMsg from '@store/utils/parseErrMsg';
 
 const BASE_URL = '/api/user/orders';
 
@@ -24,7 +25,7 @@ export const fetchOrders = createAsyncThunk(
 				},
 			};
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || 'Failed to load orders');
 		}
 	}
@@ -51,7 +52,7 @@ export const loadMoreOrders = createAsyncThunk(
 				},
 			};
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || 'Failed to load orders');
 		}
 	}

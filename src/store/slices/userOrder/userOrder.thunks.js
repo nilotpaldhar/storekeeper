@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import parseErrMsg from '@store/utils/parseErrMsg';
 
 const BASE_URL = '/api/user/orders';
 
@@ -13,7 +14,7 @@ export const fetchOrder = createAsyncThunk(
 			const res = await axios.get(`${BASE_URL}/${id}`);
 			return res.data?.data;
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || 'Failed to load order details');
 		}
 	}

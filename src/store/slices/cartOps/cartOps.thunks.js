@@ -2,7 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
 
 import { fillCart } from '@store/slices/cart';
+import parseErrMsg from '@store/utils/parseErrMsg';
 import { fillWishlist } from '@store/slices/wishlist';
+
 import * as cartApi from '@libs/commerce/cart/helpers';
 import { addWishlistItem } from '@libs/commerce/wishlist/helpers';
 
@@ -17,7 +19,7 @@ export const addCartItem = createAsyncThunk(
 			toast.success('The product has been successfully added to your cart');
 			return cart;
 		} catch (err) {
-			const message = err?.response?.data?.error ?? 'Failed to add product to cart';
+			const message = parseErrMsg(err, 'Failed to add product to cart');
 			toast.error(message);
 			return rejectWithValue(message);
 		}
@@ -34,7 +36,7 @@ export const updateCartItem = createAsyncThunk(
 			dispatch(fillCart(cart));
 			return cart;
 		} catch (err) {
-			const message = err?.response?.data?.error ?? 'Failed to update cart. Please try again';
+			const message = parseErrMsg(err, 'Failed to update cart. Please try again');
 			toast.error(message);
 			return rejectWithValue(message);
 		}
@@ -52,7 +54,7 @@ export const removeCartItem = createAsyncThunk(
 			toast.success('The product has been removed from your cart');
 			return cart;
 		} catch (err) {
-			const message = err?.response?.data?.error ?? 'Failed to remove product from cart';
+			const message = parseErrMsg(err, 'Failed to remove product from cart');
 			toast.error(message);
 			return rejectWithValue(message);
 		}
@@ -74,7 +76,7 @@ export const moveToWishlist = createAsyncThunk(
 			toast.success('The product has been moved to your wishlist');
 			return cart;
 		} catch (err) {
-			const message = err?.response?.data?.error ?? 'Failed to move product to wishlist';
+			const message = parseErrMsg(err, 'Failed to move product to wishlist');
 			toast.error(message);
 			return rejectWithValue(message);
 		}

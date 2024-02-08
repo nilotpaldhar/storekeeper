@@ -5,6 +5,7 @@ import formatOrder from '@utils/checkout/formatOrder';
 import { clearCart } from '@store/slices/cart/cart.thunks';
 import { reset as resetCheckoutSteps } from '@store/slices/checkoutSteps';
 import { fillLastOrder } from '@store/slices/lastOrder';
+import parseErrMsg from '@store/utils/parseErrMsg';
 
 import { captureOrder } from '@libs/commerce/checkout/helpers';
 
@@ -15,7 +16,7 @@ export const initCheckout = createAsyncThunk(
 			const res = await axios.get(`/api/commerce/checkout/token?id=${token}`);
 			return res.data?.data;
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || 'Checkout error! Sorry something went wrong.');
 		}
 	}
@@ -42,7 +43,7 @@ export const placeOrder = createAsyncThunk(
 
 			return formatedOrder;
 		} catch (err) {
-			const message = err?.response?.data?.error;
+			const message = parseErrMsg(err);
 			return rejectWithValue(message || null);
 		} finally {
 			dispatch(resetCheckoutSteps());
