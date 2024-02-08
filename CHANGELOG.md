@@ -1,3 +1,12 @@
+## [0.7.4](https://github.com/nilotpaldhar/storekeeper/compare/v0.7.3...v0.7.4) (2024-02-08)
+
+
+### Bug Fixes
+
+* **ci:** update node version for CI workflow ([44103d5](https://github.com/nilotpaldhar/storekeeper/commit/44103d507ceab9113401ebd8a430d7e10c6670d2))
+
+
+
 ## [0.7.3](https://github.com/nilotpaldhar/storekeeper/compare/v0.7.2...v0.7.3) (2024-01-11)
 
 
@@ -31,18 +40,6 @@
 ### Features
 
 * add mock data for testing ([a4e4a35](https://github.com/nilotpaldhar/storekeeper/commit/a4e4a3513c25621840f3abf5af89d81a538a6425))
-
-
-
-# [0.6.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.5.0...v0.6.0) (2023-12-09)
-
-
-### Features
-
-* **dashboard:** add dashboard layout ([44cdd05](https://github.com/nilotpaldhar/storekeeper/commit/44cdd059739bfaafe637d7194d4435a3dc299359))
-* **dashboard:** add profile page on dashboard ([d85782e](https://github.com/nilotpaldhar/storekeeper/commit/d85782eba3b019b5b65e88f8e5bd7ca239849951))
-* **dashboard:** add the address management page on the dashboard ([45ea9ab](https://github.com/nilotpaldhar/storekeeper/commit/45ea9abfcdeb212814a5b9c849fbc84dd65e2730))
-* **dashboard:** add the order management page on the dashboard ([3291be3](https://github.com/nilotpaldhar/storekeeper/commit/3291be3434b10765fd3108e0f7d05558f5140fed))
 
 
 
