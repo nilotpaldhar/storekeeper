@@ -1,0 +1,21 @@
+echo "🛠️ Fixing lint and format issues (if any)..."
+npm run fix:all
+
+echo "🔍 Verifying formatting, linting, and build..."
+
+npm run format:check || {
+  echo "❌ Prettier check failed even after fix. Run: npm run format:fix"
+  exit 1
+}
+
+npm run lint:check || {
+  echo "❌ ESLint check failed even after fix. Run: npm run lint:fix"
+  exit 1
+}
+
+npm run build || {
+  echo "❌ Build failed. Fix errors above."
+  exit 1
+}
+
+echo "✅ All checks passed. Committing..."

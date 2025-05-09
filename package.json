@@ -1,0 +1,63 @@
+{
+  "name": "storekeeper",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Nilotpal Dhar",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "clean": "rimraf .next",
+    "lint": "npm run lint:check",
+    "lint:check": "next lint",
+    "lint:fix": "eslint . --fix",
+    "format": "npm run format:check",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "check:all": "npm run lint && npm run format  && npm run build",
+    "fix:all": "npm run lint:fix && npm run format:fix",
+    "prepare": "husky",
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nilotpaldhar/storekeeper"
+  },
+  "bugs": {
+    "url": "https://github.com/nilotpaldhar/storekeeper/issues"
+  },
+  "dependencies": {
+    "next": "15.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.32.0",
+    "@typescript-eslint/parser": "^8.32.0",
+    "commitizen": "^4.3.1",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
