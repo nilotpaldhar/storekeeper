@@ -27,21 +27,6 @@
 	--color-input: var(--input);
 	--color-border: var(--border);
 
-	--color-destructive: var(--error-600);
-	--color-destructive-foreground: var(--neutral-50);
-
-	--color-accent: var(--primary-600);
-	--color-accent-foreground: var(--neutral-50);
-
-	--color-muted: var(--neutral-100);
-	--color-muted-foreground: var(--neutral-500);
-
-	--color-secondary: var(--neutral-200);
-	--color-secondary-foreground: var(--neutral-700);
-
-	--color-primary: var(--primary-600);
-	--color-primary-foreground: var(--neutral-50);
-
 	--color-popover: var(--popover);
 	--color-popover-foreground: var(--popover-foreground);
 
@@ -52,6 +37,78 @@
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
+
+	--color-white: #ffffff;
+	--color-black: #000000;
+
+	--color-primary-50: #ddf3ff;
+	--color-primary-100: #aedaff;
+	--color-primary-200: #91d5ff;
+	--color-primary-300: #4aa6ff;
+	--color-primary-400: #1a8cfe;
+	--color-primary-500: #0173e5;
+	--color-primary-600: #0059b3;
+	--color-primary-700: #004081;
+	--color-primary-800: #002650;
+	--color-primary-900: #000e20;
+
+	--color-neutral-50: #f5f5f5;
+	--color-neutral-100: #f0f0f0;
+	--color-neutral-200: #d9d9d9;
+	--color-neutral-300: #bfbfbf;
+	--color-neutral-400: #8c8c8c;
+	--color-neutral-500: #595959;
+	--color-neutral-600: #434343;
+	--color-neutral-700: #262626;
+	--color-neutral-800: #1f1f1f;
+	--color-neutral-900: #141414;
+
+	--color-success-50: #f6ffed;
+	--color-success-100: #d9f7be;
+	--color-success-200: #b7eb8f;
+	--color-success-300: #95de64;
+	--color-success-400: #73d13d;
+	--color-success-500: #52c41a;
+	--color-success-600: #389e0d;
+	--color-success-700: #237804;
+	--color-success-800: #135200;
+	--color-success-900: #092b00;
+
+	--color-warning-50: #feffe6;
+	--color-warning-100: #ffffb8;
+	--color-warning-200: #fffb8f;
+	--color-warning-300: #fff566;
+	--color-warning-400: #ffec3d;
+	--color-warning-500: #fadb14;
+	--color-warning-600: #d4b106;
+	--color-warning-700: #ad8b00;
+	--color-warning-800: #876800;
+	--color-warning-900: #614700;
+
+	--color-error-50: #fff1f0;
+	--color-error-100: #ffccc7;
+	--color-error-200: #ffa39e;
+	--color-error-300: #ff7875;
+	--color-error-400: #ff4d4f;
+	--color-error-500: #f5222d;
+	--color-error-600: #cf1322;
+	--color-error-700: #a8071a;
+	--color-error-800: #820014;
+	--color-error-900: #5c0011;
+
+	--color-social-google: #ea4335;
+	--color-social-facebook: #1877f2;
+	--color-social-twitter: #1da1f2;
+	--color-social-instagram: #405de6;
+	--color-social-github: #333333;
+	--color-social-linkedin: #0077b5;
+
+	--breakpoint-sm: 36rem; /* 576px */
+	--breakpoint-md: 48rem; /* 768px */
+	--breakpoint-lg: 62rem; /* 992px */
+	--breakpoint-xl: 75rem; /* 1200px */
+	--breakpoint-2xl: 87.5rem; /* 1400px */
+	--breakpoint-3xl: 112.5rem; /* 1800px */
 }
 
 :root {
@@ -68,69 +125,7 @@
 
 	--border: oklch(0.922 0 0);
 	--input: oklch(0.922 0 0);
-	--ring: oklch(0.708 0 0);
-
-	--primary-50: #ddf3ff;
-	--primary-100: #aedaff;
-	--primary-200: #91d5ff;
-	--primary-300: #4aa6ff;
-	--primary-400: #1a8cfe;
-	--primary-500: #0173e5;
-	--primary-600: #0059b3;
-	--primary-700: #004081;
-	--primary-800: #002650;
-	--primary-900: #000e20;
-
-	--neutral-50: #f5f5f5;
-	--neutral-100: #f0f0f0;
-	--neutral-200: #d9d9d9;
-	--neutral-300: #bfbfbf;
-	--neutral-400: #8c8c8c;
-	--neutral-500: #595959;
-	--neutral-600: #434343;
-	--neutral-700: #262626;
-	--neutral-800: #1f1f1f;
-	--neutral-900: #141414;
-
-	--success-50: #f6ffed;
-	--success-100: #d9f7be;
-	--success-200: #b7eb8f;
-	--success-300: #95de64;
-	--success-400: #73d13d;
-	--success-500: #52c41a;
-	--success-600: #389e0d;
-	--success-700: #237804;
-	--success-800: #135200;
-	--success-900: #092b00;
-
-	--warning-50: #feffe6;
-	--warning-100: #ffffb8;
-	--warning-200: #fffb8f;
-	--warning-300: #fff566;
-	--warning-400: #ffec3d;
-	--warning-500: #fadb14;
-	--warning-600: #d4b106;
-	--warning-700: #ad8b00;
-	--warning-800: #876800;
-	--warning-900: #614700;
-
-	--error-50: #fff1f0;
-	--error-100: #ffccc7;
-	--error-200: #ffa39e;
-	--error-300: #ff7875;
-	--error-400: #ff4d4f;
-	--error-500: #f5222d;
-	--error-600: #cf1322;
-	--error-700: #a8071a;
-	--error-800: #820014;
-	--error-900: #5c0011;
-
-	--social-google: #ea4335;
-	--social-facebook: #1877f2;
-	--social-twitter: #1da1f2;
-	--social-instagram: #405de6;
-	--social-github: #333333;
-	--social-linkedin: #0077b5;
+	--ring: red;
 
 	--chart-1: oklch(0.646 0.222 41.116);
 	--chart-2: oklch(0.6 0.118 184.704);
