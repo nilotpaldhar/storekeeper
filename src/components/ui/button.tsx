@@ -39,9 +39,9 @@ const buttonVariants = cva(
 					"text-error-600 hover:shadow-none hover:text-error-400 focus-visible:border-error-600 focus-visible:ring-error-600",
 			},
 			size: {
-				default: "h-10 px-4 py-2 has-[>svg]:px-3",
-				sm: "h-8  gap-1.5 px-3 has-[>svg]:px-2.5",
-				lg: "h-10   px-6 has-[>svg]:px-4",
+				default: "h-10 px-4 py-2",
+				sm: "h-8  gap-1.5 px-3",
+				lg: "h-10 px-6",
 				icon: "size-10",
 			},
 		},
