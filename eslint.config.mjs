@@ -38,6 +38,7 @@ export default defineConfig([
 		"**/CONTRIBUTING.md",
 		"**/README.md",
 		"**/eslint.config.mjs",
+		"src/types/**",
 	]),
 
 	// Core ESLint config
@@ -83,6 +84,7 @@ export default defineConfig([
 			"@typescript-eslint/explicit-module-boundary-types": "off",
 			"@typescript-eslint/no-explicit-any": "warn",
 			"@typescript-eslint/no-empty-function": ["warn", { allow: ["arrowFunctions"] }],
+			"@typescript-eslint/consistent-type-definitions": ["error", "type"],
 
 			// React Hooks
 			"react-hooks/rules-of-hooks": "error",
