@@ -15,12 +15,23 @@ const page = defineType({
 			validation: (rule) => rule.required().error("The title is required"),
 		}),
 		defineField({
-			title: "URL Slug",
 			name: "slug",
+			title: "URL Slug",
 			type: "slug",
 			description: "(required)",
 			options: { source: "title", maxLength: 96 },
 			validation: (rule) => rule.required().error("The slug is required"),
+		}),
+		defineField({
+			name: "pageContent",
+			title: "Page Content",
+			type: "array",
+			of: [{ type: "block" }],
+		}),
+		defineField({
+			name: "seo",
+			title: "SEO / Share Settings",
+			type: "seo",
 		}),
 	],
 	preview: {
