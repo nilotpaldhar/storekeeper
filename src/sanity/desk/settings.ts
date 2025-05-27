@@ -1,5 +1,12 @@
 import type { StructureBuilder } from "sanity/structure";
-import { Globe, Megaphone, Settings, SlidersHorizontal } from "lucide-react";
+import {
+	AlignHorizontalJustifyEnd,
+	Globe,
+	Megaphone,
+	PanelTop,
+	Settings,
+	SlidersHorizontal,
+} from "lucide-react";
 
 const generalSettingsMenu = (S: StructureBuilder) =>
 	S.listItem()
@@ -8,6 +15,22 @@ const generalSettingsMenu = (S: StructureBuilder) =>
 			S.editor().id("generalSettings").schemaType("generalSettings").documentId("generalSettings")
 		)
 		.icon(SlidersHorizontal);
+
+const headerSettingsMenu = (S: StructureBuilder) =>
+	S.listItem()
+		.title("Header Configuration")
+		.child(
+			S.editor().id("headerSettings").schemaType("headerSettings").documentId("headerSettings")
+		)
+		.icon(PanelTop);
+
+const footerSettingsMenu = (S: StructureBuilder) =>
+	S.listItem()
+		.title("Footer Configuration")
+		.child(
+			S.editor().id("footerSettings").schemaType("footerSettings").documentId("footerSettings")
+		)
+		.icon(AlignHorizontalJustifyEnd);
 
 const defaultSeoSettingsMenu = (S: StructureBuilder) =>
 	S.listItem()
@@ -32,6 +55,9 @@ const settings = (S: StructureBuilder) =>
 				.title("Settings")
 				.items([
 					generalSettingsMenu(S),
+					S.divider(),
+					headerSettingsMenu(S),
+					footerSettingsMenu(S),
 					S.divider(),
 					defaultSeoSettingsMenu(S),
 					socialSettingsMenu(S),

@@ -5,16 +5,25 @@
 import type { ListItemBuilder, StructureResolver } from "sanity/structure";
 
 import { pages } from "@/sanity/desk/pages";
+import { menus } from "@/sanity/desk/menus";
 import { settings } from "@/sanity/desk/settings";
 
 const hiddenDocTypes = (listItem: ListItemBuilder) =>
 	![
-		"page",
+		// Pages
 		"homePage",
 		"notFoundPage",
+		"page",
+
+		// Settings
 		"generalSettings",
 		"seoSettings",
 		"socialSettings",
+		"headerSettings",
+		"footerSettings",
+
+		// Navigation
+		"menu",
 	].includes(listItem.getId() ?? "");
 
 const structure: StructureResolver = (S) =>
@@ -22,6 +31,8 @@ const structure: StructureResolver = (S) =>
 		.title("Website")
 		.items([
 			pages(S),
+			S.divider(),
+			menus(S),
 			S.divider(),
 			settings(S),
 			S.divider(),

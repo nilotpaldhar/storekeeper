@@ -7,7 +7,6 @@
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { noteField } from "sanity-plugin-note-field";
 
 import { dataset, projectId, apiVersion, projectTitle } from "./src/sanity/env";
 import { schema } from "./src/sanity/schemas";
@@ -24,6 +23,5 @@ export default defineConfig({
 		visionTool({
 			defaultApiVersion: apiVersion,
 		}),
-		noteField(),
 	],
 });
