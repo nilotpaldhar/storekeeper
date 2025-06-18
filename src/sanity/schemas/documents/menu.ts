@@ -15,21 +15,31 @@ const menu = defineType({
 			validation: (rule) => rule.required().error("Menu name is required"),
 		}),
 		defineField({
+			name: "isMegaDropdown",
+			title: "Use Mega Dropdown?",
+			type: "boolean",
+			initialValue: false,
+			description: "Toggle between standard items and mega dropdown",
+		}),
+		defineField({
 			name: "items",
 			title: "Menu Items",
 			type: "array",
 			of: [{ type: "navLink" }, { type: "navPage" }, { type: "navDropdown" }],
-			validation: (rule) => rule.required().min(1).error("At least one menu item is required"),
+			hidden: ({ parent }) => parent?.isMegaDropdown === true,
+		}),
+		defineField({
+			name: "megaDropdowns",
+			title: "Mega Dropdown Items",
+			type: "array",
+			of: [{ type: "navMegaDropdown" }],
+			hidden: ({ parent }) => parent?.isMegaDropdown !== true,
 		}),
 	],
 	preview: {
-		select: {
-			title: "title",
-		},
+		select: { title: "title" },
 		prepare({ title }) {
-			return {
-				title,
-			};
+			return { title };
 		},
 	},
 });
