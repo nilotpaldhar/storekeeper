@@ -8,20 +8,31 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 
-import { dataset, projectId, apiVersion, projectTitle } from "./src/sanity/env";
+import { env } from "./src/lib/env";
 import { schema } from "./src/sanity/schemas";
 import { structure } from "./src/sanity/structure";
+import { resolveProductionUrl } from "./src/sanity/helpers/resolve-production-url";
+
+import { CustomNavbar } from "./src/components/sanity/custom-navbar";
 
 export default defineConfig({
 	basePath: "/studio",
-	title: projectTitle,
-	projectId,
-	dataset,
+	title: env.NEXT_PUBLIC_SANITY_PROJECT_TITLE,
+	projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+	dataset: env.NEXT_PUBLIC_SANITY_DATASET,
 	schema,
+	studio: {
+		components: {
+			navbar: CustomNavbar,
+		},
+	},
 	plugins: [
 		structureTool({ structure }),
 		visionTool({
-			defaultApiVersion: apiVersion,
+			defaultApiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION,
 		}),
 	],
+	document: {
+		productionUrl: resolveProductionUrl,
+	},
 });

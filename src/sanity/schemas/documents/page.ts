@@ -1,6 +1,8 @@
 import { defineField, defineType } from "sanity";
 import { Link2 } from "lucide-react";
 
+import { noSlashSlugValidation } from "@/sanity/helpers/slug-validation";
+
 const page = defineType({
 	name: "page",
 	title: "Pages",
@@ -20,7 +22,7 @@ const page = defineType({
 			type: "slug",
 			description: "(required)",
 			options: { source: "title", maxLength: 96 },
-			validation: (rule) => rule.required().error("The slug is required"),
+			validation: noSlashSlugValidation,
 		}),
 		defineField({
 			name: "pageContent",

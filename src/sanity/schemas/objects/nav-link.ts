@@ -61,8 +61,8 @@ const navLink = defineType({
 							return "Path must not be a full URL. Use a relative slug like 'about' or 'about/mission'.";
 						}
 
-						if (/[^a-zA-Z0-9\-/]/.test(value)) {
-							return "Only lowercase letters, numbers, dashes, and slashes are allowed.";
+						if (/[^a-zA-Z0-9\-/#]/.test(value)) {
+							return "Only lowercase letters, numbers, dashes, slashes, and hash symbols are allowed.";
 						}
 					}
 					return true;
@@ -78,7 +78,7 @@ const navLink = defineType({
 			path: "path",
 		},
 		prepare({ label, isExternal, url, path }) {
-			const subtitle = isExternal ? url : `/${path}`;
+			const subtitle = isExternal ? url : `${path || "(no link)"}`;
 			return {
 				title: label,
 				subtitle: subtitle || "(no link)",

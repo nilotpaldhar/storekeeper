@@ -18,7 +18,6 @@ const generalSettings = defineType({
 			title: "Site Description",
 			type: "text",
 			rows: 3,
-			description: "The description of your site will appear in the footer area",
 		}),
 		defineField({
 			name: "siteURL",
