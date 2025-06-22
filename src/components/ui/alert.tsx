@@ -32,11 +32,10 @@ const alertVariants = cva("  relative flex items-center px-4 py-2 space-x-2", {
 	},
 });
 
-interface AlertProps
-	extends React.HTMLAttributes<HTMLDivElement>,
-		VariantProps<typeof alertVariants> {
-	closable?: boolean;
-}
+type AlertProps = React.HTMLAttributes<HTMLDivElement> &
+	VariantProps<typeof alertVariants> & {
+		closable?: boolean;
+	};
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 	({ closable = true, className, children, variant, align, ...props }, ref) => {
