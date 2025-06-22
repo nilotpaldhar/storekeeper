@@ -1,4 +1,19 @@
-# 0.1.0 (2025-05-26)
+# [0.2.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.1.0...v0.2.0) (2025-06-22)
+
+
+### Features
+
+* **logging:** add centralized withLogger HOF and logEvent helper for standardized API logging ([2539d8b](https://github.com/nilotpaldhar/storekeeper/commit/2539d8b98b55b90868418749f2f007d1a9429067))
+* **sanity:** add product-related schemas and SyncSkusBanner for syncing SKUs with Commerce Layer ([787c154](https://github.com/nilotpaldhar/storekeeper/commit/787c1541072fda614348b2de844e2914052391b2))
+* **sanity:** add sanity schema for generalSettings, seoSettings, and socialSettings ([1476159](https://github.com/nilotpaldhar/storekeeper/commit/14761590055d210fcebd93c8a5567b6e1782f911))
+* **sanity:** add sanity schemas for headerSettings, footerSettings, and menu ([1c5b22a](https://github.com/nilotpaldhar/storekeeper/commit/1c5b22acb21493e4bac541a15603934079239934))
+* **sanity:** add Sanity schemas for page, homePage, and notFoundPage ([809baff](https://github.com/nilotpaldhar/storekeeper/commit/809baff9208b018afdf3fae23bef761a3695295f))
+* **sanity:** add schema for navMegaDropdown; refine menu schema structure ([d0390bb](https://github.com/nilotpaldhar/storekeeper/commit/d0390bb09ba350e7457dc18dc6de6e8d0424c7ce))
+* **sanity:** initialize Sanity Studio with basic configuration ([c17c296](https://github.com/nilotpaldhar/storekeeper/commit/c17c2961d0ade8259debae53dcfad842de348279))
+
+
+
+# [0.1.0](https://github.com/nilotpaldhar/storekeeper/compare/9cef2e05ea76a688759c403a328e991374a7f966...v0.1.0) (2025-05-26)
 
 
 ### Features
