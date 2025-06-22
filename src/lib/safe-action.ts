@@ -1,5 +1,6 @@
 import { createSafeActionClient } from "next-safe-action";
 import { z } from "zod";
+import { logEvent } from "@/lib/logging/log-event";
 
 const actionClient = createSafeActionClient({
 	defineMetadataSchema() {
@@ -7,12 +8,7 @@ const actionClient = createSafeActionClient({
 	},
 	handleServerError(err, utils) {
 		const { metadata } = utils;
-
-		console.error({
-			message: err.message,
-			actionName: metadata?.actionName,
-		});
-
+		logEvent({ level: "error", fn: metadata?.actionName, event: "fail", error: err });
 		return err.message;
 	},
 });

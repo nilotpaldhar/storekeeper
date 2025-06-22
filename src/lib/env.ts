@@ -3,6 +3,8 @@ import { z } from "zod";
 
 const env = createEnv({
 	server: {
+		NODE_ENV: z.enum(["development", "test", "production"]),
+
 		SANITY_ACCESS_TOKEN: z.string(),
 		SANITY_COMMERCE_SKU_SYNC_SECRET: z.string().optional(),
 
@@ -19,6 +21,8 @@ const env = createEnv({
 		NEXT_PUBLIC_SANITY_PREVIEW_TOKEN: z.string().optional(),
 	},
 	runtimeEnv: {
+		NODE_ENV: process.env.NODE_ENV,
+
 		SANITY_ACCESS_TOKEN: process.env.SANITY_ACCESS_TOKEN,
 		SANITY_COMMERCE_SKU_SYNC_SECRET: process.env.SANITY_COMMERCE_SKU_SYNC_SECRET,
 
