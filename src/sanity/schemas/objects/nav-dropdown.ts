@@ -18,7 +18,13 @@ const navDropdown = defineType({
 			title: "Items",
 			name: "items",
 			type: "array",
-			of: [{ type: "navLink" }, { type: "navPage" }],
+			of: [
+				{ type: "navLink" },
+				{ type: "navPage" },
+				{ type: "navProduct" },
+				{ type: "navTaxon" },
+				{ type: "navTaxonomy" },
+			],
 		}),
 	],
 	preview: {

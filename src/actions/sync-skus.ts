@@ -8,7 +8,7 @@ import { z } from "zod";
 import { env } from "@/lib/env";
 import { actionClient } from "@/lib/safe-action";
 
-import { client as sanityClient } from "@/lib/sanity/client";
+import { getClient as getSanityClient } from "@/lib/sanity/client";
 import { client as clClient } from "@/lib/commerce/client";
 
 const schema = z.object({
@@ -21,6 +21,8 @@ const syncSkusAction = actionClient
 		handleValidationErrorsShape: async (ve) => flattenValidationErrors(ve).fieldErrors,
 	})
 	.action(async ({ parsedInput: { secret } }) => {
+		const sanityClient = getSanityClient({ useToken: true });
+
 		if (secret !== env.SANITY_COMMERCE_SKU_SYNC_SECRET) {
 			throw new Error("Unauthorized! Access denied");
 		}

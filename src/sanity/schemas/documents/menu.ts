@@ -25,7 +25,14 @@ const menu = defineType({
 			name: "items",
 			title: "Menu Items",
 			type: "array",
-			of: [{ type: "navLink" }, { type: "navPage" }, { type: "navDropdown" }],
+			of: [
+				{ type: "navLink" },
+				{ type: "navPage" },
+				{ type: "navProduct" },
+				{ type: "navTaxon" },
+				{ type: "navTaxonomy" },
+				{ type: "navDropdown" },
+			],
 			hidden: ({ parent }) => parent?.isMegaDropdown === true,
 		}),
 		defineField({

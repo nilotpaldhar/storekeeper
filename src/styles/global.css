@@ -162,7 +162,28 @@
 	* {
 		@apply border-border outline-ring/50;
 	}
+
 	body {
-		@apply bg-background text-foreground font-sans;
+		@apply bg-background text-foreground font-sans select-none;
+	}
+
+	a,
+	button {
+		@apply text-primary-600 inline-block font-normal transition;
+	}
+
+	a:hover,
+	button:hover {
+		@apply text-current;
+	}
+
+	a:focus,
+	button:focus {
+		@apply outline-none;
+	}
+
+	a:focus-visible,
+	button:focus-visible {
+		@apply outline-2 outline-offset-4 outline-neutral-600 outline-dotted;
 	}
 }

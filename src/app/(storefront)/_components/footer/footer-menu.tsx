@@ -1,0 +1,46 @@
+"use client";
+
+import type { FooterMenuLink } from "@/types/ui.types";
+
+import Link from "next/link";
+import { openInNewTab } from "@/utils/general/open-in-new-tab";
+import { removeLeadingSlash } from "@/utils/general/remove-leading-slash";
+
+type FooterNavLinkWithIcon = FooterMenuLink & { icon?: React.ReactNode };
+
+type FooterMenuProps = {
+	title: string;
+	menuLinks: FooterNavLinkWithIcon[];
+};
+
+const FooterMenu = ({ title, menuLinks }: FooterMenuProps) => {
+	const menuLinkClassName = `py-1 text-sm leading-none text-inherit hover:text-neutral-300 focus-visible:outline-neutral-400 cursor-pointer`;
+
+	return (
+		<div>
+			<h4 className="flex flex-col gap-2 text-lg leading-none font-semibold after:block after:h-px after:w-8 after:bg-white">
+				{title}
+			</h4>
+			<nav className="mt-5 lg:mt-8">
+				<ul className="flex flex-col gap-5">
+					{menuLinks.map(({ key, label, href, isExternal, icon }) => (
+						<li key={key} className="flex items-center space-x-2">
+							{icon}
+							{isExternal ? (
+								<button onClick={() => openInNewTab(href)} className={menuLinkClassName}>
+									{label}
+								</button>
+							) : (
+								<Link href={href ? removeLeadingSlash(href) : "#"} className={menuLinkClassName}>
+									{label}
+								</Link>
+							)}
+						</li>
+					))}
+				</ul>
+			</nav>
+		</div>
+	);
+};
+
+export { FooterMenu };

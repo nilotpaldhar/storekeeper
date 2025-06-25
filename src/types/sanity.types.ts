@@ -55,7 +55,7 @@ export type SocialSettings = {
 	facebook?: string;
 	twitter?: string;
 	instagram?: string;
-	linkedin?: string;
+	youtube?: string;
 };
 
 export type SeoSettings = {
@@ -243,6 +243,15 @@ export type Menu = {
 		  } & NavPage)
 		| ({
 				_key: string;
+		  } & NavProduct)
+		| ({
+				_key: string;
+		  } & NavTaxon)
+		| ({
+				_key: string;
+		  } & NavTaxonomy)
+		| ({
+				_key: string;
 		  } & NavDropdown)
 	>;
 	megaDropdowns?: Array<
@@ -301,6 +310,15 @@ export type NavMegaDropdownColumn = {
 		| ({
 				_key: string;
 		  } & NavPage)
+		| ({
+				_key: string;
+		  } & NavProduct)
+		| ({
+				_key: string;
+		  } & NavTaxon)
+		| ({
+				_key: string;
+		  } & NavTaxonomy)
 	>;
 };
 
@@ -324,6 +342,15 @@ export type NavDropdown = {
 		| ({
 				_key: string;
 		  } & NavPage)
+		| ({
+				_key: string;
+		  } & NavProduct)
+		| ({
+				_key: string;
+		  } & NavTaxon)
+		| ({
+				_key: string;
+		  } & NavTaxonomy)
 	>;
 };
 
@@ -690,3 +717,406 @@ export type AllSanitySchemaTypes =
 	| SanityAssetSourceData
 	| SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./src/services/fetch-site-config.ts
+// Variable: GeneralSettings
+// Query: *[_type == "generalSettings"][0] {        "domain": siteURL,        "title": siteTitle,        "logo": siteLogo.asset._ref,        "description": siteDescription    }
+export type GeneralSettingsResult = {
+	domain: string | null;
+	title: string | null;
+	logo: string | null;
+	description: string | null;
+} | null;
+// Variable: HeaderSettings
+// Query: *[_type == "headerSettings"][0] {        "menuDesktop": menuDesktop-> {     "id": _id,    title,    isMegaDropdown,    "megaDropdownItems": megaDropdowns[] {        "refKey": _key,        label,        columns[] {            "refKey": _key,            heading,            items[] {     "refKey": _key,    "type": _type,    label,    "isExternal": coalesce(isExternal, false),    "href": select(        _type == "navLink" => coalesce(path, url, "/"),        _type == "navPage" => page->slug.current,        _type == "navProduct" => linkedProduct->slug.current,        _type == "navTaxon" => linkedTaxon->slug.current,        _type == "navTaxonomy" => linkedTaxonomy->slug.current,        "#"    ) }        }    },    "menuItems": items[] {            "refKey": _key,    "type": _type,    label,    "isExternal": coalesce(isExternal, false),    "href": select(        _type == "navLink" => coalesce(path, url, "/"),        _type == "navPage" => page->slug.current,        _type == "navProduct" => linkedProduct->slug.current,        _type == "navTaxon" => linkedTaxon->slug.current,        _type == "navTaxonomy" => linkedTaxonomy->slug.current,        "#"    ),        "dropDownItems": select(            _type == "navDropdown" => items[] {     "refKey": _key,    "type": _type,    label,    "isExternal": coalesce(isExternal, false),    "href": select(        _type == "navLink" => coalesce(path, url, "/"),        _type == "navPage" => page->slug.current,        _type == "navProduct" => linkedProduct->slug.current,        _type == "navTaxon" => linkedTaxon->slug.current,        _type == "navTaxonomy" => linkedTaxonomy->slug.current,        "#"    ) },            null        )    } },        "menuMobile": menuMobile-> {     "id": _id,    title,    isMegaDropdown,    "megaDropdownItems": megaDropdowns[] {        "refKey": _key,        label,        columns[] {            "refKey": _key,            heading,            items[] {     "refKey": _key,    "type": _type,    label,    "isExternal": coalesce(isExternal, false),    "href": select(        _type == "navLink" => coalesce(path, url, "/"),        _type == "navPage" => page->slug.current,        _type == "navProduct" => linkedProduct->slug.current,        _type == "navTaxon" => linkedTaxon->slug.current,        _type == "navTaxonomy" => linkedTaxonomy->slug.current,        "#"    ) }        }    },    "menuItems": items[] {            "refKey": _key,    "type": _type,    label,    "isExternal": coalesce(isExternal, false),    "href": select(        _type == "navLink" => coalesce(path, url, "/"),        _type == "navPage" => page->slug.current,        _type == "navProduct" => linkedProduct->slug.current,        _type == "navTaxon" => linkedTaxon->slug.current,        _type == "navTaxonomy" => linkedTaxonomy->slug.current,        "#"    ),        "dropDownItems": select(            _type == "navDropdown" => items[] {     "refKey": _key,    "type": _type,    label,    "isExternal": coalesce(isExternal, false),    "href": select(        _type == "navLink" => coalesce(path, url, "/"),        _type == "navPage" => page->slug.current,        _type == "navProduct" => linkedProduct->slug.current,        _type == "navTaxon" => linkedTaxon->slug.current,        _type == "navTaxonomy" => linkedTaxonomy->slug.current,        "#"    ) },            null        )    } }    }
+export type HeaderSettingsResult = {
+	menuDesktop: {
+		id: string;
+		title: string | null;
+		isMegaDropdown: boolean | null;
+		megaDropdownItems: Array<{
+			refKey: string;
+			label: string | null;
+			columns: Array<{
+				refKey: string;
+				heading: string | null;
+				items: Array<
+					| {
+							refKey: string;
+							type: "navPage";
+							label: string | null;
+							isExternal: false;
+							href: string | null;
+					  }
+					| {
+							refKey: string;
+							type: "navProduct";
+							label: string | null;
+							isExternal: false;
+							href: string | null;
+					  }
+					| {
+							refKey: string;
+							type: "navTaxon";
+							label: string | null;
+							isExternal: false;
+							href: string | null;
+					  }
+					| {
+							refKey: string;
+							type: "navTaxonomy";
+							label: string | null;
+							isExternal: false;
+							href: string | null;
+					  }
+					| {
+							refKey: string;
+							type: "navLink";
+							label: string | null;
+							isExternal: boolean | false;
+							href: string | "/";
+					  }
+				> | null;
+			}> | null;
+		}> | null;
+		menuItems: Array<
+			| {
+					refKey: string;
+					type: "navPage";
+					label: string | null;
+					isExternal: false;
+					href: string | null;
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navProduct";
+					label: string | null;
+					isExternal: false;
+					href: string | null;
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navTaxon";
+					label: string | null;
+					isExternal: false;
+					href: string | null;
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navTaxonomy";
+					label: string | null;
+					isExternal: false;
+					href: string | null;
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navLink";
+					label: string | null;
+					isExternal: boolean | false;
+					href: string | "/";
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navDropdown";
+					label: string | null;
+					isExternal: false;
+					href: "#";
+					dropDownItems: Array<
+						| {
+								refKey: string;
+								type: "navPage";
+								label: string | null;
+								isExternal: false;
+								href: string | null;
+						  }
+						| {
+								refKey: string;
+								type: "navProduct";
+								label: string | null;
+								isExternal: false;
+								href: string | null;
+						  }
+						| {
+								refKey: string;
+								type: "navTaxon";
+								label: string | null;
+								isExternal: false;
+								href: string | null;
+						  }
+						| {
+								refKey: string;
+								type: "navTaxonomy";
+								label: string | null;
+								isExternal: false;
+								href: string | null;
+						  }
+						| {
+								refKey: string;
+								type: "navLink";
+								label: string | null;
+								isExternal: boolean | false;
+								href: string | "/";
+						  }
+					> | null;
+			  }
+		> | null;
+	} | null;
+	menuMobile: {
+		id: string;
+		title: string | null;
+		isMegaDropdown: boolean | null;
+		megaDropdownItems: Array<{
+			refKey: string;
+			label: string | null;
+			columns: Array<{
+				refKey: string;
+				heading: string | null;
+				items: Array<
+					| {
+							refKey: string;
+							type: "navPage";
+							label: string | null;
+							isExternal: false;
+							href: string | null;
+					  }
+					| {
+							refKey: string;
+							type: "navProduct";
+							label: string | null;
+							isExternal: false;
+							href: string | null;
+					  }
+					| {
+							refKey: string;
+							type: "navTaxon";
+							label: string | null;
+							isExternal: false;
+							href: string | null;
+					  }
+					| {
+							refKey: string;
+							type: "navTaxonomy";
+							label: string | null;
+							isExternal: false;
+							href: string | null;
+					  }
+					| {
+							refKey: string;
+							type: "navLink";
+							label: string | null;
+							isExternal: boolean | false;
+							href: string | "/";
+					  }
+				> | null;
+			}> | null;
+		}> | null;
+		menuItems: Array<
+			| {
+					refKey: string;
+					type: "navPage";
+					label: string | null;
+					isExternal: false;
+					href: string | null;
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navProduct";
+					label: string | null;
+					isExternal: false;
+					href: string | null;
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navTaxon";
+					label: string | null;
+					isExternal: false;
+					href: string | null;
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navTaxonomy";
+					label: string | null;
+					isExternal: false;
+					href: string | null;
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navLink";
+					label: string | null;
+					isExternal: boolean | false;
+					href: string | "/";
+					dropDownItems: null;
+			  }
+			| {
+					refKey: string;
+					type: "navDropdown";
+					label: string | null;
+					isExternal: false;
+					href: "#";
+					dropDownItems: Array<
+						| {
+								refKey: string;
+								type: "navPage";
+								label: string | null;
+								isExternal: false;
+								href: string | null;
+						  }
+						| {
+								refKey: string;
+								type: "navProduct";
+								label: string | null;
+								isExternal: false;
+								href: string | null;
+						  }
+						| {
+								refKey: string;
+								type: "navTaxon";
+								label: string | null;
+								isExternal: false;
+								href: string | null;
+						  }
+						| {
+								refKey: string;
+								type: "navTaxonomy";
+								label: string | null;
+								isExternal: false;
+								href: string | null;
+						  }
+						| {
+								refKey: string;
+								type: "navLink";
+								label: string | null;
+								isExternal: boolean | false;
+								href: string | "/";
+						  }
+					> | null;
+			  }
+		> | null;
+	} | null;
+} | null;
+// Variable: FooterAndSocialSettings
+// Query: *[_type == "footerSettings"][0] {        "site": {            "copyright": copyrightText,            "description": aboutCompany,            "title": *[_type == "generalSettings"][0].siteTitle,            "logo": *[_type == "generalSettings"][0].siteLogo.asset._ref,            "readMore": {                "label": readMoreLink.label,                "link": readMoreLink.page->{ title, slug },            }        },        "info": {            "title": infoBlockTitle,            "email": emailAddress,            "phone": phoneNumber        },        "blockOne": {            "title": navBlockTitle1,             "menus": navBlockMenuItems1[] {     "key": _key,    "type": _type,    "isExternal": select(        defined(isExternal) => isExternal,        false    ),    "label": select(        !defined(title) && _type == "navPage" => page->title,        label    ),    "href": select(        _type == "navLink" => select(            defined(path) => path,            defined(url) => url,            null        ),        _type == "navPage" => page->slug.current,        null    ) }        },        "blockTwo": {            "title": navBlockTitle2,             "menus": navBlockMenuItems2[] {     "key": _key,    "type": _type,    "isExternal": select(        defined(isExternal) => isExternal,        false    ),    "label": select(        !defined(title) && _type == "navPage" => page->title,        label    ),    "href": select(        _type == "navLink" => select(            defined(path) => path,            defined(url) => url,            null        ),        _type == "navPage" => page->slug.current,        null    ) }        },        "blockThree": {            "title": navBlockTitle3,             "menus": navBlockMenuItems3[] {     "key": _key,    "type": _type,    "isExternal": select(        defined(isExternal) => isExternal,        false    ),    "label": select(        !defined(title) && _type == "navPage" => page->title,        label    ),    "href": select(        _type == "navLink" => select(            defined(path) => path,            defined(url) => url,            null        ),        _type == "navPage" => page->slug.current,        null    ) }        },        "social": *[_type == "socialSettings"][0]{            facebook,            twitter,            instagram,            youtube        }    }
+export type FooterAndSocialSettingsResult = {
+	site: {
+		copyright: string | null;
+		description: string | null;
+		title: string | null;
+		logo: string | null;
+		readMore: {
+			label: string | null;
+			link:
+				| {
+						title: string | null;
+						slug: Slug | null;
+				  }
+				| {
+						title: string | null;
+						slug: string | null;
+				  }
+				| null;
+		};
+	};
+	info: {
+		title: string | null;
+		email: string | null;
+		phone: string | null;
+	};
+	blockOne: {
+		title: string | null;
+		menus: Array<
+			| {
+					key: string;
+					type: "navPage";
+					isExternal: false;
+					label: string | null;
+					href: string | null;
+			  }
+			| {
+					key: string;
+					type: "navLink";
+					isExternal: boolean | false | null;
+					label: string | null;
+					href: string | null;
+			  }
+		> | null;
+	};
+	blockTwo: {
+		title: string | null;
+		menus: Array<
+			| {
+					key: string;
+					type: "navPage";
+					isExternal: false;
+					label: string | null;
+					href: string | null;
+			  }
+			| {
+					key: string;
+					type: "navLink";
+					isExternal: boolean | false | null;
+					label: string | null;
+					href: string | null;
+			  }
+		> | null;
+	};
+	blockThree: {
+		title: string | null;
+		menus: Array<
+			| {
+					key: string;
+					type: "navPage";
+					isExternal: false;
+					label: string | null;
+					href: string | null;
+			  }
+			| {
+					key: string;
+					type: "navLink";
+					isExternal: boolean | false | null;
+					label: string | null;
+					href: string | null;
+			  }
+		> | null;
+	};
+	social: {
+		facebook: string | null;
+		twitter: string | null;
+		instagram: string | null;
+		youtube: string | null;
+	} | null;
+} | null;
+// Variable: GlobalSeoSettings
+// Query: *[_type == "seoSettings"][0] {        metaTitle,        metaDesc,        shareDesc,        shareTitle,        twitterCardType,        twitterUsername,        metaRobotsNoindex,        metaRobotsNofollow,        "favicon": favicon.asset->url,        "touchIcon": touchIcon.asset->url,        "shareGraphic": shareGraphic.asset->url,        "faviconLegacy": faviconLegacy.asset->url    }
+export type GlobalSeoSettingsResult = {
+	metaTitle: string | null;
+	metaDesc: string | null;
+	shareDesc: string | null;
+	shareTitle: string | null;
+	twitterCardType: "summary_large_image" | "summary" | null;
+	twitterUsername: string | null;
+	metaRobotsNoindex: boolean | null;
+	metaRobotsNofollow: boolean | null;
+	favicon: string | null;
+	touchIcon: string | null;
+	shareGraphic: string | null;
+	faviconLegacy: string | null;
+} | null;
+
+// Query TypeMap
+import "@sanity/client";
+declare module "@sanity/client" {
+	interface SanityQueries {
+		'\n    *[_type == "generalSettings"][0] {\n        "domain": siteURL,\n        "title": siteTitle,\n        "logo": siteLogo.asset._ref,\n        "description": siteDescription\n    }\n': GeneralSettingsResult;
+		'\n    *[_type == "headerSettings"][0] {\n        "menuDesktop": menuDesktop-> { \n    "id": _id,\n    title,\n    isMegaDropdown,\n    "megaDropdownItems": megaDropdowns[] {\n        "refKey": _key,\n        label,\n        columns[] {\n            "refKey": _key,\n            heading,\n            items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n }\n        }\n    },\n    "menuItems": items[] {\n        \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n,\n        "dropDownItems": select(\n            _type == "navDropdown" => items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n },\n            null\n        )\n    }\n },\n        "menuMobile": menuMobile-> { \n    "id": _id,\n    title,\n    isMegaDropdown,\n    "megaDropdownItems": megaDropdowns[] {\n        "refKey": _key,\n        label,\n        columns[] {\n            "refKey": _key,\n            heading,\n            items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n }\n        }\n    },\n    "menuItems": items[] {\n        \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n,\n        "dropDownItems": select(\n            _type == "navDropdown" => items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n },\n            null\n        )\n    }\n }\n    }\n': HeaderSettingsResult;
+		'\n    *[_type == "footerSettings"][0] {\n        "site": {\n            "copyright": copyrightText,\n            "description": aboutCompany,\n            "title": *[_type == "generalSettings"][0].siteTitle,\n            "logo": *[_type == "generalSettings"][0].siteLogo.asset._ref,\n            "readMore": {\n                "label": readMoreLink.label,\n                "link": readMoreLink.page->{ title, slug },\n            }\n        },\n        "info": {\n            "title": infoBlockTitle,\n            "email": emailAddress,\n            "phone": phoneNumber\n        },\n        "blockOne": {\n            "title": navBlockTitle1, \n            "menus": navBlockMenuItems1[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "blockTwo": {\n            "title": navBlockTitle2, \n            "menus": navBlockMenuItems2[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "blockThree": {\n            "title": navBlockTitle3, \n            "menus": navBlockMenuItems3[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "social": *[_type == "socialSettings"][0]{\n            facebook,\n            twitter,\n            instagram,\n            youtube\n        }\n    }\n': FooterAndSocialSettingsResult;
+		'\n    *[_type == "seoSettings"][0] {\n        metaTitle,\n        metaDesc,\n        shareDesc,\n        shareTitle,\n        twitterCardType,\n        twitterUsername,\n        metaRobotsNoindex,\n        metaRobotsNofollow,\n        "favicon": favicon.asset->url,\n        "touchIcon": touchIcon.asset->url,\n        "shareGraphic": shareGraphic.asset->url,\n        "faviconLegacy": faviconLegacy.asset->url\n    }\n': GlobalSeoSettingsResult;
+	}
+}
