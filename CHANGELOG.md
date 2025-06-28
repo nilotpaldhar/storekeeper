@@ -1,3 +1,15 @@
+# [0.3.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.2.0...v0.3.0) (2025-06-28)
+
+
+### Features
+
+* **layout:** add storefront layout with header and footer ([5eda0f1](https://github.com/nilotpaldhar/storekeeper/commit/5eda0f1fd8d08682d372fc5e219bd4bf41444677))
+* **not-found:** add custom 404 page to handle invalid routes gracefully ([448bc40](https://github.com/nilotpaldhar/storekeeper/commit/448bc400ba78e3023c6169e404598867ee251195))
+* **pages:** add static pages and restructure lib directory ([28ac36e](https://github.com/nilotpaldhar/storekeeper/commit/28ac36e8a61edadd3fae689bf4c8570c0a2d1548))
+* **seo:** add global and page-level SEO settings ([3fc90df](https://github.com/nilotpaldhar/storekeeper/commit/3fc90dfbb32b033feab7766856a1d16edbb5b0af))
+
+
+
 # [0.2.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.1.0...v0.2.0) (2025-06-22)
 
 
