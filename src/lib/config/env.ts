@@ -14,6 +14,8 @@ const env = createEnv({
 	},
 	client: {
 		NEXT_PUBLIC_SITE_URL: z.string().url(),
+		NEXT_PUBLIC_SITE_TITLE: z.string().optional(),
+
 		NEXT_PUBLIC_SANITY_PROJECT_ID: z.string(),
 		NEXT_PUBLIC_SANITY_PROJECT_TITLE: z.string().optional(),
 		NEXT_PUBLIC_SANITY_DATASET: z.enum(["development", "production"]),
@@ -31,6 +33,8 @@ const env = createEnv({
 		COMMERCE_LAYER_ORGANIZATION: process.env.COMMERCE_LAYER_ORGANIZATION,
 
 		NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+		NEXT_PUBLIC_SITE_TITLE: process.env.NEXT_PUBLIC_SITE_TITLE,
+
 		NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
 		NEXT_PUBLIC_SANITY_PROJECT_TITLE: process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE,
 		NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,

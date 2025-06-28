@@ -11,8 +11,8 @@ import { getSanityImageUrl } from "@/lib/sanity/image";
 import { getFooterSettings } from "@/lib/settings/fetch";
 
 const Footer = async () => {
-	const footerAndSocialSettings = await getFooterSettings();
-	const { site, info, social, blockOne, blockTwo, blockThree } = footerAndSocialSettings ?? {};
+	const footerSettings = await getFooterSettings();
+	const { site, info, social, blockOne, blockTwo, blockThree } = footerSettings ?? {};
 	const logoSrc = site?.logo ? getSanityImageUrl(site.logo).url() : null;
 
 	return (

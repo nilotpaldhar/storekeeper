@@ -1,11 +1,16 @@
+import type { Metadata } from "next";
+
 import { PortableText } from "next-sanity";
 import { Info } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
 import { notFound } from "next/navigation";
+import { getSeo } from "@/lib/services/seo/get-seo";
+import { getStaticPageSeoBySlug } from "@/lib/seo/fetch";
 import { getStaticPageBySlug, getStaticPageSlugs } from "@/lib/pages/fetch";
 
 import { cn } from "@/lib/utils/general/cn";
+import { sanitizeSlug } from "@/lib/utils/validators/sanitize-slug";
 
 type StaticCMSPageProps = {
 	params: Promise<{ slug: string }>;
@@ -13,14 +18,22 @@ type StaticCMSPageProps = {
 
 export const revalidate = 86400; // 24 Hours
 
+export const generateMetadata = async ({ params }: StaticCMSPageProps): Promise<Metadata> => {
+	const { slug } = await params;
+	const seoOverrides = await getStaticPageSeoBySlug({ slug });
+	if (seoOverrides) return getSeo(seoOverrides);
+	return getSeo();
+};
+
 export const generateStaticParams = async () => {
 	const slugs = await getStaticPageSlugs();
-	return slugs.map(({ slug }) => ({ slug }));
+	if (!slugs) return [];
+	return slugs.map((slug) => ({ slug }));
 };
 
 const StaticCMSPage = async ({ params }: StaticCMSPageProps) => {
 	const { slug } = await params;
-	const page = await getStaticPageBySlug({ slug });
+	const page = await getStaticPageBySlug({ slug: sanitizeSlug(slug) });
 	if (!page) return notFound();
 
 	const classNames = {
