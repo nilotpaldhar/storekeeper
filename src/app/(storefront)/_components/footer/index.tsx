@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
-import { SiteLogo } from "@/components/site-logo";
+import { SiteLogo } from "@/components/ui/site-logo";
 
 import { FooterMenu } from "@/app/(storefront)/_components/footer/footer-menu";
 import { FooterSocialLink } from "@/app/(storefront)/_components/footer/footer-social-link";

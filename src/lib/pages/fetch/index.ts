@@ -1,6 +1,6 @@
 import { logEvent } from "@/lib/logging/log-event";
 import { getSanityClient } from "@/lib/sanity/client";
-import { StaticPageSlugs, StaticPage } from "@/lib/sanity/queries";
+import { StaticPageSlugs, StaticPage, NotFoundPage } from "@/lib/sanity/queries";
 
 /**
  * Fetches an array of static page slugs from the CMS.
@@ -42,4 +42,23 @@ const getStaticPageBySlug = async ({ slug }: { slug: string }) => {
 	}
 };
 
-export { getStaticPageSlugs, getStaticPageBySlug };
+/**
+ *
+ */
+const getNotFoundPage = async () => {
+	try {
+		const page = await getSanityClient().fetch(NotFoundPage);
+		if (!page) return null;
+		return page;
+	} catch (err) {
+		logEvent({
+			fn: "getNotFoundPage",
+			level: "error",
+			event: "fail",
+			error: err,
+		});
+		return null;
+	}
+};
+
+export { getStaticPageSlugs, getStaticPageBySlug, getNotFoundPage };

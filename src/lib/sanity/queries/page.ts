@@ -13,4 +13,11 @@ const StaticPage = defineQuery(`
     }
 `);
 
-export { StaticPageSlugs, StaticPage };
+const NotFoundPage = defineQuery(`
+    *[_type == "notFoundPage"] | order(_updatedAt desc) [0] {
+        title,
+        description
+    }
+`);
+
+export { StaticPageSlugs, StaticPage, NotFoundPage };

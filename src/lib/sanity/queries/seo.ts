@@ -1,5 +1,13 @@
 import { defineQuery } from "next-sanity";
 
+const SeoFields = `
+    metaTitle,
+    metaDesc,
+    shareTitle,
+    shareDesc,
+    "shareGraphic": shareGraphic.asset->url
+`;
+
 const GlobalSeo = defineQuery(`
     *[_type == "seoSettings"][0] {
         metaTitle,
@@ -19,14 +27,14 @@ const GlobalSeo = defineQuery(`
 
 const StaticPageSeo = defineQuery(`
     *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {
-        seo {
-            metaTitle,
-            metaDesc,
-            shareTitle,
-            shareDesc,
-            "shareGraphic": shareGraphic.asset->url
-        }
+        seo { ${SeoFields} }
     }
 `);
 
-export { GlobalSeo, StaticPageSeo };
+const NotFoundPageSeo = defineQuery(`
+    *[_type == "notFoundPage"] | order(_updatedAt desc) [0] {
+        seo { ${SeoFields} }
+    }
+`);
+
+export { GlobalSeo, StaticPageSeo, NotFoundPageSeo };
