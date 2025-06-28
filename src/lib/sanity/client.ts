@@ -1,36 +1,21 @@
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { createClient } from "next-sanity";
-import createImageUrlBuilder from "@sanity/image-url";
-
-import { env } from "@/lib/env";
-
-const projectId = env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = env.NEXT_PUBLIC_SANITY_DATASET;
-const apiVersion = env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-05-26";
-const token = env.SANITY_ACCESS_TOKEN;
+import { env } from "@/lib/config/env";
+import { config } from "@/lib/config/sanity";
 
 /**
  * Helper function for easily switching between normal client and preview client.
  */
-const getClient = ({
+const getSanityClient = ({
 	useCdn = env.NODE_ENV === "production",
 	useToken = false,
 }: { useCdn?: boolean; useToken?: boolean } = {}) => {
 	return createClient({
-		projectId,
-		dataset,
-		apiVersion,
+		projectId: config.projectId,
+		dataset: config.dataset,
+		apiVersion: config.apiVersion,
 		useCdn,
-		token: useToken ? token : undefined,
+		token: useToken ? config.accessToken : undefined,
 	});
 };
 
-/**
- * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
- * Read more: https://www.sanity.io/docs/image-url
- **/
-const urlFor = (source: SanityImageSource) => {
-	return createImageUrlBuilder({ projectId, dataset }).image(source);
-};
-
-export { getClient, urlFor };
+export { getSanityClient };

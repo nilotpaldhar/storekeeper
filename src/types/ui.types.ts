@@ -1,7 +1,7 @@
-import type { FooterAndSocialSettingsResult } from "@/types/sanity.types";
+import type { FooterSettingsResult } from "@/types/sanity.types";
 
 export type FooterMenuLink = NonNullable<
-	Exclude<FooterAndSocialSettingsResult, null>["blockOne"]["menus"]
+	Exclude<FooterSettingsResult, null>["blockOne"]["menus"]
 >[number];
 
 export type HeaderNavLinkType = {

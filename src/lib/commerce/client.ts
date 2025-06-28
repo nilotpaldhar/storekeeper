@@ -1,16 +1,16 @@
 import CommerceLayer from "@commercelayer/sdk";
 import { authenticate } from "@commercelayer/js-auth";
 
-import { env } from "@/lib/env";
+import { config } from "@/lib/config/commerce";
 
 const auth = await authenticate("client_credentials", {
-	clientId: env.COMMERCE_LAYER_CLIENT_ID,
-	clientSecret: env.COMMERCE_LAYER_CLIENT_SECRET,
+	clientId: config.clientId,
+	clientSecret: config.clientSecret,
 });
 
-const client = CommerceLayer({
-	organization: env.COMMERCE_LAYER_ORGANIZATION,
+const clClient = CommerceLayer({
+	organization: config.organization,
 	accessToken: auth.accessToken,
 });
 
-export { client };
+export { clClient };

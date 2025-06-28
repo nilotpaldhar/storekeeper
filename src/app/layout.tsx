@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito as FontSans } from "next/font/google";
-import { cn } from "@/utils/general/cn";
+import { cn } from "@/lib/utils/general/cn";
 
 import "@/styles/global.css";
 

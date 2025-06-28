@@ -2,6 +2,7 @@
 
 import type { HeaderDropdownItem } from "@/types/ui.types";
 
+import { ChevronDownIcon } from "lucide-react";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -12,8 +13,8 @@ import {
 	HeaderNavLink,
 	headerNavLinkStyle,
 } from "@/app/(storefront)/_components/header/header-nav-link";
-import { cn } from "@/utils/general/cn";
-import { ChevronDownIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils/general/cn";
 
 type HeaderDesktopMenuDropdownProps = HeaderDropdownItem & {
 	className?: string;

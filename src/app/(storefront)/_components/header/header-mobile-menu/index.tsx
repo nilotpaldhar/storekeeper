@@ -22,7 +22,7 @@ import { HeaderAccountPreview } from "@/app/(storefront)/_components/header/head
 import { HeaderMobileMenuDropdown } from "@/app/(storefront)/_components/header/header-mobile-menu/header-mobile-menu-dropdown";
 import { HeaderMobileMenuMegaDropdown } from "@/app/(storefront)/_components/header/header-mobile-menu/header-mobile-menu-mega-dropdown";
 
-import { cn } from "@/utils/general/cn";
+import { cn } from "@/lib/utils/general/cn";
 
 type HeaderMobileMenuProps = {
 	menu: HeaderMenu | null;
@@ -41,7 +41,12 @@ const HeaderMobileMenu = ({ menu, logo }: HeaderMobileMenuProps) => {
 
 	return (
 		<>
-			<Button size="icon" variant="light-ghost" onClick={() => setOpen(true)}>
+			<Button
+				size="icon"
+				variant="dark-ghost"
+				className="hover:text-primary-600 w-min"
+				onClick={() => setOpen(true)}
+			>
 				<Menu />
 				<span className="sr-only">toggle mobile menu</span>
 			</Button>

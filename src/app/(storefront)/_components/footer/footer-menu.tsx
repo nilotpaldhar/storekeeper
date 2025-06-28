@@ -3,8 +3,9 @@
 import type { FooterMenuLink } from "@/types/ui.types";
 
 import Link from "next/link";
-import { openInNewTab } from "@/utils/general/open-in-new-tab";
-import { removeLeadingSlash } from "@/utils/general/remove-leading-slash";
+
+import { openInNewTab } from "@/lib/utils/general/open-in-new-tab";
+import { removeLeadingSlash } from "@/lib/utils/general/remove-leading-slash";
 
 type FooterNavLinkWithIcon = FooterMenuLink & { icon?: React.ReactNode };
 

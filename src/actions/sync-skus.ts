@@ -5,11 +5,11 @@ import type { Sku } from "@/types/sanity.types";
 import { flattenValidationErrors } from "next-safe-action";
 import { z } from "zod";
 
-import { env } from "@/lib/env";
+import { config } from "@/lib/config/sanity";
 import { actionClient } from "@/lib/safe-action";
 
-import { getClient as getSanityClient } from "@/lib/sanity/client";
-import { client as clClient } from "@/lib/commerce/client";
+import { clClient } from "@/lib/commerce/client";
+import { getSanityClient } from "@/lib/sanity/client";
 
 const schema = z.object({
 	secret: z.string().min(1),
@@ -23,7 +23,7 @@ const syncSkusAction = actionClient
 	.action(async ({ parsedInput: { secret } }) => {
 		const sanityClient = getSanityClient({ useToken: true });
 
-		if (secret !== env.SANITY_COMMERCE_SKU_SYNC_SECRET) {
+		if (secret !== config.skuSyncSecret) {
 			throw new Error("Unauthorized! Access denied");
 		}
 

@@ -10,25 +10,25 @@ import {
 	HeaderToolbarCart,
 } from "@/app/(storefront)/_components/header/header-toolbar";
 
-import { urlFor } from "@/lib/sanity/client";
-import { getGeneralSettings, getHeaderSettings } from "@/services/fetch-site-config";
+import { getSanityImageUrl } from "@/lib/sanity/image";
+import { getGeneralSiteSettings, getHeaderSettings } from "@/lib/settings/fetch";
 
-import { cn } from "@/utils/general/cn";
-import { normalizeHeaderMenu } from "@/utils/navigation/normalize-header-menu";
+import { cn } from "@/lib/utils/general/cn";
+import { normalizeHeaderMenu } from "@/lib/utils/navigation/normalize-header-menu";
 
 type HeaderProps = {
 	className?: string;
 };
 
 const Header = async ({ className }: HeaderProps) => {
-	const generalSettings = await getGeneralSettings();
+	const generalSettings = await getGeneralSiteSettings();
 	const headerSettings = await getHeaderSettings();
 	const { menuDesktop: menuDesktopRaw, menuMobile: menuMobileRaw } = headerSettings ?? {};
 
 	const menuDesktop = menuDesktopRaw ? normalizeHeaderMenu(menuDesktopRaw) : null;
 	const menuMobile = menuMobileRaw ? normalizeHeaderMenu(menuMobileRaw) : null;
 
-	const logoSrc = generalSettings?.logo ? urlFor(generalSettings.logo).url() : null;
+	const logoSrc = generalSettings?.logo ? getSanityImageUrl(generalSettings.logo).url() : null;
 	const logoAlt = generalSettings?.title;
 
 	return (
@@ -44,7 +44,7 @@ const Header = async ({ className }: HeaderProps) => {
 					<HeaderToolbarWishlist />
 					<HeaderToolbarCart />
 				</div>
-				<div className="order-first mr-2 sm:mr-4 2xl:hidden">
+				<div className="order-first mr-4 2xl:hidden">
 					<HeaderMobileMenu menu={menuMobile} logo={{ src: logoSrc, alt: logoAlt }} />
 				</div>
 			</Container>

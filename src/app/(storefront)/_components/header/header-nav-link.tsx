@@ -1,9 +1,11 @@
-import { HeaderNavLinkType } from "@/types/ui.types";
-import { cn } from "@/utils/general/cn";
-import { openInNewTab } from "@/utils/general/open-in-new-tab";
-import { removeLeadingSlash } from "@/utils/general/remove-leading-slash";
-import { cva } from "class-variance-authority";
+import type { HeaderNavLinkType } from "@/types/ui.types";
+
 import Link from "next/link";
+import { cva } from "class-variance-authority";
+
+import { cn } from "@/lib/utils/general/cn";
+import { openInNewTab } from "@/lib/utils/general/open-in-new-tab";
+import { removeLeadingSlash } from "@/lib/utils/general/remove-leading-slash";
 
 type HeaderNavLinkProps = HeaderNavLinkType & {
 	className?: string;

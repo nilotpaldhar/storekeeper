@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 
 import { HeaderNavLink } from "@/app/(storefront)/_components/header/header-nav-link";
 
-import { cn } from "@/utils/general/cn";
+import { cn } from "@/lib/utils/general/cn";
 
 type HeaderMobileMenuDropdownProps = HeaderDropdownItem & {
 	className?: string;

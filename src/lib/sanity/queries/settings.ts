@@ -1,7 +1,6 @@
 import { defineQuery } from "next-sanity";
-import { getClient } from "@/lib/sanity/client";
 
-const GeneralSettings = defineQuery(`
+const GeneralSiteSettings = defineQuery(`
     *[_type == "generalSettings"][0] {
         "domain": siteURL,
         "title": siteTitle,
@@ -76,7 +75,7 @@ const FooterLink = `
     )
 `;
 
-const FooterAndSocialSettings = defineQuery(`
+const FooterSettings = defineQuery(`
     *[_type == "footerSettings"][0] {
         "site": {
             "copyright": copyrightText,
@@ -114,53 +113,4 @@ const FooterAndSocialSettings = defineQuery(`
     }
 `);
 
-const GlobalSeoSettings = defineQuery(`
-    *[_type == "seoSettings"][0] {
-        metaTitle,
-        metaDesc,
-        shareDesc,
-        shareTitle,
-        twitterCardType,
-        twitterUsername,
-        metaRobotsNoindex,
-        metaRobotsNofollow,
-        "favicon": favicon.asset->url,
-        "touchIcon": touchIcon.asset->url,
-        "shareGraphic": shareGraphic.asset->url,
-        "faviconLegacy": faviconLegacy.asset->url
-    }
-`);
-
-const getGeneralSettings = async () => {
-	const generalSettings = await getClient({
-		useCdn: true,
-		useToken: true,
-	}).fetch(GeneralSettings);
-	return generalSettings;
-};
-
-const getHeaderSettings = async () => {
-	const headerSettings = await getClient({
-		useCdn: true,
-		useToken: true,
-	}).fetch(HeaderSettings);
-	return headerSettings;
-};
-
-const getFooterAndSocialSettings = async () => {
-	const footerAndSocialSettings = await getClient({
-		useCdn: true,
-		useToken: true,
-	}).fetch(FooterAndSocialSettings);
-	return footerAndSocialSettings;
-};
-
-const getGlobalSeoSettings = async () => {
-	const globalSeoSettings = await getClient({
-		useCdn: true,
-		useToken: true,
-	}).fetch(GlobalSeoSettings);
-	return globalSeoSettings;
-};
-
-export { getGeneralSettings, getHeaderSettings, getFooterAndSocialSettings, getGlobalSeoSettings };
+export { GeneralSiteSettings, HeaderSettings, FooterSettings };

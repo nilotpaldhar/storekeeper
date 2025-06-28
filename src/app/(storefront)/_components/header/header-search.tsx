@@ -1,4 +1,4 @@
-import { cn } from "@/utils/general/cn";
+import { cn } from "@/lib/utils/general/cn";
 
 const HeaderSearch = ({ className }: { className?: string }) => {
 	return (

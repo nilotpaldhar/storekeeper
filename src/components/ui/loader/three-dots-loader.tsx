@@ -1,4 +1,4 @@
-import { cn } from "@/utils/general/cn";
+import { cn } from "@/lib/utils/general/cn";
 
 const ThreeDotsLoader = ({ className }: { className?: string }) => {
 	const dotClassName = "animate-dot-bounce size-2 rounded-full bg-current";

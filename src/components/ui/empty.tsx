@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { cn } from "@/utils/general/cn";
+import { cn } from "@/lib/utils/general/cn";
 import { ILLUSTRATIONS } from "@/constants/media";
 
 const Empty = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (

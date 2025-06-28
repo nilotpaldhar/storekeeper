@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { cn } from "@/utils/general/cn";
+import { cn } from "@/lib/utils/general/cn";
 
 type SiteLogoProps = {
 	href?: string;

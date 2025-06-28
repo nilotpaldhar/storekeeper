@@ -9,8 +9,8 @@ import {
 	YouTube,
 } from "@/app/(storefront)/_components/footer/footer-social-link/icons";
 
-import { cn } from "@/utils/general/cn";
-import { openInNewTab } from "@/utils/general/open-in-new-tab";
+import { cn } from "@/lib/utils/general/cn";
+import { openInNewTab } from "@/lib/utils/general/open-in-new-tab";
 
 type FooterSocialLinkProps = {
 	platform: SocialPlatform;

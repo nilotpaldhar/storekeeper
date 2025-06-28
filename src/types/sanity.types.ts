@@ -717,10 +717,71 @@ export type AllSanitySchemaTypes =
 	| SanityAssetSourceData
 	| SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/services/fetch-site-config.ts
-// Variable: GeneralSettings
+// Source: ./src/lib/sanity/queries/page.ts
+// Variable: StaticPageSlugs
+// Query: *[_type == "page"]{ "slug": slug.current }
+export type StaticPageSlugsResult = Array<{
+	slug: string | null;
+}>;
+// Variable: StaticPage
+// Query: *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {        "type": _type,        "id": _id,        title,        "content": pageContent    }
+export type StaticPageResult = {
+	type: "page";
+	id: string;
+	title: string | null;
+	content: Array<{
+		children?: Array<{
+			marks?: Array<string>;
+			text?: string;
+			_type: "span";
+			_key: string;
+		}>;
+		style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+		listItem?: "bullet" | "number";
+		markDefs?: Array<{
+			href?: string;
+			_type: "link";
+			_key: string;
+		}>;
+		level?: number;
+		_type: "block";
+		_key: string;
+	}> | null;
+} | null;
+
+// Source: ./src/lib/sanity/queries/seo.ts
+// Variable: GlobalSeo
+// Query: *[_type == "seoSettings"][0] {        metaTitle,        metaDesc,        shareDesc,        shareTitle,        twitterCardType,        twitterUsername,        metaRobotsNoindex,        metaRobotsNofollow,        "favicon": favicon.asset->url,        "touchIcon": touchIcon.asset->url,        "shareGraphic": shareGraphic.asset->url,        "faviconLegacy": faviconLegacy.asset->url    }
+export type GlobalSeoResult = {
+	metaTitle: string | null;
+	metaDesc: string | null;
+	shareDesc: string | null;
+	shareTitle: string | null;
+	twitterCardType: "summary_large_image" | "summary" | null;
+	twitterUsername: string | null;
+	metaRobotsNoindex: boolean | null;
+	metaRobotsNofollow: boolean | null;
+	favicon: string | null;
+	touchIcon: string | null;
+	shareGraphic: string | null;
+	faviconLegacy: string | null;
+} | null;
+// Variable: StaticPageSeo
+// Query: *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {        seo {            metaTitle,            metaDesc,            shareTitle,            shareDesc,            "shareGraphic": shareGraphic.asset->url        }    }
+export type StaticPageSeoResult = {
+	seo: {
+		metaTitle: string | null;
+		metaDesc: string | null;
+		shareTitle: string | null;
+		shareDesc: string | null;
+		shareGraphic: string | null;
+	} | null;
+} | null;
+
+// Source: ./src/lib/sanity/queries/settings.ts
+// Variable: GeneralSiteSettings
 // Query: *[_type == "generalSettings"][0] {        "domain": siteURL,        "title": siteTitle,        "logo": siteLogo.asset._ref,        "description": siteDescription    }
-export type GeneralSettingsResult = {
+export type GeneralSiteSettingsResult = {
 	domain: string | null;
 	title: string | null;
 	logo: string | null;
@@ -1002,9 +1063,9 @@ export type HeaderSettingsResult = {
 		> | null;
 	} | null;
 } | null;
-// Variable: FooterAndSocialSettings
+// Variable: FooterSettings
 // Query: *[_type == "footerSettings"][0] {        "site": {            "copyright": copyrightText,            "description": aboutCompany,            "title": *[_type == "generalSettings"][0].siteTitle,            "logo": *[_type == "generalSettings"][0].siteLogo.asset._ref,            "readMore": {                "label": readMoreLink.label,                "link": readMoreLink.page->{ title, slug },            }        },        "info": {            "title": infoBlockTitle,            "email": emailAddress,            "phone": phoneNumber        },        "blockOne": {            "title": navBlockTitle1,             "menus": navBlockMenuItems1[] {     "key": _key,    "type": _type,    "isExternal": select(        defined(isExternal) => isExternal,        false    ),    "label": select(        !defined(title) && _type == "navPage" => page->title,        label    ),    "href": select(        _type == "navLink" => select(            defined(path) => path,            defined(url) => url,            null        ),        _type == "navPage" => page->slug.current,        null    ) }        },        "blockTwo": {            "title": navBlockTitle2,             "menus": navBlockMenuItems2[] {     "key": _key,    "type": _type,    "isExternal": select(        defined(isExternal) => isExternal,        false    ),    "label": select(        !defined(title) && _type == "navPage" => page->title,        label    ),    "href": select(        _type == "navLink" => select(            defined(path) => path,            defined(url) => url,            null        ),        _type == "navPage" => page->slug.current,        null    ) }        },        "blockThree": {            "title": navBlockTitle3,             "menus": navBlockMenuItems3[] {     "key": _key,    "type": _type,    "isExternal": select(        defined(isExternal) => isExternal,        false    ),    "label": select(        !defined(title) && _type == "navPage" => page->title,        label    ),    "href": select(        _type == "navLink" => select(            defined(path) => path,            defined(url) => url,            null        ),        _type == "navPage" => page->slug.current,        null    ) }        },        "social": *[_type == "socialSettings"][0]{            facebook,            twitter,            instagram,            youtube        }    }
-export type FooterAndSocialSettingsResult = {
+export type FooterSettingsResult = {
 	site: {
 		copyright: string | null;
 		description: string | null;
@@ -1093,30 +1154,17 @@ export type FooterAndSocialSettingsResult = {
 		youtube: string | null;
 	} | null;
 } | null;
-// Variable: GlobalSeoSettings
-// Query: *[_type == "seoSettings"][0] {        metaTitle,        metaDesc,        shareDesc,        shareTitle,        twitterCardType,        twitterUsername,        metaRobotsNoindex,        metaRobotsNofollow,        "favicon": favicon.asset->url,        "touchIcon": touchIcon.asset->url,        "shareGraphic": shareGraphic.asset->url,        "faviconLegacy": faviconLegacy.asset->url    }
-export type GlobalSeoSettingsResult = {
-	metaTitle: string | null;
-	metaDesc: string | null;
-	shareDesc: string | null;
-	shareTitle: string | null;
-	twitterCardType: "summary_large_image" | "summary" | null;
-	twitterUsername: string | null;
-	metaRobotsNoindex: boolean | null;
-	metaRobotsNofollow: boolean | null;
-	favicon: string | null;
-	touchIcon: string | null;
-	shareGraphic: string | null;
-	faviconLegacy: string | null;
-} | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
 	interface SanityQueries {
-		'\n    *[_type == "generalSettings"][0] {\n        "domain": siteURL,\n        "title": siteTitle,\n        "logo": siteLogo.asset._ref,\n        "description": siteDescription\n    }\n': GeneralSettingsResult;
+		'\n    *[_type == "page"]{ "slug": slug.current }\n': StaticPageSlugsResult;
+		'\n    *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        "type": _type,\n        "id": _id,\n        title,\n        "content": pageContent\n    }\n': StaticPageResult;
+		'\n    *[_type == "seoSettings"][0] {\n        metaTitle,\n        metaDesc,\n        shareDesc,\n        shareTitle,\n        twitterCardType,\n        twitterUsername,\n        metaRobotsNoindex,\n        metaRobotsNofollow,\n        "favicon": favicon.asset->url,\n        "touchIcon": touchIcon.asset->url,\n        "shareGraphic": shareGraphic.asset->url,\n        "faviconLegacy": faviconLegacy.asset->url\n    }\n': GlobalSeoResult;
+		'\n    *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        seo {\n            metaTitle,\n            metaDesc,\n            shareTitle,\n            shareDesc,\n            "shareGraphic": shareGraphic.asset->url\n        }\n    }\n': StaticPageSeoResult;
+		'\n    *[_type == "generalSettings"][0] {\n        "domain": siteURL,\n        "title": siteTitle,\n        "logo": siteLogo.asset._ref,\n        "description": siteDescription\n    }\n': GeneralSiteSettingsResult;
 		'\n    *[_type == "headerSettings"][0] {\n        "menuDesktop": menuDesktop-> { \n    "id": _id,\n    title,\n    isMegaDropdown,\n    "megaDropdownItems": megaDropdowns[] {\n        "refKey": _key,\n        label,\n        columns[] {\n            "refKey": _key,\n            heading,\n            items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n }\n        }\n    },\n    "menuItems": items[] {\n        \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n,\n        "dropDownItems": select(\n            _type == "navDropdown" => items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n },\n            null\n        )\n    }\n },\n        "menuMobile": menuMobile-> { \n    "id": _id,\n    title,\n    isMegaDropdown,\n    "megaDropdownItems": megaDropdowns[] {\n        "refKey": _key,\n        label,\n        columns[] {\n            "refKey": _key,\n            heading,\n            items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n }\n        }\n    },\n    "menuItems": items[] {\n        \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n,\n        "dropDownItems": select(\n            _type == "navDropdown" => items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n },\n            null\n        )\n    }\n }\n    }\n': HeaderSettingsResult;
-		'\n    *[_type == "footerSettings"][0] {\n        "site": {\n            "copyright": copyrightText,\n            "description": aboutCompany,\n            "title": *[_type == "generalSettings"][0].siteTitle,\n            "logo": *[_type == "generalSettings"][0].siteLogo.asset._ref,\n            "readMore": {\n                "label": readMoreLink.label,\n                "link": readMoreLink.page->{ title, slug },\n            }\n        },\n        "info": {\n            "title": infoBlockTitle,\n            "email": emailAddress,\n            "phone": phoneNumber\n        },\n        "blockOne": {\n            "title": navBlockTitle1, \n            "menus": navBlockMenuItems1[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "blockTwo": {\n            "title": navBlockTitle2, \n            "menus": navBlockMenuItems2[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "blockThree": {\n            "title": navBlockTitle3, \n            "menus": navBlockMenuItems3[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "social": *[_type == "socialSettings"][0]{\n            facebook,\n            twitter,\n            instagram,\n            youtube\n        }\n    }\n': FooterAndSocialSettingsResult;
-		'\n    *[_type == "seoSettings"][0] {\n        metaTitle,\n        metaDesc,\n        shareDesc,\n        shareTitle,\n        twitterCardType,\n        twitterUsername,\n        metaRobotsNoindex,\n        metaRobotsNofollow,\n        "favicon": favicon.asset->url,\n        "touchIcon": touchIcon.asset->url,\n        "shareGraphic": shareGraphic.asset->url,\n        "faviconLegacy": faviconLegacy.asset->url\n    }\n': GlobalSeoSettingsResult;
+		'\n    *[_type == "footerSettings"][0] {\n        "site": {\n            "copyright": copyrightText,\n            "description": aboutCompany,\n            "title": *[_type == "generalSettings"][0].siteTitle,\n            "logo": *[_type == "generalSettings"][0].siteLogo.asset._ref,\n            "readMore": {\n                "label": readMoreLink.label,\n                "link": readMoreLink.page->{ title, slug },\n            }\n        },\n        "info": {\n            "title": infoBlockTitle,\n            "email": emailAddress,\n            "phone": phoneNumber\n        },\n        "blockOne": {\n            "title": navBlockTitle1, \n            "menus": navBlockMenuItems1[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "blockTwo": {\n            "title": navBlockTitle2, \n            "menus": navBlockMenuItems2[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "blockThree": {\n            "title": navBlockTitle3, \n            "menus": navBlockMenuItems3[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "social": *[_type == "socialSettings"][0]{\n            facebook,\n            twitter,\n            instagram,\n            youtube\n        }\n    }\n': FooterSettingsResult;
 	}
 }
