@@ -1,5 +1,5 @@
 import { Container } from "@/components/ui/container";
-import { SiteLogo } from "@/components/site-logo";
+import { SiteLogo } from "@/components/ui/site-logo";
 
 import { HeaderSearch } from "@/app/(storefront)/_components/header/header-search";
 import { HeaderDesktopMenu } from "@/app/(storefront)/_components/header/header-desktop-menu";

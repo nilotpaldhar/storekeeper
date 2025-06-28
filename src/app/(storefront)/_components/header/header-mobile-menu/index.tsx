@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { SiteLogo } from "@/components/site-logo";
+import { SiteLogo } from "@/components/ui/site-logo";
 
 import { HeaderNavLink } from "@/app/(storefront)/_components/header/header-nav-link";
 import { HeaderAccountPreview } from "@/app/(storefront)/_components/header/header-account-preview";

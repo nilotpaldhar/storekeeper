@@ -15,7 +15,7 @@ const notFoundPage = defineType({
 			initialValue: "Not Found",
 			validation: (rule) => [
 				rule.required().error("The title is required"),
-				rule.max(20).error(`The title shouldn't be more than 20 characters`),
+				rule.max(30).error(`The title shouldn't be more than 30 characters`),
 			],
 		}),
 		defineField({
