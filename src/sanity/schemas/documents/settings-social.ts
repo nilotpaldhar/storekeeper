@@ -26,10 +26,10 @@ const socialSettings = defineType({
 			description: "E.g. https://www.instagram.com/username",
 		}),
 		defineField({
-			name: "linkedin",
-			title: "Linkedin",
+			name: "youtube",
+			title: "YouTube",
 			type: "url",
-			description: "E.g. https://www.linkedin.com/in/username",
+			description: "E.g. https://www.youtube.com/username",
 		}),
 	],
 	preview: {

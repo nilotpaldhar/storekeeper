@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Nunito as FontSans } from "next/font/google";
-import { cn } from "@/utils/general/cn";
+
+import { env } from "@/lib/config/env";
+import { cn } from "@/lib/utils/general/cn";
 
 import "@/styles/global.css";
 
@@ -14,8 +16,7 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-	title: "StoreKeeper",
-	description: "Headless E-commerce App",
+	title: env.NEXT_PUBLIC_SITE_TITLE,
 };
 
 const RootLayout = ({
@@ -25,7 +26,7 @@ const RootLayout = ({
 }>) => {
 	return (
 		<html lang="en">
-			<body className={cn("antialiased", fontSans.variable)}>{children}</body>
+			<body className={cn("min-h-screen antialiased", fontSans.variable)}>{children}</body>
 		</html>
 	);
 };

@@ -18,7 +18,13 @@ const navMegaDropdownColumn = defineType({
 			name: "items",
 			title: "Items",
 			type: "array",
-			of: [{ type: "navLink" }, { type: "navPage" }],
+			of: [
+				{ type: "navLink" },
+				{ type: "navPage" },
+				{ type: "navProduct" },
+				{ type: "navTaxon" },
+				{ type: "navTaxonomy" },
+			],
 		}),
 	],
 });

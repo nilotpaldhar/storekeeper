@@ -245,7 +245,7 @@
 				},
 				"optional": true
 			},
-			"linkedin": {
+			"youtube": {
 				"type": "objectAttribute",
 				"value": {
 					"type": "string"
@@ -1302,6 +1302,51 @@
 								},
 								"rest": {
 									"type": "inline",
+									"name": "navProduct"
+								}
+							},
+							{
+								"type": "object",
+								"attributes": {
+									"_key": {
+										"type": "objectAttribute",
+										"value": {
+											"type": "string"
+										}
+									}
+								},
+								"rest": {
+									"type": "inline",
+									"name": "navTaxon"
+								}
+							},
+							{
+								"type": "object",
+								"attributes": {
+									"_key": {
+										"type": "objectAttribute",
+										"value": {
+											"type": "string"
+										}
+									}
+								},
+								"rest": {
+									"type": "inline",
+									"name": "navTaxonomy"
+								}
+							},
+							{
+								"type": "object",
+								"attributes": {
+									"_key": {
+										"type": "objectAttribute",
+										"value": {
+											"type": "string"
+										}
+									}
+								},
+								"rest": {
+									"type": "inline",
 									"name": "navDropdown"
 								}
 							}
@@ -1587,6 +1632,51 @@
 										"type": "inline",
 										"name": "navPage"
 									}
+								},
+								{
+									"type": "object",
+									"attributes": {
+										"_key": {
+											"type": "objectAttribute",
+											"value": {
+												"type": "string"
+											}
+										}
+									},
+									"rest": {
+										"type": "inline",
+										"name": "navProduct"
+									}
+								},
+								{
+									"type": "object",
+									"attributes": {
+										"_key": {
+											"type": "objectAttribute",
+											"value": {
+												"type": "string"
+											}
+										}
+									},
+									"rest": {
+										"type": "inline",
+										"name": "navTaxon"
+									}
+								},
+								{
+									"type": "object",
+									"attributes": {
+										"_key": {
+											"type": "objectAttribute",
+											"value": {
+												"type": "string"
+											}
+										}
+									},
+									"rest": {
+										"type": "inline",
+										"name": "navTaxonomy"
+									}
 								}
 							]
 						}
@@ -1696,6 +1786,51 @@
 									"rest": {
 										"type": "inline",
 										"name": "navPage"
+									}
+								},
+								{
+									"type": "object",
+									"attributes": {
+										"_key": {
+											"type": "objectAttribute",
+											"value": {
+												"type": "string"
+											}
+										}
+									},
+									"rest": {
+										"type": "inline",
+										"name": "navProduct"
+									}
+								},
+								{
+									"type": "object",
+									"attributes": {
+										"_key": {
+											"type": "objectAttribute",
+											"value": {
+												"type": "string"
+											}
+										}
+									},
+									"rest": {
+										"type": "inline",
+										"name": "navTaxon"
+									}
+								},
+								{
+									"type": "object",
+									"attributes": {
+										"_key": {
+											"type": "objectAttribute",
+											"value": {
+												"type": "string"
+											}
+										}
+									},
+									"rest": {
+										"type": "inline",
+										"name": "navTaxonomy"
 									}
 								}
 							]

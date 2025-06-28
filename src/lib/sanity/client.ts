@@ -1,12 +1,21 @@
-import { createClient as createSanityClient } from "@sanity/client";
-import { env } from "@/lib/env";
+import { createClient } from "next-sanity";
+import { env } from "@/lib/config/env";
+import { config } from "@/lib/config/sanity";
 
-const client = createSanityClient({
-	projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-	dataset: env.NEXT_PUBLIC_SANITY_DATASET,
-	token: env.SANITY_ACCESS_TOKEN,
-	apiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION ?? "2024-06-01",
-	useCdn: false,
-});
+/**
+ * Helper function for easily switching between normal client and preview client.
+ */
+const getSanityClient = ({
+	useCdn = env.NODE_ENV === "production",
+	useToken = false,
+}: { useCdn?: boolean; useToken?: boolean } = {}) => {
+	return createClient({
+		projectId: config.projectId,
+		dataset: config.dataset,
+		apiVersion: config.apiVersion,
+		useCdn,
+		token: useToken ? config.accessToken : undefined,
+	});
+};
 
-export { client };
+export { getSanityClient };

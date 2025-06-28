@@ -8,12 +8,12 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 
-import { env } from "./src/lib/env";
+import { env } from "./src/lib/config/env";
 import { schema } from "./src/sanity/schemas";
 import { structure } from "./src/sanity/structure";
 import { resolveProductionUrl } from "./src/sanity/helpers/resolve-production-url";
 
-import { CustomNavbar } from "./src/components/sanity/custom-navbar";
+// import { CustomNavbar } from "./src/components/sanity/custom-navbar";
 
 export default defineConfig({
 	basePath: "/studio",
@@ -23,7 +23,8 @@ export default defineConfig({
 	schema,
 	studio: {
 		components: {
-			navbar: CustomNavbar,
+			// TODO FIX SERVER ENV INCOMPATIBILITY
+			// navbar: CustomNavbar,
 		},
 	},
 	plugins: [
