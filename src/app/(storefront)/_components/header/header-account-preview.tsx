@@ -11,7 +11,7 @@ const HeaderAccountPreview = () => {
 	const router = useRouter();
 
 	const [isLoading] = useState(false);
-	const [isAuthenticated] = useState(true);
+	const [isAuthenticated] = useState(false);
 
 	return (
 		<div>

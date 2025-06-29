@@ -2,12 +2,7 @@
 
 type SocialPlatform = "facebook" | "twitter" | "instagram" | "youtube";
 
-import {
-	Facebook,
-	Twitter,
-	Instagram,
-	YouTube,
-} from "@/app/(storefront)/_components/footer/footer-social-link/icons";
+import { Facebook, Twitter, Instagram, YouTube } from "@/components/icons/brand";
 
 import { cn } from "@/lib/utils/general/cn";
 import { openInNewTab } from "@/lib/utils/general/open-in-new-tab";

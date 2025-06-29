@@ -1,3 +1,5 @@
+import "server-only";
+
 import { logEvent } from "@/lib/logging/log-event";
 import { getSanityClient } from "@/lib/sanity/client";
 import { GlobalSeo, StaticPageSeo, NotFoundPageSeo } from "@/lib/sanity/queries";
