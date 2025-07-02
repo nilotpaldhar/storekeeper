@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
-import { auth } from "@/lib/auth/config";
+import { getCurrentUser } from "@/lib/resources/user/services";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
-	const session = await auth();
+	const user = await getCurrentUser();
 
-	if (!session) {
-		redirect(`/login?callbackUrl=/dashboard`);
+	if (!user) {
+		redirect(`/login?callbackUrl=${encodeURIComponent("/dashboard")}`);
 	}
 
 	return <>{children}</>;

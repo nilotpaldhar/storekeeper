@@ -15,15 +15,13 @@ type FooterMenuProps = {
 };
 
 const FooterMenu = ({ title, menuLinks }: FooterMenuProps) => {
-	const menuLinkClassName = `py-1 text-sm leading-none text-inherit hover:text-neutral-300 focus-visible:outline-neutral-400 cursor-pointer`;
+	const menuLinkClassName = `py-1 text-sm font-normal leading-none text-inherit hover:text-neutral-300 focus-visible:outline-neutral-400 cursor-pointer`;
 
 	return (
 		<div>
-			<h4 className="flex flex-col gap-2 text-lg leading-none font-semibold after:block after:h-px after:w-8 after:bg-white">
-				{title}
-			</h4>
-			<nav className="mt-5 lg:mt-8">
-				<ul className="flex flex-col gap-5">
+			<h4 className="text-xs leading-none font-light text-neutral-300 uppercase">{title}</h4>
+			<nav className="mt-5">
+				<ul className="flex flex-col gap-2">
 					{menuLinks.map(({ key, label, href, isExternal, icon }) => (
 						<li key={key} className="flex items-center space-x-2">
 							{icon}

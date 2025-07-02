@@ -1,19 +1,25 @@
-import { auth } from "@/lib/auth/config";
-import { Container } from "@/components/ui/container";
+"use client";
 
-const DashboardPage = async () => {
-	const session = await auth();
+import { useAction } from "next-safe-action/hooks";
+import { useCurrentUser } from "@/hooks/user/use-current-user";
+import { logoutAction } from "@/actions/auth/logout";
+
+import { Container } from "@/components/ui/container";
+import { Button } from "@/components/ui/button";
+
+const DashboardPage = () => {
+	const { data } = useCurrentUser();
+	const { execute, isPending } = useAction(logoutAction);
 
 	return (
 		<Container className="py-10 text-center">
 			<main>
-				{session?.user ? (
-					<h1 className="text-2xl">Logged in as {session.user.email}</h1>
-				) : (
-					<div>
-						<h1 className="text-2xl">Not authenticated</h1>
-					</div>
-				)}
+				<div className="flex flex-col items-center justify-center space-y-4 text-center">
+					<h1 className="text-2xl">Logged in as {data?.data?.email}</h1>
+					<Button disabled={isPending} onClick={() => execute()}>
+						{isPending ? "Logout..." : "Logout"}
+					</Button>
+				</div>
 			</main>
 		</Container>
 	);

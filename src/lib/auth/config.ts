@@ -7,6 +7,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 
 import { prisma } from "@/lib/clients/db";
 import { env } from "@/lib/config/env";
+import { syncCommerceLayerCustomer } from "@/lib/resources/user/services";
 
 export const {
 	handlers: { GET, POST },
@@ -34,7 +35,22 @@ export const {
 			clientSecret: env.AUTH_FACEBOOK_SECRET,
 		}),
 	],
-	callbacks: {},
+	callbacks: {
+		async jwt({ token, user }) {
+			if (!token.sub) return null;
+			if (user?.email) await syncCommerceLayerCustomer({ email: user.email });
+			return token;
+		},
+		async session({ session, token }) {
+			if (token.sub && session.user) session.user.id = token.sub;
+			return session;
+		},
+	},
+	events: {
+		async createUser({ user }) {
+			if (user?.email) await syncCommerceLayerCustomer({ email: user.email });
+		},
+	},
 	session: { strategy: "jwt" },
 	debug: env.NODE_ENV === "development",
 });

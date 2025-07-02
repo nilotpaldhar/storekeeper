@@ -16,13 +16,13 @@ const Footer = async () => {
 	const logoSrc = site?.logo ? getImageUrl(site.logo).url() : null;
 
 	return (
-		<footer className="w-full bg-neutral-900 py-10 text-neutral-100 lg:pt-16 lg:pb-10">
+		<footer className="w-full bg-neutral-900 py-8 text-neutral-100 lg:pt-10 lg:pb-8">
 			<Container>
 				<div className="flex flex-col justify-between gap-10 xl:flex-row xl:gap-0">
 					<div>
-						<SiteLogo href="/" logoSrc={logoSrc} alt={site?.title} width={220} height={30} />
+						<SiteLogo href="/" logoSrc={logoSrc} alt={site?.title} />
 						{site?.description ? (
-							<p className="mt-5 max-w-[40ch] text-sm leading-relaxed font-normal">
+							<p className="mt-1 max-w-[40ch] text-sm leading-relaxed font-normal">
 								{site.description}
 							</p>
 						) : null}
@@ -61,7 +61,7 @@ const Footer = async () => {
 						]}
 					/>
 				</div>
-				<hr className="my-10 border-t border-neutral-800 lg:mt-14 lg:mb-10" />
+				<hr className="my-8 border-t border-neutral-800 lg:mt-10 lg:mb-8" />
 				<div className="flex flex-col items-center gap-5 xl:flex-row xl:justify-between xl:gap-0">
 					{site?.copyright ? (
 						<p className="text-center text-sm font-normal text-inherit">{site.copyright}</p>

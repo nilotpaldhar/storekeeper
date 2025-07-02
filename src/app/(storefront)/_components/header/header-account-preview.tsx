@@ -1,21 +1,24 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 
-import { useCallbackUrl } from "@/hooks/use-callback-url";
+import { useCallbackUrl } from "@/hooks/common/use-callback-url";
+import { useCurrentUser } from "@/hooks/user/use-current-user";
+
 import { DASHBOARD_ROUTE, LOGIN_ROUTE } from "@/constants/routes";
 
+import { LayoutDashboard, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThreeDotsLoader } from "@/components/ui/loader";
-import { LayoutDashboard, Lock } from "lucide-react";
 
 const HeaderAccountPreviewContent = () => {
 	const router = useRouter();
 	const callbackUrl = useCallbackUrl();
+	const { data, isLoading } = useCurrentUser();
 
-	const [isLoading] = useState(false);
-	const [isAuthenticated] = useState(false);
+	const user = data?.data ?? null;
+	const isAuthenticated = !isLoading && !!user;
 
 	const handleLoginClick = () => {
 		router.push(`${LOGIN_ROUTE}?callbackUrl=${callbackUrl}`);
@@ -34,14 +37,13 @@ const HeaderAccountPreviewContent = () => {
 							<span>{isAuthenticated ? "Hello" : "Welcome"}</span>
 							{isAuthenticated && (
 								<span className="ml-1 inline-block">
-									<span>{`John`}</span>
-									<span className="ml-1">{`Doe`}</span>
+									<span>{user.name ?? "Anonymous User"}</span>
 								</span>
 							)}
 						</h4>
 						<p className="text-xs leading-none font-light">
 							{isAuthenticated ? (
-								<span className="font-semibold">{`john@example.com`}</span>
+								<span className="font-semibold">{user.email ?? `Email not provided`}</span>
 							) : (
 								<span>To access your account & manage orders</span>
 							)}

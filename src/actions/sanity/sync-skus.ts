@@ -8,8 +8,8 @@ import { z } from "zod";
 import { config } from "@/lib/config/sanity";
 import { actionClient } from "@/lib/safe-action";
 
-import { clClient } from "@/lib/clients/commerce";
 import { getSanityClient } from "@/lib/clients/sanity";
+import { getCommerceLayerClient } from "@/lib/clients/commerce";
 
 const schema = z.object({
 	secret: z.string().min(1),
@@ -22,6 +22,7 @@ const syncSkusAction = actionClient
 	})
 	.action(async ({ parsedInput: { secret } }) => {
 		const sanityClient = getSanityClient({ useToken: true });
+		const clClient = await getCommerceLayerClient();
 
 		if (secret !== config.skuSyncSecret) {
 			throw new Error("Unauthorized! Access denied");
