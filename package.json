@@ -6,7 +6,7 @@
   "author": "Nilotpal Dhar",
   "scripts": {
     "dev": "next dev",
-    "build": "npm run sanity:generate && next build",
+    "build": "npm run db:generate && npm run sanity:generate && next build",
     "start": "next start",
     "clean": "rimraf .next",
     "lint": "npm run lint:check",
@@ -20,6 +20,10 @@
     "sanity:schema": "npx sanity schema extract",
     "sanity:types": "npx sanity typegen generate",
     "sanity:generate": "npm run sanity:schema && npm run sanity:types",
+    "db:generate": "prisma generate --schema=prisma/schema",
+    "db:migrate": "prisma migrate dev --schema=prisma/schema",
+    "db:push": "prisma db push --schema=prisma/schema",
+    "db:studio": "prisma studio --schema=prisma/schema",
     "prepare": "husky",
     "commit": "git-cz"
   },
@@ -36,9 +40,11 @@
     "url": "https://github.com/nilotpaldhar/storekeeper/issues"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.10.0",
     "@commercelayer/js-auth": "^6.7.2",
     "@commercelayer/sdk": "^6.44.0",
     "@hookform/resolvers": "^5.1.1",
+    "@prisma/client": "^6.10.1",
     "@radix-ui/react-checkbox": "^1.3.1",
     "@radix-ui/react-collapsible": "^1.1.11",
     "@radix-ui/react-dialog": "^1.1.14",
@@ -57,6 +63,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.509.0",
     "next": "15.3.2",
+    "next-auth": "^5.0.0-beta.29",
     "next-safe-action": "^8.0.3",
     "next-sanity": "^9.11.1",
     "react": "^19.0.0",
@@ -90,6 +97,7 @@
     "husky": "^9.1.7",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
+    "prisma": "^6.10.1",
     "rimraf": "^6.0.1",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.2.9",

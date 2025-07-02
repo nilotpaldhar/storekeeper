@@ -1,8 +1,8 @@
 import "server-only";
 
 import { logEvent } from "@/lib/logging/log-event";
-import { getSanityClient } from "@/lib/sanity/client";
-import { GlobalSeo, StaticPageSeo, NotFoundPageSeo } from "@/lib/sanity/queries";
+import { getSanityClient } from "@/lib/clients/sanity";
+import { GlobalSeo, StaticPageSeo, NotFoundPageSeo } from "@/lib/queries/sanity";
 
 /**
  * Fetches the global SEO settings from the CMS.

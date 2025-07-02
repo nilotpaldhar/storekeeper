@@ -5,9 +5,10 @@ import { Info } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
 import { notFound } from "next/navigation";
-import { getSeo } from "@/lib/services/seo/get-seo";
-import { getStaticPageSeoBySlug } from "@/lib/seo/fetch";
-import { getStaticPageBySlug, getStaticPageSlugs } from "@/lib/pages/fetch";
+
+import { getSeo } from "@/lib/resources/seo/services";
+import { getStaticPageSeoBySlug } from "@/lib/resources/seo/fetch";
+import { getStaticPageBySlug, getStaticPageSlugs } from "@/lib/resources/pages/fetch";
 
 import { cn } from "@/lib/utils/general/cn";
 import { sanitizeSlug } from "@/lib/utils/validators/sanitize-slug";

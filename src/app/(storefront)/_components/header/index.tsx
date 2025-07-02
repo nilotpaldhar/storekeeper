@@ -10,10 +10,10 @@ import {
 	HeaderToolbarCart,
 } from "@/app/(storefront)/_components/header/header-toolbar";
 
-import { getSanityImageUrl } from "@/lib/sanity/image";
-import { getGeneralSiteSettings, getHeaderSettings } from "@/lib/settings/fetch";
+import { getGeneralSiteSettings, getHeaderSettings } from "@/lib/resources/settings/fetch";
 
 import { cn } from "@/lib/utils/general/cn";
+import { getImageUrl } from "@/lib/utils/sanity/get-image-url";
 import { normalizeHeaderMenu } from "@/lib/utils/navigation/normalize-header-menu";
 
 type HeaderProps = {
@@ -28,7 +28,7 @@ const Header = async ({ className }: HeaderProps) => {
 	const menuDesktop = menuDesktopRaw ? normalizeHeaderMenu(menuDesktopRaw) : null;
 	const menuMobile = menuMobileRaw ? normalizeHeaderMenu(menuMobileRaw) : null;
 
-	const logoSrc = generalSettings?.logo ? getSanityImageUrl(generalSettings.logo).url() : null;
+	const logoSrc = generalSettings?.logo ? getImageUrl(generalSettings.logo).url() : null;
 	const logoAlt = generalSettings?.title;
 
 	return (

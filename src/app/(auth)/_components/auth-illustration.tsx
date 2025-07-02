@@ -10,6 +10,7 @@ const AuthIllustration = () => {
 
 	const resolveIllustrationSrc = () => {
 		if (path === "/login/verification") return ILLUSTRATIONS.AUTH.VERIFICATION;
+		if (path === "/login/error") return ILLUSTRATIONS.AUTH.ERROR;
 		return ILLUSTRATIONS.AUTH.DEFAULT;
 	};
 

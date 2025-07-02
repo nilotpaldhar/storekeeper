@@ -1,8 +1,8 @@
 import "server-only";
 
 import { logEvent } from "@/lib/logging/log-event";
-import { getSanityClient } from "@/lib/sanity/client";
-import { StaticPageSlugs, StaticPage, NotFoundPage } from "@/lib/sanity/queries";
+import { getSanityClient } from "@/lib/clients/sanity";
+import { StaticPageSlugs, StaticPage, NotFoundPage } from "@/lib/queries/sanity";
 
 /**
  * Fetches an array of static page slugs from the CMS.

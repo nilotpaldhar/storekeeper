@@ -8,8 +8,8 @@ import { z } from "zod";
 import { config } from "@/lib/config/sanity";
 import { actionClient } from "@/lib/safe-action";
 
-import { clClient } from "@/lib/commerce/client";
-import { getSanityClient } from "@/lib/sanity/client";
+import { clClient } from "@/lib/clients/commerce";
+import { getSanityClient } from "@/lib/clients/sanity";
 
 const schema = z.object({
 	secret: z.string().min(1),

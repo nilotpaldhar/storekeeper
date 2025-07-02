@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Button, TextInput, Dialog, Layer, Box, Flex, Stack, Text, useToast } from "@sanity/ui";
 
 import { useAction } from "next-safe-action/hooks";
-import { syncSkusAction } from "@/actions/sync-skus";
+import { syncSkusAction } from "@/actions/sanity/sync-skus";
 
 type SyncSkusDialogProps = {
 	open: boolean;

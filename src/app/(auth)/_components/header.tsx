@@ -5,14 +5,15 @@ import { Button } from "@/components/ui/button";
 import { SiteLogo } from "@/components/ui/site-logo";
 import { Container } from "@/components/ui/container";
 
-import { getSanityImageUrl } from "@/lib/sanity/image";
-import { getGeneralSiteSettings } from "@/lib/settings/fetch";
+import { getGeneralSiteSettings } from "@/lib/resources/settings/fetch";
+
 import { cn } from "@/lib/utils/general/cn";
+import { getImageUrl } from "@/lib/utils/sanity/get-image-url";
 
 const Header = async ({ className }: { className?: string }) => {
 	const generalSettings = await getGeneralSiteSettings();
 
-	const logoSrc = generalSettings?.logo ? getSanityImageUrl(generalSettings.logo).url() : null;
+	const logoSrc = generalSettings?.logo ? getImageUrl(generalSettings.logo).url() : null;
 	const logoAlt = generalSettings?.title;
 
 	return (

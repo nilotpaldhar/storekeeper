@@ -1,17 +1,25 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+
+import { useCallbackUrl } from "@/hooks/use-callback-url";
+import { DASHBOARD_ROUTE, LOGIN_ROUTE } from "@/constants/routes";
 
 import { Button } from "@/components/ui/button";
 import { ThreeDotsLoader } from "@/components/ui/loader";
 import { LayoutDashboard, Lock } from "lucide-react";
 
-const HeaderAccountPreview = () => {
+const HeaderAccountPreviewContent = () => {
 	const router = useRouter();
+	const callbackUrl = useCallbackUrl();
 
 	const [isLoading] = useState(false);
 	const [isAuthenticated] = useState(false);
+
+	const handleLoginClick = () => {
+		router.push(`${LOGIN_ROUTE}?callbackUrl=${callbackUrl}`);
+	};
 
 	return (
 		<div>
@@ -40,12 +48,12 @@ const HeaderAccountPreview = () => {
 						</p>
 					</div>
 					{isAuthenticated ? (
-						<Button className="w-full" onClick={() => router.push("/dashboard")}>
+						<Button className="w-full" onClick={() => router.push(DASHBOARD_ROUTE)}>
 							<LayoutDashboard />
 							<span>Dashboard</span>
 						</Button>
 					) : (
-						<Button className="w-full" onClick={() => router.push("/login")}>
+						<Button className="w-full" onClick={handleLoginClick}>
 							<Lock />
 							<span>Login / Register</span>
 						</Button>
@@ -53,6 +61,14 @@ const HeaderAccountPreview = () => {
 				</div>
 			)}
 		</div>
+	);
+};
+
+const HeaderAccountPreview = () => {
+	return (
+		<Suspense fallback={null}>
+			<HeaderAccountPreviewContent />
+		</Suspense>
 	);
 };
 

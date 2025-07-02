@@ -10,9 +10,9 @@ import { GoBackButton } from "@/components/navigation/go-back-button";
 
 import { ILLUSTRATIONS } from "@/constants/media";
 
-import { getNotFoundPageSeo } from "@/lib/seo/fetch";
-import { getSeo } from "@/lib/services/seo/get-seo";
-import { getNotFoundPage } from "@/lib/pages/fetch";
+import { getNotFoundPageSeo } from "@/lib/resources/seo/fetch";
+import { getNotFoundPage } from "@/lib/resources/pages/fetch";
+import { getSeo } from "@/lib/resources/seo/services";
 
 export const revalidate = 86400; // 24 Hours
 

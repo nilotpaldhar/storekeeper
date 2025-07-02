@@ -7,13 +7,13 @@ import { SiteLogo } from "@/components/ui/site-logo";
 import { FooterMenu } from "@/app/(storefront)/_components/footer/footer-menu";
 import { FooterSocialLink } from "@/app/(storefront)/_components/footer/footer-social-link";
 
-import { getSanityImageUrl } from "@/lib/sanity/image";
-import { getFooterSettings } from "@/lib/settings/fetch";
+import { getFooterSettings } from "@/lib/resources/settings/fetch";
+import { getImageUrl } from "@/lib/utils/sanity/get-image-url";
 
 const Footer = async () => {
 	const footerSettings = await getFooterSettings();
 	const { site, info, social, blockOne, blockTwo, blockThree } = footerSettings ?? {};
-	const logoSrc = site?.logo ? getSanityImageUrl(site.logo).url() : null;
+	const logoSrc = site?.logo ? getImageUrl(site.logo).url() : null;
 
 	return (
 		<footer className="w-full bg-neutral-900 py-10 text-neutral-100 lg:pt-16 lg:pb-10">

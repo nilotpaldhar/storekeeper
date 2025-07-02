@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 import { env } from "@/lib/config/env";
 import { logEvent } from "@/lib/logging/log-event";
-import { getGlobalSeo } from "@/lib/seo/fetch";
+import { getGlobalSeo } from "@/lib/resources/seo/fetch";
 
 type SeoOverrides = {
 	metaTitle?: string | null;

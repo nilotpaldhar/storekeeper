@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { Divider } from "@/components/ui/divider";
 import { LoginForm } from "@/app/(auth)/_components/login-form";
 import { SocialAuthButtons } from "@/app/(auth)/_components/social-auth-buttons";
 
-import { getSeo } from "@/lib/services/seo/get-seo";
+import { getSeo } from "@/lib/resources/seo/services";
 
 export const generateMetadata = async (): Promise<Metadata> => {
 	return getSeo({ metaTitle: "Login", shareTitle: "Login" });
@@ -27,7 +28,9 @@ const LoginPage = () => {
 					</p>
 				</section>
 				<section className="mt-12 flex flex-col space-y-4">
-					<LoginForm />
+					<Suspense fallback={<div>Loading...</div>}>
+						<LoginForm />
+					</Suspense>
 					<p className="flex flex-wrap justify-center space-x-1 text-center text-sm font-light">
 						<span>By continuing, I agree to the</span>
 						<Link href="/" className="hover:text-primary-500 font-semibold">
@@ -40,7 +43,9 @@ const LoginPage = () => {
 					</p>
 				</section>
 				<Divider className="my-8">or continue with</Divider>
-				<SocialAuthButtons />
+				<Suspense fallback={<div>Loading...</div>}>
+					<SocialAuthButtons />
+				</Suspense>
 			</main>
 		</div>
 	);
