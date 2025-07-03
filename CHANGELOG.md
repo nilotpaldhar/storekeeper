@@ -1,3 +1,14 @@
+# [0.4.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.3.0...v0.4.0) (2025-07-03)
+
+
+### Features
+
+* **auth:** add basic structure and styling for login page (no auth logic yet) ([011bc65](https://github.com/nilotpaldhar/storekeeper/commit/011bc65bd15ef7b6962fae3d4bed1a7d3eba7289))
+* **auth:** add helper to sync user with Commerce Layer customer and store reference ID ([a3752c9](https://github.com/nilotpaldhar/storekeeper/commit/a3752c95c9c5d0a981941e5aa8b848b00ddab947))
+* **auth:** implement user authentication using Auth.js ([89316e4](https://github.com/nilotpaldhar/storekeeper/commit/89316e47559878b76418fcd8fb75bb84b4211d0e))
+
+
+
 # [0.3.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.2.0...v0.3.0) (2025-06-28)
 
 
