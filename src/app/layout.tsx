@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Nunito as FontSans } from "next/font/google";
 
+import { TanstackQueryProvider } from "@/components/providers/tanstack-query-provider";
+import { ToastProvider } from "@/components/providers/toast-provider";
+
 import { env } from "@/lib/config/env";
 import { cn } from "@/lib/utils/general/cn";
 
@@ -26,7 +29,12 @@ const RootLayout = ({
 }>) => {
 	return (
 		<html lang="en">
-			<body className={cn("min-h-screen antialiased", fontSans.variable)}>{children}</body>
+			<body className={cn("min-h-screen antialiased", fontSans.variable)}>
+				<TanstackQueryProvider>
+					{children}
+					<ToastProvider />
+				</TanstackQueryProvider>
+			</body>
 		</html>
 	);
 };

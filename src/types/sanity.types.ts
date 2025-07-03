@@ -717,7 +717,7 @@ export type AllSanitySchemaTypes =
 	| SanityAssetSourceData
 	| SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/lib/sanity/queries/page.ts
+// Source: ./src/lib/queries/sanity/page.ts
 // Variable: StaticPageSlugs
 // Query: *[_type == "page"]{ "slug": slug.current }
 export type StaticPageSlugsResult = Array<{
@@ -755,7 +755,7 @@ export type NotFoundPageResult = {
 	description: string | null;
 } | null;
 
-// Source: ./src/lib/sanity/queries/seo.ts
+// Source: ./src/lib/queries/sanity/seo.ts
 // Variable: GlobalSeo
 // Query: *[_type == "seoSettings"][0] {        metaTitle,        metaDesc,        shareDesc,        shareTitle,        twitterCardType,        twitterUsername,        metaRobotsNoindex,        metaRobotsNofollow,        "favicon": favicon.asset->url,        "touchIcon": touchIcon.asset->url,        "shareGraphic": shareGraphic.asset->url,        "faviconLegacy": faviconLegacy.asset->url    }
 export type GlobalSeoResult = {
@@ -795,7 +795,7 @@ export type NotFoundPageSeoResult = {
 	} | null;
 } | null;
 
-// Source: ./src/lib/sanity/queries/settings.ts
+// Source: ./src/lib/queries/sanity/settings.ts
 // Variable: GeneralSiteSettings
 // Query: *[_type == "generalSettings"][0] {        "domain": siteURL,        "title": siteTitle,        "logo": siteLogo.asset._ref,        "description": siteDescription    }
 export type GeneralSiteSettingsResult = {

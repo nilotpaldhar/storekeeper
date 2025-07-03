@@ -42,4 +42,5 @@ jobs:
           COMMERCE_LAYER_CLIENT_ID: ${{ secrets.COMMERCE_LAYER_CLIENT_ID }}
           COMMERCE_LAYER_CLIENT_SECRET: ${{ secrets.COMMERCE_LAYER_CLIENT_SECRET }}
           COMMERCE_LAYER_ORGANIZATION: ${{ secrets.COMMERCE_LAYER_ORGANIZATION }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npm run build
