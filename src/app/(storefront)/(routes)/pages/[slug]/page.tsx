@@ -52,7 +52,7 @@ const StaticCMSPage = async ({ params }: StaticCMSPageProps) => {
 
 	return (
 		<main className="bg-white pb-8 sm:bg-neutral-50">
-			<Container className=" ">
+			<Container>
 				<div className="mx-auto max-w-5xl bg-white py-6 sm:px-8">
 					{page.content ? (
 						<div className={cn(...Object.values(classNames))}>

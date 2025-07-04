@@ -2,7 +2,7 @@ import "server-only";
 
 import { logEvent } from "@/lib/logging/log-event";
 import { getSanityClient } from "@/lib/clients/sanity";
-import { GlobalSeo, StaticPageSeo, NotFoundPageSeo } from "@/lib/queries/sanity";
+import { GlobalSeo, StaticPageSeo, NotFoundPageSeo, ProductSeo } from "@/lib/queries/sanity";
 
 /**
  * Fetches the global SEO settings from the CMS.
@@ -63,4 +63,23 @@ const getNotFoundPageSeo = async () => {
 	}
 };
 
-export { getGlobalSeo, getStaticPageSeoBySlug, getNotFoundPageSeo };
+/**
+ *
+ */
+const getProductSeo = async ({ slug }: { slug: string }) => {
+	try {
+		const data = await getSanityClient().fetch(ProductSeo, { slug });
+		if (!data || !data.seo) return null;
+		return data.seo;
+	} catch (err) {
+		logEvent({
+			fn: "getProductSeo",
+			level: "error",
+			event: "fail",
+			error: err,
+		});
+		return null;
+	}
+};
+
+export { getGlobalSeo, getStaticPageSeoBySlug, getNotFoundPageSeo, getProductSeo };

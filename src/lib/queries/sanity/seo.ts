@@ -37,4 +37,10 @@ const NotFoundPageSeo = defineQuery(`
     }
 `);
 
-export { GlobalSeo, StaticPageSeo, NotFoundPageSeo };
+const ProductSeo = defineQuery(`
+    *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {
+        seo { ${SeoFields} }
+    }
+`);
+
+export { GlobalSeo, StaticPageSeo, NotFoundPageSeo, ProductSeo };
