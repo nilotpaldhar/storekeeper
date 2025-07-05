@@ -17,6 +17,8 @@ import { ProductPricing } from "@/components/product/pricing";
 import { ProductRating } from "@/components/product/rating";
 import { ProductShareDropdown } from "@/components/product/share-dropdown";
 import { ProductSpecifications } from "@/components/product/specifications";
+import { useProductInventory } from "@/hooks/product";
+import { cn } from "@/lib/utils/general/cn";
 
 type ProductDetailsProps = ProductDetails & {};
 
@@ -31,15 +33,23 @@ const ProductDetails = ({
 	sku,
 	gallery,
 }: ProductDetailsProps) => {
-	const [activeSkuCode, setActiveSkuCode] = useState<string | null>(null);
+	const [activeSkuId, setActiveSkuId] = useState<string | null>(null);
+	const activeSku = hasVariants ? variants.find((v) => v.sku?.id === activeSkuId)?.sku : sku;
+
+	const {
+		data,
+		isLoading: isInventoryLoading,
+		isError: isInventoryError,
+	} = useProductInventory({ skuId: activeSkuId ?? "", enabled: !!activeSku });
+	const isOutOfStock = (!isInventoryLoading || !isInventoryError) && data?.data?.quantity === 0;
 
 	const handleVariantChange = useCallback((variant: ProductVariant | null) => {
-		setActiveSkuCode(variant?.sku?.code ?? null);
+		setActiveSkuId(variant?.sku?.id ?? null);
 	}, []);
 
 	useEffect(() => {
-		if (!hasVariants) setActiveSkuCode(sku?.code ?? null);
-	}, [hasVariants, sku?.code]);
+		if (!hasVariants) setActiveSkuId(sku?.id ?? null);
+	}, [hasVariants, sku?.id]);
 
 	return (
 		<div className="flex space-x-8">
@@ -52,7 +62,6 @@ const ProductDetails = ({
 					<ProductImageGallery gallery={gallery} />
 				</div>
 			</div>
-
 			<article className="flex-1/2">
 				<section>
 					<div className="flex flex-col space-y-2">
@@ -62,11 +71,11 @@ const ProductDetails = ({
 						<h1 className="text-2xl leading-8 font-semibold">{title}</h1>
 					</div>
 					<div className="flex items-center space-x-6 pt-4">
-						<div aria-labelledby="product-price">
-							<ProductPricing />
-						</div>
 						<div aria-labelledby="product-rating">
 							<ProductRating />
+						</div>
+						<div aria-labelledby="product-price">
+							<ProductPricing sku={activeSku ?? null} />
 						</div>
 					</div>
 				</section>
@@ -77,15 +86,33 @@ const ProductDetails = ({
 							<ProductVariantSelector
 								options={options}
 								variants={variants}
-								disabled={false}
+								disabled={isInventoryLoading}
 								onVariantChange={handleVariantChange}
 							/>
 						</div>
 					) : null}
 					<div className="flex space-x-4">
-						<AddToCartButton />
+						<AddToCartButton
+							label={isOutOfStock ? "Out Of Stock" : "Add To Cart"}
+							disabled={isInventoryLoading || isInventoryError || isOutOfStock}
+							className={cn(isOutOfStock && "bg-neutral-500 hover:bg-neutral-500")}
+						/>
 						<AddToWishlistButton />
 					</div>
+					{isInventoryError || isOutOfStock ? (
+						<div className="mt-2.5">
+							{isInventoryError ? (
+								<p className="text-error-600 px-px text-xs font-bold">
+									Unable to retrieve product inventory at the moment. Please try again later.
+								</p>
+							) : null}
+							{isOutOfStock ? (
+								<p className="text-error-600 px-px text-xs font-bold">
+									Currently sold out. Check back later.
+								</p>
+							) : null}
+						</div>
+					) : null}
 				</section>
 				<Divider type="solid" className="my-6 before:border-neutral-200" />
 				<section>
@@ -114,7 +141,7 @@ const ProductDetails = ({
 					<Block className="flex-row items-center space-y-0 space-x-3">
 						<BlockTitle>Product Code:</BlockTitle>
 						<BlockContent>
-							<p className="text-sm leading-none font-normal">{activeSkuCode ?? "?"}</p>
+							<p className="text-sm leading-none font-normal">{activeSku?.code ?? "?"}</p>
 						</BlockContent>
 					</Block>
 				</section>
@@ -124,5 +151,3 @@ const ProductDetails = ({
 };
 
 export { ProductDetails };
-
-// https://www.figma.com/design/Hvt2IKE7tgDceXpnBlU1vZ/StoreKeeper---Headless-Ecommerce-Storefront?node-id=123024-4971&t=5fyXpCa1zbEQU04m-0

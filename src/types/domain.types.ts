@@ -1,4 +1,5 @@
-import { User } from "@prisma/client";
+import type { Price, StockItem } from "@commercelayer/sdk";
+import type { User } from "@prisma/client";
 
 export type UserProfile = User;
 
@@ -57,3 +58,7 @@ export type ProductDetails = {
 	sku: ProductSku | null;
 	gallery: ProductImage[];
 };
+
+export type ProductPrice = Price;
+
+export type ProductInventory = StockItem;
