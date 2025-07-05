@@ -11,13 +11,15 @@ const ProductImageGallery = ({ gallery }: ProductImageGalleryProps) => {
 		<div className="grid grid-cols-2 gap-5">
 			{gallery.map(({ refKey, src, alt }) => {
 				return (
-					<div key={refKey} className="aspect-square bg-neutral-50">
-						<Image
-							src={src ?? ILLUSTRATIONS.PLACEHOLDERS.PRODUCT}
-							alt={alt ?? ""}
-							width={400}
-							height={400}
-						/>
+					<div key={refKey} className="aspect-square overflow-hidden bg-neutral-50">
+						<div className="transition-transform duration-300 hover:scale-105">
+							<Image
+								src={src ?? ILLUSTRATIONS.PLACEHOLDERS.PRODUCT}
+								alt={alt ?? ""}
+								width={400}
+								height={400}
+							/>
+						</div>
 					</div>
 				);
 			})}

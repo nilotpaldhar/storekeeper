@@ -1,15 +1,18 @@
 "use client";
 
-import type { ProductDetails } from "@/types/domain.types";
+import type { ProductDetails, ProductVariant } from "@/types/domain.types";
+
+import { useCallback, useEffect, useState } from "react";
 
 import { Divider } from "@/components/ui/divider";
+import { CollapsibleText } from "@/components/ui/collapsible-text";
 import { Block, BlockTitle, BlockContent } from "@/components/ui/block";
 
 import { AddToCartButton } from "@/components/product/add-to-cart-button";
 import { AddToWishlistButton } from "@/components/product/add-to-wishlist-button";
 import { ProductBreadcrumb } from "@/components/product/breadcrumb";
 import { ProductImageGallery } from "@/components/product/image-gallery";
-import { ProductOptions } from "@/components/product/options";
+import { ProductVariantSelector } from "@/components/product/variant-selector";
 import { ProductPricing } from "@/components/product/pricing";
 import { ProductRating } from "@/components/product/rating";
 import { ProductShareDropdown } from "@/components/product/share-dropdown";
@@ -28,6 +31,16 @@ const ProductDetails = ({
 	sku,
 	gallery,
 }: ProductDetailsProps) => {
+	const [activeSkuCode, setActiveSkuCode] = useState<string | null>(null);
+
+	const handleVariantChange = useCallback((variant: ProductVariant | null) => {
+		setActiveSkuCode(variant?.sku?.code ?? null);
+	}, []);
+
+	useEffect(() => {
+		if (!hasVariants) setActiveSkuCode(sku?.code ?? null);
+	}, [hasVariants, sku?.code]);
+
 	return (
 		<div className="flex space-x-8">
 			<div className="flex-1/2">
@@ -61,7 +74,12 @@ const ProductDetails = ({
 				<section>
 					{hasVariants ? (
 						<div className="pb-8">
-							<ProductOptions options={options} />
+							<ProductVariantSelector
+								options={options}
+								variants={variants}
+								disabled={false}
+								onVariantChange={handleVariantChange}
+							/>
 						</div>
 					) : null}
 					<div className="flex space-x-4">
@@ -75,7 +93,11 @@ const ProductDetails = ({
 						<Block className="pb-8">
 							<BlockTitle>Product Details</BlockTitle>
 							<BlockContent>
-								<p className="leading-relaxed">{description}</p>
+								<CollapsibleText
+									text={description}
+									previewLength={300}
+									className="leading-relaxed"
+								/>
 							</BlockContent>
 						</Block>
 					) : null}
@@ -92,9 +114,7 @@ const ProductDetails = ({
 					<Block className="flex-row items-center space-y-0 space-x-3">
 						<BlockTitle>Product Code:</BlockTitle>
 						<BlockContent>
-							<p className="text-sm leading-none font-normal">
-								{hasVariants ? variants.at(0)?.sku?.code : sku?.code}
-							</p>
+							<p className="text-sm leading-none font-normal">{activeSkuCode ?? "?"}</p>
 						</BlockContent>
 					</Block>
 				</section>
@@ -104,3 +124,5 @@ const ProductDetails = ({
 };
 
 export { ProductDetails };
+
+// https://www.figma.com/design/Hvt2IKE7tgDceXpnBlU1vZ/StoreKeeper---Headless-Ecommerce-Storefront?node-id=123024-4971&t=5fyXpCa1zbEQU04m-0
