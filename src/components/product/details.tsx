@@ -15,10 +15,14 @@ import { ProductImageGallery } from "@/components/product/image-gallery";
 import { ProductVariantSelector } from "@/components/product/variant-selector";
 import { ProductPricing } from "@/components/product/pricing";
 import { ProductRating } from "@/components/product/rating";
-import { ProductShareDropdown } from "@/components/product/share-dropdown";
+import { ProductSharePopover } from "@/components/product/share-popover";
 import { ProductSpecifications } from "@/components/product/specifications";
 import { useProductInventory } from "@/hooks/product";
+
+import { usePathname } from "next/navigation";
+
 import { cn } from "@/lib/utils/general/cn";
+import { createCanonicalUrl } from "@/lib/utils/general/create-canonical-url";
 
 type ProductDetailsProps = ProductDetails & {};
 
@@ -33,6 +37,8 @@ const ProductDetails = ({
 	sku,
 	gallery,
 }: ProductDetailsProps) => {
+	const pathname = usePathname();
+
 	const [activeSkuId, setActiveSkuId] = useState<string | null>(null);
 	const activeSku = hasVariants ? variants.find((v) => v.sku?.id === activeSkuId)?.sku : sku;
 
@@ -56,7 +62,7 @@ const ProductDetails = ({
 			<div className="flex-1/2">
 				<div className="spax flex items-center justify-between">
 					<ProductBreadcrumb />
-					<ProductShareDropdown />
+					<ProductSharePopover title={title} url={createCanonicalUrl({ pathname })} />
 				</div>
 				<div className="pt-6">
 					<ProductImageGallery gallery={gallery} />
