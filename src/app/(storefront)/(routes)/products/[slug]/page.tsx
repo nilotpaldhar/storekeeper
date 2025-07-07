@@ -39,8 +39,8 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 	if (!product) return notFound();
 
 	return (
-		<main className="pt-10 pb-16">
-			<Container className="flex flex-col space-y-6">
+		<main>
+			<Container>
 				<section>
 					<ProductDetails
 						title={product.title}
@@ -56,7 +56,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 						breadcrumb={product.breadcrumb}
 					/>
 				</section>
-				<section className="pt-10">
+				<section className="pt-10 md:pt-12 lg:pt-16">
 					<ProductRecommendations />
 				</section>
 			</Container>

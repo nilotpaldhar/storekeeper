@@ -21,9 +21,18 @@ import { cn } from "@/lib/utils/general/cn";
 type ProductSharePopoverProps = {
 	url: string;
 	title: string;
+	side?: "top" | "right" | "bottom" | "left";
+	sideOffset?: number;
+	align?: "start" | "center" | "end";
 };
 
-const ProductSharePopover = ({ url, title }: ProductSharePopoverProps) => {
+const ProductSharePopover = ({
+	url,
+	title,
+	side = "bottom",
+	sideOffset = 12,
+	align = "center",
+}: ProductSharePopoverProps) => {
 	const { copy, isCopied } = useCopy({ str: url });
 
 	const titlePrefix = `I ❤ this product on ${env.NEXT_PUBLIC_SITE_TITLE}!`;
@@ -42,7 +51,12 @@ const ProductSharePopover = ({ url, title }: ProductSharePopoverProps) => {
 					<span className="font-bold">Share</span>
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent sideOffset={12} className="w-40 rounded-xs p-0">
+			<PopoverContent
+				side={side}
+				sideOffset={sideOffset}
+				align={align}
+				className="w-40 rounded-xs p-0"
+			>
 				<div className={btnContainerClassName}>
 					<TwitterShareButton url={url} title={prefixedTitle}>
 						<div className={btnWrapperClassName}>
