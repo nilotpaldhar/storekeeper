@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { PanelTop } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const headerSettings = defineType({
 	name: "headerSettings",

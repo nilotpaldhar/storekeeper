@@ -1,4 +1,5 @@
 import { Slot } from "@radix-ui/react-slot";
+
 import { cn } from "@/lib/utils/general/cn";
 
 const Block = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (

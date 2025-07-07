@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 
-import Link from "next/link";
-import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
-import { GoBackButton } from "@/components/navigation/go-back-button";
+import Image from "next/image";
+import Link from "next/link";
 
 import { ILLUSTRATIONS } from "@/constants/media";
 
-import { getNotFoundPageSeo } from "@/lib/resources/seo/fetch";
+import { GoBackButton } from "@/components/navigation/go-back-button";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+
 import { getNotFoundPage } from "@/lib/resources/pages/fetch";
+import { getNotFoundPageSeo } from "@/lib/resources/seo/fetch";
 import { getSeo } from "@/lib/resources/seo/services";
 
 export const revalidate = 86400; // 24 Hours

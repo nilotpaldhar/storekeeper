@@ -5,8 +5,8 @@ import { useAction } from "next-safe-action/hooks";
 
 import { socialLoginAction } from "@/actions/auth/social-login";
 
+import { Facebook, Google } from "@/components/icons/brand";
 import { Button } from "@/components/ui/button";
-import { Google, Facebook } from "@/components/icons/brand";
 
 const SocialAuthButtons = () => {
 	const { execute, isPending } = useAction(socialLoginAction);

@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { Image } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const mediaImage = defineType({
 	name: "mediaImage",

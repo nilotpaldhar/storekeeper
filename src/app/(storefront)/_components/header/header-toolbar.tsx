@@ -1,17 +1,16 @@
 "use client";
 
+import { Heart, ShoppingCart, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { Heart, ShoppingCart, User } from "lucide-react";
+import { HeaderAccountPreview } from "@/app/(storefront)/_components/header/header-account-preview";
+import { HeaderAction } from "@/app/(storefront)/_components/header/header-action";
 
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import { HeaderAction } from "@/app/(storefront)/_components/header/header-action";
-import { HeaderAccountPreview } from "@/app/(storefront)/_components/header/header-account-preview";
 
 const HeaderToolbarProfile = ({ className }: { className?: string }) => {
 	return (

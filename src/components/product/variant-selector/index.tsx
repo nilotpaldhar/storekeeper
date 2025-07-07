@@ -2,7 +2,8 @@
 
 import type { ProductOption, ProductVariant } from "@/types/domain.types";
 
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import { OptionBlock } from "@/components/product/variant-selector/option-block";
 
 type ProductVariantSelectorProps = {

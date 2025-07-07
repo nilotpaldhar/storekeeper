@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { File } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const navPage = defineType({
 	name: "navPage",

@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { Megaphone } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 import { decodeAssetUrl } from "@/sanity/helpers/decode-asset-url";
 

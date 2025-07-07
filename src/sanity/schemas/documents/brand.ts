@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { Building2 } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 import { noSlashSlugValidation } from "@/sanity/helpers/slug-validation";
 

@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
 import { copyTextToClipboard } from "@/lib/utils/general/copy-text-to-clipboard";
 
 /**

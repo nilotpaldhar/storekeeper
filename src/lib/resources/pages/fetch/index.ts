@@ -1,8 +1,7 @@
 import "server-only";
-
-import { logEvent } from "@/lib/logging/log-event";
 import { getSanityClient } from "@/lib/clients/sanity";
-import { StaticPageSlugs, StaticPage, NotFoundPage } from "@/lib/queries/sanity";
+import { logEvent } from "@/lib/logging/log-event";
+import { NotFoundPage, StaticPage, StaticPageSlugs } from "@/lib/queries/sanity";
 
 /**
  * Fetches an array of static page slugs from the CMS.
@@ -45,7 +44,7 @@ const getStaticPageBySlug = async ({ slug }: { slug: string }) => {
 };
 
 /**
- *
+ * Fetches the 404 Not Found page content from Sanity.
  */
 const getNotFoundPage = async () => {
 	try {

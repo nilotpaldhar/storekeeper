@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { ListTree } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const menu = defineType({
 	name: "menu",

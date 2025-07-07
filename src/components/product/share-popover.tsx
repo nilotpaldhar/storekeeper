@@ -1,20 +1,21 @@
 "use client";
 
-import {
-	TwitterShareButton,
-	EmailShareButton,
-	WhatsappShareButton,
-	TwitterIcon,
-	WhatsappIcon,
-	EmailIcon,
-} from "next-share";
 import { Link, Share2 } from "lucide-react";
+import {
+	EmailIcon,
+	EmailShareButton,
+	TwitterIcon,
+	TwitterShareButton,
+	WhatsappIcon,
+	WhatsappShareButton,
+} from "next-share";
 
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import { useCopy } from "@/hooks/common/use-copy";
+
 import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 import { env } from "@/lib/config/env";
-import { useCopy } from "@/hooks/common/use-copy";
 import { cn } from "@/lib/utils/general/cn";
 
 type ProductSharePopoverProps = {

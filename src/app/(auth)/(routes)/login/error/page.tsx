@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 
-import Link from "next/link";
 import { XOctagon } from "lucide-react";
+import Link from "next/link";
+
+import { StatusMessage } from "@/app/(auth)/_components/status-message";
 
 import { Button } from "@/components/ui/button";
-import { StatusMessage } from "@/app/(auth)/_components/status-message";
+
+import { getSeo } from "@/lib/resources/seo/services";
 
 enum AuthError {
 	Configuration = "Configuration",
@@ -16,8 +19,6 @@ enum AuthError {
 type LoginErrorPageProps = {
 	searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
-
-import { getSeo } from "@/lib/resources/seo/services";
 
 export const generateMetadata = async (): Promise<Metadata> => {
 	return getSeo({ metaTitle: "Login Error", shareTitle: "Login Error" });

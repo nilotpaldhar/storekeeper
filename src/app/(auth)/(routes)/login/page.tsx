@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { Divider } from "@/components/ui/divider";
 import { LoginForm } from "@/app/(auth)/_components/login-form";
 import { SocialAuthButtons } from "@/app/(auth)/_components/social-auth-buttons";
+
+import { Divider } from "@/components/ui/divider";
 
 import { getSeo } from "@/lib/resources/seo/services";
 

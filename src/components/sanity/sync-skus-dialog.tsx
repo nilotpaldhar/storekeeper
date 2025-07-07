@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Button, TextInput, Dialog, Layer, Box, Flex, Stack, Text, useToast } from "@sanity/ui";
-
+import { Box, Button, Dialog, Flex, Layer, Stack, Text, TextInput, useToast } from "@sanity/ui";
 import { useAction } from "next-safe-action/hooks";
+import { useEffect, useState } from "react";
+
 import { syncSkusAction } from "@/actions/sanity/sync-skus";
 
 type SyncSkusDialogProps = {

@@ -4,8 +4,9 @@ import type { ProductOption } from "@/types/domain.types";
 
 import React from "react";
 
-import { Block, BlockTitle, BlockContent } from "@/components/ui/block";
+import { Block, BlockContent, BlockTitle } from "@/components/ui/block";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 import { cn } from "@/lib/utils/general/cn";
 
 type ProductOptionBlockProps = {

@@ -1,6 +1,7 @@
 "use client";
 
-import { type LucideIcon, ShoppingCart } from "lucide-react";
+import { ShoppingCart, type LucideIcon } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils/general/cn";

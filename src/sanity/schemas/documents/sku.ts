@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { Barcode } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const sku = defineType({
 	name: "sku",

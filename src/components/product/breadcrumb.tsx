@@ -1,47 +1,44 @@
+import type { ProductBreadcrumb } from "@/types/domain.types";
+
+import Link from "next/link";
+import { Fragment } from "react";
+
 import {
 	Breadcrumb,
 	BreadcrumbItem,
 	BreadcrumbLink,
 	BreadcrumbList,
-	BreadcrumbPage,
 	BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import Link from "next/link";
 
-const ProductBreadcrumb = () => {
+import { cn } from "@/lib/utils/general/cn";
+
+const ProductBreadcrumb = ({ breadcrumb }: { breadcrumb: ProductBreadcrumb }) => {
 	return (
 		<Breadcrumb>
 			<BreadcrumbList className="gap-1 sm:gap-1">
-				<BreadcrumbItem>
-					<BreadcrumbLink asChild>
-						<Link href="/" className="font-normal text-neutral-900 hover:text-neutral-500">
-							Home
-						</Link>
-					</BreadcrumbLink>
-				</BreadcrumbItem>
-				<BreadcrumbSeparator />
+				{breadcrumb.map((item, idx) => {
+					const isLastItem = idx === breadcrumb.length - 1;
 
-				<BreadcrumbItem>
-					<BreadcrumbLink asChild>
-						<Link href="/#" className="font-normal text-neutral-900 hover:text-neutral-500">
-							Mobiles & Accessories
-						</Link>
-					</BreadcrumbLink>
-				</BreadcrumbItem>
-				<BreadcrumbSeparator />
-
-				<BreadcrumbItem>
-					<BreadcrumbLink asChild>
-						<Link href="/#" className="font-normal text-neutral-900 hover:text-neutral-500">
-							Mobiles
-						</Link>
-					</BreadcrumbLink>
-				</BreadcrumbItem>
-				<BreadcrumbSeparator />
-
-				<BreadcrumbItem>
-					<BreadcrumbPage>SAMSUNG Mobiles</BreadcrumbPage>
-				</BreadcrumbItem>
+					return (
+						<Fragment key={item.id}>
+							<BreadcrumbItem>
+								<BreadcrumbLink asChild>
+									<Link
+										href={item.path}
+										className={cn(
+											"font-normal text-neutral-900 hover:text-neutral-500",
+											isLastItem && "font-bold"
+										)}
+									>
+										{item.label}
+									</Link>
+								</BreadcrumbLink>
+							</BreadcrumbItem>
+							{!isLastItem ? <BreadcrumbSeparator /> : null}
+						</Fragment>
+					);
+				})}
 			</BreadcrumbList>
 		</Breadcrumb>
 	);

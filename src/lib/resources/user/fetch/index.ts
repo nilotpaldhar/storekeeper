@@ -1,11 +1,10 @@
 import "server-only";
-
 import type { UserProfile } from "@/types/domain.types";
 
 import { unstable_cache as cache } from "next/cache";
 
-import { prisma } from "@/lib/clients/db";
 import { auth } from "@/lib/auth/config";
+import { prisma } from "@/lib/clients/db";
 
 const getUserSession = async () => {
 	const session = await auth();

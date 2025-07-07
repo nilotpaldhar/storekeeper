@@ -1,13 +1,12 @@
 import "server-only";
-
 import { getCommerceLayerClient } from "@/lib/clients/commerce";
+import { prisma } from "@/lib/clients/db";
 import {
-	getUserSession,
-	getUserById,
 	getCachedUserById,
 	getUserByEmail,
+	getUserById,
+	getUserSession,
 } from "@/lib/resources/user/fetch";
-import { prisma } from "@/lib/clients/db";
 
 const getCurrentUser = async ({ cached }: { cached?: true } = {}) => {
 	const session = await getUserSession();

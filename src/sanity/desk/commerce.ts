@@ -1,5 +1,6 @@
 import type { StructureBuilder } from "sanity/structure";
-import { Store, Layers, Tag, Package, Building2, Barcode } from "lucide-react";
+
+import { Barcode, Building2, Layers, Package, Store, Tag } from "lucide-react";
 
 const productMenu = (S: StructureBuilder) =>
 	S.listItem()

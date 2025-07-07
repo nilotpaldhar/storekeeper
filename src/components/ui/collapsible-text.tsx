@@ -1,10 +1,12 @@
 "use client";
 
-import { useToggle } from "@/hooks/common/use-toggle";
-import { truncateStr } from "@/lib/utils/general/truncate-str";
-
 import { ChevronDown, ChevronUp } from "lucide-react";
+
+import { useToggle } from "@/hooks/common/use-toggle";
+
 import { Button } from "@/components/ui/button";
+
+import { truncateStr } from "@/lib/utils/general/truncate-str";
 
 type CollapsibleTextProps = {
 	text: string;

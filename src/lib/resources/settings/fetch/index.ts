@@ -1,8 +1,7 @@
 import "server-only";
-
-import { logEvent } from "@/lib/logging/log-event";
 import { getSanityClient } from "@/lib/clients/sanity";
-import { GeneralSiteSettings, HeaderSettings, FooterSettings } from "@/lib/queries/sanity";
+import { logEvent } from "@/lib/logging/log-event";
+import { FooterSettings, GeneralSiteSettings, HeaderSettings } from "@/lib/queries/sanity";
 
 /**
  * Fetches the general site settings from the CMS.

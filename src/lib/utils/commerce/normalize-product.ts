@@ -1,6 +1,8 @@
-import type { ProductResult } from "@/types/sanity.types";
 import type { ProductDetails, ProductImage } from "@/types/domain.types";
-import { getImageUrl } from "../sanity/get-image-url";
+import type { ProductResult } from "@/types/sanity.types";
+
+import { buildCategoryBreadcrumb } from "@/lib/resources/categories/services/index";
+import { getImageUrl } from "@/lib/utils/sanity/get-image-url";
 
 /**
  * Normalize an array of gallery images.
@@ -26,7 +28,9 @@ const normalizeGallery = (gallery: NonNullable<ProductResult>["gallery"]): Produ
  * @param rawProduct - The raw product object from the CMS.
  * @returns A normalized ProductDetails object or null if the input is invalid.
  */
-const normalizeProduct = (rawProduct: ProductResult | null | undefined): ProductDetails | null => {
+const normalizeProduct = async (
+	rawProduct: ProductResult | null | undefined
+): Promise<ProductDetails | null> => {
 	if (!rawProduct) return null;
 
 	// Normalize brand if it exists
@@ -66,6 +70,9 @@ const normalizeProduct = (rawProduct: ProductResult | null | undefined): Product
 			}))
 		: [];
 
+	const taxonSlug = rawProduct.taxon?.slug ?? "";
+	const breadcrumb = taxonSlug ? await buildCategoryBreadcrumb({ taxonSlug }) : [];
+
 	// Final normalized product object
 	return {
 		title: rawProduct.title ?? "",
@@ -78,6 +85,7 @@ const normalizeProduct = (rawProduct: ProductResult | null | undefined): Product
 		specifications,
 		sku: rawProduct.sku ?? null,
 		gallery: normalizeGallery(rawProduct.gallery),
+		breadcrumb,
 	};
 };
 

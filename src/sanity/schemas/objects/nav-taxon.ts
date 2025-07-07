@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { Tag } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const navTaxon = defineType({
 	name: "navTaxon",

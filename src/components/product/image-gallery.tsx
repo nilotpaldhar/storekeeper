@@ -1,6 +1,8 @@
-import { ILLUSTRATIONS } from "@/constants/media";
 import type { ProductImage } from "@/types/domain.types";
+
 import Image from "next/image";
+
+import { ILLUSTRATIONS } from "@/constants/media";
 
 type ProductImageGalleryProps = {
 	gallery: ProductImage[];

@@ -1,8 +1,7 @@
 import "server-only";
-
-import { logEvent } from "@/lib/logging/log-event";
 import { getSanityClient } from "@/lib/clients/sanity";
-import { GlobalSeo, StaticPageSeo, NotFoundPageSeo, ProductSeo } from "@/lib/queries/sanity";
+import { logEvent } from "@/lib/logging/log-event";
+import { GlobalSeo, NotFoundPageSeo, ProductSeo, StaticPageSeo } from "@/lib/queries/sanity";
 
 /**
  * Fetches the global SEO settings from the CMS.
@@ -45,7 +44,7 @@ const getStaticPageSeoBySlug = async ({ slug }: { slug: string }) => {
 };
 
 /**
- *
+ * Fetches the SEO metadata for the 404 Not Found page from Sanity.
  */
 const getNotFoundPageSeo = async () => {
 	try {
@@ -64,7 +63,7 @@ const getNotFoundPageSeo = async () => {
 };
 
 /**
- *
+ * Fetches the SEO metadata for a specific product page by slug from Sanity.
  */
 const getProductSeo = async ({ slug }: { slug: string }) => {
 	try {

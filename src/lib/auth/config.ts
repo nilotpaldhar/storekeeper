@@ -1,9 +1,8 @@
-import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-
-import ResendProvider from "next-auth/providers/resend";
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth from "next-auth";
 import FacebookProvider from "next-auth/providers/facebook";
+import GoogleProvider from "next-auth/providers/google";
+import ResendProvider from "next-auth/providers/resend";
 
 import { prisma } from "@/lib/clients/db";
 import { env } from "@/lib/config/env";

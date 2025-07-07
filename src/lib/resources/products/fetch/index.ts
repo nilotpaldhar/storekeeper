@@ -1,16 +1,14 @@
 import "server-only";
-
 import type { ProductPrice } from "@/types/domain.types";
 
-import { logEvent } from "@/lib/logging/log-event";
-import { config as clConfig } from "@/lib/config/commerce";
-
-import { getSanityClient } from "@/lib/clients/sanity";
 import { getCommerceLayerClient } from "@/lib/clients/commerce";
-import { ProductSlugs, Product } from "@/lib/queries/sanity";
+import { getSanityClient } from "@/lib/clients/sanity";
+import { config as clConfig } from "@/lib/config/commerce";
+import { logEvent } from "@/lib/logging/log-event";
+import { Product, ProductSlugs } from "@/lib/queries/sanity";
 
 /**
- *
+ * Fetches the default stock location from Commerce Layer.
  */
 const getDefaultStockLocation = async () => {
 	const clClient = await getCommerceLayerClient();
@@ -92,7 +90,7 @@ const getProductPrice = async ({ skuId }: { skuId: string }): Promise<ProductPri
 };
 
 /**
- *
+ * Fetches the stock inventory record for a given product SKU at a specific stock location.
  */
 const getProductInventory = async ({
 	skuId,

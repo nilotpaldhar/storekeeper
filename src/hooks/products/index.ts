@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { productInventoryKeys, productPriceKeys } from "@/constants/tanstack-query-keys";
-import { getProductPrice, getProductInventory } from "@/lib/requests/product";
+
+import { getProductInventory, getProductPrice } from "@/lib/requests/products";
 
 const useProductPrice = ({ skuId, enabled = true }: { skuId: string; enabled?: boolean }) => {
 	return useQuery({

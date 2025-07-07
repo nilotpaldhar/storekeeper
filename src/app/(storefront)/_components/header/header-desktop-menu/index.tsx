@@ -1,8 +1,8 @@
 import type { HeaderMenu } from "@/types/ui.types";
 
-import { HeaderNavLink } from "@/app/(storefront)/_components/header/header-nav-link";
 import { HeaderDesktopMenuDropdown } from "@/app/(storefront)/_components/header/header-desktop-menu/header-desktop-menu-dropdown";
 import { HeaderDesktopMenuMegaDropdown } from "@/app/(storefront)/_components/header/header-desktop-menu/header-desktop-menu-mega-dropdown";
+import { HeaderNavLink } from "@/app/(storefront)/_components/header/header-nav-link";
 
 type HeaderDesktopMenuProps = {
 	menu: HeaderMenu | null;

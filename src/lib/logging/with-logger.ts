@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { NextRequest, NextResponse } from "next/server";
+
 import { logEvent } from "@/lib/logging/log-event";
 
 type Handler = (req: NextRequest, context: any) => Promise<NextResponse>;

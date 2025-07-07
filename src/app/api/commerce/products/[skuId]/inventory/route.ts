@@ -1,5 +1,6 @@
-import { type NextRequest, NextResponse } from "next/server";
-import { getDefaultStockLocation, getProductInventory } from "@/lib/resources/product/fetch";
+import { NextResponse, type NextRequest } from "next/server";
+
+import { getDefaultStockLocation, getProductInventory } from "@/lib/resources/products/fetch";
 
 type Params = Promise<{ skuId: string }>;
 

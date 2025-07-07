@@ -1,6 +1,6 @@
 import type { StructureBuilder } from "sanity/structure";
 
-import { Home, Files, FileStack, OctagonX } from "lucide-react";
+import { Files, FileStack, Home, OctagonX } from "lucide-react";
 
 const homePageMenu = (S: StructureBuilder) =>
 	S.listItem()

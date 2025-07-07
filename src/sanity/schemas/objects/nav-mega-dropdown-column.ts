@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { Columns3 } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const navMegaDropdownColumn = defineType({
 	name: "navMegaDropdownColumn",

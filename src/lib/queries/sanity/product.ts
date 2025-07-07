@@ -1,4 +1,5 @@
 import { defineQuery } from "next-sanity";
+
 import { MediaImage } from "@/lib/queries/sanity/media";
 
 const ProductSKU = `

@@ -1,4 +1,5 @@
 import type { StructureBuilder } from "sanity/structure";
+
 import {
 	AlignHorizontalJustifyEnd,
 	Globe,

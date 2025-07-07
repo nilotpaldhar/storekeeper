@@ -3,6 +3,9 @@ import type { User } from "@prisma/client";
 
 export type UserProfile = User;
 
+export type ProductPrice = Price;
+export type ProductInventory = StockItem;
+
 export type ProductSku = {
 	id: string;
 	code: string | null;
@@ -46,6 +49,12 @@ export type ProductSpecification = {
 	value: string;
 };
 
+export type ProductBreadcrumb = {
+	id: string;
+	label: string;
+	path: string;
+}[];
+
 export type ProductDetails = {
 	title: string;
 	slug: string;
@@ -57,8 +66,5 @@ export type ProductDetails = {
 	specifications: ProductSpecification[];
 	sku: ProductSku | null;
 	gallery: ProductImage[];
+	breadcrumb: ProductBreadcrumb;
 };
-
-export type ProductPrice = Price;
-
-export type ProductInventory = StockItem;

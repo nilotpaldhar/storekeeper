@@ -1,12 +1,11 @@
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { SiteLogo } from "@/components/ui/site-logo";
 import { Container } from "@/components/ui/container";
+import { SiteLogo } from "@/components/ui/site-logo";
 
 import { getGeneralSiteSettings } from "@/lib/resources/settings/fetch";
-
 import { cn } from "@/lib/utils/general/cn";
 import { getImageUrl } from "@/lib/utils/sanity/get-image-url";
 

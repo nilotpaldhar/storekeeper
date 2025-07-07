@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 
-import { Container } from "@/components/ui/container";
-import { ProductDetails } from "@/components/product/details";
-import { ProductRecommendations } from "@/components/product/recommendations";
-
 import { notFound } from "next/navigation";
 
-import { getSeo } from "@/lib/resources/seo/services";
-import { getProductSeo } from "@/lib/resources/seo/fetch";
-import { getProductSlugs, getProductBySlug } from "@/lib/resources/product/fetch";
+import { ProductDetails } from "@/components/product/details";
+import { ProductRecommendations } from "@/components/product/recommendations";
+import { Container } from "@/components/ui/container";
 
-import { sanitizeSlug } from "@/lib/utils/validators/sanitize-slug";
+import { getProductBySlug, getProductSlugs } from "@/lib/resources/products/fetch";
+import { getProductSeo } from "@/lib/resources/seo/fetch";
+import { getSeo } from "@/lib/resources/seo/services";
 import { normalizeProduct } from "@/lib/utils/commerce/normalize-product";
+import { sanitizeSlug } from "@/lib/utils/validators/sanitize-slug";
 
 type ProductPageProps = {
 	params: Promise<{ slug: string }>;
@@ -35,7 +34,7 @@ export const generateStaticParams = async () => {
 const ProductPage = async ({ params }: ProductPageProps) => {
 	const { slug } = await params;
 	const rawProduct = await getProductBySlug({ slug: sanitizeSlug(slug) });
-	const product = normalizeProduct(rawProduct);
+	const product = await normalizeProduct(rawProduct);
 
 	if (!product) return notFound();
 
@@ -54,6 +53,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 						specifications={product.specifications}
 						sku={product.sku}
 						gallery={product.gallery}
+						breadcrumb={product.breadcrumb}
 					/>
 				</section>
 				<section className="pt-10">

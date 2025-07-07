@@ -1,7 +1,8 @@
 import type { ProductSku } from "@/types/domain.types";
 
+import { useProductPrice } from "@/hooks/products";
+
 import { Skeleton } from "@/components/ui/skeleton";
-import { useProductPrice } from "@/hooks/product";
 
 type ProductPricingProps = {
 	sku: ProductSku | null;

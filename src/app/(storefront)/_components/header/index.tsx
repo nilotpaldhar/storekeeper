@@ -1,20 +1,19 @@
+import { HeaderDesktopMenu } from "@/app/(storefront)/_components/header/header-desktop-menu";
+import { HeaderMobileMenu } from "@/app/(storefront)/_components/header/header-mobile-menu";
+import { HeaderSearch } from "@/app/(storefront)/_components/header/header-search";
+import {
+	HeaderToolbarCart,
+	HeaderToolbarProfile,
+	HeaderToolbarWishlist,
+} from "@/app/(storefront)/_components/header/header-toolbar";
+
 import { Container } from "@/components/ui/container";
 import { SiteLogo } from "@/components/ui/site-logo";
 
-import { HeaderSearch } from "@/app/(storefront)/_components/header/header-search";
-import { HeaderDesktopMenu } from "@/app/(storefront)/_components/header/header-desktop-menu";
-import { HeaderMobileMenu } from "@/app/(storefront)/_components/header/header-mobile-menu";
-import {
-	HeaderToolbarProfile,
-	HeaderToolbarWishlist,
-	HeaderToolbarCart,
-} from "@/app/(storefront)/_components/header/header-toolbar";
-
 import { getGeneralSiteSettings, getHeaderSettings } from "@/lib/resources/settings/fetch";
-
 import { cn } from "@/lib/utils/general/cn";
-import { getImageUrl } from "@/lib/utils/sanity/get-image-url";
 import { normalizeHeaderMenu } from "@/lib/utils/navigation/normalize-header-menu";
+import { getImageUrl } from "@/lib/utils/sanity/get-image-url";
 
 type HeaderProps = {
 	className?: string;

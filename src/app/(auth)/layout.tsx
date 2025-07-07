@@ -1,7 +1,7 @@
-import { Container } from "@/components/ui/container";
-import { Header } from "@/app/(auth)/_components/header";
 import { AuthIllustration } from "@/app/(auth)/_components/auth-illustration";
+import { Header } from "@/app/(auth)/_components/header";
 
+import { Container } from "@/components/ui/container";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {

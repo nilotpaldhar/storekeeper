@@ -2,24 +2,23 @@
 
 import type { ProductDetails, ProductVariant } from "@/types/domain.types";
 
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-import { Divider } from "@/components/ui/divider";
-import { CollapsibleText } from "@/components/ui/collapsible-text";
-import { Block, BlockTitle, BlockContent } from "@/components/ui/block";
+import { useProductInventory } from "@/hooks/products";
 
 import { AddToCartButton } from "@/components/product/add-to-cart-button";
 import { AddToWishlistButton } from "@/components/product/add-to-wishlist-button";
 import { ProductBreadcrumb } from "@/components/product/breadcrumb";
 import { ProductImageGallery } from "@/components/product/image-gallery";
-import { ProductVariantSelector } from "@/components/product/variant-selector";
 import { ProductPricing } from "@/components/product/pricing";
 import { ProductRating } from "@/components/product/rating";
 import { ProductSharePopover } from "@/components/product/share-popover";
 import { ProductSpecifications } from "@/components/product/specifications";
-import { useProductInventory } from "@/hooks/product";
-
-import { usePathname } from "next/navigation";
+import { ProductVariantSelector } from "@/components/product/variant-selector";
+import { Block, BlockContent, BlockTitle } from "@/components/ui/block";
+import { CollapsibleText } from "@/components/ui/collapsible-text";
+import { Divider } from "@/components/ui/divider";
 
 import { cn } from "@/lib/utils/general/cn";
 import { createCanonicalUrl } from "@/lib/utils/general/create-canonical-url";
@@ -36,6 +35,7 @@ const ProductDetails = ({
 	specifications,
 	sku,
 	gallery,
+	breadcrumb,
 }: ProductDetailsProps) => {
 	const pathname = usePathname();
 
@@ -61,7 +61,7 @@ const ProductDetails = ({
 		<div className="flex space-x-8">
 			<div className="flex-1/2">
 				<div className="spax flex items-center justify-between">
-					<ProductBreadcrumb />
+					<ProductBreadcrumb breadcrumb={breadcrumb} />
 					<ProductSharePopover title={title} url={createCanonicalUrl({ pathname })} />
 				</div>
 				<div className="pt-6">

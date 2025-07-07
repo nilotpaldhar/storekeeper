@@ -5,11 +5,10 @@ import type { Sku } from "@/types/sanity.types";
 import { flattenValidationErrors } from "next-safe-action";
 import { z } from "zod";
 
+import { getCommerceLayerClient } from "@/lib/clients/commerce";
+import { getSanityClient } from "@/lib/clients/sanity";
 import { config } from "@/lib/config/sanity";
 import { actionClient } from "@/lib/safe-action";
-
-import { getSanityClient } from "@/lib/clients/sanity";
-import { getCommerceLayerClient } from "@/lib/clients/commerce";
 
 const schema = z.object({
 	secret: z.string().min(1),

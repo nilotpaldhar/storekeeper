@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { XOctagon } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const notFoundPage = defineType({
 	name: "notFoundPage",

@@ -1,5 +1,6 @@
 "use client";
 
+import { LayoutDashboard, Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 
@@ -8,7 +9,6 @@ import { useCurrentUser } from "@/hooks/user/use-current-user";
 
 import { DASHBOARD_ROUTE, LOGIN_ROUTE } from "@/constants/routes";
 
-import { LayoutDashboard, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThreeDotsLoader } from "@/components/ui/loader";
 

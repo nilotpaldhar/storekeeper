@@ -3,15 +3,14 @@
 /**
  * This configuration is used to for the Sanity Studio that’s mounted on the `\src\app\studio\[[...tool]]\page.tsx` route
  */
-
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 
 import { env } from "./src/lib/config/env";
+import { resolveProductionUrl } from "./src/sanity/helpers/resolve-production-url";
 import { schema } from "./src/sanity/schemas";
 import { structure } from "./src/sanity/structure";
-import { resolveProductionUrl } from "./src/sanity/helpers/resolve-production-url";
 
 // import { CustomNavbar } from "./src/components/sanity/custom-navbar";
 
