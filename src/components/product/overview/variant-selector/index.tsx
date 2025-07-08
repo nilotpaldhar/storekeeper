@@ -4,21 +4,21 @@ import type { ProductOption, ProductVariant } from "@/types/domain.types";
 
 import { useCallback, useEffect, useState } from "react";
 
-import { OptionBlock } from "@/components/product/variant-selector/option-block";
+import { OptionBlock } from "@/components/product/overview/variant-selector/option-block";
 
-type ProductVariantSelectorProps = {
+type VariantSelectorProps = {
 	options: ProductOption[];
 	variants: ProductVariant[];
 	disabled?: boolean;
 	onVariantChange: (variant: ProductVariant | null) => void;
 };
 
-const ProductVariantSelector = ({
+const VariantSelector = ({
 	options,
 	variants,
 	disabled,
 	onVariantChange,
-}: ProductVariantSelectorProps) => {
+}: VariantSelectorProps) => {
 	const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
 
 	const handleChange = useCallback(({ name, value }: { name: string; value: string }) => {
@@ -56,4 +56,4 @@ const ProductVariantSelector = ({
 	);
 };
 
-export { ProductVariantSelector };
+export { VariantSelector };

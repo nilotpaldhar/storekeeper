@@ -5,6 +5,7 @@ import { type LucideIcon, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils/general/cn";
+import { notifyFeatureUnavailable } from "@/lib/utils/toast";
 
 type AddToWishlistButtonProps = {
 	label?: string;
@@ -22,11 +23,12 @@ const AddToWishlistButton = ({
 	return (
 		<Button
 			variant="light"
+			disabled={disabled}
+			onClick={() => notifyFeatureUnavailable({ featureName: "Wishlist" })}
 			className={cn(
 				"border border-neutral-200 bg-white px-12 py-2 hover:bg-neutral-50 hover:shadow-none",
 				className
 			)}
-			disabled={disabled}
 		>
 			<Icon />
 			<span>{label}</span>

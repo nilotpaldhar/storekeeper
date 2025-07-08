@@ -5,7 +5,7 @@ import { getCommerceLayerClient } from "@/lib/clients/commerce";
 import { getSanityClient } from "@/lib/clients/sanity";
 import { config as clConfig } from "@/lib/config/commerce";
 import { logEvent } from "@/lib/logging/log-event";
-import { Product, ProductSlugs } from "@/lib/queries/sanity";
+import { ProductQuery, ProductSlugsQuery, RelatedProductsQuery } from "@/lib/queries/sanity";
 
 /**
  * Fetches the default stock location from Commerce Layer.
@@ -35,7 +35,7 @@ const getDefaultStockLocation = async () => {
  */
 const getProductSlugs = async ({ limit = 10 }: { limit?: number } = {}) => {
 	try {
-		const slugs = await getSanityClient().fetch(ProductSlugs, { limit });
+		const slugs = await getSanityClient().fetch(ProductSlugsQuery, { limit });
 		if (!slugs || !Array.isArray(slugs)) return null;
 		return slugs.map(({ slug }) => slug);
 	} catch (err) {
@@ -54,12 +54,31 @@ const getProductSlugs = async ({ limit = 10 }: { limit?: number } = {}) => {
  */
 const getProductBySlug = async ({ slug }: { slug: string }) => {
 	try {
-		const product = await getSanityClient().fetch(Product, { slug });
+		const product = await getSanityClient().fetch(ProductQuery, { slug });
 		if (!product) return null;
 		return product;
 	} catch (err) {
 		logEvent({
 			fn: "getProductBySlug",
+			level: "error",
+			event: "fail",
+			error: err,
+		});
+		return null;
+	}
+};
+
+/**
+ *
+ */
+const getRelatedProducts = async ({ productId }: { productId: string }) => {
+	try {
+		const products = await getSanityClient().fetch(RelatedProductsQuery, { id: productId });
+		if (!products?.relatedProducts) return [];
+		return products.relatedProducts;
+	} catch (err) {
+		logEvent({
+			fn: "getRelatedProducts",
 			level: "error",
 			event: "fail",
 			error: err,
@@ -125,6 +144,7 @@ export {
 	getDefaultStockLocation,
 	getProductSlugs,
 	getProductBySlug,
+	getRelatedProducts,
 	getProductPrice,
 	getProductInventory,
 };

@@ -1,24 +1,10 @@
-import type { ProductDetails, ProductImage } from "@/types/domain.types";
-import type { ProductResult } from "@/types/sanity.types";
+import "server-only";
+
+import type { ProductDetails } from "@/types/domain.types";
+import type { ProductQueryResult } from "@/types/sanity.types";
 
 import { buildCategoryBreadcrumb } from "@/lib/resources/categories/services/index";
-import { getImageUrl } from "@/lib/utils/sanity/get-image-url";
-
-/**
- * Normalize an array of gallery images.
- * Ensures consistent shape and default values.
- *
- * @param gallery - The raw gallery array.
- * @returns Normalized gallery array.
- */
-const normalizeGallery = (gallery: NonNullable<ProductResult>["gallery"]): ProductImage[] => {
-	if (!Array.isArray(gallery)) return [];
-	return gallery.map(({ refKey, image, altText }) => ({
-		refKey: refKey,
-		src: image ? getImageUrl(image).url() : null,
-		alt: altText ?? null,
-	}));
-};
+import { normalizeProductImageGallery } from "@/lib/utils/commerce/normalize-product-image-gallery";
 
 /**
  * Normalize a raw product fetched from Sanity into a domain-level ProductDetails object.
@@ -29,7 +15,7 @@ const normalizeGallery = (gallery: NonNullable<ProductResult>["gallery"]): Produ
  * @returns A normalized ProductDetails object or null if the input is invalid.
  */
 const normalizeProduct = async (
-	rawProduct: ProductResult | null | undefined
+	rawProduct: ProductQueryResult | null | undefined
 ): Promise<ProductDetails | null> => {
 	if (!rawProduct) return null;
 
@@ -66,7 +52,7 @@ const normalizeProduct = async (
 				refKey: variant.refKey,
 				variantKey: variant.variantKey ?? "",
 				sku: variant.sku ?? null,
-				gallery: normalizeGallery(variant.gallery),
+				gallery: normalizeProductImageGallery(variant.gallery),
 			}))
 		: [];
 
@@ -75,6 +61,7 @@ const normalizeProduct = async (
 
 	// Final normalized product object
 	return {
+		id: rawProduct.id,
 		title: rawProduct.title ?? "",
 		slug: rawProduct.slug ?? "",
 		description: rawProduct.description ?? null,
@@ -84,7 +71,7 @@ const normalizeProduct = async (
 		variants,
 		specifications,
 		sku: rawProduct.sku ?? null,
-		gallery: normalizeGallery(rawProduct.gallery),
+		gallery: normalizeProductImageGallery(rawProduct.gallery),
 		breadcrumb,
 	};
 };

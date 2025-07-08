@@ -10,11 +10,6 @@ import { ILLUSTRATIONS } from "@/constants/media";
 
 import { cn } from "@/lib/utils/general/cn";
 
-type ProductImageGalleryMobileProps = {
-	gallery: ProductImage[];
-	loop?: boolean;
-};
-
 const GallerySlider = ({ slides, loop = false }: { slides: React.ReactNode[]; loop?: boolean }) => {
 	const [emblaRef, emblaApi] = useEmblaCarousel({ loop });
 	const [selectedIndex, setSelectedIndex] = useState(0);
@@ -85,7 +80,7 @@ const GallerySlide = ({ image: { src, alt } }: { image: Omit<ProductImage, "refK
 	);
 };
 
-const ProductImageGalleryMobile = ({ gallery, loop }: ProductImageGalleryMobileProps) => {
+const ImageGalleryMobile = ({ gallery, loop }: { gallery: ProductImage[]; loop?: boolean }) => {
 	return (
 		<GallerySlider
 			loop={loop}
@@ -108,4 +103,4 @@ const ProductImageGalleryMobile = ({ gallery, loop }: ProductImageGalleryMobileP
 	);
 };
 
-export { ProductImageGalleryMobile };
+export { ImageGalleryMobile };

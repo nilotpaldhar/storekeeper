@@ -13,7 +13,7 @@ import {
 
 import { cn } from "@/lib/utils/general/cn";
 
-const ProductBreadcrumb = ({ breadcrumb }: { breadcrumb: ProductBreadcrumb }) => {
+const NavigationTrail = ({ breadcrumb }: { breadcrumb: ProductBreadcrumb }) => {
 	return (
 		<Breadcrumb>
 			<BreadcrumbList className="gap-1 sm:gap-1">
@@ -44,4 +44,4 @@ const ProductBreadcrumb = ({ breadcrumb }: { breadcrumb: ProductBreadcrumb }) =>
 	);
 };
 
-export { ProductBreadcrumb };
+export { NavigationTrail };

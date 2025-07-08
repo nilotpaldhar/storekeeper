@@ -4,11 +4,11 @@ import { useProductPrice } from "@/hooks/products";
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-type ProductPricingProps = {
+type PricingSummaryProps = {
 	sku: ProductSku | null;
 };
 
-const ProductPricing = ({ sku }: ProductPricingProps) => {
+const PricingSummary = ({ sku }: PricingSummaryProps) => {
 	const { data, isLoading, isError } = useProductPrice({
 		skuId: sku?.id ?? "",
 		enabled: !!sku?.id,
@@ -35,8 +35,8 @@ const ProductPricing = ({ sku }: ProductPricingProps) => {
 	return (
 		<div className="flex items-center space-x-4 text-lg leading-none">
 			{formatted_compare_at_amount ? (
-				<span className="font-normal text-neutral-500 line-through">
-					<del>{formatted_compare_at_amount}</del>
+				<span className="font-normal text-neutral-500">
+					<del className="line-through">{formatted_compare_at_amount}</del>
 				</span>
 			) : null}
 			{formatted_amount ? (
@@ -48,5 +48,4 @@ const ProductPricing = ({ sku }: ProductPricingProps) => {
 	);
 };
 
-export { ProductPricing };
-//
+export { PricingSummary };

@@ -9,7 +9,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import { cn } from "@/lib/utils/general/cn";
 
-type ProductOptionBlockProps = {
+type OptionBlockProps = {
 	option: ProductOption;
 	selectedValue: string;
 	disabled?: boolean;
@@ -21,7 +21,7 @@ const OptionBlock = React.memo(function OptionBlock({
 	selectedValue,
 	disabled = false,
 	onChange,
-}: ProductOptionBlockProps) {
+}: OptionBlockProps) {
 	return (
 		<Block key={option.refKey} className="flex flex-row items-center space-y-0 space-x-6">
 			<BlockTitle className="w-28">{option.name}</BlockTitle>

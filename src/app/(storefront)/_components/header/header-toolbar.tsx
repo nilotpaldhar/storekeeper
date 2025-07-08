@@ -12,6 +12,8 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { notifyFeatureUnavailable } from "@/lib/utils/toast";
+
 const HeaderToolbarProfile = ({ className }: { className?: string }) => {
 	return (
 		<DropdownMenu>
@@ -28,13 +30,11 @@ const HeaderToolbarProfile = ({ className }: { className?: string }) => {
 };
 
 const HeaderToolbarWishlist = ({ className }: { className?: string }) => {
-	const router = useRouter();
-
 	return (
 		<HeaderAction
 			label="wishlist"
 			icon={Heart}
-			onClick={() => router.push("/wishlist")}
+			onClick={() => notifyFeatureUnavailable({ featureName: "Wishlist" })}
 			className={className}
 		/>
 	);

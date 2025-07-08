@@ -1,8 +1,8 @@
 import { defineQuery } from "next-sanity";
 
-import { MediaImage } from "@/lib/queries/sanity/media";
+import { MediaImageFragment } from "@/lib/queries/sanity/media";
 
-const ProductSKU = `
+const ProductSKUFragment = `
     "id": _id,
     code,
     name,
@@ -14,51 +14,75 @@ const ProductSKU = `
     hsTariffNumber
 `;
 
-const ProductSlugs = defineQuery(`
+const ProductTaxonFragment = `
+    "id": _id,
+    title,
+    "slug": slug.current,
+    isLeaf
+`;
+
+const ProductOptionFragment = `
+    "refKey": _key,
+    name,
+    values
+`;
+
+const ProductVariantFragment = `
+    "refKey": _key,
+    variantKey,
+    "sku": sku->{ ${ProductSKUFragment} },
+    "gallery":  select(
+        defined(gallery) => gallery[]{ ${MediaImageFragment} },
+        []
+    )
+`;
+
+const ProductSummaryFragment = `
+    "id": _id,
+    title,
+    "slug": slug.current,
+    description,
+    hasVariants,
+    "sku": sku->{ ${ProductSKUFragment} },
+    "taxon": taxon->{ ${ProductTaxonFragment} },
+    "gallery":  select(
+        defined(gallery) => gallery[]{ ${MediaImageFragment} },
+        []
+    ),
+    "variants": select(
+        defined(variants) => variants[]{ ${ProductVariantFragment} },
+        []
+    ),
+`;
+
+const ProductSlugsQuery = defineQuery(`
     *[_type == "product"]{ "slug": slug.current }[0...$limit]
 `);
 
-const Product = defineQuery(`
+const ProductQuery = defineQuery(`
     *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {
         "id": _id,
         title,
         "slug": slug.current,
         description,
         hasVariants,
-        "sku": sku->{ ${ProductSKU} },
+        "sku": sku->{ ${ProductSKUFragment} },
         "brand": brand->{
             "id": _id,
             title,
             "slug": slug.current
         },
-        "taxon": taxon->{
-            "id": _id,
-            title,
-            "slug": slug.current,
-            isLeaf
-        },
+        "taxon": taxon->{ ${ProductTaxonFragment} },
         "options": select(
-            defined(options) => options[]{
-                "refKey": _key,
-                name,
-                values
-            },
+            defined(options) => options[]{ ${ProductOptionFragment} },
             []
         ),
         "variants": select(
-            defined(variants) => variants[]{
-                "refKey": _key,
-                variantKey,
-                "sku": sku->{ ${ProductSKU} },
-                "gallery":  select(
-                    defined(gallery) => gallery[]{ ${MediaImage} },
-                    []
-                ),
-            },
+            defined(variants) => variants[]{ ${ProductVariantFragment} },
             []
         ),
         "gallery":  select(
-            defined(gallery) => gallery[]{ ${MediaImage} },
+            defined(gallery) => gallery[]{ ${MediaImageFragment} },
             []
         ),
         "specifications": select(
@@ -72,4 +96,16 @@ const Product = defineQuery(`
     }
 `);
 
-export { ProductSlugs, Product };
+const ProductSummaryQuery = defineQuery(`
+    *[_type == "product" && _id ==  $id] | order(_updatedAt desc) [0] {
+        ${ProductSummaryFragment}
+    }
+`);
+
+const RelatedProductsQuery = defineQuery(`
+    *[_type == "product" && _id ==  $id] | order(_updatedAt desc) [0] {
+        "relatedProducts": relatedProducts[]->{ ${ProductSummaryFragment} }
+    }
+`);
+
+export { ProductSlugsQuery, ProductQuery, ProductSummaryQuery, RelatedProductsQuery };

@@ -9,16 +9,16 @@ import { useProductInventory } from "@/hooks/products";
 
 import { AddToCartButton } from "@/components/product/add-to-cart-button";
 import { AddToWishlistButton } from "@/components/product/add-to-wishlist-button";
-import { ProductBreadcrumb } from "@/components/product/breadcrumb";
 import {
-	ProductImageGalleryDesktop,
-	ProductImageGalleryMobile,
-} from "@/components/product/image-gallery";
-import { ProductPricing } from "@/components/product/pricing";
-import { ProductRating } from "@/components/product/rating";
+	ImageGalleryDesktop,
+	ImageGalleryMobile,
+} from "@/components/product/overview/image-gallery";
+import { NavigationTrail } from "@/components/product/overview/navigation-trail";
+import { PricingSummary } from "@/components/product/overview/pricing-summary";
+import { RatingSummary } from "@/components/product/overview/rating-summary";
+import { Specifications } from "@/components/product/overview/specifications";
+import { VariantSelector } from "@/components/product/overview/variant-selector";
 import { ProductSharePopover } from "@/components/product/share-popover";
-import { ProductSpecifications } from "@/components/product/specifications";
-import { ProductVariantSelector } from "@/components/product/variant-selector";
 import { Block, BlockContent, BlockTitle } from "@/components/ui/block";
 import { CollapsibleText } from "@/components/ui/collapsible-text";
 import { Divider } from "@/components/ui/divider";
@@ -26,20 +26,26 @@ import { Divider } from "@/components/ui/divider";
 import { cn } from "@/lib/utils/general/cn";
 import { createCanonicalUrl } from "@/lib/utils/general/create-canonical-url";
 
-type ProductDetailsProps = ProductDetails & {};
+type ProductOverviewProps = {
+	details: ProductDetails;
+	className?: string;
+};
 
-const ProductDetails = ({
-	title,
-	description,
-	hasVariants,
-	brand,
-	options,
-	variants,
-	specifications,
-	sku,
-	gallery,
-	breadcrumb,
-}: ProductDetailsProps) => {
+const ProductOverview = ({
+	details: {
+		title,
+		description,
+		hasVariants,
+		brand,
+		options,
+		variants,
+		specifications,
+		sku,
+		gallery,
+		breadcrumb,
+	},
+	className,
+}: ProductOverviewProps) => {
 	const pathname = usePathname();
 	const shareUrl = createCanonicalUrl({ pathname });
 
@@ -62,11 +68,11 @@ const ProductDetails = ({
 	}, [hasVariants, sku?.id]);
 
 	return (
-		<div className="space-y-6 md:pt-8">
+		<div className={cn("space-y-6 md:pt-8", className)}>
 			<div className="hidden grid-cols-12 gap-8 md:grid">
 				<div className="col-span-full lg:col-span-7">
 					<div className="flex flex-wrap items-center justify-between space-x-4">
-						<ProductBreadcrumb breadcrumb={breadcrumb} />
+						<NavigationTrail breadcrumb={breadcrumb} />
 						<ProductSharePopover title={title} url={shareUrl} />
 					</div>
 				</div>
@@ -74,11 +80,11 @@ const ProductDetails = ({
 			<div className="grid grid-cols-12 gap-8">
 				<div className="col-span-full lg:col-span-7">
 					<div className="relative md:hidden">
-						<ProductImageGalleryMobile gallery={gallery} />
+						<ImageGalleryMobile gallery={gallery} />
 						<div className="absolute bottom-12 left-0 z-50 w-full md:hidden">
 							<div className="flex justify-between px-4 py-2">
 								<div>
-									<ProductRating className="rounded-full border-transparent bg-white" compact />
+									<RatingSummary className="rounded-full border-transparent bg-white" compact />
 								</div>
 								<div>
 									<ProductSharePopover title={title} url={shareUrl} side="top" align="end" />
@@ -87,7 +93,7 @@ const ProductDetails = ({
 						</div>
 					</div>
 					<div className="hidden md:block">
-						<ProductImageGalleryDesktop gallery={gallery} />
+						<ImageGalleryDesktop gallery={gallery} />
 					</div>
 				</div>
 				<div className="col-span-full lg:col-span-5">
@@ -101,18 +107,18 @@ const ProductDetails = ({
 							</div>
 							<div className="flex flex-wrap items-center gap-6 pt-4">
 								<div aria-labelledby="product-rating" className="hidden md:block">
-									<ProductRating />
+									<RatingSummary />
 								</div>
 								<div aria-labelledby="product-price">
-									<ProductPricing sku={activeSku ?? null} />
+									<PricingSummary sku={activeSku ?? null} />
 								</div>
 							</div>
 						</section>
-						<Divider type="solid" className="my-6 before:border-neutral-200" />
+						<Divider type="solid" className="my-6 before:border-neutral-100" />
 						<section>
 							{hasVariants ? (
 								<div className="pb-8">
-									<ProductVariantSelector
+									<VariantSelector
 										options={options}
 										variants={variants}
 										disabled={isInventoryLoading}
@@ -146,7 +152,7 @@ const ProductDetails = ({
 								</div>
 							) : null}
 						</section>
-						<Divider type="solid" className="my-6 before:border-neutral-200" />
+						<Divider type="solid" className="my-6 before:border-neutral-100" />
 						<section>
 							{description ? (
 								<Block className="pb-8">
@@ -165,7 +171,7 @@ const ProductDetails = ({
 								<Block className="space-y-4 pb-6">
 									<BlockTitle>Specifications</BlockTitle>
 									<BlockContent>
-										<ProductSpecifications specifications={specifications} />
+										<Specifications specifications={specifications} />
 									</BlockContent>
 								</Block>
 							) : null}
@@ -186,4 +192,4 @@ const ProductDetails = ({
 	);
 };
 
-export { ProductDetails };
+export { ProductOverview };

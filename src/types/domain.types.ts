@@ -56,6 +56,7 @@ export type ProductBreadcrumb = {
 }[];
 
 export type ProductDetails = {
+	id: string;
 	title: string;
 	slug: string;
 	description: string | null;
@@ -67,4 +68,17 @@ export type ProductDetails = {
 	sku: ProductSku | null;
 	gallery: ProductImage[];
 	breadcrumb: ProductBreadcrumb;
+};
+
+export type ProductSummary = {
+	id: string;
+	title: string;
+	slug: string;
+	category: string;
+	description: string | null;
+	hasVariants: boolean;
+	variants: ProductVariant[];
+	sku: ProductSku | null;
+	gallery: ProductImage[];
+	price: ProductPrice | null;
 };

@@ -4,10 +4,6 @@ import Image from "next/image";
 
 import { ILLUSTRATIONS } from "@/constants/media";
 
-type ProductImageGalleryDesktopProps = {
-	gallery: ProductImage[];
-};
-
 const GalleryItem = ({ image: { src, alt } }: { image: Omit<ProductImage, "refKey"> }) => (
 	<div className="flex aspect-square items-center justify-center overflow-hidden bg-neutral-50">
 		<div className="flex items-center justify-center transition-transform duration-300 hover:scale-105">
@@ -21,7 +17,7 @@ const GalleryItem = ({ image: { src, alt } }: { image: Omit<ProductImage, "refKe
 	</div>
 );
 
-const ProductImageGalleryDesktop = ({ gallery }: ProductImageGalleryDesktopProps) => {
+const ImageGalleryDesktop = ({ gallery }: { gallery: ProductImage[] }) => {
 	return (
 		<div className="grid grid-cols-2 gap-5">
 			{gallery.length > 0 ? (
@@ -46,4 +42,4 @@ const ProductImageGalleryDesktop = ({ gallery }: ProductImageGalleryDesktopProps
 	);
 };
 
-export { ProductImageGalleryDesktop };
+export { ImageGalleryDesktop };
