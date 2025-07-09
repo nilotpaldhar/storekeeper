@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils/general/cn";
 import { cva, VariantProps } from "class-variance-authority";
+
+import { cn } from "@/lib/utils/general/cn";
 
 const dividerVariants = cva(
 	"relative flex items-center before:absolute before:top-1/2 before:right-0 before:left-0 before:border-neutral-500 before:border-t",

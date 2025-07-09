@@ -1,11 +1,11 @@
-import Link from "next/link";
 import { ArrowRight, Mail, Phone } from "lucide-react";
-
-import { Container } from "@/components/ui/container";
-import { SiteLogo } from "@/components/ui/site-logo";
+import Link from "next/link";
 
 import { FooterMenu } from "@/app/(storefront)/_components/footer/footer-menu";
 import { FooterSocialLink } from "@/app/(storefront)/_components/footer/footer-social-link";
+
+import { Container } from "@/components/ui/container";
+import { SiteLogo } from "@/components/ui/site-logo";
 
 import { getFooterSettings } from "@/lib/resources/settings/fetch";
 import { getImageUrl } from "@/lib/utils/sanity/get-image-url";

@@ -1,17 +1,14 @@
 "use client";
 
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { useSearchParams } from "next/navigation";
 import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 import { loginAction } from "@/actions/auth/login";
-import { LoginSchema } from "@/lib/schemas";
 
 import { Alert } from "@/components/ui/alert";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
 	Form,
@@ -21,6 +18,9 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
+import { LoginSchema } from "@/lib/schemas";
 
 const LoginForm = () => {
 	const { execute, result, isPending, hasSucceeded, hasErrored } = useAction(loginAction);

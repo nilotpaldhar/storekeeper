@@ -3,11 +3,13 @@ import { fileURLToPath } from "url";
 
 import { FlatCompat } from "@eslint/eslintrc";
 import { defineConfig, globalIgnores } from "eslint/config";
-import js from "@eslint/js";
 
+import js from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
+
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import reactHooks from "eslint-plugin-react-hooks";
+import importPlugin from "eslint-plugin-import";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -57,6 +59,7 @@ export default defineConfig([
 		plugins: {
 			"@typescript-eslint": tsPlugin,
 			"react-hooks": reactHooks,
+			import: importPlugin,
 		},
 
 		// Core JS/TS/React/Next config
@@ -89,6 +92,42 @@ export default defineConfig([
 			// React Hooks
 			"react-hooks/rules-of-hooks": "error",
 			"react-hooks/exhaustive-deps": "warn",
+
+			"import/order": [
+				"error",
+				{
+					groups: [
+						"type", // ✅ Type imports FIRST
+						"builtin", // Node builtins (fs, path, etc.)
+						"external", // npm packages (react, next)
+						"internal", // aliased internal modules (hooks, components, lib)
+						["parent", "sibling", "index"], // relative imports
+					],
+					pathGroups: [
+						{
+							pattern: "@/hooks/**",
+							group: "internal",
+							position: "before",
+						},
+						{
+							pattern: "@/components/**",
+							group: "internal",
+							position: "after",
+						},
+						{
+							pattern: "@/lib/**",
+							group: "internal",
+							position: "after",
+						},
+					],
+					pathGroupsExcludedImportTypes: ["builtin"],
+					"newlines-between": "always",
+					alphabetize: {
+						order: "asc",
+						caseInsensitive: true,
+					},
+				},
+			],
 		},
 	},
 ]);

@@ -1,6 +1,6 @@
 import { defineQuery } from "next-sanity";
 
-const SeoFields = `
+const SeoFieldsFragment = `
     metaTitle,
     metaDesc,
     shareTitle,
@@ -27,14 +27,20 @@ const GlobalSeo = defineQuery(`
 
 const StaticPageSeo = defineQuery(`
     *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {
-        seo { ${SeoFields} }
+        seo { ${SeoFieldsFragment} }
     }
 `);
 
 const NotFoundPageSeo = defineQuery(`
     *[_type == "notFoundPage"] | order(_updatedAt desc) [0] {
-        seo { ${SeoFields} }
+        seo { ${SeoFieldsFragment} }
     }
 `);
 
-export { GlobalSeo, StaticPageSeo, NotFoundPageSeo };
+const ProductSeo = defineQuery(`
+    *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {
+        seo { ${SeoFieldsFragment} }
+    }
+`);
+
+export { GlobalSeo, StaticPageSeo, NotFoundPageSeo, ProductSeo };

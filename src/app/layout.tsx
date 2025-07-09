@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import { Nunito as FontSans } from "next/font/google";
 
 import { TanstackQueryProvider } from "@/components/providers/tanstack-query-provider";

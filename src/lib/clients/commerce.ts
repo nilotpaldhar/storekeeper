@@ -1,5 +1,5 @@
-import CommerceLayer from "@commercelayer/sdk";
 import { authenticate } from "@commercelayer/js-auth";
+import CommerceLayer from "@commercelayer/sdk";
 
 import { config } from "@/lib/config/commerce";
 

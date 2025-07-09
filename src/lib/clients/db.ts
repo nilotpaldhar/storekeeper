@@ -1,6 +1,6 @@
 import "server-only";
-
 import { PrismaClient } from "@prisma/client";
+
 import { env } from "@/lib/config/env";
 
 /**

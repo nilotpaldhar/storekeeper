@@ -1,11 +1,8 @@
 "use client";
 
-import type { StringInputProps, StringSchemaType } from "sanity";
-
-import { useEffect, useState } from "react";
-import { useFormValue } from "sanity";
-
 import { Select } from "@sanity/ui";
+import { useEffect, useState } from "react";
+import { useFormValue, type StringInputProps, type StringSchemaType } from "sanity";
 
 type ProductOption = {
 	name: string;

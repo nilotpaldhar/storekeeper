@@ -30,7 +30,10 @@ const FooterMenu = ({ title, menuLinks }: FooterMenuProps) => {
 									{label}
 								</button>
 							) : (
-								<Link href={href ? removeLeadingSlash(href) : "#"} className={menuLinkClassName}>
+								<Link
+									href={href ? `/${removeLeadingSlash(href)}` : "#"}
+									className={menuLinkClassName}
+								>
 									{label}
 								</Link>
 							)}

@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 
-import { PortableText } from "next-sanity";
 import { Info } from "lucide-react";
+import { notFound } from "next/navigation";
+import { PortableText } from "next-sanity";
+
 import { Container } from "@/components/ui/container";
 
-import { notFound } from "next/navigation";
-
-import { getSeo } from "@/lib/resources/seo/services";
-import { getStaticPageSeoBySlug } from "@/lib/resources/seo/fetch";
 import { getStaticPageBySlug, getStaticPageSlugs } from "@/lib/resources/pages/fetch";
-
+import { getStaticPageSeoBySlug } from "@/lib/resources/seo/fetch";
+import { getSeo } from "@/lib/resources/seo/services";
 import { cn } from "@/lib/utils/general/cn";
 import { sanitizeSlug } from "@/lib/utils/validators/sanitize-slug";
 
@@ -52,7 +51,7 @@ const StaticCMSPage = async ({ params }: StaticCMSPageProps) => {
 
 	return (
 		<main className="bg-white pb-8 sm:bg-neutral-50">
-			<Container className=" ">
+			<Container>
 				<div className="mx-auto max-w-5xl bg-white py-6 sm:px-8">
 					{page.content ? (
 						<div className={cn(...Object.values(classNames))}>

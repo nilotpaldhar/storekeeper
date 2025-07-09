@@ -2,10 +2,16 @@
 
 import type { HeaderMenu } from "@/types/ui.types";
 
+import { Menu, XIcon } from "lucide-react";
 import { useState } from "react";
 
-import { Menu, XIcon } from "lucide-react";
+import { HeaderAccountPreview } from "@/app/(storefront)/_components/header/header-account-preview";
+import { HeaderMobileMenuDropdown } from "@/app/(storefront)/_components/header/header-mobile-menu/header-mobile-menu-dropdown";
+import { HeaderMobileMenuMegaDropdown } from "@/app/(storefront)/_components/header/header-mobile-menu/header-mobile-menu-mega-dropdown";
+import { HeaderNavLink } from "@/app/(storefront)/_components/header/header-nav-link";
 
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
 	Sheet,
 	SheetContent,
@@ -13,14 +19,7 @@ import {
 	SheetHeader,
 	SheetTitle,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { SiteLogo } from "@/components/ui/site-logo";
-
-import { HeaderNavLink } from "@/app/(storefront)/_components/header/header-nav-link";
-import { HeaderAccountPreview } from "@/app/(storefront)/_components/header/header-account-preview";
-import { HeaderMobileMenuDropdown } from "@/app/(storefront)/_components/header/header-mobile-menu/header-mobile-menu-dropdown";
-import { HeaderMobileMenuMegaDropdown } from "@/app/(storefront)/_components/header/header-mobile-menu/header-mobile-menu-mega-dropdown";
 
 import { cn } from "@/lib/utils/general/cn";
 

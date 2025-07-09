@@ -1,11 +1,11 @@
 "use client";
 
-type SocialPlatform = "facebook" | "twitter" | "instagram" | "youtube";
-
-import { Facebook, Twitter, Instagram, YouTube } from "@/components/icons/brand";
+import { Facebook, Instagram, Twitter, YouTube } from "@/components/icons/brand";
 
 import { cn } from "@/lib/utils/general/cn";
 import { openInNewTab } from "@/lib/utils/general/open-in-new-tab";
+
+type SocialPlatform = "facebook" | "twitter" | "instagram" | "youtube";
 
 type FooterSocialLinkProps = {
 	platform: SocialPlatform;

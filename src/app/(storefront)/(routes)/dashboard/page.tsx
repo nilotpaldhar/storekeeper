@@ -1,11 +1,13 @@
 "use client";
 
 import { useAction } from "next-safe-action/hooks";
+
 import { useCurrentUser } from "@/hooks/user/use-current-user";
+
 import { logoutAction } from "@/actions/auth/logout";
 
-import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 
 const DashboardPage = () => {
 	const { data } = useCurrentUser();

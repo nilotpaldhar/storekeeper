@@ -3,6 +3,11 @@
 import type { HeaderMegaDropdownItem } from "@/types/ui.types";
 
 import {
+	HeaderNavLink,
+	headerNavLinkStyle,
+} from "@/app/(storefront)/_components/header/header-nav-link";
+
+import {
 	NavigationMenu,
 	NavigationMenuContent,
 	NavigationMenuItem,
@@ -10,11 +15,6 @@ import {
 	NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-
-import {
-	HeaderNavLink,
-	headerNavLinkStyle,
-} from "@/app/(storefront)/_components/header/header-nav-link";
 
 import { cn } from "@/lib/utils/general/cn";
 

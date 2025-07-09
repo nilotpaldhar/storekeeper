@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth/config";
+
 import {
 	API_AUTH_PREFIX,
 	DEFAULT_LOGIN_REDIRECT,
+	LOGIN_ROUTE,
 	PROTECTED_PREFIX,
 	PUBLIC_PREFIXES,
 	PUBLIC_ROUTES,
-	LOGIN_ROUTE,
 } from "@/constants/routes";
+
+import { auth } from "@/lib/auth/config";
 
 export default auth((req) => {
 	const { nextUrl } = req;

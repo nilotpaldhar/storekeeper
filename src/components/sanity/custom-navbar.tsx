@@ -2,8 +2,8 @@
 
 import type { NavbarProps } from "sanity";
 
-import { useState } from "react";
 import { Stack } from "@sanity/ui";
+import { useState } from "react";
 
 import { SyncSkusBanner } from "@/components/sanity/sync-skus-banner";
 import { SyncSkusDialog } from "@/components/sanity/sync-skus-dialog";

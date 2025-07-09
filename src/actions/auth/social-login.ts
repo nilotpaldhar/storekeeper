@@ -2,10 +2,11 @@
 
 import { flattenValidationErrors } from "next-safe-action";
 
-import { signIn } from "@/lib/auth/config";
-import { SocialLoginSchema } from "@/lib/schemas";
-import { actionClient } from "@/lib/safe-action";
 import { DEFAULT_LOGIN_REDIRECT } from "@/constants/routes";
+
+import { signIn } from "@/lib/auth/config";
+import { actionClient } from "@/lib/safe-action";
+import { SocialLoginSchema } from "@/lib/schemas";
 
 const socialLoginAction = actionClient
 	.metadata({ actionName: "socialLoginAction" })

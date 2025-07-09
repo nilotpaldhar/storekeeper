@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { HomeIcon } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const homePage = defineType({
 	name: "homePage",

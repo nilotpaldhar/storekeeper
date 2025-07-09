@@ -1,11 +1,12 @@
 "use client";
 
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { CircleAlert, CircleCheck, CircleX, Info, XIcon } from "lucide-react";
+import * as React from "react";
+
+import { useToggle } from "@/hooks/common/use-toggle";
 
 import { cn } from "@/lib/utils/general/cn";
-import { useToggle } from "@/hooks/common/use-toggle";
 
 const alertVariants = cva("  relative flex items-center px-4 py-2 space-x-2", {
 	variants: {

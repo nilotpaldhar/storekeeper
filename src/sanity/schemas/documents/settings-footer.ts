@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { AlignHorizontalJustifyEnd } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const navBlock = ({ blockNumber, title }: { blockNumber: number; title: string }) => [
 	defineField({

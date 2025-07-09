@@ -755,6 +755,216 @@ export type NotFoundPageResult = {
 	description: string | null;
 } | null;
 
+// Source: ./src/lib/queries/sanity/product.ts
+// Variable: ProductSlugsQuery
+// Query: *[_type == "product"]{ "slug": slug.current }[0...$limit]
+export type ProductSlugsQueryResult = Array<{
+	slug: string | null;
+}>;
+// Variable: ProductQuery
+// Query: *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {        "id": _id,        title,        "slug": slug.current,        description,        hasVariants,        "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },        "brand": brand->{            "id": _id,            title,            "slug": slug.current        },        "taxon": taxon->{     "id": _id,    title,    "slug": slug.current,    isLeaf },        "options": select(            defined(options) => options[]{     "refKey": _key,    name,    values },            []        ),        "variants": select(            defined(variants) => variants[]{     "refKey": _key,    variantKey,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ) },            []        ),        "gallery":  select(            defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },            []        ),        "specifications": select(            defined(gallery) => specifications[]{                "refKey": _key,                label,                value            },            []        )    }
+export type ProductQueryResult = {
+	id: string;
+	title: string | null;
+	slug: string | null;
+	description: string | null;
+	hasVariants: boolean | null;
+	sku: {
+		id: string;
+		code: string | null;
+		name: string | null;
+		description: string | null;
+		imageUrl: string | null;
+		piecesPerPack: number | null;
+		weight: number | null;
+		unitOfWeight: string | null;
+		hsTariffNumber: string | null;
+	} | null;
+	brand: {
+		id: string;
+		title: string | null;
+		slug: string | null;
+	} | null;
+	taxon: {
+		id: string;
+		title: string | null;
+		slug: string | null;
+		isLeaf: boolean | null;
+	} | null;
+	options:
+		| Array<{
+				refKey: string;
+				name: string | null;
+				values: Array<string> | null;
+		  }>
+		| Array<never>
+		| null;
+	variants:
+		| Array<{
+				refKey: string;
+				variantKey: string | null;
+				sku: {
+					id: string;
+					code: string | null;
+					name: string | null;
+					description: string | null;
+					imageUrl: string | null;
+					piecesPerPack: number | null;
+					weight: number | null;
+					unitOfWeight: string | null;
+					hsTariffNumber: string | null;
+				} | null;
+				gallery:
+					| Array<{
+							refKey: string;
+							image: string | null;
+							altText: string | null;
+					  }>
+					| Array<never>
+					| null;
+		  }>
+		| Array<never>
+		| null;
+	gallery:
+		| Array<{
+				refKey: string;
+				image: string | null;
+				altText: string | null;
+		  }>
+		| Array<never>
+		| null;
+	specifications:
+		| Array<{
+				refKey: string;
+				label: string | null;
+				value: string | null;
+		  }>
+		| Array<never>
+		| null;
+} | null;
+// Variable: ProductSummaryQuery
+// Query: *[_type == "product" && _id ==  $id] | order(_updatedAt desc) [0] {            "id": _id,    title,    "slug": slug.current,    description,    hasVariants,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "taxon": taxon->{     "id": _id,    title,    "slug": slug.current,    isLeaf },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ),    "variants": select(        defined(variants) => variants[]{     "refKey": _key,    variantKey,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ) },        []    ),    }
+export type ProductSummaryQueryResult = {
+	id: string;
+	title: string | null;
+	slug: string | null;
+	description: string | null;
+	hasVariants: boolean | null;
+	sku: {
+		id: string;
+		code: string | null;
+		name: string | null;
+		description: string | null;
+		imageUrl: string | null;
+		piecesPerPack: number | null;
+		weight: number | null;
+		unitOfWeight: string | null;
+		hsTariffNumber: string | null;
+	} | null;
+	taxon: {
+		id: string;
+		title: string | null;
+		slug: string | null;
+		isLeaf: boolean | null;
+	} | null;
+	gallery:
+		| Array<{
+				refKey: string;
+				image: string | null;
+				altText: string | null;
+		  }>
+		| Array<never>
+		| null;
+	variants:
+		| Array<{
+				refKey: string;
+				variantKey: string | null;
+				sku: {
+					id: string;
+					code: string | null;
+					name: string | null;
+					description: string | null;
+					imageUrl: string | null;
+					piecesPerPack: number | null;
+					weight: number | null;
+					unitOfWeight: string | null;
+					hsTariffNumber: string | null;
+				} | null;
+				gallery:
+					| Array<{
+							refKey: string;
+							image: string | null;
+							altText: string | null;
+					  }>
+					| Array<never>
+					| null;
+		  }>
+		| Array<never>
+		| null;
+} | null;
+// Variable: RelatedProductsQuery
+// Query: *[_type == "product" && _id ==  $id] | order(_updatedAt desc) [0] {        "relatedProducts": relatedProducts[]->{     "id": _id,    title,    "slug": slug.current,    description,    hasVariants,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "taxon": taxon->{     "id": _id,    title,    "slug": slug.current,    isLeaf },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ),    "variants": select(        defined(variants) => variants[]{     "refKey": _key,    variantKey,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ) },        []    ), }    }
+export type RelatedProductsQueryResult = {
+	relatedProducts: Array<{
+		id: string;
+		title: string | null;
+		slug: string | null;
+		description: string | null;
+		hasVariants: boolean | null;
+		sku: {
+			id: string;
+			code: string | null;
+			name: string | null;
+			description: string | null;
+			imageUrl: string | null;
+			piecesPerPack: number | null;
+			weight: number | null;
+			unitOfWeight: string | null;
+			hsTariffNumber: string | null;
+		} | null;
+		taxon: {
+			id: string;
+			title: string | null;
+			slug: string | null;
+			isLeaf: boolean | null;
+		} | null;
+		gallery:
+			| Array<{
+					refKey: string;
+					image: string | null;
+					altText: string | null;
+			  }>
+			| Array<never>
+			| null;
+		variants:
+			| Array<{
+					refKey: string;
+					variantKey: string | null;
+					sku: {
+						id: string;
+						code: string | null;
+						name: string | null;
+						description: string | null;
+						imageUrl: string | null;
+						piecesPerPack: number | null;
+						weight: number | null;
+						unitOfWeight: string | null;
+						hsTariffNumber: string | null;
+					} | null;
+					gallery:
+						| Array<{
+								refKey: string;
+								image: string | null;
+								altText: string | null;
+						  }>
+						| Array<never>
+						| null;
+			  }>
+			| Array<never>
+			| null;
+	}> | null;
+} | null;
+
 // Source: ./src/lib/queries/sanity/seo.ts
 // Variable: GlobalSeo
 // Query: *[_type == "seoSettings"][0] {        metaTitle,        metaDesc,        shareDesc,        shareTitle,        twitterCardType,        twitterUsername,        metaRobotsNoindex,        metaRobotsNofollow,        "favicon": favicon.asset->url,        "touchIcon": touchIcon.asset->url,        "shareGraphic": shareGraphic.asset->url,        "faviconLegacy": faviconLegacy.asset->url    }
@@ -786,6 +996,17 @@ export type StaticPageSeoResult = {
 // Variable: NotFoundPageSeo
 // Query: *[_type == "notFoundPage"] | order(_updatedAt desc) [0] {        seo {     metaTitle,    metaDesc,    shareTitle,    shareDesc,    "shareGraphic": shareGraphic.asset->url }    }
 export type NotFoundPageSeoResult = {
+	seo: {
+		metaTitle: string | null;
+		metaDesc: string | null;
+		shareTitle: string | null;
+		shareDesc: string | null;
+		shareGraphic: string | null;
+	} | null;
+} | null;
+// Variable: ProductSeo
+// Query: *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {        seo {     metaTitle,    metaDesc,    shareTitle,    shareDesc,    "shareGraphic": shareGraphic.asset->url }    }
+export type ProductSeoResult = {
 	seo: {
 		metaTitle: string | null;
 		metaDesc: string | null;
@@ -1172,6 +1393,28 @@ export type FooterSettingsResult = {
 	} | null;
 } | null;
 
+// Source: ./src/lib/resources/categories/services/index.ts
+// Variable: TaxonById
+// Query: *[_type == "taxon" && _id == $id][0]{        "id": _id,        title,        "slug": slug.current,        "parentId": parent->_id    }
+export type TaxonByIdResult = {
+	id: string;
+	title: string | null;
+	slug: string | null;
+	parentId: string | null;
+} | null;
+// Variable: TaxonBySlug
+// Query: *[_type == "taxon" && slug.current ==  $slug] | order(_updatedAt desc) [0] {        "id": _id,        title,        "slug": slug.current,        "taxonomy": taxonomy->{            "id": _id,              title,            "slug": slug.current,        }    }
+export type TaxonBySlugResult = {
+	id: string;
+	title: string | null;
+	slug: string | null;
+	taxonomy: {
+		id: string;
+		title: string | null;
+		slug: string | null;
+	} | null;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -1179,11 +1422,18 @@ declare module "@sanity/client" {
 		'\n    *[_type == "page"]{ "slug": slug.current }\n': StaticPageSlugsResult;
 		'\n    *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        "type": _type,\n        "id": _id,\n        title,\n        "content": pageContent\n    }\n': StaticPageResult;
 		'\n    *[_type == "notFoundPage"] | order(_updatedAt desc) [0] {\n        title,\n        description\n    }\n': NotFoundPageResult;
+		'\n    *[_type == "product"]{ "slug": slug.current }[0...$limit]\n': ProductSlugsQueryResult;
+		'\n    *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        "id": _id,\n        title,\n        "slug": slug.current,\n        description,\n        hasVariants,\n        "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n        "brand": brand->{\n            "id": _id,\n            title,\n            "slug": slug.current\n        },\n        "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n        "options": select(\n            defined(options) => options[]{ \n    "refKey": _key,\n    name,\n    values\n },\n            []\n        ),\n        "variants": select(\n            defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n            []\n        ),\n        "gallery":  select(\n            defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n            []\n        ),\n        "specifications": select(\n            defined(gallery) => specifications[]{\n                "refKey": _key,\n                label,\n                value\n            },\n            []\n        )\n    }\n': ProductQueryResult;
+		'\n    *[_type == "product" && _id ==  $id] | order(_updatedAt desc) [0] {\n        \n    "id": _id,\n    title,\n    "slug": slug.current,\n    description,\n    hasVariants,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    ),\n    "variants": select(\n        defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n        []\n    ),\n\n    }\n': ProductSummaryQueryResult;
+		'\n    *[_type == "product" && _id ==  $id] | order(_updatedAt desc) [0] {\n        "relatedProducts": relatedProducts[]->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    description,\n    hasVariants,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    ),\n    "variants": select(\n        defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n        []\n    ),\n }\n    }\n': RelatedProductsQueryResult;
 		'\n    *[_type == "seoSettings"][0] {\n        metaTitle,\n        metaDesc,\n        shareDesc,\n        shareTitle,\n        twitterCardType,\n        twitterUsername,\n        metaRobotsNoindex,\n        metaRobotsNofollow,\n        "favicon": favicon.asset->url,\n        "touchIcon": touchIcon.asset->url,\n        "shareGraphic": shareGraphic.asset->url,\n        "faviconLegacy": faviconLegacy.asset->url\n    }\n': GlobalSeoResult;
 		'\n    *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        seo { \n    metaTitle,\n    metaDesc,\n    shareTitle,\n    shareDesc,\n    "shareGraphic": shareGraphic.asset->url\n }\n    }\n': StaticPageSeoResult;
 		'\n    *[_type == "notFoundPage"] | order(_updatedAt desc) [0] {\n        seo { \n    metaTitle,\n    metaDesc,\n    shareTitle,\n    shareDesc,\n    "shareGraphic": shareGraphic.asset->url\n }\n    }\n': NotFoundPageSeoResult;
+		'\n    *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        seo { \n    metaTitle,\n    metaDesc,\n    shareTitle,\n    shareDesc,\n    "shareGraphic": shareGraphic.asset->url\n }\n    }\n': ProductSeoResult;
 		'\n    *[_type == "generalSettings"][0] {\n        "domain": siteURL,\n        "title": siteTitle,\n        "logo": siteLogo.asset._ref,\n        "description": siteDescription\n    }\n': GeneralSiteSettingsResult;
 		'\n    *[_type == "headerSettings"][0] {\n        "menuDesktop": menuDesktop-> { \n    "id": _id,\n    title,\n    isMegaDropdown,\n    "megaDropdownItems": megaDropdowns[] {\n        "refKey": _key,\n        label,\n        columns[] {\n            "refKey": _key,\n            heading,\n            items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n }\n        }\n    },\n    "menuItems": items[] {\n        \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n,\n        "dropDownItems": select(\n            _type == "navDropdown" => items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n },\n            null\n        )\n    }\n },\n        "menuMobile": menuMobile-> { \n    "id": _id,\n    title,\n    isMegaDropdown,\n    "megaDropdownItems": megaDropdowns[] {\n        "refKey": _key,\n        label,\n        columns[] {\n            "refKey": _key,\n            heading,\n            items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n }\n        }\n    },\n    "menuItems": items[] {\n        \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n,\n        "dropDownItems": select(\n            _type == "navDropdown" => items[] { \n    "refKey": _key,\n    "type": _type,\n    label,\n    "isExternal": coalesce(isExternal, false),\n    "href": select(\n        _type == "navLink" => coalesce(path, url, "/"),\n        _type == "navPage" => page->slug.current,\n        _type == "navProduct" => linkedProduct->slug.current,\n        _type == "navTaxon" => linkedTaxon->slug.current,\n        _type == "navTaxonomy" => linkedTaxonomy->slug.current,\n        "#"\n    )\n },\n            null\n        )\n    }\n }\n    }\n': HeaderSettingsResult;
 		'\n    *[_type == "footerSettings"][0] {\n        "site": {\n            "copyright": copyrightText,\n            "description": aboutCompany,\n            "title": *[_type == "generalSettings"][0].siteTitle,\n            "logo": *[_type == "generalSettings"][0].siteLogo.asset._ref,\n            "readMore": {\n                "label": readMoreLink.label,\n                "link": readMoreLink.page->{ title, slug },\n            }\n        },\n        "info": {\n            "title": infoBlockTitle,\n            "email": emailAddress,\n            "phone": phoneNumber\n        },\n        "blockOne": {\n            "title": navBlockTitle1, \n            "menus": navBlockMenuItems1[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "blockTwo": {\n            "title": navBlockTitle2, \n            "menus": navBlockMenuItems2[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "blockThree": {\n            "title": navBlockTitle3, \n            "menus": navBlockMenuItems3[] { \n    "key": _key,\n    "type": _type,\n    "isExternal": select(\n        defined(isExternal) => isExternal,\n        false\n    ),\n    "label": select(\n        !defined(title) && _type == "navPage" => page->title,\n        label\n    ),\n    "href": select(\n        _type == "navLink" => select(\n            defined(path) => path,\n            defined(url) => url,\n            null\n        ),\n        _type == "navPage" => page->slug.current,\n        null\n    )\n }\n        },\n        "social": *[_type == "socialSettings"][0]{\n            facebook,\n            twitter,\n            instagram,\n            youtube\n        }\n    }\n': FooterSettingsResult;
+		'\n    *[_type == "taxon" && _id == $id][0]{\n        "id": _id,\n        title,\n        "slug": slug.current,\n        "parentId": parent->_id\n    }\n': TaxonByIdResult;
+		'\n    *[_type == "taxon" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        "id": _id,\n        title,\n        "slug": slug.current,\n        "taxonomy": taxonomy->{\n            "id": _id,  \n            title,\n            "slug": slug.current,\n        }\n    }\n': TaxonBySlugResult;
 	}
 }

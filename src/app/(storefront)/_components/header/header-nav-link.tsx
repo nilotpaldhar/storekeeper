@@ -1,7 +1,7 @@
 import type { HeaderNavLinkType } from "@/types/ui.types";
 
-import Link from "next/link";
 import { cva } from "class-variance-authority";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils/general/cn";
 import { openInNewTab } from "@/lib/utils/general/open-in-new-tab";

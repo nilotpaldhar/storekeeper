@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { List } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const productSpecification = defineType({
 	name: "productSpecification",

@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { SlidersHorizontal } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const generalSettings = defineType({
 	name: "generalSettings",

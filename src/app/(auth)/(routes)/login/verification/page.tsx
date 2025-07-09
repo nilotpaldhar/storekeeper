@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
-import Link from "next/link";
 import { MailCheck } from "lucide-react";
+import Link from "next/link";
+
 import { StatusMessage } from "@/app/(auth)/_components/status-message";
 
 import { getSeo } from "@/lib/resources/seo/services";

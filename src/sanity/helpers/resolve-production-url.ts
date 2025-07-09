@@ -1,4 +1,5 @@
 import type { ResolveProductionUrlContext, SanityDocumentLike, Slug } from "sanity";
+
 import { env } from "@/lib/config/env";
 
 // Extend base Sanity document type to optionally include a slug

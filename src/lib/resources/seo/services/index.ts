@@ -1,5 +1,4 @@
 import "server-only";
-
 import type { Metadata } from "next";
 
 import { env } from "@/lib/config/env";

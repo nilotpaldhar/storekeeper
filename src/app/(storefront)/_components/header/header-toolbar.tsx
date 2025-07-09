@@ -1,8 +1,10 @@
 "use client";
 
+import { Heart, ShoppingCart, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { Heart, ShoppingCart, User } from "lucide-react";
+import { HeaderAccountPreview } from "@/app/(storefront)/_components/header/header-account-preview";
+import { HeaderAction } from "@/app/(storefront)/_components/header/header-action";
 
 import {
 	DropdownMenu,
@@ -10,8 +12,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { HeaderAction } from "@/app/(storefront)/_components/header/header-action";
-import { HeaderAccountPreview } from "@/app/(storefront)/_components/header/header-account-preview";
+import { notifyFeatureUnavailable } from "@/lib/utils/toast";
 
 const HeaderToolbarProfile = ({ className }: { className?: string }) => {
 	return (
@@ -29,13 +30,11 @@ const HeaderToolbarProfile = ({ className }: { className?: string }) => {
 };
 
 const HeaderToolbarWishlist = ({ className }: { className?: string }) => {
-	const router = useRouter();
-
 	return (
 		<HeaderAction
 			label="wishlist"
 			icon={Heart}
-			onClick={() => router.push("/wishlist")}
+			onClick={() => notifyFeatureUnavailable({ featureName: "Wishlist" })}
 			className={className}
 		/>
 	);

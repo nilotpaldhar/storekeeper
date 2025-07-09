@@ -4,6 +4,7 @@ import type { HeaderMegaDropdownItem } from "@/types/ui.types";
 
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { ChevronDown } from "lucide-react";
+
 import { HeaderNavLink } from "@/app/(storefront)/_components/header/header-nav-link";
 
 import { cn } from "@/lib/utils/general/cn";

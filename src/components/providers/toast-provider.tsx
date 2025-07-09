@@ -1,7 +1,7 @@
 "use client";
 
+import { CheckCircle2, CircleX, Info, Loader2, OctagonAlert } from "lucide-react";
 import { Toaster } from "sonner";
-import { CheckCircle2, Info, CircleX, OctagonAlert, Loader2 } from "lucide-react";
 
 const ToastProvider = () => {
 	return (

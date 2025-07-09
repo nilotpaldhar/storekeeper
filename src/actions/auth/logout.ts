@@ -1,8 +1,9 @@
 "use server";
 
+import { LOGIN_ROUTE } from "@/constants/routes";
+
 import { signOut } from "@/lib/auth/config";
 import { actionClient } from "@/lib/safe-action";
-import { LOGIN_ROUTE } from "@/constants/routes";
 
 const logoutAction = actionClient.metadata({ actionName: "loginAction" }).action(async () => {
 	await signOut({ redirectTo: LOGIN_ROUTE });

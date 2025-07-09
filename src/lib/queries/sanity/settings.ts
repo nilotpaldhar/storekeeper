@@ -9,7 +9,7 @@ const GeneralSiteSettings = defineQuery(`
     }
 `);
 
-const HeaderMenuLink = `
+const HeaderMenuLinkFragment = `
     "refKey": _key,
     "type": _type,
     label,
@@ -24,7 +24,7 @@ const HeaderMenuLink = `
     )
 `;
 
-const HeaderMenu = `
+const HeaderMenuFragment = `
     "id": _id,
     title,
     isMegaDropdown,
@@ -34,13 +34,13 @@ const HeaderMenu = `
         columns[] {
             "refKey": _key,
             heading,
-            items[] { ${HeaderMenuLink} }
+            items[] { ${HeaderMenuLinkFragment} }
         }
     },
     "menuItems": items[] {
-        ${HeaderMenuLink},
+        ${HeaderMenuLinkFragment},
         "dropDownItems": select(
-            _type == "navDropdown" => items[] { ${HeaderMenuLink} },
+            _type == "navDropdown" => items[] { ${HeaderMenuLinkFragment} },
             null
         )
     }
@@ -48,12 +48,12 @@ const HeaderMenu = `
 
 const HeaderSettings = defineQuery(`
     *[_type == "headerSettings"][0] {
-        "menuDesktop": menuDesktop-> { ${HeaderMenu} },
-        "menuMobile": menuMobile-> { ${HeaderMenu} }
+        "menuDesktop": menuDesktop-> { ${HeaderMenuFragment} },
+        "menuMobile": menuMobile-> { ${HeaderMenuFragment} }
     }
 `);
 
-const FooterLink = `
+const FooterLinkFragment = `
     "key": _key,
     "type": _type,
     "isExternal": select(
@@ -94,15 +94,15 @@ const FooterSettings = defineQuery(`
         },
         "blockOne": {
             "title": navBlockTitle1, 
-            "menus": navBlockMenuItems1[] { ${FooterLink} }
+            "menus": navBlockMenuItems1[] { ${FooterLinkFragment} }
         },
         "blockTwo": {
             "title": navBlockTitle2, 
-            "menus": navBlockMenuItems2[] { ${FooterLink} }
+            "menus": navBlockMenuItems2[] { ${FooterLinkFragment} }
         },
         "blockThree": {
             "title": navBlockTitle3, 
-            "menus": navBlockMenuItems3[] { ${FooterLink} }
+            "menus": navBlockMenuItems3[] { ${FooterLinkFragment} }
         },
         "social": *[_type == "socialSettings"][0]{
             facebook,

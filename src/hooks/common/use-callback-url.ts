@@ -1,4 +1,5 @@
 import { usePathname, useSearchParams } from "next/navigation";
+
 import { buildCallbackUrl } from "@/lib/utils/navigation/build-callback-url";
 
 /**

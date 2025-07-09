@@ -1,8 +1,8 @@
 import type { ListItemBuilder, StructureResolver } from "sanity/structure";
 
-import { pages } from "@/sanity/desk/pages";
-import { menus } from "@/sanity/desk/menus";
 import { commerce } from "@/sanity/desk/commerce";
+import { menus } from "@/sanity/desk/menus";
+import { pages } from "@/sanity/desk/pages";
 import { settings } from "@/sanity/desk/settings";
 
 // Define a function to hide specific document types from the default list

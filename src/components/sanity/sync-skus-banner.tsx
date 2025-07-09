@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Flex, Text, Button, Box, Stack } from "@sanity/ui";
+import { Box, Button, Card, Flex, Stack, Text } from "@sanity/ui";
 import { RefreshCw } from "lucide-react";
 
 type SyncSkusBannerProps = {

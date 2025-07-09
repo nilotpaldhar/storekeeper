@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { ChevronDownCircle } from "lucide-react";
+import { defineField, defineType } from "sanity";
 
 const navDropdown = defineType({
 	name: "navDropdown",

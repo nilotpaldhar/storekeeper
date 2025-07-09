@@ -2,10 +2,10 @@
 
 import type { HeaderSettingsResult } from "@/types/sanity.types";
 import type {
-	HeaderMenu,
-	HeaderNavLinkType,
 	HeaderDropdownItem,
 	HeaderMegaDropdownItem,
+	HeaderMenu,
+	HeaderNavLinkType,
 } from "@/types/ui.types";
 
 export type RawHeaderMenu = NonNullable<NonNullable<HeaderSettingsResult>["menuDesktop"]>;

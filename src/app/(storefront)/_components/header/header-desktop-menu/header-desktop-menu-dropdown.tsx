@@ -3,16 +3,18 @@
 import type { HeaderDropdownItem } from "@/types/ui.types";
 
 import { ChevronDownIcon } from "lucide-react";
+
+import {
+	HeaderNavLink,
+	headerNavLinkStyle,
+} from "@/app/(storefront)/_components/header/header-nav-link";
+
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-	HeaderNavLink,
-	headerNavLinkStyle,
-} from "@/app/(storefront)/_components/header/header-nav-link";
 
 import { cn } from "@/lib/utils/general/cn";
 
