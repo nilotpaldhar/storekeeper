@@ -1,3 +1,18 @@
+# [0.5.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.0...v0.5.0) (2025-07-09)
+
+
+### Features
+
+* **api:** add endpoints to retrieve product price and inventory ([bd9c43c](https://github.com/nilotpaldhar/storekeeper/commit/bd9c43c36a3431f1688daddf16dcfa4295565cd7))
+* **product-page:** add category breadcrumb trail on product page ([a992c02](https://github.com/nilotpaldhar/storekeeper/commit/a992c02330b57a276da8984135cd622f36c4d975))
+* **product-page:** add collapsible text for description and variant selector ([ca73d97](https://github.com/nilotpaldhar/storekeeper/commit/ca73d97d6a33b1524c29c548c15c09fab2b4cdae))
+* **product-page:** add initial structure for product page layout ([53c120b](https://github.com/nilotpaldhar/storekeeper/commit/53c120bec0dc75601fc9ea4cb04b61ef0c019210))
+* **product-page:** add ProductCollection component with related products section ([0d0eb7c](https://github.com/nilotpaldhar/storekeeper/commit/0d0eb7c460c10b9939aa4b13ea3b6b41b4a9883d))
+* **product-page:** add ProductSharePopover component to display social share buttons ([f5fe5e5](https://github.com/nilotpaldhar/storekeeper/commit/f5fe5e53575ef9ae402aa70c06b5a6b1e808ec17))
+* **product-page:** add responsive image gallery for desktop and mobile ([2b84a4a](https://github.com/nilotpaldhar/storekeeper/commit/2b84a4ac32872cf0bc8d0e7d72610aacaec4ba5e))
+
+
+
 # [0.4.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.3.0...v0.4.0) (2025-07-03)
 
 
