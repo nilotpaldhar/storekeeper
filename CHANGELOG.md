@@ -1,3 +1,15 @@
+# [0.6.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.5.0...v0.6.0) (2025-07-15)
+
+
+### Features
+
+* **cart-page:** add initial structure for cart page layout ([7337c35](https://github.com/nilotpaldhar/storekeeper/commit/7337c3543b408d01504e837aa9f57c0682338644))
+* **cart:** add cart, count, add-item APIs & useCart, useCartCount, useAddCartItem hooks ([e1e8f56](https://github.com/nilotpaldhar/storekeeper/commit/e1e8f560464a978d4a9d355867227f89b66c36bc))
+* **cart:** add POST/DELETE coupon endpoints and related hooks ([4cad5ce](https://github.com/nilotpaldhar/storekeeper/commit/4cad5cec804563f501f09214910d2c3bdb870016))
+* **cart:** add update and delete item endpoints and useUpdateCartItem, useRemoveCartItem hooks ([2b6ee36](https://github.com/nilotpaldhar/storekeeper/commit/2b6ee36113dc0f453f1060a393e660fac1864f05))
+
+
+
 # [0.5.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.0...v0.5.0) (2025-07-09)
 
 
@@ -48,20 +60,6 @@
 * **sanity:** add Sanity schemas for page, homePage, and notFoundPage ([809baff](https://github.com/nilotpaldhar/storekeeper/commit/809baff9208b018afdf3fae23bef761a3695295f))
 * **sanity:** add schema for navMegaDropdown; refine menu schema structure ([d0390bb](https://github.com/nilotpaldhar/storekeeper/commit/d0390bb09ba350e7457dc18dc6de6e8d0424c7ce))
 * **sanity:** initialize Sanity Studio with basic configuration ([c17c296](https://github.com/nilotpaldhar/storekeeper/commit/c17c2961d0ade8259debae53dcfad842de348279))
-
-
-
-# [0.1.0](https://github.com/nilotpaldhar/storekeeper/compare/9cef2e05ea76a688759c403a328e991374a7f966...v0.1.0) (2025-05-26)
-
-
-### Features
-
-* **ui:** add form components – Input, Label, Textarea, RadioGroup, Select ([97ee46a](https://github.com/nilotpaldhar/storekeeper/commit/97ee46a291db1b6bbe61f55af5a67c67c6eab77e))
-* **ui:** add reusable alert component ([c5e9fd6](https://github.com/nilotpaldhar/storekeeper/commit/c5e9fd609ec1ba7fcffc984560e9b7b11e5ee2b0))
-* **ui:** add reusable Button component ([0c5c52b](https://github.com/nilotpaldhar/storekeeper/commit/0c5c52b5ea6fd1265e1bb8610162edd8449eb6d6))
-* **ui:** add reusable empty state component ([b4b5d6d](https://github.com/nilotpaldhar/storekeeper/commit/b4b5d6d668e6b765d44757019db851c011e2b1c3))
-* **ui:** add ThreeDotsLoader component with custom animation ([84b9771](https://github.com/nilotpaldhar/storekeeper/commit/84b977149a50c4a30bdf6d6200b8d49b79fc8aac))
-* **ui:** initialize shadcn/ui and update tailwind theme with custom CSS variables ([9cef2e0](https://github.com/nilotpaldhar/storekeeper/commit/9cef2e05ea76a688759c403a328e991374a7f966))
 
 
 
