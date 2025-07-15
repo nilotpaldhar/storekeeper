@@ -1,34 +1,17 @@
 import "server-only";
+
 import type { ProductPrice } from "@/types/domain.types";
 
 import { getCommerceLayerClient } from "@/lib/clients/commerce";
 import { getSanityClient } from "@/lib/clients/sanity";
 import { config as clConfig } from "@/lib/config/commerce";
 import { logEvent } from "@/lib/logging/log-event";
-import { ProductQuery, ProductSlugsQuery, RelatedProductsQuery } from "@/lib/queries/sanity";
-
-/**
- * Fetches the default stock location from Commerce Layer.
- */
-const getDefaultStockLocation = async () => {
-	const clClient = await getCommerceLayerClient();
-
-	try {
-		const locations = await clClient.stock_locations.list({
-			filters: { code_eq: clConfig.stockLocationCode },
-		});
-
-		return locations.at(0) ?? null;
-	} catch (err) {
-		logEvent({
-			fn: "getDefaultStockLocation",
-			level: "error",
-			event: "fail",
-			error: err,
-		});
-		return null;
-	}
-};
+import {
+	ProductQuery,
+	ProductSlugsQuery,
+	RelatedProductsQuery,
+	ProductBySkuCodeQuery,
+} from "@/lib/queries/sanity";
 
 /**
  * Fetches a list of product slugs from Sanity.
@@ -60,6 +43,25 @@ const getProductBySlug = async ({ slug }: { slug: string }) => {
 	} catch (err) {
 		logEvent({
 			fn: "getProductBySlug",
+			level: "error",
+			event: "fail",
+			error: err,
+		});
+		return null;
+	}
+};
+
+/**
+ * Fetches a product document from Sanity based on its sku code.
+ */
+const getProductBySkuCode = async ({ skuCode }: { skuCode: string }) => {
+	try {
+		const product = await getSanityClient().fetch(ProductBySkuCodeQuery, { skuCode });
+		if (!product) return null;
+		return product;
+	} catch (err) {
+		logEvent({
+			fn: "getProductBySkuCode",
 			level: "error",
 			event: "fail",
 			error: err,
@@ -141,9 +143,9 @@ const getProductInventory = async ({
 };
 
 export {
-	getDefaultStockLocation,
 	getProductSlugs,
 	getProductBySlug,
+	getProductBySkuCode,
 	getRelatedProducts,
 	getProductPrice,
 	getProductInventory,

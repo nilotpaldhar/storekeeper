@@ -964,6 +964,66 @@ export type RelatedProductsQueryResult = {
 			| null;
 	}> | null;
 } | null;
+// Variable: ProductBySkuCodeQuery
+// Query: *[_type == "product" && ( sku->code == $skuCode || count(variants[sku->code == $skuCode]) > 0 )][0]{            "id": _id,    title,    "slug": slug.current,    description,    hasVariants,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "taxon": taxon->{     "id": _id,    title,    "slug": slug.current,    isLeaf },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ),    "variants": select(        defined(variants) => variants[]{     "refKey": _key,    variantKey,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ) },        []    ),    }
+export type ProductBySkuCodeQueryResult = {
+	id: string;
+	title: string | null;
+	slug: string | null;
+	description: string | null;
+	hasVariants: boolean | null;
+	sku: {
+		id: string;
+		code: string | null;
+		name: string | null;
+		description: string | null;
+		imageUrl: string | null;
+		piecesPerPack: number | null;
+		weight: number | null;
+		unitOfWeight: string | null;
+		hsTariffNumber: string | null;
+	} | null;
+	taxon: {
+		id: string;
+		title: string | null;
+		slug: string | null;
+		isLeaf: boolean | null;
+	} | null;
+	gallery:
+		| Array<{
+				refKey: string;
+				image: string | null;
+				altText: string | null;
+		  }>
+		| Array<never>
+		| null;
+	variants:
+		| Array<{
+				refKey: string;
+				variantKey: string | null;
+				sku: {
+					id: string;
+					code: string | null;
+					name: string | null;
+					description: string | null;
+					imageUrl: string | null;
+					piecesPerPack: number | null;
+					weight: number | null;
+					unitOfWeight: string | null;
+					hsTariffNumber: string | null;
+				} | null;
+				gallery:
+					| Array<{
+							refKey: string;
+							image: string | null;
+							altText: string | null;
+					  }>
+					| Array<never>
+					| null;
+		  }>
+		| Array<never>
+		| null;
+} | null;
 
 // Source: ./src/lib/queries/sanity/seo.ts
 // Variable: GlobalSeo
@@ -1426,6 +1486,7 @@ declare module "@sanity/client" {
 		'\n    *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        "id": _id,\n        title,\n        "slug": slug.current,\n        description,\n        hasVariants,\n        "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n        "brand": brand->{\n            "id": _id,\n            title,\n            "slug": slug.current\n        },\n        "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n        "options": select(\n            defined(options) => options[]{ \n    "refKey": _key,\n    name,\n    values\n },\n            []\n        ),\n        "variants": select(\n            defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n            []\n        ),\n        "gallery":  select(\n            defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n            []\n        ),\n        "specifications": select(\n            defined(gallery) => specifications[]{\n                "refKey": _key,\n                label,\n                value\n            },\n            []\n        )\n    }\n': ProductQueryResult;
 		'\n    *[_type == "product" && _id ==  $id] | order(_updatedAt desc) [0] {\n        \n    "id": _id,\n    title,\n    "slug": slug.current,\n    description,\n    hasVariants,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    ),\n    "variants": select(\n        defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n        []\n    ),\n\n    }\n': ProductSummaryQueryResult;
 		'\n    *[_type == "product" && _id ==  $id] | order(_updatedAt desc) [0] {\n        "relatedProducts": relatedProducts[]->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    description,\n    hasVariants,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    ),\n    "variants": select(\n        defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n        []\n    ),\n }\n    }\n': RelatedProductsQueryResult;
+		'\n    *[_type == "product" && ( sku->code == $skuCode || count(variants[sku->code == $skuCode]) > 0 )][0]{\n        \n    "id": _id,\n    title,\n    "slug": slug.current,\n    description,\n    hasVariants,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    ),\n    "variants": select(\n        defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n        []\n    ),\n\n    }\n': ProductBySkuCodeQueryResult;
 		'\n    *[_type == "seoSettings"][0] {\n        metaTitle,\n        metaDesc,\n        shareDesc,\n        shareTitle,\n        twitterCardType,\n        twitterUsername,\n        metaRobotsNoindex,\n        metaRobotsNofollow,\n        "favicon": favicon.asset->url,\n        "touchIcon": touchIcon.asset->url,\n        "shareGraphic": shareGraphic.asset->url,\n        "faviconLegacy": faviconLegacy.asset->url\n    }\n': GlobalSeoResult;
 		'\n    *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        seo { \n    metaTitle,\n    metaDesc,\n    shareTitle,\n    shareDesc,\n    "shareGraphic": shareGraphic.asset->url\n }\n    }\n': StaticPageSeoResult;
 		'\n    *[_type == "notFoundPage"] | order(_updatedAt desc) [0] {\n        seo { \n    metaTitle,\n    metaDesc,\n    shareTitle,\n    shareDesc,\n    "shareGraphic": shareGraphic.asset->url\n }\n    }\n': NotFoundPageSeoResult;
