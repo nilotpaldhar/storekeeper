@@ -1,6 +1,10 @@
 import type { LineItem, Order, Price, StockItem } from "@commercelayer/sdk";
 import type { User } from "@prisma/client";
 
+export type OperationResult<TData = undefined, TReason extends string = "UNKNOWN"> =
+	| { ok: true; data?: TData }
+	| { ok: false; reason: TReason; detail?: string };
+
 export type UserProfile = User;
 
 export type ProductPrice = Price;

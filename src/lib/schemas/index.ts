@@ -14,3 +14,7 @@ export const AddCartItemSchema = z.object({
 	skuCode: z.string().min(1, { message: "Please enter a valid product SKU code" }),
 	quantity: z.number().optional(),
 });
+
+export const UpdateCartItemQuantitySchema = z.object({
+	quantity: z.number().min(1, { message: "Quantity must be at least 1" }),
+});

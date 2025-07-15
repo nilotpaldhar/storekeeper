@@ -81,7 +81,6 @@ const PurchaseActionsSection = ({
 			/>
 			<AddToWishlistButton className="w-full md:w-max" />
 		</div>
-
 		<InventoryStatusMessage isInventoryError={isInventoryError} isOutOfStock={isOutOfStock} />
 	</>
 );

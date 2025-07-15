@@ -56,7 +56,7 @@ const ProductOverview = ({ details, className }: ProductOverviewProps) => {
 
 	// Check if inventory call is done & successful
 	const isInventoryReady = !isLoading && !isError;
-	const quantity = data?.data?.quantity ?? 0;
+	const quantity = data?.data?.quantity ?? 1;
 
 	// Safe out-of-stock check
 	const isOutOfStock = isInventoryReady && quantity <= 0;

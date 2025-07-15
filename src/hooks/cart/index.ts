@@ -2,7 +2,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { cartKeys } from "@/constants/tanstack-query-keys";
 
-import { getCart, getCartCount, addCartItem } from "@/lib/requests/cart";
+import {
+	getCart,
+	getCartCount,
+	addCartItem,
+	updateCartItemQuantity,
+	removeCartItem,
+} from "@/lib/requests/cart";
 
 const useCart = ({ enabled = true }: { enabled?: boolean } = {}) => {
 	return useQuery({
@@ -33,4 +39,30 @@ const useAddCartItem = () => {
 	});
 };
 
-export { useCart, useCartCount, useAddCartItem };
+const useUpdateCartItem = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: updateCartItemQuantity,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: cartKeys.base,
+			});
+		},
+	});
+};
+
+const useRemoveCartItem = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: removeCartItem,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: cartKeys.base,
+			});
+		},
+	});
+};
+
+export { useCart, useCartCount, useAddCartItem, useUpdateCartItem, useRemoveCartItem };

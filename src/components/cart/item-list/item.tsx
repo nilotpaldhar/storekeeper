@@ -4,25 +4,33 @@ import type { CartLineItem } from "@/types/domain.types";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useCallback, useState } from "react";
 
+import { useUpdateCartItem } from "@/hooks/cart";
 import { useProductInventory } from "@/hooks/products";
 
 import { ILLUSTRATIONS } from "@/constants/media";
+import { useDialogStore } from "@/stores/use-dialog-store";
 
 import { Button } from "@/components/ui/button";
 import { QuantityStepper } from "@/components/ui/quantity-stepper";
 
+import { notifyFeatureUnavailable } from "@/lib/utils/toast";
+
 type CartItemProps = {
 	item: CartLineItem;
-	onRemove?: (item: CartLineItem) => void;
-	onSaveForLater?: (item: CartLineItem) => void;
 };
 
-const CartItem = ({ item, onSaveForLater, onRemove }: CartItemProps) => {
+const CartItem = ({ item }: CartItemProps) => {
+	const [quantity, setQuantity] = useState(item.quantity ?? 0);
+	const { onOpen } = useDialogStore();
+
 	const skuId = item.sku?.id ?? "";
 	const { title: productTitle, slug: productSlug, thumbnail } = item.product ?? {};
 
 	const { data: { data: inventory } = {} } = useProductInventory({ skuId, enabled: !!skuId });
+
+	const updateCartItemMutation = useUpdateCartItem();
 
 	const itemTitle = productTitle ?? item.name ?? "Unknown Product";
 	const productHref = productSlug ? `/products/${productSlug}` : "#";
@@ -31,6 +39,22 @@ const CartItem = ({ item, onSaveForLater, onRemove }: CartItemProps) => {
 	const imageAlt = thumbnail?.alt ?? itemTitle;
 
 	const maxQuantity = inventory?.quantity ?? item.quantity ?? 0;
+
+	const handleQuantityChange = useCallback(
+		(newQuantity: number) => {
+			setQuantity(newQuantity);
+
+			updateCartItemMutation.mutate({
+				lineItemId: item.id,
+				quantity: newQuantity,
+			});
+		},
+		[updateCartItemMutation, item.id]
+	);
+
+	const handleRemoveItem = () => {
+		onOpen("CONFIRM_REMOVE_CART_ITEM", { lineItemId: item.id, productTitle });
+	};
 
 	return (
 		<div className="grid grid-cols-[minmax(0,140px)_1fr] gap-x-4 gap-y-2 sm:grid-cols-[minmax(0,160px)_1fr]">
@@ -84,7 +108,12 @@ const CartItem = ({ item, onSaveForLater, onRemove }: CartItemProps) => {
 
 			{/* Quantity stepper */}
 			<div className="xs:pr-0 xs:pl-5 col-span-full px-3 sm:col-span-1">
-				<QuantityStepper max={maxQuantity} defaultValue={item.quantity ?? 0} />
+				<QuantityStepper
+					max={maxQuantity}
+					value={quantity}
+					onChange={handleQuantityChange}
+					disabled={updateCartItemMutation.isPending}
+				/>
 			</div>
 
 			{/* Actions */}
@@ -93,7 +122,7 @@ const CartItem = ({ item, onSaveForLater, onRemove }: CartItemProps) => {
 					<Button
 						variant="primary-ghost"
 						className="h-10 flex-1 p-px font-bold sm:max-w-max"
-						onClick={() => onSaveForLater?.(item)}
+						onClick={() => notifyFeatureUnavailable({ featureName: "Save For Later" })}
 					>
 						SAVE FOR LATER
 					</Button>
@@ -104,7 +133,7 @@ const CartItem = ({ item, onSaveForLater, onRemove }: CartItemProps) => {
 					<Button
 						variant="error-ghost"
 						className="h-10 flex-1 p-px font-bold sm:max-w-max"
-						onClick={() => onRemove?.(item)}
+						onClick={handleRemoveItem}
 					>
 						REMOVE
 					</Button>

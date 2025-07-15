@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { Nunito as FontSans } from "next/font/google";
 
+import { DialogProvider } from "@/components/providers/dialog-provider";
 import { TanstackQueryProvider } from "@/components/providers/tanstack-query-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
 
@@ -34,6 +35,7 @@ const RootLayout = ({
 				<TanstackQueryProvider>
 					{children}
 					<ToastProvider />
+					<DialogProvider />
 				</TanstackQueryProvider>
 			</body>
 		</html>

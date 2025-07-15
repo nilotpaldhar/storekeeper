@@ -4,7 +4,7 @@ import type { CartCount, CartLineItem } from "@/types/domain.types";
 import { z } from "zod";
 
 import { axios, handleAxiosError } from "@/lib/http/client";
-import { AddCartItemSchema } from "@/lib/schemas";
+import { AddCartItemSchema, UpdateCartItemQuantitySchema } from "@/lib/schemas";
 
 const getCart = async () => {
 	try {
@@ -39,4 +39,29 @@ const addCartItem = async ({ skuCode, quantity }: z.infer<typeof AddCartItemSche
 	}
 };
 
-export { getCart, getCartCount, addCartItem };
+const updateCartItemQuantity = async ({
+	lineItemId,
+	quantity,
+}: z.infer<typeof UpdateCartItemQuantitySchema> & { lineItemId: string }) => {
+	try {
+		const res = await axios.patch<APIResponse<undefined>>(`/commerce/cart/items/${lineItemId}`, {
+			quantity,
+		});
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
+const removeCartItem = async ({ lineItemId }: { lineItemId: string }) => {
+	try {
+		const res = await axios.delete<APIResponse<undefined>>(`/commerce/cart/items/${lineItemId}`);
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
+export { getCart, getCartCount, addCartItem, updateCartItemQuantity, removeCartItem };

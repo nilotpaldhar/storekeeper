@@ -1,11 +1,12 @@
 import "server-only";
 
-import type { Cart, CartLineItem } from "@/types/domain.types";
+import type { Cart, CartLineItem, OperationResult } from "@/types/domain.types";
 
 import { getCommerceLayerClient } from "@/lib/clients/commerce";
 import { logEvent } from "@/lib/logging/log-event";
 import { attachProductToLineItem } from "@/lib/resources/cart/services";
 import { getDefaultMarket } from "@/lib/resources/markets/fetch";
+import { isCLApiError } from "@/lib/utils/commerce/errors";
 
 /**
  * Creates a new draft Order in Commerce Layer,
@@ -151,4 +152,66 @@ const addCartItem = async ({
 	}
 };
 
-export { createCart, deleteCart, attachCartToUser, addCartItem };
+/**
+ *
+ */
+const updateCartItemQuantity = async ({
+	lineItemId,
+	quantity,
+}: {
+	lineItemId: string;
+	quantity: number;
+}): Promise<OperationResult<undefined, "NOT_FOUND" | "FAILURE">> => {
+	const clClient = await getCommerceLayerClient();
+
+	try {
+		await clClient.line_items.update({
+			id: lineItemId,
+			quantity,
+		});
+		return { ok: true };
+	} catch (err) {
+		if (isCLApiError(err)) {
+			if (err.status === 404 || err.message === "Not Found") {
+				return { ok: false, reason: "NOT_FOUND" };
+			}
+		}
+
+		logEvent({ fn: "removeCartItem", level: "error", event: "fail", error: err });
+		return { ok: false, reason: "FAILURE" };
+	}
+};
+
+/**
+ *
+ */
+const removeCartItem = async ({
+	lineItemId,
+}: {
+	lineItemId: string;
+}): Promise<OperationResult<undefined, "NOT_FOUND" | "FAILURE">> => {
+	const clClient = await getCommerceLayerClient();
+
+	try {
+		await clClient.line_items.delete(lineItemId);
+		return { ok: true };
+	} catch (err) {
+		if (isCLApiError(err)) {
+			if (err.status === 404 || err.message === "Not Found") {
+				return { ok: false, reason: "NOT_FOUND" };
+			}
+		}
+
+		logEvent({ fn: "removeCartItem", level: "error", event: "fail", error: err });
+		return { ok: false, reason: "FAILURE" };
+	}
+};
+
+export {
+	createCart,
+	deleteCart,
+	attachCartToUser,
+	addCartItem,
+	updateCartItemQuantity,
+	removeCartItem,
+};

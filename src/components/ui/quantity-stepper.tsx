@@ -1,7 +1,7 @@
 "use client";
 
 import { Minus, Plus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { cn } from "@/lib/utils/general/cn";
 
@@ -31,6 +31,15 @@ const QuantityStepper = ({
 	const [internalQty, setInternalQty] = useState(defaultValue);
 	const quantity = isControlled ? value : internalQty;
 
+	const updateQuantity = (qty: number) => {
+		if (isControlled) {
+			onChange?.(qty);
+		} else {
+			setInternalQty(qty);
+			onChange?.(qty); // Optional: call it for uncontrolled too if you want to sync up
+		}
+	};
+
 	const decrease = () => {
 		if (quantity > min) updateQuantity(quantity - 1);
 	};
@@ -38,18 +47,6 @@ const QuantityStepper = ({
 	const increase = () => {
 		if (quantity < max) updateQuantity(quantity + 1);
 	};
-
-	const updateQuantity = (qty: number) => {
-		if (isControlled) {
-			onChange?.(qty);
-		} else {
-			setInternalQty(qty);
-		}
-	};
-
-	useEffect(() => {
-		if (onChange) onChange(quantity);
-	}, [onChange, quantity]);
 
 	return (
 		<div

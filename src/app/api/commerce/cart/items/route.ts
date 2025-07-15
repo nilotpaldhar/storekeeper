@@ -55,9 +55,10 @@ export async function POST(req: NextRequest) {
 		);
 	}
 
+	const productLabel = newLineItem.product?.title ?? `SKU ${newLineItem.sku_code}`;
 	return NextResponse.json({
 		success: true,
-		message: `Item added to cart successfully (SKU: ${newLineItem.sku_code}, Quantity: ${newLineItem.quantity}).`,
+		message: `Great choice! ${productLabel} added to your cart.`,
 		data: newLineItem,
 	});
 }
