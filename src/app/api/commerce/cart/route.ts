@@ -38,6 +38,7 @@ export async function GET() {
 			formatted_total_tax_amount: cart.formatted_total_tax_amount,
 			number: cart.number,
 			skus_count: cart.skus_count,
+			coupon_code: cart.coupon_code,
 		},
 		items,
 	};

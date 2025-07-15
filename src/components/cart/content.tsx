@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import { useCart } from "@/hooks/cart";
 
 import { CartEmpty } from "@/components/cart/empty";
@@ -20,14 +22,21 @@ const CartContentStateWrapper = ({ children }: { children: React.ReactNode }) =>
 };
 
 const CartContent = () => {
+	const router = useRouter();
 	const { data, isLoading, isError, isFetching, error, refetch } = useCart();
 
+	const id = data?.data?.summary.id;
 	const summary = data?.data?.summary;
 	const items = data?.data?.items || [];
 	const skusCount = summary?.skus_count ?? 0;
 
 	const isUpdating = !isLoading && isFetching;
 	const isEmpty = !isLoading && !isError && skusCount === 0;
+
+	const handleProceedToCheckou = () => {
+		if (!id || isLoading || isError || isFetching) return;
+		router.push(`/checkout?order_id=${id}`);
+	};
 
 	if (isLoading || (isEmpty && isFetching)) {
 		return (
@@ -67,7 +76,7 @@ const CartContent = () => {
 				{summary ? (
 					<section className="col-span-full xl:col-span-4">
 						<div className="xl:sticky xl:top-4">
-							<CartSummary summary={summary} />
+							<CartSummary summary={summary} onProceedToCheckout={handleProceedToCheckou} />
 						</div>
 					</section>
 				) : null}

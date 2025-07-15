@@ -4,7 +4,11 @@ import type { CartCount, CartLineItem } from "@/types/domain.types";
 import { z } from "zod";
 
 import { axios, handleAxiosError } from "@/lib/http/client";
-import { AddCartItemSchema, UpdateCartItemQuantitySchema } from "@/lib/schemas";
+import {
+	AddCartItemSchema,
+	UpdateCartItemQuantitySchema,
+	AddCartCouponSchema,
+} from "@/lib/schemas";
 
 const getCart = async () => {
 	try {
@@ -64,4 +68,32 @@ const removeCartItem = async ({ lineItemId }: { lineItemId: string }) => {
 	}
 };
 
-export { getCart, getCartCount, addCartItem, updateCartItemQuantity, removeCartItem };
+const applyCouponToCart = async ({ couponCode }: z.infer<typeof AddCartCouponSchema>) => {
+	try {
+		const res = await axios.post<APIResponse<undefined>>(`/commerce/cart/coupon`, { couponCode });
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
+const removeCouponFromCart = async () => {
+	try {
+		const res = await axios.delete<APIResponse<undefined>>(`/commerce/cart/coupon`);
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
+export {
+	getCart,
+	getCartCount,
+	addCartItem,
+	updateCartItemQuantity,
+	removeCartItem,
+	applyCouponToCart,
+	removeCouponFromCart,
+};

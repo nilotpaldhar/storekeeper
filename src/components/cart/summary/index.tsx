@@ -2,8 +2,9 @@
 
 import type { CartSummary } from "@/types/domain.types";
 
-import { ArrowRight, TagsIcon, XIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
+import { PromotionBlock } from "@/components/cart/summary/promotion-block";
 import { Button } from "@/components/ui/button";
 import {
 	CostPanel,
@@ -14,19 +15,20 @@ import {
 	CostPanelPriceRow,
 	CostPanelTitle,
 } from "@/components/ui/cost-panel";
-import { Input } from "@/components/ui/input";
 
 type CartSummaryProps = {
 	summary: CartSummary;
+	onProceedToCheckout: () => void;
 };
 
-const CartSummary = ({ summary }: CartSummaryProps) => {
+const CartSummary = ({ summary, onProceedToCheckout }: CartSummaryProps) => {
 	const {
 		skus_count,
 		formatted_subtotal_amount,
 		formatted_total_tax_amount,
 		formatted_discount_amount,
 		formatted_total_amount_with_taxes,
+		coupon_code,
 	} = summary;
 
 	const resolveTotalItemsStr = () => {
@@ -41,34 +43,8 @@ const CartSummary = ({ summary }: CartSummaryProps) => {
 				<CostPanelTitle>Cart Summary ({resolveTotalItemsStr()})</CostPanelTitle>
 			</CostPanelHeader>
 			<CostPanelContent>
-				<CostPanelBlock className="flex flex-col space-y-4">
-					<div className="flex items-center space-x-1">
-						<TagsIcon size={16} />
-						<span className="text-sm font-semibold">Promotions</span>
-					</div>
-					<div className="flex items-center space-x-2">
-						<button
-							type="button"
-							className="flex cursor-pointer items-center rounded-full text-neutral-900 hover:text-current hover:opacity-80"
-						>
-							<XIcon size={16} />
-							<span className="sr-only">Remove Coupon</span>
-						</button>
-						<div className="flex items-center space-x-1 text-xs">
-							<span className="font-normal">ST11MT60622</span>
-							<span className="text-neutral-500">is applied</span>
-						</div>
-					</div>
-					<div>
-						<form>
-							<div className="flex max-w-xs items-start space-x-1">
-								<Input required id="couponCode" placeholder="Enter your code" className="h-8" />
-								<Button type="submit" className="h-8">
-									Apply
-								</Button>
-							</div>
-						</form>
-					</div>
+				<CostPanelBlock>
+					<PromotionBlock couponCode={coupon_code} />
 				</CostPanelBlock>
 				<CostPanelBlock>
 					<dl className="flex flex-col space-y-4">
@@ -86,7 +62,7 @@ const CartSummary = ({ summary }: CartSummaryProps) => {
 				/>
 			</CostPanelBlock>
 			<CostPanelFooter>
-				<Button className="w-full">
+				<Button className="w-full" onClick={onProceedToCheckout}>
 					<span>Proceed To Checkout</span>
 					<ArrowRight />
 				</Button>

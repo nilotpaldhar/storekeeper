@@ -153,7 +153,7 @@ const addCartItem = async ({
 };
 
 /**
- *
+ * Updates the quantity of a specific cart line item.
  */
 const updateCartItemQuantity = async ({
 	lineItemId,
@@ -183,7 +183,7 @@ const updateCartItemQuantity = async ({
 };
 
 /**
- *
+ * Removes a specific item from the cart.
  */
 const removeCartItem = async ({
 	lineItemId,
@@ -207,6 +207,55 @@ const removeCartItem = async ({
 	}
 };
 
+/**
+ * Applies a coupon code to the current cart.
+ */
+const applyCouponToCart = async ({
+	cartId,
+	couponCode,
+}: {
+	cartId: string;
+	couponCode: string;
+}): Promise<OperationResult<undefined, "INVALID_COUPON_CODE" | "FAILURE">> => {
+	const clClient = await getCommerceLayerClient();
+
+	try {
+		await clClient.orders.update({
+			id: cartId,
+			coupon_code: couponCode,
+		});
+		return { ok: true };
+	} catch (err) {
+		if (isCLApiError(err)) {
+			if (err.status === 422) {
+				return { ok: false, reason: "INVALID_COUPON_CODE" };
+			}
+		}
+
+		logEvent({ fn: "applyCouponToCart", level: "error", event: "fail", error: err });
+		return { ok: false, reason: "FAILURE" };
+	}
+};
+
+/**
+ * Removes any applied coupon code from the current cart.
+ */
+const removeCouponFromCart = async ({
+	cartId,
+}: {
+	cartId: string;
+}): Promise<OperationResult<undefined, "FAILURE">> => {
+	const clClient = await getCommerceLayerClient();
+
+	try {
+		await clClient.orders.update({ id: cartId, coupon_code: "" });
+		return { ok: true };
+	} catch (err) {
+		logEvent({ fn: "removeCouponFromCart", level: "error", event: "fail", error: err });
+		return { ok: false, reason: "FAILURE" };
+	}
+};
+
 export {
 	createCart,
 	deleteCart,
@@ -214,4 +263,6 @@ export {
 	addCartItem,
 	updateCartItemQuantity,
 	removeCartItem,
+	applyCouponToCart,
+	removeCouponFromCart,
 };

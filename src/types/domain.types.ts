@@ -103,6 +103,7 @@ export type CartSummary = Pick<
 	| "formatted_total_tax_amount"
 	| "formatted_total_amount_with_taxes"
 	| "skus_count"
+	| "coupon_code"
 >;
 
 export type CartLineItem = Pick<

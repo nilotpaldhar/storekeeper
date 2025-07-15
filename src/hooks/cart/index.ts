@@ -8,6 +8,8 @@ import {
 	addCartItem,
 	updateCartItemQuantity,
 	removeCartItem,
+	applyCouponToCart,
+	removeCouponFromCart,
 } from "@/lib/requests/cart";
 
 const useCart = ({ enabled = true }: { enabled?: boolean } = {}) => {
@@ -65,4 +67,38 @@ const useRemoveCartItem = () => {
 	});
 };
 
-export { useCart, useCartCount, useAddCartItem, useUpdateCartItem, useRemoveCartItem };
+const useApplyCouponToCart = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: applyCouponToCart,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: cartKeys.base,
+			});
+		},
+	});
+};
+
+const useRemoveCouponFromCart = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: removeCouponFromCart,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: cartKeys.base,
+			});
+		},
+	});
+};
+
+export {
+	useCart,
+	useCartCount,
+	useAddCartItem,
+	useUpdateCartItem,
+	useRemoveCartItem,
+	useApplyCouponToCart,
+	useRemoveCouponFromCart,
+};

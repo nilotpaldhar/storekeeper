@@ -64,6 +64,7 @@ const getCartSummary = async ({ id }: { id: string }): Promise<CartSummary | nul
 			fields: [
 				"number",
 				"skus_count",
+				"coupon_code",
 				"formatted_subtotal_amount",
 				"formatted_discount_amount",
 				"formatted_shipping_amount",
@@ -93,6 +94,7 @@ const getCartLineItems = async ({ id }: { id: string }): Promise<CartLineItem[]>
 	try {
 		// Fetch raw line items for the given order ID.
 		const lineItems = await clClient.orders.line_items(id, {
+			filters: { item_type_eq: "skus" },
 			include: ["sku"],
 			fields: [
 				"sku",
