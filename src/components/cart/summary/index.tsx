@@ -1,3 +1,7 @@
+"use client";
+
+import type { CartSummary } from "@/types/domain.types";
+
 import { ArrowRight, TagsIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -12,11 +16,29 @@ import {
 } from "@/components/ui/cost-panel";
 import { Input } from "@/components/ui/input";
 
-const CartSummary = () => {
+type CartSummaryProps = {
+	summary: CartSummary;
+};
+
+const CartSummary = ({ summary }: CartSummaryProps) => {
+	const {
+		skus_count,
+		formatted_subtotal_amount,
+		formatted_total_tax_amount,
+		formatted_discount_amount,
+		formatted_total_amount_with_taxes,
+	} = summary;
+
+	const resolveTotalItemsStr = () => {
+		if (!skus_count) return `0 Item`;
+		if (skus_count <= 1) return `${skus_count} Item`;
+		return `${skus_count} Items`;
+	};
+
 	return (
 		<CostPanel>
 			<CostPanelHeader>
-				<CostPanelTitle>Cart Summary (2 Items)</CostPanelTitle>
+				<CostPanelTitle>Cart Summary ({resolveTotalItemsStr()})</CostPanelTitle>
 			</CostPanelHeader>
 			<CostPanelContent>
 				<CostPanelBlock className="flex flex-col space-y-4">
@@ -50,16 +72,18 @@ const CartSummary = () => {
 				</CostPanelBlock>
 				<CostPanelBlock>
 					<dl className="flex flex-col space-y-4">
-						<CostPanelPriceRow label="Subtotal" value="$1050.00" />
-						<CostPanelPriceRow
-							label="Coupon Discount"
-							value={<span className="text-success-600">-$50.00</span>}
-						/>
+						<CostPanelPriceRow label="Subtotal" value={formatted_subtotal_amount ?? "---"} />
+						<CostPanelPriceRow label="Total tax" value={formatted_total_tax_amount ?? "---"} />
+						<CostPanelPriceRow label="Coupon Discount" value={formatted_discount_amount ?? "---"} />
 					</dl>
 				</CostPanelBlock>
 			</CostPanelContent>
 			<CostPanelBlock hideDivider>
-				<CostPanelPriceRow className="font-semibold" label="Total Price" value="$1020.00" />
+				<CostPanelPriceRow
+					className="font-semibold"
+					label="Total Price"
+					value={formatted_total_amount_with_taxes ?? "---"}
+				/>
 			</CostPanelBlock>
 			<CostPanelFooter>
 				<Button className="w-full">

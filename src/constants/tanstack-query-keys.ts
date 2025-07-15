@@ -26,3 +26,15 @@ export const productInventoryKeys = {
 	all: ["product-inventory"] as const,
 	bySku: (skuId: string) => [...productInventoryKeys.all, "by-sku", skuId] as const,
 };
+
+/**
+ * Cart query keys
+ *
+ * Contains keys used to uniquely identify queries related to cart.
+ */
+export const cartKeys = {
+	base: ["cart"] as const,
+	count: () => [...cartKeys.base, "count"] as const,
+	summary: () => [...cartKeys.base, "summary"] as const,
+	items: () => [...cartKeys.base, "items"] as const,
+};

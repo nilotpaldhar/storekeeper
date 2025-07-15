@@ -11,7 +11,13 @@ import {
 	EmptyDescription,
 } from "@/components/ui/empty";
 
-const CartError = ({ className }: { className?: string }) => {
+type CartErrorProps = {
+	message?: string;
+	onRetry?: () => void;
+	className?: string;
+};
+
+const CartError = ({ message, onRetry = () => {}, className }: CartErrorProps) => {
 	return (
 		<Empty className={className}>
 			<EmptyImage
@@ -20,13 +26,13 @@ const CartError = ({ className }: { className?: string }) => {
 				width={200}
 				height={200}
 			/>
-			<EmptyTitle>Couldn’t Load Your Cart!</EmptyTitle>
+			<EmptyTitle>Couldn&apos;t Load Your Cart!</EmptyTitle>
 			<EmptyDescription>
-				<p>Something went wrong while fetching your cart.</p>
+				<p>{message ?? "Something went wrong while fetching your cart."}</p>
 				<p>Click below to retry.</p>
 			</EmptyDescription>
 			<EmptyContent>
-				<Button className="px-8">
+				<Button className="px-8" onClick={onRetry}>
 					<RefreshCcw />
 					<span>Try Again</span>
 				</Button>

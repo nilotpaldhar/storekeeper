@@ -108,4 +108,16 @@ const RelatedProductsQuery = defineQuery(`
     }
 `);
 
-export { ProductSlugsQuery, ProductQuery, ProductSummaryQuery, RelatedProductsQuery };
+const ProductBySkuCodeQuery = defineQuery(`
+    *[_type == "product" && ( sku->code == $skuCode || count(variants[sku->code == $skuCode]) > 0 )][0]{
+        ${ProductSummaryFragment}
+    }
+`);
+
+export {
+	ProductSlugsQuery,
+	ProductQuery,
+	ProductSummaryQuery,
+	RelatedProductsQuery,
+	ProductBySkuCodeQuery,
+};

@@ -1,4 +1,4 @@
-import type { Price, StockItem } from "@commercelayer/sdk";
+import type { LineItem, Order, Price, StockItem } from "@commercelayer/sdk";
 import type { User } from "@prisma/client";
 
 export type UserProfile = User;
@@ -81,4 +81,49 @@ export type ProductSummary = {
 	sku: ProductSku | null;
 	gallery: ProductImage[];
 	price: ProductPrice | null;
+};
+
+export type Cart = Order;
+
+export type CartCount = Pick<Order, "skus_count">;
+
+export type CartSummary = Pick<
+	Order,
+	| "id"
+	| "type"
+	| "number"
+	| "formatted_subtotal_amount"
+	| "formatted_shipping_amount"
+	| "formatted_discount_amount"
+	| "formatted_gift_card_amount"
+	| "formatted_total_tax_amount"
+	| "formatted_total_amount_with_taxes"
+	| "skus_count"
+>;
+
+export type CartLineItem = Pick<
+	LineItem,
+	| "id"
+	| "type"
+	| "sku_code"
+	| "sku"
+	| "name"
+	| "quantity"
+	| "currency_code"
+	| "formatted_unit_amount"
+	| "formatted_compare_at_amount"
+	| "formatted_options_amount"
+	| "formatted_discount"
+	| "formatted_total_amount"
+	| "formatted_tax_amount"
+> & {
+	product: {
+		id: string;
+		title: string;
+		slug: string;
+		thumbnail: {
+			src: string | null;
+			alt?: string | null;
+		} | null;
+	} | null;
 };

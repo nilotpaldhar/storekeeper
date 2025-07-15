@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { getDefaultStockLocation, getProductInventory } from "@/lib/resources/products/fetch";
+import { getProductInventory } from "@/lib/resources/products/fetch";
+import { getDefaultStockLocation } from "@/lib/resources/stock-locations/fetch";
 
 type Params = Promise<{ skuId: string }>;
 

@@ -3,6 +3,8 @@
 import { Heart, ShoppingCart, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+import { useCartCount } from "@/hooks/cart";
+
 import { HeaderAccountPreview } from "@/app/(storefront)/_components/header/header-account-preview";
 import { HeaderAction } from "@/app/(storefront)/_components/header/header-action";
 
@@ -42,12 +44,13 @@ const HeaderToolbarWishlist = ({ className }: { className?: string }) => {
 
 const HeaderToolbarCart = ({ className }: { className?: string }) => {
 	const router = useRouter();
+	const { data } = useCartCount();
 
 	return (
 		<HeaderAction
 			label="cart"
 			icon={ShoppingCart}
-			count={0}
+			count={data?.data?.skus_count ?? 0}
 			onClick={() => router.push("/cart")}
 			className={className}
 		/>
