@@ -2,9 +2,21 @@ import { Slot } from "@radix-ui/react-slot";
 
 import { cn } from "@/lib/utils/general/cn";
 
-const CostPanel = ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-	<aside className={cn("border border-dashed border-neutral-200", className)} {...props} />
-);
+const CostPanel = ({
+	asChild,
+	children,
+	className,
+	...props
+}: React.HTMLAttributes<HTMLElement> & {
+	asChild?: boolean;
+}) => {
+	const Comp = asChild ? Slot : "aside";
+	return (
+		<Comp className={cn("border border-dashed border-neutral-200", className)} {...props}>
+			{children}
+		</Comp>
+	);
+};
 CostPanel.displayName = "CostPanel";
 
 const CostPanelHeader = ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (

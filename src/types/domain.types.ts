@@ -132,3 +132,10 @@ export type CartLineItem = Pick<
 		} | null;
 	} | null;
 };
+
+export type CheckoutStep = {
+	id: string;
+	label: string;
+	description: string;
+	completed: boolean;
+};
