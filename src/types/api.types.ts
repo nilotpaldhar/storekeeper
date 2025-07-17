@@ -1,4 +1,4 @@
-import type { CartLineItem, CartSummary } from "@/types/domain.types";
+import type { CartLineItem, CartSummary, OrderSummary, OrderLineItem } from "@/types/domain.types";
 
 export type APIResponse<T> = {
 	status: boolean;
@@ -9,4 +9,9 @@ export type APIResponse<T> = {
 export type CartResponseData = {
 	summary: CartSummary;
 	items: CartLineItem[];
+};
+
+export type OrderResponseData = {
+	summary: OrderSummary;
+	items: OrderLineItem[];
 };

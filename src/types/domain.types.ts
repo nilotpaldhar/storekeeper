@@ -1,11 +1,29 @@
 import type { LineItem, Order, Price, StockItem } from "@commercelayer/sdk";
 import type { User } from "@prisma/client";
 
+// ─────────────────────────────────────────────────────
+// Utility & Generic Types
+// ─────────────────────────────────────────────────────
+
+/**
+ * Represents a standardized result from any operation, including success or failure.
+ */
 export type OperationResult<TData = undefined, TReason extends string = "UNKNOWN"> =
 	| { ok: true; data?: TData }
 	| { ok: false; reason: TReason; detail?: string };
 
+// ─────────────────────────────────────────────────────
+// User Types
+// ─────────────────────────────────────────────────────
+
+/**
+ * Alias for the user profile from the Prisma client.
+ */
 export type UserProfile = User;
+
+// ─────────────────────────────────────────────────────
+// Product Primitives (building blocks)
+// ─────────────────────────────────────────────────────
 
 export type ProductPrice = Price;
 export type ProductInventory = StockItem;
@@ -59,6 +77,10 @@ export type ProductBreadcrumb = {
 	path: string;
 }[];
 
+// ─────────────────────────────────────────────────────
+// Product Aggregates (for display or pages)
+// ─────────────────────────────────────────────────────
+
 export type ProductDetails = {
 	id: string;
 	title: string;
@@ -87,40 +109,96 @@ export type ProductSummary = {
 	price: ProductPrice | null;
 };
 
+// ─────────────────────────────────────────────────────
+// Cart & Order Shared Types
+// ─────────────────────────────────────────────────────
+
+/**
+ * Alias for a Commerce Layer order representing a cart.
+ */
 export type Cart = Order;
 
+/**
+ * Represents the count of SKUs in a cart or order.
+ */
 export type CartCount = Pick<Order, "skus_count">;
 
-export type CartSummary = Pick<
+/**
+ * Shared summary type for both carts and orders.
+ */
+export type CheckoutSummary = Pick<
 	Order,
 	| "id"
 	| "type"
 	| "number"
-	| "formatted_subtotal_amount"
-	| "formatted_shipping_amount"
+	| "token"
+	| "customer_email"
+	| "language_code"
+	| "currency_code"
+	| "country_code"
+	| "status"
+	| "payment_status"
+	| "fulfillment_status"
+	| "coupon_code"
+	| "gift_card_code"
+	| "discount_amount_cents"
 	| "formatted_discount_amount"
+	| "gift_card_amount_cents"
 	| "formatted_gift_card_amount"
+	| "subtotal_amount_cents"
+	| "formatted_subtotal_amount"
+	| "shipping_amount_cents"
+	| "formatted_shipping_amount"
+	| "payment_method_amount_cents"
+	| "formatted_payment_method_amount"
+	| "adjustment_amount_cents"
+	| "formatted_adjustment_amount"
+	| "total_tax_amount_cents"
 	| "formatted_total_tax_amount"
+	| "fees_amount_cents"
+	| "formatted_fees_amount"
+	| "place_total_amount_cents"
+	| "formatted_place_total_amount"
+	| "total_amount_cents"
+	| "formatted_total_amount"
+	| "total_amount_with_taxes_cents"
 	| "formatted_total_amount_with_taxes"
 	| "skus_count"
-	| "coupon_code"
+	| "payment_source_details"
+	| "placed_at"
+	| "approved_at"
+	| "cancelled_at"
+	| "payment_updated_at"
+	| "fulfillment_updated_at"
+	| "refreshed_at"
+	| "created_at"
+	| "updated_at"
 >;
 
-export type CartLineItem = Pick<
+/**
+ * Shared line item shape for both carts and orders.
+ */
+export type CheckoutLineItem = Pick<
 	LineItem,
 	| "id"
 	| "type"
-	| "sku_code"
 	| "sku"
+	| "sku_code"
 	| "name"
 	| "quantity"
 	| "currency_code"
+	| "unit_amount_cents"
 	| "formatted_unit_amount"
+	| "compare_at_amount_cents"
 	| "formatted_compare_at_amount"
+	| "options_amount_cents"
 	| "formatted_options_amount"
+	| "discount_cents"
 	| "formatted_discount"
-	| "formatted_total_amount"
+	| "tax_amount_cents"
 	| "formatted_tax_amount"
+	| "total_amount_cents"
+	| "formatted_total_amount"
 > & {
 	product: {
 		id: string;
@@ -133,6 +211,25 @@ export type CartLineItem = Pick<
 	} | null;
 };
 
+// ─────────────────────────────────────────────────────
+// Cart & Order Aliases
+// ─────────────────────────────────────────────────────
+
+export type CartSummary = CheckoutSummary;
+export type CartLineItem = CheckoutLineItem;
+
+export type OrderSummary = CheckoutSummary;
+export type OrderLineItem = CheckoutLineItem;
+
+export type OrderStatus = Order["status"];
+
+// ─────────────────────────────────────────────────────
+// Checkout Flow Types
+// ─────────────────────────────────────────────────────
+
+/**
+ * Represents a single step in the checkout process.
+ */
 export type CheckoutStep = {
 	id: string;
 	label: string;

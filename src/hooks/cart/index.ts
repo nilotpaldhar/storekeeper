@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { type QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { cartKeys } from "@/constants/tanstack-query-keys";
+import { cartKeys, orderKeys } from "@/constants/tanstack-query-keys";
 
 import {
 	getCart,
@@ -11,6 +11,16 @@ import {
 	applyCouponToCart,
 	removeCouponFromCart,
 } from "@/lib/requests/cart";
+
+const invalidateCartAndOrderQueries = ({
+	queryClient,
+}: {
+	orderId?: string;
+	queryClient: QueryClient;
+}) => {
+	queryClient.invalidateQueries({ queryKey: cartKeys.base });
+	queryClient.invalidateQueries({ queryKey: orderKeys.base });
+};
 
 const useCart = ({ enabled = true }: { enabled?: boolean } = {}) => {
 	return useQuery({
@@ -33,11 +43,7 @@ const useAddCartItem = () => {
 
 	return useMutation({
 		mutationFn: addCartItem,
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: cartKeys.base,
-			});
-		},
+		onSuccess: () => invalidateCartAndOrderQueries({ queryClient }),
 	});
 };
 
@@ -46,11 +52,7 @@ const useUpdateCartItem = () => {
 
 	return useMutation({
 		mutationFn: updateCartItemQuantity,
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: cartKeys.base,
-			});
-		},
+		onSuccess: () => invalidateCartAndOrderQueries({ queryClient }),
 	});
 };
 
@@ -59,11 +61,7 @@ const useRemoveCartItem = () => {
 
 	return useMutation({
 		mutationFn: removeCartItem,
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: cartKeys.base,
-			});
-		},
+		onSuccess: () => invalidateCartAndOrderQueries({ queryClient }),
 	});
 };
 
@@ -72,11 +70,7 @@ const useApplyCouponToCart = () => {
 
 	return useMutation({
 		mutationFn: applyCouponToCart,
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: cartKeys.base,
-			});
-		},
+		onSuccess: () => invalidateCartAndOrderQueries({ queryClient }),
 	});
 };
 
@@ -85,11 +79,7 @@ const useRemoveCouponFromCart = () => {
 
 	return useMutation({
 		mutationFn: removeCouponFromCart,
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: cartKeys.base,
-			});
-		},
+		onSuccess: () => invalidateCartAndOrderQueries({ queryClient }),
 	});
 };
 

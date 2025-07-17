@@ -38,3 +38,13 @@ export const cartKeys = {
 	summary: () => [...cartKeys.base, "summary"] as const,
 	items: () => [...cartKeys.base, "items"] as const,
 };
+
+/**
+ * Cart query keys
+ *
+ * Contains keys used to uniquely identify queries related to cart.
+ */
+export const orderKeys = {
+	base: ["orders"] as const,
+	byId: (id: string) => [...orderKeys.base, "by-id", id] as const,
+};

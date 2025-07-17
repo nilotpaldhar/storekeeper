@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { CheckoutContent } from "@/components/checkout/content";
 import { CheckoutError } from "@/components/checkout/error";
 
-import { getOrder } from "@/lib/resources/orders/fetch";
 import { getSeo } from "@/lib/resources/seo/services";
 
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -16,10 +15,8 @@ type CheckoutPageProps = {
 
 const CheckoutPage = async ({ searchParams }: CheckoutPageProps) => {
 	const orderId = (await searchParams).order_id;
-	const isValidOrderId = orderId && !Array.isArray(orderId);
-	const order = isValidOrderId ? await getOrder({ id: orderId, status: "draft" }) : null;
 
-	if (!order) {
+	if (!orderId || Array.isArray(orderId)) {
 		return (
 			<CheckoutError
 				title="Order Not Found"
@@ -33,7 +30,7 @@ const CheckoutPage = async ({ searchParams }: CheckoutPageProps) => {
 		);
 	}
 
-	return <CheckoutContent />;
+	return <CheckoutContent orderId={orderId} />;
 };
 
 export default CheckoutPage;

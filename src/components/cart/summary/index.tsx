@@ -25,11 +25,16 @@ const CartSummary = ({ summary, onProceedToCheckout }: CartSummaryProps) => {
 	const {
 		skus_count,
 		formatted_subtotal_amount,
-		formatted_total_tax_amount,
+		discount_amount_cents,
 		formatted_discount_amount,
+		total_tax_amount_cents,
+		formatted_total_tax_amount,
 		formatted_total_amount_with_taxes,
 		coupon_code,
 	} = summary;
+
+	const hasDiscountAmount = discount_amount_cents && Math.abs(discount_amount_cents) > 0;
+	const hasTotalTaxAmount = total_tax_amount_cents && total_tax_amount_cents > 0;
 
 	const resolveTotalItemsStr = () => {
 		if (!skus_count) return `0 Item`;
@@ -49,15 +54,28 @@ const CartSummary = ({ summary, onProceedToCheckout }: CartSummaryProps) => {
 				<CostPanelBlock>
 					<dl className="flex flex-col space-y-4">
 						<CostPanelPriceRow label="Subtotal" value={formatted_subtotal_amount ?? "---"} />
-						<CostPanelPriceRow label="Total tax" value={formatted_total_tax_amount ?? "---"} />
-						<CostPanelPriceRow label="Coupon Discount" value={formatted_discount_amount ?? "---"} />
+						{hasDiscountAmount ? (
+							<CostPanelPriceRow
+								label="Coupon Discount"
+								value={formatted_discount_amount ?? "---"}
+							/>
+						) : null}
 					</dl>
 				</CostPanelBlock>
 			</CostPanelContent>
 			<CostPanelBlock hideDivider>
 				<CostPanelPriceRow
 					className="font-semibold"
-					label="Total Price"
+					label={
+						<div className="flex items-center space-x-1">
+							<span className="font-semibold">Total Price</span>
+							{hasTotalTaxAmount ? (
+								<span className="text-xs font-light">
+									(includes {formatted_total_tax_amount ?? "---"} tax)
+								</span>
+							) : null}
+						</div>
+					}
 					value={formatted_total_amount_with_taxes ?? "---"}
 				/>
 			</CostPanelBlock>
