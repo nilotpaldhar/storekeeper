@@ -41,3 +41,9 @@ export type HeaderMenu = {
 	megaDropdownItems: HeaderMegaDropdownItem[];
 	menuItems: (HeaderNavLinkType | HeaderDropdownItem)[];
 };
+
+export type CheckoutStepProps = {
+	orderId: string;
+	completed: boolean;
+	onStepComplete: () => void;
+};

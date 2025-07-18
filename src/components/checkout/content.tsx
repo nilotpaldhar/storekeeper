@@ -68,7 +68,7 @@ const CheckoutContent = ({ orderId, showDisclaimer = false }: CheckoutContentPro
 					</section>
 					<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 						<section className="">
-							<CheckoutFlow onPlaceOrder={handlePlaceOrder} />
+							<CheckoutFlow orderId={orderId} onPlaceOrder={handlePlaceOrder} />
 						</section>
 						<section className="space-y-6">
 							{summary && items ? <CheckoutSummary summary={summary} items={items} /> : null}

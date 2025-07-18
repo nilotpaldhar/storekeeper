@@ -1,12 +1,14 @@
 "use client";
 
+import type { CheckoutStepProps } from "@/types/ui.types";
+
 import { Button } from "@/components/ui/button";
 
-const AddressStep = ({ onSubmit }: { onSubmit: () => void }) => {
+const AddressStep = ({ completed, onStepComplete }: CheckoutStepProps) => {
 	return (
 		<div>
 			<div className="mb-4">Address Step</div>
-			<Button onClick={onSubmit}>Submit</Button>
+			{!completed ? <Button onClick={onStepComplete}>Submit</Button> : null}
 		</div>
 	);
 };

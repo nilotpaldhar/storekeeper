@@ -20,10 +20,7 @@ const getCartById = async ({ id }: { id: string }): Promise<Cart | null> => {
 
 	try {
 		const carts = await clClient.orders.list({
-			filters: {
-				id_eq: id,
-				status_eq: "draft",
-			},
+			filters: { id_eq: id },
 		});
 		return carts.at(0) ?? null;
 	} catch (err) {
@@ -47,10 +44,7 @@ const getCartByUserEmail = async ({ email }: { email: string }): Promise<Cart | 
 
 	try {
 		const carts = await clClient.orders.list({
-			filters: {
-				customer_email_eq: email,
-				status_eq: "draft",
-			},
+			filters: { customer_email_eq: email },
 		});
 		return carts.at(0) ?? null;
 	} catch (err) {

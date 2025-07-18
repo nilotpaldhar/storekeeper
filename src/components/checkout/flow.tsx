@@ -1,6 +1,7 @@
 "use client";
 
 import type { CheckoutStep } from "@/types/domain.types";
+import type { CheckoutStepProps } from "@/types/ui.types";
 
 import { useCheckoutStepsStore } from "@/stores/use-checkout-steps-store";
 
@@ -15,19 +16,24 @@ import {
 	CheckoutStepsAccordionPanel,
 } from "@/components/checkout/steps-accordion";
 
-const stepComponents: Record<CheckoutStep["id"], React.ComponentType<{ onSubmit: () => void }>> = {
+type CheckoutFlowProps = {
+	orderId: string;
+	onPlaceOrder: () => void;
+};
+
+const stepComponents: Record<CheckoutStep["id"], React.ComponentType<CheckoutStepProps>> = {
 	fill_user_details: UserDetailsStep,
 	fill_address: AddressStep,
 	fill_shipping_options: DeliveryOptionsStep,
 	fill_payment_details: PaymentDetailsStep,
 };
 
-const CheckoutFlow = ({ onPlaceOrder }: { onPlaceOrder: () => void }) => {
+const CheckoutFlow = ({ orderId, onPlaceOrder }: CheckoutFlowProps) => {
 	const { activeIndex, steps, goTo, next, markAsComplete, isLastStep, reset } =
 		useCheckoutStepsStore();
 	const activeStep = steps[activeIndex];
 
-	const handleSubmit = (step: CheckoutStep) => {
+	const handleStepComplete = (step: CheckoutStep) => {
 		if (isLastStep()) {
 			onPlaceOrder();
 			reset();
@@ -51,7 +57,13 @@ const CheckoutFlow = ({ onPlaceOrder }: { onPlaceOrder: () => void }) => {
 						disabled={step.id === activeStep.id || !step.completed}
 						onOpenChange={() => goTo(idx)}
 					>
-						{StepComponent ? <StepComponent onSubmit={() => handleSubmit(step)} /> : null}
+						{StepComponent ? (
+							<StepComponent
+								orderId={orderId}
+								completed={step.id !== activeStep.id && step.completed}
+								onStepComplete={() => handleStepComplete(step)}
+							/>
+						) : null}
 					</CheckoutStepsAccordionPanel>
 				);
 			})}

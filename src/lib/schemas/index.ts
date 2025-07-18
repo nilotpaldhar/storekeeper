@@ -22,3 +22,14 @@ export const UpdateCartItemQuantitySchema = z.object({
 export const AddCartCouponSchema = z.object({
 	couponCode: z.string().trim().min(1, "Coupon code is required").max(50),
 });
+
+export const AttachCustomerToOrderSchema = z.object({
+	name: z.string().trim().optional(),
+	email: z.string().trim().email({ message: "Please enter a valid email address" }),
+});
+
+// export const UpdateOrderAddressesSchema = z.object({});
+
+// export const UpdateOrderPaymentMethodSchema = z.object({});
+
+// export const PlaceOrderSchema = z.object({});

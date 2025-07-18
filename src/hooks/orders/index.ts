@@ -1,10 +1,10 @@
 import type { OrderStatus } from "@/types/domain.types";
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { orderKeys } from "@/constants/tanstack-query-keys";
 
-import { getOrder } from "@/lib/requests/orders";
+import { getOrder, attachCustomerToOrder } from "@/lib/requests/orders";
 
 const useOrder = ({
 	id,
@@ -22,4 +22,15 @@ const useOrder = ({
 	});
 };
 
-export { useOrder };
+const useAttachCustomerToOrder = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: attachCustomerToOrder,
+		onSuccess: (_data, { orderId }) => {
+			queryClient.invalidateQueries({ queryKey: orderKeys.byId(orderId) });
+		},
+	});
+};
+
+export { useOrder, useAttachCustomerToOrder };

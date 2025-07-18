@@ -1,24 +1,64 @@
+import type { CheckoutStep } from "@/types/domain.types";
+import type { Address, PaymentMethod, ShippingMethod } from "@commercelayer/sdk";
+
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 import { CHECKOUT_STEPS } from "@/constants/commerce";
-import { CheckoutStep } from "@/types/domain.types";
+
+export type CheckoutData = {
+	customer: {
+		name: string | null;
+		email: string;
+	};
+	address: {
+		shipping: Address | null;
+		billing: Address | null;
+	};
+	shipping: {
+		method: ShippingMethod | null;
+	};
+	payment: {
+		method: PaymentMethod | null;
+	};
+};
 
 type CheckoutStepsStore = {
 	steps: CheckoutStep[];
 	activeIndex: number;
+	checkoutData: CheckoutData;
 	next: () => void;
 	back: () => void;
 	goTo: (index: number) => void;
 	markAsComplete: (id: string) => void;
+	setCheckoutData: <K extends keyof CheckoutData>(key: K, value: Partial<CheckoutData[K]>) => void;
+	getStepData: <K extends keyof CheckoutData>(key: K) => CheckoutData[K];
 	isLastStep: () => boolean;
 	reset: () => void;
 };
 
+const defaultCheckoutData: CheckoutData = {
+	customer: {
+		name: null,
+		email: "",
+	},
+	address: {
+		shipping: null,
+		billing: null,
+	},
+	shipping: {
+		method: null,
+	},
+	payment: {
+		method: null,
+	},
+};
+
 const useCheckoutStepsStore = create<CheckoutStepsStore>()(
 	immer((set, get) => ({
-		steps: CHECKOUT_STEPS,
+		steps: CHECKOUT_STEPS.map((s) => ({ ...s, completed: false })),
 		activeIndex: 0,
+		checkoutData: defaultCheckoutData,
 
 		next: () =>
 			set((state) => {
@@ -48,7 +88,16 @@ const useCheckoutStepsStore = create<CheckoutStepsStore>()(
 					step.completed = true;
 				}
 			}),
+
+		setCheckoutData: (key, value) =>
+			set((state) => {
+				state.checkoutData[key] = { ...state.checkoutData[key], ...value };
+			}),
+
+		getStepData: (key) => get().checkoutData[key],
+
 		isLastStep: () => get().activeIndex === get().steps.length - 1,
+
 		reset: () =>
 			set(() => ({
 				steps: CHECKOUT_STEPS.map((s) => ({ ...s, completed: false })),

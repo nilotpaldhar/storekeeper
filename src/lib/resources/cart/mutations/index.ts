@@ -133,7 +133,7 @@ const addCartItem = async ({
 		return enrichedItem;
 	} catch (err) {
 		logEvent({
-			fn: "addCartLineItem",
+			fn: "addCartItem",
 			level: "error",
 			event: "fail",
 			error: err,
