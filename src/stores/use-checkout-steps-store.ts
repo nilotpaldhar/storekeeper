@@ -1,5 +1,5 @@
-import type { CheckoutStep } from "@/types/domain.types";
-import type { Address, PaymentMethod, ShippingMethod } from "@commercelayer/sdk";
+import type { AddressInput, CheckoutStep } from "@/types/domain.types";
+import type { PaymentMethod, ShippingMethod } from "@commercelayer/sdk";
 
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
@@ -11,10 +11,7 @@ export type CheckoutData = {
 		name: string | null;
 		email: string;
 	};
-	address: {
-		shipping: Address | null;
-		billing: Address | null;
-	};
+	address: AddressInput | null;
 	shipping: {
 		method: ShippingMethod | null;
 	};
@@ -38,20 +35,10 @@ type CheckoutStepsStore = {
 };
 
 const defaultCheckoutData: CheckoutData = {
-	customer: {
-		name: null,
-		email: "",
-	},
-	address: {
-		shipping: null,
-		billing: null,
-	},
-	shipping: {
-		method: null,
-	},
-	payment: {
-		method: null,
-	},
+	customer: { name: null, email: "" },
+	address: null,
+	shipping: { method: null },
+	payment: { method: null },
 };
 
 const useCheckoutStepsStore = create<CheckoutStepsStore>()(

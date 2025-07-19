@@ -1,6 +1,9 @@
 import type { LineItem, Order, Price, StockItem } from "@commercelayer/sdk";
 import type { User } from "@prisma/client";
 
+import { z } from "zod";
+import { AddressSchema } from "@/lib/schemas";
+
 // ─────────────────────────────────────────────────────
 // Utility & Generic Types
 // ─────────────────────────────────────────────────────
@@ -235,4 +238,11 @@ export type CheckoutStep = {
 	label: string;
 	description: string;
 	completed: boolean;
+};
+
+export type AddressInput = z.infer<typeof AddressSchema>;
+
+export type AddressRecord = z.infer<typeof AddressSchema> & {
+	id: string;
+	type: "addresses";
 };

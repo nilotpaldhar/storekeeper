@@ -30,6 +30,7 @@ type UserDetailsFormProps = {
 
 const UserDetailsForm = ({ isLoading = false, onContinue }: UserDetailsFormProps) => {
 	const checkoutData = useCheckoutStepsStore().checkoutData;
+
 	const form = useForm<z.infer<typeof schema>>({
 		resolver: zodResolver(schema),
 		defaultValues: { name: "", email: "" },

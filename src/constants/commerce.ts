@@ -13,7 +13,7 @@ export const CHECKOUT_STEPS = [
 	{
 		id: "fill_address",
 		label: "Address",
-		description: "Shipping Address",
+		description: "Delivery Address",
 		completed: false,
 	},
 	{

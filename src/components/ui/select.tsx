@@ -30,7 +30,7 @@ const SelectTrigger = ({
 		data-slot="select-trigger"
 		data-size={size}
 		className={cn(
-			"focus-visible:ring-primary-600 file:text-foreground border-input selection:bg-primary-600 flex w-fit min-w-0 items-center justify-between gap-2 rounded-none border bg-transparent px-3 text-sm whitespace-nowrap transition-colors outline-none selection:text-white file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:ring-1 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+			"focus-visible:ring-primary-600 file:text-foreground border-input selection:bg-primary-600 flex w-fit min-w-0 items-center justify-between gap-2 rounded-none border bg-transparent px-3 text-sm whitespace-nowrap text-neutral-900 transition-colors outline-none selection:text-white file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:ring-1 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
 			"data-[size=default]:h-10 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-neutral-500",
 			"aria-invalid:ring-error-600 aria-invalid:border-error-600",
 			className

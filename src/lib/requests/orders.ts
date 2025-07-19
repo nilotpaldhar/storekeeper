@@ -4,7 +4,7 @@ import type { OrderStatus } from "@/types/domain.types";
 import { z } from "zod";
 
 import { axios, handleAxiosError } from "@/lib/http/client";
-import { AttachCustomerToOrderSchema } from "@/lib/schemas";
+import { AttachCustomerToOrderSchema, UpdateOrderAddressesSchema } from "@/lib/schemas";
 
 const getOrder = async ({ id, status }: { id: string; status?: OrderStatus }) => {
 	try {
@@ -22,16 +22,15 @@ const getOrder = async ({ id, status }: { id: string; status?: OrderStatus }) =>
 
 const attachCustomerToOrder = async ({
 	orderId,
-	name,
-	email,
+	...data
 }: {
 	orderId: string;
 } & z.infer<typeof AttachCustomerToOrderSchema>) => {
 	try {
-		const res = await axios.patch<APIResponse<undefined>>(`/commerce/orders/${orderId}/customer`, {
-			name,
-			email,
-		});
+		const res = await axios.patch<APIResponse<undefined>>(
+			`/commerce/orders/${orderId}/customer`,
+			data
+		);
 		return res.data;
 	} catch (error) {
 		const errMsg = handleAxiosError(error);
@@ -39,4 +38,22 @@ const attachCustomerToOrder = async ({
 	}
 };
 
-export { getOrder, attachCustomerToOrder };
+const updateOrderAddresses = async ({
+	orderId,
+	...data
+}: {
+	orderId: string;
+} & z.infer<typeof UpdateOrderAddressesSchema>) => {
+	try {
+		const res = await axios.patch<APIResponse<undefined>>(
+			`/commerce/orders/${orderId}/address`,
+			data
+		);
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
+export { getOrder, attachCustomerToOrder, updateOrderAddresses };
