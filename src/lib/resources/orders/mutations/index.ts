@@ -7,7 +7,11 @@ import { z } from "zod";
 
 import { getCommerceLayerClient } from "@/lib/clients/commerce";
 import { logEvent } from "@/lib/logging/log-event";
-import { AttachCustomerToOrderSchema, UpdateOrderAddressesSchema } from "@/lib/schemas";
+import {
+	AttachCustomerToOrderSchema,
+	UpdateOrderAddressesSchema,
+	UpdateOrderShippingMethodSchema,
+} from "@/lib/schemas";
 import { isCLApiError } from "@/lib/utils/commerce/errors";
 
 /**
@@ -97,7 +101,49 @@ const updateOrderAddresses = async ({
 /**
  *
  */
-const updateOrderShippingMethod = async () => {};
+const updateOrderShippingMethod = async ({
+	orderId,
+	shippingMethodId,
+}: {
+	orderId: string;
+} & z.infer<typeof UpdateOrderShippingMethodSchema>): Promise<
+	OperationResult<
+		undefined,
+		"ORDER_NOT_FOUND" | "SHIPMENT_NOT_FOUND" | "INVALID_SHIPPING_METHOD_ID" | "FAILURE"
+	>
+> => {
+	const clClient = await getCommerceLayerClient();
+
+	try {
+		const order = await clClient.orders.retrieve(orderId, {
+			include: ["shipments"],
+			fields: ["shipments"],
+		});
+
+		const shipmentId = order.shipments?.at(0)?.id;
+		if (!shipmentId) return { ok: false, reason: "SHIPMENT_NOT_FOUND" };
+
+		await clClient.shipments.update({
+			id: shipmentId,
+			shipping_method: { id: shippingMethodId, type: "shipping_methods" },
+		});
+
+		return { ok: true };
+	} catch (err) {
+		if (isCLApiError(err)) {
+			if (err.status === 404) {
+				return { ok: false, reason: "ORDER_NOT_FOUND" };
+			}
+
+			if (err.status === 422) {
+				return { ok: false, reason: "INVALID_SHIPPING_METHOD_ID" };
+			}
+		}
+
+		logEvent({ fn: "updateOrderShippingMethod", level: "error", event: "fail", error: err });
+		return { ok: false, reason: "FAILURE" };
+	}
+};
 
 /**
  *

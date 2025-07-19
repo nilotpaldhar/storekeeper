@@ -45,6 +45,10 @@ export const UpdateOrderAddressesSchema = z
 		}
 	);
 
+export const UpdateOrderShippingMethodSchema = z.object({
+	shippingMethodId: z.string().trim().min(1, { message: "Shipping method ID is required." }),
+});
+
 // export const UpdateOrderPaymentMethodSchema = z.object({});
 
 // export const PlaceOrderSchema = z.object({});

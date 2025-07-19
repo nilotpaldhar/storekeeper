@@ -25,6 +25,10 @@ const CartSummary = ({ summary, onProceedToCheckout }: CartSummaryProps) => {
 	const {
 		skus_count,
 		formatted_subtotal_amount,
+		shipping_amount_cents,
+		formatted_shipping_amount,
+		payment_method_amount_cents,
+		formatted_payment_method_amount,
 		discount_amount_cents,
 		formatted_discount_amount,
 		total_tax_amount_cents,
@@ -33,6 +37,8 @@ const CartSummary = ({ summary, onProceedToCheckout }: CartSummaryProps) => {
 		coupon_code,
 	} = summary;
 
+	const hasShippingAmount = shipping_amount_cents && shipping_amount_cents > 0;
+	const hasPaymentMethodAmount = payment_method_amount_cents && payment_method_amount_cents > 0;
 	const hasDiscountAmount = discount_amount_cents && Math.abs(discount_amount_cents) > 0;
 	const hasTotalTaxAmount = total_tax_amount_cents && total_tax_amount_cents > 0;
 
@@ -54,6 +60,18 @@ const CartSummary = ({ summary, onProceedToCheckout }: CartSummaryProps) => {
 				<CostPanelBlock>
 					<dl className="flex flex-col space-y-4">
 						<CostPanelPriceRow label="Subtotal" value={formatted_subtotal_amount ?? "---"} />
+
+						{hasShippingAmount ? (
+							<CostPanelPriceRow label="Shipping Cost" value={formatted_shipping_amount ?? "---"} />
+						) : null}
+
+						{hasPaymentMethodAmount ? (
+							<CostPanelPriceRow
+								label="Payment Processing Fee"
+								value={formatted_payment_method_amount ?? "---"}
+							/>
+						) : null}
+
 						{hasDiscountAmount ? (
 							<CostPanelPriceRow
 								label="Coupon Discount"

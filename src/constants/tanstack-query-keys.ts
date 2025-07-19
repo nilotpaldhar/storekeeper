@@ -14,7 +14,7 @@ export const userKeys = {
  */
 export const productPriceKeys = {
 	all: ["product-prices"] as const,
-	bySku: (skuId: string) => [...productPriceKeys.all, "by-sku", skuId] as const,
+	bySku: (skuId: string) => [...productPriceKeys.all, "by_sku", skuId] as const,
 };
 
 /**
@@ -24,7 +24,7 @@ export const productPriceKeys = {
  */
 export const productInventoryKeys = {
 	all: ["product-inventory"] as const,
-	bySku: (skuId: string) => [...productInventoryKeys.all, "by-sku", skuId] as const,
+	bySku: (skuId: string) => [...productInventoryKeys.all, "by_sku", skuId] as const,
 };
 
 /**
@@ -46,5 +46,6 @@ export const cartKeys = {
  */
 export const orderKeys = {
 	base: ["orders"] as const,
-	byId: (id: string) => [...orderKeys.base, "by-id", id] as const,
+	byId: (id: string) => [...orderKeys.base, "by_id", id] as const,
+	shippingMethods: (id: string) => [...orderKeys.base, "shipping_methods", id] as const,
 };

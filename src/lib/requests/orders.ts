@@ -1,10 +1,15 @@
 import type { APIResponse, OrderResponseData } from "@/types/api.types";
 import type { OrderStatus } from "@/types/domain.types";
+import type { ShippingMethod } from "@commercelayer/sdk";
 
 import { z } from "zod";
 
 import { axios, handleAxiosError } from "@/lib/http/client";
-import { AttachCustomerToOrderSchema, UpdateOrderAddressesSchema } from "@/lib/schemas";
+import {
+	AttachCustomerToOrderSchema,
+	UpdateOrderAddressesSchema,
+	UpdateOrderShippingMethodSchema,
+} from "@/lib/schemas";
 
 const getOrder = async ({ id, status }: { id: string; status?: OrderStatus }) => {
 	try {
@@ -13,6 +18,18 @@ const getOrder = async ({ id, status }: { id: string; status?: OrderStatus }) =>
 		const url = `/commerce/orders/${id}?${params.toString()}`;
 
 		const res = await axios.get<APIResponse<OrderResponseData>>(url);
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
+const getOrderShippingMethods = async ({ id }: { id: string }) => {
+	try {
+		const res = await axios.get<APIResponse<ShippingMethod[]>>(
+			`/commerce/orders/${id}/shipping-methods`
+		);
 		return res.data;
 	} catch (error) {
 		const errMsg = handleAxiosError(error);
@@ -56,4 +73,28 @@ const updateOrderAddresses = async ({
 	}
 };
 
-export { getOrder, attachCustomerToOrder, updateOrderAddresses };
+const updateOrderShippingMethod = async ({
+	orderId,
+	shippingMethodId,
+}: {
+	orderId: string;
+} & z.infer<typeof UpdateOrderShippingMethodSchema>) => {
+	try {
+		const res = await axios.patch<APIResponse<undefined>>(
+			`/commerce/orders/${orderId}/shipping-methods`,
+			{ shippingMethodId }
+		);
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
+export {
+	getOrder,
+	getOrderShippingMethods,
+	attachCustomerToOrder,
+	updateOrderAddresses,
+	updateOrderShippingMethod,
+};

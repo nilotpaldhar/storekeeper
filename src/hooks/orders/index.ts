@@ -4,7 +4,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { orderKeys } from "@/constants/tanstack-query-keys";
 
-import { getOrder, attachCustomerToOrder, updateOrderAddresses } from "@/lib/requests/orders";
+import {
+	getOrder,
+	getOrderShippingMethods,
+	attachCustomerToOrder,
+	updateOrderAddresses,
+	updateOrderShippingMethod,
+} from "@/lib/requests/orders";
 
 const useOrder = ({
 	id,
@@ -18,6 +24,14 @@ const useOrder = ({
 	return useQuery({
 		queryKey: orderKeys.byId(id),
 		queryFn: () => getOrder({ id, status }),
+		enabled,
+	});
+};
+
+const useOrderShippingMethods = ({ id, enabled = true }: { id: string; enabled?: boolean }) => {
+	return useQuery({
+		queryKey: orderKeys.shippingMethods(id),
+		queryFn: () => getOrderShippingMethods({ id }),
 		enabled,
 	});
 };
@@ -44,4 +58,21 @@ const useUpdateOrderAddresses = () => {
 	});
 };
 
-export { useOrder, useAttachCustomerToOrder, useUpdateOrderAddresses };
+const useUpdateOrderShippingMethod = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: updateOrderShippingMethod,
+		onSuccess: (_data, { orderId }) => {
+			queryClient.invalidateQueries({ queryKey: orderKeys.byId(orderId) });
+		},
+	});
+};
+
+export {
+	useOrder,
+	useOrderShippingMethods,
+	useAttachCustomerToOrder,
+	useUpdateOrderAddresses,
+	useUpdateOrderShippingMethod,
+};
