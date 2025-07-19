@@ -1,6 +1,6 @@
 import type { APIResponse, OrderResponseData } from "@/types/api.types";
 import type { OrderStatus } from "@/types/domain.types";
-import type { ShippingMethod } from "@commercelayer/sdk";
+import type { ShippingMethod, PaymentMethod } from "@commercelayer/sdk";
 
 import { z } from "zod";
 
@@ -9,6 +9,7 @@ import {
 	AttachCustomerToOrderSchema,
 	UpdateOrderAddressesSchema,
 	UpdateOrderShippingMethodSchema,
+	UpdateOrderPaymentMethodSchema,
 } from "@/lib/schemas";
 
 const getOrder = async ({ id, status }: { id: string; status?: OrderStatus }) => {
@@ -29,6 +30,18 @@ const getOrderShippingMethods = async ({ id }: { id: string }) => {
 	try {
 		const res = await axios.get<APIResponse<ShippingMethod[]>>(
 			`/commerce/orders/${id}/shipping-methods`
+		);
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
+const getOrderPaymentMethods = async ({ id }: { id: string }) => {
+	try {
+		const res = await axios.get<APIResponse<PaymentMethod[]>>(
+			`/commerce/orders/${id}/payment-methods`
 		);
 		return res.data;
 	} catch (error) {
@@ -91,10 +104,30 @@ const updateOrderShippingMethod = async ({
 	}
 };
 
+const updateOrderPaymentMethod = async ({
+	orderId,
+	paymentMethodId,
+}: {
+	orderId: string;
+} & z.infer<typeof UpdateOrderPaymentMethodSchema>) => {
+	try {
+		const res = await axios.patch<APIResponse<undefined>>(
+			`/commerce/orders/${orderId}/payment-methods`,
+			{ paymentMethodId }
+		);
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
 export {
 	getOrder,
 	getOrderShippingMethods,
+	getOrderPaymentMethods,
 	attachCustomerToOrder,
 	updateOrderAddresses,
 	updateOrderShippingMethod,
+	updateOrderPaymentMethod,
 };

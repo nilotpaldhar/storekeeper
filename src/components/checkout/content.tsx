@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { useOrder } from "@/hooks/orders";
 
 import { CheckoutDisclaimer } from "@/components/checkout/disclaimer";
@@ -20,18 +22,19 @@ type CheckoutContentProps = {
 const INVALID_ORDER_STATUS = ["approved", "cancelled", "placed", "editing", "placing"];
 
 const CheckoutContent = ({ orderId, showDisclaimer = false }: CheckoutContentProps) => {
-	const { data, isLoading, isFetching, isError, error } = useOrder({
-		id: orderId,
-	});
+	const { data, isLoading, isFetching, isError, error } = useOrder({ id: orderId });
+	const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
 	const isUpdating = !isLoading && isFetching;
 	const summary = data?.data?.summary;
 	const items = data?.data?.items;
 	const orderStatus = data?.data?.summary.status ?? "";
 
-	const handlePlaceOrder = () => {};
+	const handlePlaceOrder = () => {
+		setIsPlacingOrder(true);
+	};
 
-	if (isLoading) {
+	if (isLoading || isPlacingOrder) {
 		return (
 			<main className="flex min-h-[80vh] items-center justify-center py-5">
 				<Container className="flex justify-center">

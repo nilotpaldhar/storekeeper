@@ -3,6 +3,9 @@
 import type { CheckoutStep } from "@/types/domain.types";
 import type { CheckoutStepProps } from "@/types/ui.types";
 
+import { ClipboardCheck } from "lucide-react";
+import { Fragment } from "react";
+
 import { useCheckoutStepsStore } from "@/stores/use-checkout-steps-store";
 
 import {
@@ -15,6 +18,9 @@ import {
 	CheckoutStepsAccordion,
 	CheckoutStepsAccordionPanel,
 } from "@/components/checkout/steps-accordion";
+import { Button } from "@/components/ui/button";
+
+import { cn } from "@/lib/utils/general/cn";
 
 type CheckoutFlowProps = {
 	orderId: string;
@@ -22,10 +28,10 @@ type CheckoutFlowProps = {
 };
 
 const stepComponents: Record<CheckoutStep["id"], React.ComponentType<CheckoutStepProps>> = {
-	fill_user_details: UserDetailsStep,
-	fill_address: AddressStep,
-	fill_shipping_options: DeliveryOptionsStep,
-	fill_payment_details: PaymentDetailsStep,
+	user_info: UserDetailsStep,
+	shipping_address: AddressStep,
+	shipping_method: DeliveryOptionsStep,
+	payment_method: PaymentDetailsStep,
 };
 
 const CheckoutFlow = ({ orderId, onPlaceOrder }: CheckoutFlowProps) => {
@@ -48,23 +54,35 @@ const CheckoutFlow = ({ orderId, onPlaceOrder }: CheckoutFlowProps) => {
 		<CheckoutStepsAccordion>
 			{steps.map((step, idx) => {
 				const StepComponent = stepComponents[step.id];
+				const isLastStep = idx === steps.length - 1;
 
 				return (
-					<CheckoutStepsAccordionPanel
-						key={step.id}
-						title={step.description}
-						open={step.id === activeStep.id || step.completed}
-						disabled={step.id === activeStep.id || !step.completed}
-						onOpenChange={() => goTo(idx)}
-					>
-						{StepComponent ? (
-							<StepComponent
-								orderId={orderId}
-								completed={step.id !== activeStep.id && step.completed}
-								onStepComplete={() => handleStepComplete(step)}
-							/>
-						) : null}
-					</CheckoutStepsAccordionPanel>
+					<Fragment key={step.id}>
+						{isLastStep ? (
+							<Button
+								onClick={() => handleStepComplete(step)}
+								className={cn("w-full", step.id !== activeStep.id && "hidden")}
+							>
+								<ClipboardCheck />
+								<span>{step.description}</span>
+							</Button>
+						) : (
+							<CheckoutStepsAccordionPanel
+								title={step.description}
+								open={step.id === activeStep.id || step.completed}
+								disabled={step.id === activeStep.id || !step.completed}
+								onOpenChange={() => goTo(idx)}
+							>
+								{StepComponent ? (
+									<StepComponent
+										orderId={orderId}
+										completed={step.id !== activeStep.id && step.completed}
+										onStepComplete={() => handleStepComplete(step)}
+									/>
+								) : null}
+							</CheckoutStepsAccordionPanel>
+						)}
+					</Fragment>
 				);
 			})}
 		</CheckoutStepsAccordion>

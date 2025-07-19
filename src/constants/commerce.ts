@@ -5,27 +5,33 @@ export const CART_COOKIE_KEY = "sk_cart_id";
 
 export const CHECKOUT_STEPS = [
 	{
-		id: "fill_user_details",
+		id: "user_info",
 		label: "User",
-		description: "User Details",
+		description: "User Info",
 		completed: false,
 	},
 	{
-		id: "fill_address",
+		id: "shipping_address",
 		label: "Address",
-		description: "Delivery Address",
+		description: "Shipping Address",
 		completed: false,
 	},
 	{
-		id: "fill_shipping_options",
+		id: "shipping_method",
 		label: "Delivery",
-		description: "Delivery Methods",
+		description: "Delivery Method",
 		completed: false,
 	},
 	{
-		id: "fill_payment_details",
+		id: "payment_method",
 		label: "Payment",
-		description: "Payment Options",
+		description: "Payment Method",
+		completed: false,
+	},
+	{
+		id: "review_order",
+		label: "Review",
+		description: "Review & Place",
 		completed: false,
 	},
 ] as const satisfies CheckoutStep[];

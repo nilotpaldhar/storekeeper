@@ -10,6 +10,7 @@ import { logEvent } from "@/lib/logging/log-event";
 import {
 	AttachCustomerToOrderSchema,
 	UpdateOrderAddressesSchema,
+	UpdateOrderPaymentMethodSchema,
 	UpdateOrderShippingMethodSchema,
 } from "@/lib/schemas";
 import { isCLApiError } from "@/lib/utils/commerce/errors";
@@ -148,7 +149,38 @@ const updateOrderShippingMethod = async ({
 /**
  *
  */
-const updateOrderPaymentMethod = async () => {};
+const updateOrderPaymentMethod = async ({
+	orderId,
+	paymentMethodId,
+}: {
+	orderId: string;
+} & z.infer<typeof UpdateOrderPaymentMethodSchema>): Promise<
+	OperationResult<undefined, "ORDER_NOT_FOUND" | "INVALID_PAYMENT_METHOD_ID" | "FAILURE">
+> => {
+	const clClient = await getCommerceLayerClient();
+
+	try {
+		await clClient.orders.update({
+			id: orderId,
+			payment_method: { id: paymentMethodId, type: "payment_methods" },
+		});
+
+		return { ok: true };
+	} catch (err) {
+		if (isCLApiError(err)) {
+			if (err.status === 404) {
+				return { ok: false, reason: "ORDER_NOT_FOUND" };
+			}
+
+			if (err.status === 422) {
+				return { ok: false, reason: "INVALID_PAYMENT_METHOD_ID" };
+			}
+		}
+
+		logEvent({ fn: "updateOrderPaymentMethod", level: "error", event: "fail", error: err });
+		return { ok: false, reason: "FAILURE" };
+	}
+};
 
 /**
  *

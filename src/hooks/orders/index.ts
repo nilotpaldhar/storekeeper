@@ -7,9 +7,11 @@ import { orderKeys } from "@/constants/tanstack-query-keys";
 import {
 	getOrder,
 	getOrderShippingMethods,
+	getOrderPaymentMethods,
 	attachCustomerToOrder,
 	updateOrderAddresses,
 	updateOrderShippingMethod,
+	updateOrderPaymentMethod,
 } from "@/lib/requests/orders";
 
 const useOrder = ({
@@ -32,6 +34,14 @@ const useOrderShippingMethods = ({ id, enabled = true }: { id: string; enabled?:
 	return useQuery({
 		queryKey: orderKeys.shippingMethods(id),
 		queryFn: () => getOrderShippingMethods({ id }),
+		enabled,
+	});
+};
+
+const useOrderPaymentMethods = ({ id, enabled = true }: { id: string; enabled?: boolean }) => {
+	return useQuery({
+		queryKey: orderKeys.paymentMethods(id),
+		queryFn: () => getOrderPaymentMethods({ id }),
 		enabled,
 	});
 };
@@ -69,10 +79,23 @@ const useUpdateOrderShippingMethod = () => {
 	});
 };
 
+const useUpdateOrderPaymentMethod = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: updateOrderPaymentMethod,
+		onSuccess: (_data, { orderId }) => {
+			queryClient.invalidateQueries({ queryKey: orderKeys.byId(orderId) });
+		},
+	});
+};
+
 export {
 	useOrder,
 	useOrderShippingMethods,
+	useOrderPaymentMethods,
 	useAttachCustomerToOrder,
 	useUpdateOrderAddresses,
 	useUpdateOrderShippingMethod,
+	useUpdateOrderPaymentMethod,
 };

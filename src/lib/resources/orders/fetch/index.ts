@@ -1,5 +1,5 @@
 import type { OperationResult, OrderLineItem, OrderStatus } from "@/types/domain.types";
-import type { ShippingMethod } from "@commercelayer/sdk";
+import type { PaymentMethod, ShippingMethod } from "@commercelayer/sdk";
 
 import { ORDER_AND_CART_LINE_ITEM_FIELDS } from "@/constants/commerce";
 
@@ -90,7 +90,7 @@ const getOrderShippingMethods = async ({
 		return { ok: true, data: shippingMethods };
 	} catch (err) {
 		logEvent({
-			fn: "getOrderAvailableShippingMethods",
+			fn: "getOrderShippingMethods",
 			level: "error",
 			event: "fail",
 			error: err,
@@ -101,4 +101,35 @@ const getOrderShippingMethods = async ({
 	}
 };
 
-export { getOrder, getOrderLineItems, getOrderShippingMethods };
+/**
+ *
+ */
+const getOrderPaymentMethods = async ({
+	id,
+	currencyCode = clConfig.currencyCode,
+}: {
+	id: string;
+	currencyCode?: string;
+}): Promise<OperationResult<PaymentMethod[], "ORDER_NOT_FOUND" | "FAILURE">> => {
+	const clClient = await getCommerceLayerClient();
+
+	try {
+		const paymentMethods = await clClient.orders.available_payment_methods(id);
+		const data = paymentMethods.filter(
+			(paymentMethod) => paymentMethod.currency_code === currencyCode
+		);
+		return { ok: true, data };
+	} catch (err) {
+		logEvent({
+			fn: "getOrderPaymentMethods",
+			level: "error",
+			event: "fail",
+			error: err,
+		});
+
+		if (isCLApiError(err)) return { ok: false, reason: "ORDER_NOT_FOUND" };
+		return { ok: false, reason: "FAILURE" };
+	}
+};
+
+export { getOrder, getOrderLineItems, getOrderShippingMethods, getOrderPaymentMethods };

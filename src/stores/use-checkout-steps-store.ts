@@ -13,9 +13,7 @@ export type CheckoutData = {
 	};
 	address: AddressInput | null;
 	shipping: ShippingMethod | null;
-	payment: {
-		method: PaymentMethod | null;
-	};
+	payment: PaymentMethod | null;
 };
 
 type CheckoutStepsStore = {
@@ -36,7 +34,7 @@ const defaultCheckoutData: CheckoutData = {
 	customer: { name: null, email: "" },
 	address: null,
 	shipping: null,
-	payment: { method: null },
+	payment: null,
 };
 
 const useCheckoutStepsStore = create<CheckoutStepsStore>()(
