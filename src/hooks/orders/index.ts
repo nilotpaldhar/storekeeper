@@ -6,6 +6,7 @@ import { orderKeys, cartKeys } from "@/constants/tanstack-query-keys";
 
 import {
 	getOrder,
+	getConfirmedOrder,
 	getOrderShippingMethods,
 	getOrderPaymentMethods,
 	attachCustomerToOrder,
@@ -27,6 +28,14 @@ const useOrder = ({
 	return useQuery({
 		queryKey: orderKeys.byId(id),
 		queryFn: () => getOrder({ id, status }),
+		enabled,
+	});
+};
+
+const useConfirmedOrder = ({ id, enabled = true }: { id: string; enabled?: boolean }) => {
+	return useQuery({
+		queryKey: orderKeys.confirmed(id),
+		queryFn: () => getConfirmedOrder({ id }),
 		enabled,
 	});
 };
@@ -106,6 +115,7 @@ const usePlaceOrder = () => {
 
 export {
 	useOrder,
+	useConfirmedOrder,
 	useOrderShippingMethods,
 	useOrderPaymentMethods,
 	useAttachCustomerToOrder,

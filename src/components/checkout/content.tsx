@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { useOrder, usePlaceOrder } from "@/hooks/orders";
 
 import { INVALID_CHECKOUT_ORDER_STATUS } from "@/constants/commerce";
+import { useCheckoutStepsStore } from "@/stores/use-checkout-steps-store";
 
 import { CheckoutDisclaimer } from "@/components/checkout/disclaimer";
 import { CheckoutError } from "@/components/checkout/error";
@@ -27,6 +28,8 @@ type InvalidCheckoutOrderStatusType = (typeof INVALID_CHECKOUT_ORDER_STATUS)[num
 
 const CheckoutContent = ({ orderId, showDisclaimer = false }: CheckoutContentProps) => {
 	const router = useRouter();
+
+	const resetCheckoutState = useCheckoutStepsStore().reset;
 	const [isRedirecting, setIsRedirecting] = useState(false);
 
 	const { data, isLoading, isFetching, isError, error } = useOrder({ id: orderId });
@@ -43,9 +46,10 @@ const CheckoutContent = ({ orderId, showDisclaimer = false }: CheckoutContentPro
 			{
 				onError: (error) => toast.error(error.message),
 				onSuccess: () => {
-					setIsRedirecting(true); // Block render while redirecting
+					setIsRedirecting(true);
 					router.push(`/checkout/success?order_id=${orderId}`);
 				},
+				onSettled: () => resetCheckoutState(),
 			}
 		);
 	};
@@ -94,8 +98,10 @@ const CheckoutContent = ({ orderId, showDisclaimer = false }: CheckoutContentPro
 							<CheckoutFlow orderId={orderId} onPlaceOrder={handlePlaceOrder} />
 						</section>
 						<section className="space-y-6">
-							{summary && items ? <CheckoutSummary summary={summary} items={items} /> : null}
-							{showDisclaimer ? <CheckoutDisclaimer /> : null}
+							<div className="md:sticky md:top-4">
+								{summary && items ? <CheckoutSummary summary={summary} items={items} /> : null}
+								{showDisclaimer ? <CheckoutDisclaimer /> : null}
+							</div>
 						</section>
 					</div>
 				</div>

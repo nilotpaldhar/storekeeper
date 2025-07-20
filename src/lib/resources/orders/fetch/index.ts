@@ -132,4 +132,30 @@ const getOrderPaymentMethods = async ({
 	}
 };
 
-export { getOrder, getOrderLineItems, getOrderShippingMethods, getOrderPaymentMethods };
+/**
+ *
+ */
+const getConfirmedOrder = async ({ id }: { id: string }) => {
+	const clClient = await getCommerceLayerClient();
+
+	try {
+		const orders = await clClient.orders.list({
+			filters: {
+				id_eq: id,
+				status_in: ["placed", "approved"],
+			},
+			include: ["billing_address", "shipping_address", "payment_method"],
+		});
+		return orders.at(0) ?? null;
+	} catch (error) {
+		return null;
+	}
+};
+
+export {
+	getOrder,
+	getOrderLineItems,
+	getOrderShippingMethods,
+	getOrderPaymentMethods,
+	getConfirmedOrder,
+};

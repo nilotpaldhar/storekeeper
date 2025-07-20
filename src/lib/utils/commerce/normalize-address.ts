@@ -6,14 +6,14 @@ import type { Address as CLAddress } from "@commercelayer/sdk";
 /**
  * Normalize a commerce layer address into the internal Address format.
  */
-const normalizeAddress = async (clAddress: CLAddress): Promise<AddressRecord> => {
+const normalizeAddress = (clAddress: CLAddress): AddressRecord => {
 	return {
 		id: clAddress.id,
 		type: clAddress.type,
 		firstName: clAddress.first_name ?? "",
 		lastName: clAddress.last_name ?? "",
 		phone: clAddress.phone,
-		street: clAddress.state_code,
+		street: clAddress.line_1,
 		city: clAddress.city,
 		zip: clAddress.zip_code ?? "",
 		country: clAddress.country_code,

@@ -44,6 +44,7 @@ export const cartKeys = {
  */
 export const orderKeys = {
 	base: ["orders"] as const,
+	confirmed: (id: string) => [...orderKeys.base, "confirmation", id] as const,
 	byId: (id: string) => [...orderKeys.base, "by_id", id] as const,
 	shippingMethods: (id: string) => [...orderKeys.base, "shipping_methods", id] as const,
 	paymentMethods: (id: string) => [...orderKeys.base, "payment_methods", id] as const,

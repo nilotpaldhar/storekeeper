@@ -1,4 +1,4 @@
-import type { APIResponse, OrderResponseData } from "@/types/api.types";
+import type { APIResponse, ConfirmedOrderResponseData, OrderResponseData } from "@/types/api.types";
 import type { OrderStatus } from "@/types/domain.types";
 import type { ShippingMethod, PaymentMethod } from "@commercelayer/sdk";
 
@@ -19,6 +19,18 @@ const getOrder = async ({ id, status }: { id: string; status?: OrderStatus }) =>
 		const url = `/commerce/orders/${id}?${params.toString()}`;
 
 		const res = await axios.get<APIResponse<OrderResponseData>>(url);
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
+const getConfirmedOrder = async ({ id }: { id: string }) => {
+	try {
+		const res = await axios.get<APIResponse<ConfirmedOrderResponseData>>(
+			`/commerce/orders/${id}/confirmation`
+		);
 		return res.data;
 	} catch (error) {
 		const errMsg = handleAxiosError(error);
@@ -134,6 +146,7 @@ const placeOrder = async ({ orderId }: { orderId: string }) => {
 
 export {
 	getOrder,
+	getConfirmedOrder,
 	getOrderShippingMethods,
 	getOrderPaymentMethods,
 	attachCustomerToOrder,

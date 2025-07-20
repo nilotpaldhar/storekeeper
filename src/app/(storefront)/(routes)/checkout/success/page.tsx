@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 
 import { CheckoutError } from "@/components/checkout/error";
+import { CheckoutSuccessConfirmation } from "@/components/checkout/success-confirmation";
+import { Container } from "@/components/ui/container";
 
 import { getSeo } from "@/lib/resources/seo/services";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-	return getSeo({ metaTitle: "Checkout Success", shareTitle: "Checkout Success" });
+	const title = "Order Confirmation - Thank You for Your Purchase";
+	return getSeo({ metaTitle: title, shareTitle: title });
 };
 
 type CheckoutSuccessPageProps = {
@@ -30,8 +33,12 @@ const CheckoutSuccessPage = async ({ searchParams }: CheckoutSuccessPageProps) =
 	}
 
 	return (
-		<main className="pt-10 pb-14">
-			<h1 className="text-center text-3xl font-bold">Order Placed Successfully</h1>
+		<main className="py-10 lg:py-14">
+			<Container>
+				<div className="mx-auto max-w-3xl">
+					<CheckoutSuccessConfirmation orderId={orderId} />
+				</div>
+			</Container>
 		</main>
 	);
 };
