@@ -1,3 +1,19 @@
+# [0.7.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.6.0...v0.7.0) (2025-07-20)
+
+
+### Features
+
+* **checkout-page:** add initial structure for checkout page layout ([a8d3271](https://github.com/nilotpaldhar/storekeeper/commit/a8d32711c3652a6fe46a422e27f7d656e1bd37c0))
+* **checkout:** add AddressStep component and address/order API endpoints ([1052049](https://github.com/nilotpaldhar/storekeeper/commit/1052049fec4c9a5c9d604ac4f021f25b7cde7ce4))
+* **checkout:** add CheckoutSuccessPage for order confirmation display ([886b6d1](https://github.com/nilotpaldhar/storekeeper/commit/886b6d1384162d51808da8583e18361db229648c))
+* **checkout:** add customer attach API and UserDetailsStep to checkout flow ([80f0652](https://github.com/nilotpaldhar/storekeeper/commit/80f06524306992fe0162a3b01ff4b5efcb60fefa))
+* **checkout:** add DeliveryOptionsStep and shipping methods API (GET, PATCH) ([d4b4fef](https://github.com/nilotpaldhar/storekeeper/commit/d4b4fef030bd9b8a475c0da6036868a5194d7a53))
+* **checkout:** add GET /api/commerce/orders/:orderId endpoint and useOrder hook for checkout page ([00fe91b](https://github.com/nilotpaldhar/storekeeper/commit/00fe91b6065c17a583e0de2f92b6fff32f898a95))
+* **checkout:** add PaymentDetailsStep and payment methods API (GET, PATCH) ([cc57aa7](https://github.com/nilotpaldhar/storekeeper/commit/cc57aa78f98820a7a3ab05c712527c9d41ae04fe))
+* **checkout:** add place order functionality to complete checkout flow ([3d25581](https://github.com/nilotpaldhar/storekeeper/commit/3d255817615b8c4bf410246edba448149576ea8c))
+
+
+
 # [0.6.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.5.0...v0.6.0) (2025-07-15)
 
 
@@ -45,21 +61,6 @@
 * **not-found:** add custom 404 page to handle invalid routes gracefully ([448bc40](https://github.com/nilotpaldhar/storekeeper/commit/448bc400ba78e3023c6169e404598867ee251195))
 * **pages:** add static pages and restructure lib directory ([28ac36e](https://github.com/nilotpaldhar/storekeeper/commit/28ac36e8a61edadd3fae689bf4c8570c0a2d1548))
 * **seo:** add global and page-level SEO settings ([3fc90df](https://github.com/nilotpaldhar/storekeeper/commit/3fc90dfbb32b033feab7766856a1d16edbb5b0af))
-
-
-
-# [0.2.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.1.0...v0.2.0) (2025-06-22)
-
-
-### Features
-
-* **logging:** add centralized withLogger HOF and logEvent helper for standardized API logging ([2539d8b](https://github.com/nilotpaldhar/storekeeper/commit/2539d8b98b55b90868418749f2f007d1a9429067))
-* **sanity:** add product-related schemas and SyncSkusBanner for syncing SKUs with Commerce Layer ([787c154](https://github.com/nilotpaldhar/storekeeper/commit/787c1541072fda614348b2de844e2914052391b2))
-* **sanity:** add sanity schema for generalSettings, seoSettings, and socialSettings ([1476159](https://github.com/nilotpaldhar/storekeeper/commit/14761590055d210fcebd93c8a5567b6e1782f911))
-* **sanity:** add sanity schemas for headerSettings, footerSettings, and menu ([1c5b22a](https://github.com/nilotpaldhar/storekeeper/commit/1c5b22acb21493e4bac541a15603934079239934))
-* **sanity:** add Sanity schemas for page, homePage, and notFoundPage ([809baff](https://github.com/nilotpaldhar/storekeeper/commit/809baff9208b018afdf3fae23bef761a3695295f))
-* **sanity:** add schema for navMegaDropdown; refine menu schema structure ([d0390bb](https://github.com/nilotpaldhar/storekeeper/commit/d0390bb09ba350e7457dc18dc6de6e8d0424c7ce))
-* **sanity:** initialize Sanity Studio with basic configuration ([c17c296](https://github.com/nilotpaldhar/storekeeper/commit/c17c2961d0ade8259debae53dcfad842de348279))
 
 
 
