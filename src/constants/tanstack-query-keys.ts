@@ -14,7 +14,7 @@ export const userKeys = {
  */
 export const productPriceKeys = {
 	all: ["product-prices"] as const,
-	bySku: (skuId: string) => [...productPriceKeys.all, "by-sku", skuId] as const,
+	bySku: (skuId: string) => [...productPriceKeys.all, "by_sku", skuId] as const,
 };
 
 /**
@@ -24,7 +24,7 @@ export const productPriceKeys = {
  */
 export const productInventoryKeys = {
 	all: ["product-inventory"] as const,
-	bySku: (skuId: string) => [...productInventoryKeys.all, "by-sku", skuId] as const,
+	bySku: (skuId: string) => [...productInventoryKeys.all, "by_sku", skuId] as const,
 };
 
 /**
@@ -35,6 +35,17 @@ export const productInventoryKeys = {
 export const cartKeys = {
 	base: ["cart"] as const,
 	count: () => [...cartKeys.base, "count"] as const,
-	summary: () => [...cartKeys.base, "summary"] as const,
-	items: () => [...cartKeys.base, "items"] as const,
+};
+
+/**
+ * Cart query keys
+ *
+ * Contains keys used to uniquely identify queries related to cart.
+ */
+export const orderKeys = {
+	base: ["orders"] as const,
+	confirmed: (id: string) => [...orderKeys.base, "confirmation", id] as const,
+	byId: (id: string) => [...orderKeys.base, "by_id", id] as const,
+	shippingMethods: (id: string) => [...orderKeys.base, "shipping_methods", id] as const,
+	paymentMethods: (id: string) => [...orderKeys.base, "payment_methods", id] as const,
 };

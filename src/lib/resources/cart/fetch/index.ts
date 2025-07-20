@@ -2,9 +2,16 @@ import "server-only";
 
 import type { Cart, CartLineItem, CartSummary } from "@/types/domain.types";
 
+import {
+	ORDER_AND_CART_SUMMARY_FIELDS,
+	ORDER_AND_CART_LINE_ITEM_FIELDS,
+	VALID_CART_STATUS,
+} from "@/constants/commerce";
+
 import { getCommerceLayerClient } from "@/lib/clients/commerce";
 import { logEvent } from "@/lib/logging/log-event";
 import { attachProductToLineItem } from "@/lib/resources/cart/services";
+import { isValidCartStatus } from "@/lib/utils/commerce/is-valid-cart-status";
 
 /**
  * Fetches a single draft Order (cart) by its Commerce Layer ID.
@@ -14,8 +21,12 @@ const getCartById = async ({ id }: { id: string }): Promise<Cart | null> => {
 	const clClient = await getCommerceLayerClient();
 
 	try {
-		const cart = await clClient.orders.retrieve(id);
-		return cart;
+		const carts = await clClient.orders.list({
+			filters: { id_eq: id, status_in: VALID_CART_STATUS },
+		});
+
+		const cart = carts.at(0) ?? null;
+		return cart && isValidCartStatus(cart.status) ? cart : null;
 	} catch (err) {
 		logEvent({
 			fn: "getCartById",
@@ -37,11 +48,12 @@ const getCartByUserEmail = async ({ email }: { email: string }): Promise<Cart | 
 
 	try {
 		const carts = await clClient.orders.list({
-			filters: {
-				customer_email_eq: email,
-			},
+			filters: { customer_email_eq: email, status_in: VALID_CART_STATUS },
+			sort: { created_at: "desc" },
 		});
-		return carts.at(0) ?? null;
+
+		const cart = carts.at(0) ?? null;
+		return cart && isValidCartStatus(cart.status) ? cart : null;
 	} catch (err) {
 		logEvent({
 			fn: "getCartByUserEmail",
@@ -60,20 +72,13 @@ const getCartSummary = async ({ id }: { id: string }): Promise<CartSummary | nul
 	const clClient = await getCommerceLayerClient();
 
 	try {
-		const cartSummary = await clClient.orders.retrieve(id, {
-			fields: [
-				"number",
-				"skus_count",
-				"coupon_code",
-				"formatted_subtotal_amount",
-				"formatted_discount_amount",
-				"formatted_shipping_amount",
-				"formatted_total_tax_amount",
-				"formatted_gift_card_amount",
-				"formatted_total_amount_with_taxes",
-			],
+		const carts = await clClient.orders.list({
+			filters: { id_eq: id, status_in: VALID_CART_STATUS },
+			fields: ORDER_AND_CART_SUMMARY_FIELDS,
 		});
-		return cartSummary ?? null;
+
+		const cart = carts.at(0) ?? null;
+		return cart && isValidCartStatus(cart.status) ? cart : null;
 	} catch (err) {
 		logEvent({
 			fn: "getCartSummary",
@@ -96,19 +101,7 @@ const getCartLineItems = async ({ id }: { id: string }): Promise<CartLineItem[]>
 		const lineItems = await clClient.orders.line_items(id, {
 			filters: { item_type_eq: "skus" },
 			include: ["sku"],
-			fields: [
-				"sku",
-				"sku_code",
-				"name",
-				"quantity",
-				"currency_code",
-				"formatted_unit_amount",
-				"formatted_compare_at_amount",
-				"formatted_options_amount",
-				"formatted_discount",
-				"formatted_total_amount",
-				"formatted_tax_amount",
-			],
+			fields: ORDER_AND_CART_LINE_ITEM_FIELDS,
 		});
 
 		// Enrich each line item with product data.

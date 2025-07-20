@@ -8,6 +8,7 @@ const useCurrentUser = () => {
 	return useQuery({
 		queryKey: userKeys.current,
 		queryFn: getCurrentUser,
+		retry: 1,
 	});
 };
 

@@ -2,6 +2,8 @@ import "server-only";
 
 import type { Cart, CartLineItem, OperationResult } from "@/types/domain.types";
 
+import { ORDER_AND_CART_LINE_ITEM_FIELDS } from "@/constants/commerce";
+
 import { getCommerceLayerClient } from "@/lib/clients/commerce";
 import { logEvent } from "@/lib/logging/log-event";
 import { attachProductToLineItem } from "@/lib/resources/cart/services";
@@ -121,19 +123,7 @@ const addCartItem = async ({
 			},
 			{
 				include: ["sku"],
-				fields: [
-					"sku",
-					"sku_code",
-					"name",
-					"quantity",
-					"currency_code",
-					"formatted_unit_amount",
-					"formatted_compare_at_amount",
-					"formatted_options_amount",
-					"formatted_discount",
-					"formatted_total_amount",
-					"formatted_tax_amount",
-				],
+				fields: ORDER_AND_CART_LINE_ITEM_FIELDS,
 			}
 		);
 
@@ -143,7 +133,7 @@ const addCartItem = async ({
 		return enrichedItem;
 	} catch (err) {
 		logEvent({
-			fn: "addCartLineItem",
+			fn: "addCartItem",
 			level: "error",
 			event: "fail",
 			error: err,

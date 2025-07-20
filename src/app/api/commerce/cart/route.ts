@@ -2,9 +2,12 @@ import type { CartResponseData } from "@/types/api.types";
 
 import { NextResponse } from "next/server";
 
+import { ORDER_AND_CART_SUMMARY_FIELDS } from "@/constants/commerce";
+
 import { getCartLineItems } from "@/lib/resources/cart/fetch";
 import { getOrCreateCart } from "@/lib/resources/cart/services";
 import { getCurrentUser } from "@/lib/resources/user/services";
+import { pickFields } from "@/lib/utils/general/pick-fields";
 
 /**
  * Handler function to resolve and return the current cart.
@@ -30,15 +33,7 @@ export async function GET() {
 		summary: {
 			id: cart.id,
 			type: cart.type,
-			formatted_discount_amount: cart.formatted_discount_amount,
-			formatted_gift_card_amount: cart.formatted_gift_card_amount,
-			formatted_shipping_amount: cart.formatted_shipping_amount,
-			formatted_subtotal_amount: cart.formatted_subtotal_amount,
-			formatted_total_amount_with_taxes: cart.formatted_total_amount_with_taxes,
-			formatted_total_tax_amount: cart.formatted_total_tax_amount,
-			number: cart.number,
-			skus_count: cart.skus_count,
-			coupon_code: cart.coupon_code,
+			...pickFields(cart, ORDER_AND_CART_SUMMARY_FIELDS),
 		},
 		items,
 	};

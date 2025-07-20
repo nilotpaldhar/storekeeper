@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 import { CART_COOKIE_KEY } from "@/constants/commerce";
 
 import { getCartById, getCartByUserEmail } from "@/lib/resources/cart/fetch";
-import { createCart, deleteCart, attachCartToUser } from "@/lib/resources/cart/mutations";
+import { createCart, attachCartToUser } from "@/lib/resources/cart/mutations";
 
 const getCartCookie = async ({ key = CART_COOKIE_KEY }: { key?: string } = {}) => {
 	const cookieStore = await cookies();
@@ -35,7 +35,6 @@ const getOrCreateCart = async ({ user }: { user: UserProfile | null }): Promise<
 		if (cartId && userCart) {
 			await Promise.all([
 				setCartCookie({ value: userCart.id }), // Update cookie to user cart ID
-				cartId && deleteCart({ id: cartId }), // Clean up stale guest cart
 			]);
 			return userCart;
 		}
@@ -80,4 +79,23 @@ const getOrCreateCart = async ({ user }: { user: UserProfile | null }): Promise<
 	return newGuestCart;
 };
 
-export { getOrCreateCart };
+/**
+ * Resets the current cart.
+ */
+const resetCart = async ({ user }: { user: UserProfile | null }): Promise<Cart | null> => {
+	// Attempt to create a new cart
+	const newCart = await createCart();
+	if (!newCart) return null;
+
+	// If the user is logged in, associate the cart with the user
+	if (user) {
+		await attachCartToUser({ cartId: newCart.id, userEmail: user.email });
+	}
+
+	// Persist the cart ID to cookies
+	await setCartCookie({ value: newCart.id });
+
+	return newCart;
+};
+
+export { getOrCreateCart, resetCart };
