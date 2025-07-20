@@ -35,8 +35,6 @@ export const productInventoryKeys = {
 export const cartKeys = {
 	base: ["cart"] as const,
 	count: () => [...cartKeys.base, "count"] as const,
-	summary: () => [...cartKeys.base, "summary"] as const,
-	items: () => [...cartKeys.base, "items"] as const,
 };
 
 /**

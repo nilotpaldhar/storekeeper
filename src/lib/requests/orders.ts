@@ -122,6 +122,16 @@ const updateOrderPaymentMethod = async ({
 	}
 };
 
+const placeOrder = async ({ orderId }: { orderId: string }) => {
+	try {
+		const res = await axios.post<APIResponse<undefined>>(`/commerce/orders/${orderId}/place`);
+		return res.data;
+	} catch (error) {
+		const errMsg = handleAxiosError(error);
+		throw new Error(errMsg);
+	}
+};
+
 export {
 	getOrder,
 	getOrderShippingMethods,
@@ -130,4 +140,5 @@ export {
 	updateOrderAddresses,
 	updateOrderShippingMethod,
 	updateOrderPaymentMethod,
+	placeOrder,
 };

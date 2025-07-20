@@ -2,7 +2,7 @@ import type { OrderStatus } from "@/types/domain.types";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { orderKeys } from "@/constants/tanstack-query-keys";
+import { orderKeys, cartKeys } from "@/constants/tanstack-query-keys";
 
 import {
 	getOrder,
@@ -12,6 +12,7 @@ import {
 	updateOrderAddresses,
 	updateOrderShippingMethod,
 	updateOrderPaymentMethod,
+	placeOrder,
 } from "@/lib/requests/orders";
 
 const useOrder = ({
@@ -90,6 +91,19 @@ const useUpdateOrderPaymentMethod = () => {
 	});
 };
 
+const usePlaceOrder = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: placeOrder,
+		onSuccess: (_data, { orderId }) => {
+			queryClient.invalidateQueries({ queryKey: orderKeys.byId(orderId) });
+			queryClient.invalidateQueries({ queryKey: cartKeys.base });
+			queryClient.resetQueries({ queryKey: cartKeys.base });
+		},
+	});
+};
+
 export {
 	useOrder,
 	useOrderShippingMethods,
@@ -98,4 +112,5 @@ export {
 	useUpdateOrderAddresses,
 	useUpdateOrderShippingMethod,
 	useUpdateOrderPaymentMethod,
+	usePlaceOrder,
 };

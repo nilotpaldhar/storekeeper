@@ -66,7 +66,7 @@ const getOrderLineItems = async ({
 };
 
 /**
- *
+ * Fetches available shipping methods of a given order.
  */
 const getOrderShippingMethods = async ({
 	id,
@@ -102,7 +102,7 @@ const getOrderShippingMethods = async ({
 };
 
 /**
- *
+ * Fetches available payment methods for a given order.
  */
 const getOrderPaymentMethods = async ({
 	id,

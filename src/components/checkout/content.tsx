@@ -1,8 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
-import { useOrder } from "@/hooks/orders";
+import { useOrder, usePlaceOrder } from "@/hooks/orders";
+
+import { INVALID_CHECKOUT_ORDER_STATUS } from "@/constants/commerce";
 
 import { CheckoutDisclaimer } from "@/components/checkout/disclaimer";
 import { CheckoutError } from "@/components/checkout/error";
@@ -19,11 +23,14 @@ type CheckoutContentProps = {
 	showDisclaimer?: boolean;
 };
 
-const INVALID_ORDER_STATUS = ["approved", "cancelled", "placed", "editing", "placing"];
+type InvalidCheckoutOrderStatusType = (typeof INVALID_CHECKOUT_ORDER_STATUS)[number];
 
 const CheckoutContent = ({ orderId, showDisclaimer = false }: CheckoutContentProps) => {
+	const router = useRouter();
+	const [isRedirecting, setIsRedirecting] = useState(false);
+
 	const { data, isLoading, isFetching, isError, error } = useOrder({ id: orderId });
-	const [isPlacingOrder, setIsPlacingOrder] = useState(false);
+	const placeOrderMutation = usePlaceOrder();
 
 	const isUpdating = !isLoading && isFetching;
 	const summary = data?.data?.summary;
@@ -31,10 +38,19 @@ const CheckoutContent = ({ orderId, showDisclaimer = false }: CheckoutContentPro
 	const orderStatus = data?.data?.summary.status ?? "";
 
 	const handlePlaceOrder = () => {
-		setIsPlacingOrder(true);
+		placeOrderMutation.mutate(
+			{ orderId },
+			{
+				onError: (error) => toast.error(error.message),
+				onSuccess: () => {
+					setIsRedirecting(true); // Block render while redirecting
+					router.push(`/checkout/success?order_id=${orderId}`);
+				},
+			}
+		);
 	};
 
-	if (isLoading || isPlacingOrder) {
+	if (isLoading || placeOrderMutation.isPending || isRedirecting) {
 		return (
 			<main className="flex min-h-[80vh] items-center justify-center py-5">
 				<Container className="flex justify-center">
@@ -48,7 +64,11 @@ const CheckoutContent = ({ orderId, showDisclaimer = false }: CheckoutContentPro
 		return <CheckoutError title={error.message} />;
 	}
 
-	if (!isLoading && !isError && INVALID_ORDER_STATUS.includes(orderStatus)) {
+	if (
+		!isLoading &&
+		!isError &&
+		INVALID_CHECKOUT_ORDER_STATUS.includes(orderStatus as InvalidCheckoutOrderStatusType)
+	) {
 		return (
 			<CheckoutError
 				title="Order Not Valid for Checkout"
@@ -85,6 +105,3 @@ const CheckoutContent = ({ orderId, showDisclaimer = false }: CheckoutContentPro
 };
 
 export { CheckoutContent };
-
-// lalhzaJvGy - placed
-// xzYheEDmzJ - current

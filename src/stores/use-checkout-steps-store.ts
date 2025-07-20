@@ -31,8 +31,18 @@ type CheckoutStepsStore = {
 };
 
 const defaultCheckoutData: CheckoutData = {
-	customer: { name: null, email: "" },
-	address: null,
+	customer: { name: "John Doe", email: "john@example.com" },
+	address: {
+		firstName: "John",
+		lastName: "Doe",
+		phone: "+911234567890",
+		street: "ABC Street",
+		country: "IN",
+		state: "AS",
+		city: "Silchar",
+		zip: "788001",
+		notes: "Please handle with care",
+	},
 	shipping: null,
 	payment: null,
 };

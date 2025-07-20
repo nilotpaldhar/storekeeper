@@ -92,6 +92,16 @@ export async function PATCH(req: NextRequest, segmentData: { params: Params }) {
 			);
 		}
 
+		if (result.reason === "INVALID_PAYMENT_SOURCE_TYPE") {
+			return NextResponse.json(
+				{
+					success: false,
+					message: `The selected payment method is currently not supported. Please choose a different one.`,
+				},
+				{ status: 409 }
+			);
+		}
+
 		if (result.reason === "FAILURE") {
 			return NextResponse.json(
 				{

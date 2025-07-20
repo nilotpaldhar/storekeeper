@@ -35,17 +35,14 @@ const stepComponents: Record<CheckoutStep["id"], React.ComponentType<CheckoutSte
 };
 
 const CheckoutFlow = ({ orderId, onPlaceOrder }: CheckoutFlowProps) => {
-	const { activeIndex, steps, goTo, next, markAsComplete, isLastStep, reset } =
-		useCheckoutStepsStore();
+	const { activeIndex, steps, goTo, next, markAsComplete, isLastStep } = useCheckoutStepsStore();
 	const activeStep = steps[activeIndex];
 
 	const handleStepComplete = (step: CheckoutStep) => {
 		if (isLastStep()) {
 			onPlaceOrder();
-			reset();
 			return;
 		}
-
 		markAsComplete(step.id);
 		next();
 	};

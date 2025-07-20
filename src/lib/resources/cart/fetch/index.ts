@@ -5,11 +5,13 @@ import type { Cart, CartLineItem, CartSummary } from "@/types/domain.types";
 import {
 	ORDER_AND_CART_SUMMARY_FIELDS,
 	ORDER_AND_CART_LINE_ITEM_FIELDS,
+	VALID_CART_STATUS,
 } from "@/constants/commerce";
 
 import { getCommerceLayerClient } from "@/lib/clients/commerce";
 import { logEvent } from "@/lib/logging/log-event";
 import { attachProductToLineItem } from "@/lib/resources/cart/services";
+import { isValidCartStatus } from "@/lib/utils/commerce/is-valid-cart-status";
 
 /**
  * Fetches a single draft Order (cart) by its Commerce Layer ID.
@@ -20,9 +22,11 @@ const getCartById = async ({ id }: { id: string }): Promise<Cart | null> => {
 
 	try {
 		const carts = await clClient.orders.list({
-			filters: { id_eq: id },
+			filters: { id_eq: id, status_in: VALID_CART_STATUS },
 		});
-		return carts.at(0) ?? null;
+
+		const cart = carts.at(0) ?? null;
+		return cart && isValidCartStatus(cart.status) ? cart : null;
 	} catch (err) {
 		logEvent({
 			fn: "getCartById",
@@ -44,9 +48,12 @@ const getCartByUserEmail = async ({ email }: { email: string }): Promise<Cart | 
 
 	try {
 		const carts = await clClient.orders.list({
-			filters: { customer_email_eq: email },
+			filters: { customer_email_eq: email, status_in: VALID_CART_STATUS },
+			sort: { created_at: "desc" },
 		});
-		return carts.at(0) ?? null;
+
+		const cart = carts.at(0) ?? null;
+		return cart && isValidCartStatus(cart.status) ? cart : null;
 	} catch (err) {
 		logEvent({
 			fn: "getCartByUserEmail",
@@ -66,10 +73,12 @@ const getCartSummary = async ({ id }: { id: string }): Promise<CartSummary | nul
 
 	try {
 		const carts = await clClient.orders.list({
-			filters: { id_eq: id, status_eq: "draft" },
+			filters: { id_eq: id, status_in: VALID_CART_STATUS },
 			fields: ORDER_AND_CART_SUMMARY_FIELDS,
 		});
-		return carts.at(0) ?? null;
+
+		const cart = carts.at(0) ?? null;
+		return cart && isValidCartStatus(cart.status) ? cart : null;
 	} catch (err) {
 		logEvent({
 			fn: "getCartSummary",
