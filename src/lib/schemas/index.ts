@@ -53,8 +53,6 @@ export const UpdateOrderPaymentMethodSchema = z.object({
 	paymentMethodId: z.string().trim().min(1, { message: "Shipping method ID is required." }),
 });
 
-// export const PlaceOrderSchema = z.object({});
-
 export const AddressSchema = z.object({
 	firstName: z
 		.string()
@@ -71,4 +69,8 @@ export const AddressSchema = z.object({
 	country: z.string().min(2, "Country is required"),
 	state: z.string().min(2, "State/Province is required"),
 	notes: z.string().max(300, "Note can't exceed 300 characters").optional(),
+});
+
+export const NewsletterFormSchema = z.object({
+	email: z.string().trim().email({ message: "Please enter a valid email address" }),
 });

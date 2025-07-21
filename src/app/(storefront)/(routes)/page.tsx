@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 
 import { notFound } from "next/navigation";
 
+import { FeatureHighlights } from "@/components/sections/feature-highlights";
+import { NewsletterSubscription } from "@/components/sections/newsletter-subscription";
 import { PromoBlockSlider } from "@/components/sections/promo-block-slider";
+import { Container } from "@/components/ui/container";
 
 import { getNotHomePage } from "@/lib/resources/pages/fetch";
 import { getHomePageSeo } from "@/lib/resources/seo/fetch";
@@ -31,6 +34,14 @@ const HomePage = async () => {
 					<PromoBlockSlider blocks={promoSection.items} />
 				</section>
 			) : null}
+			<section aria-label="Subscribe to our newsletter">
+				<NewsletterSubscription />
+			</section>
+			<section aria-label="Service highlights" className="py-8 xl:py-10">
+				<Container>
+					<FeatureHighlights />
+				</Container>
+			</section>
 		</main>
 	);
 };
