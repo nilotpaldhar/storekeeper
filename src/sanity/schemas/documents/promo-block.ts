@@ -90,8 +90,8 @@ const promoBlock = defineType({
 			type: "object",
 			fields: [
 				defineField({
-					title: "Text",
-					name: "text",
+					title: "Label",
+					name: "label",
 					type: "string",
 					initialValue: "Discover Now",
 				}),

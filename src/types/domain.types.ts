@@ -246,3 +246,44 @@ export type AddressRecord = z.infer<typeof AddressSchema> & {
 	id: string;
 	type: "addresses";
 };
+
+export type MediaImage = {
+	src: string | null;
+	alt: string | null;
+};
+
+export type PromoBlock = {
+	id: string;
+	title: string;
+	description: string | null;
+	contentAlignment: "left" | "right";
+	thumbnail: MediaImage;
+	backdrop: MediaImage | null;
+	price: {
+		label: string;
+		amount: string;
+	};
+	link: {
+		label: string;
+		resource: {
+			type: "page" | "product" | "taxonomy" | "taxon" | null;
+			slug: string | null;
+		} | null;
+	};
+};
+
+export type HomePage = {
+	id: string;
+	title: string;
+	promoSection: {
+		hidden: boolean;
+		items: PromoBlock[];
+	};
+};
+
+// link: {
+//                 label: string;
+//                 resource: {
+//                     type: "page";
+//                     slug: string | null;
+//                 }

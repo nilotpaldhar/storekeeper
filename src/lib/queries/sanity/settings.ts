@@ -1,14 +1,5 @@
 import { defineQuery } from "next-sanity";
 
-const GeneralSiteSettings = defineQuery(`
-    *[_type == "generalSettings"][0] {
-        "domain": siteURL,
-        "title": siteTitle,
-        "logo": siteLogo.asset._ref,
-        "description": siteDescription
-    }
-`);
-
 const HeaderMenuLinkFragment = `
     "refKey": _key,
     "type": _type,
@@ -46,13 +37,6 @@ const HeaderMenuFragment = `
     }
 `;
 
-const HeaderSettings = defineQuery(`
-    *[_type == "headerSettings"][0] {
-        "menuDesktop": menuDesktop-> { ${HeaderMenuFragment} },
-        "menuMobile": menuMobile-> { ${HeaderMenuFragment} }
-    }
-`);
-
 const FooterLinkFragment = `
     "key": _key,
     "type": _type,
@@ -74,6 +58,22 @@ const FooterLinkFragment = `
         null
     )
 `;
+
+const GeneralSiteSettings = defineQuery(`
+    *[_type == "generalSettings"][0] {
+        "domain": siteURL,
+        "title": siteTitle,
+        "logo": siteLogo.asset._ref,
+        "description": siteDescription
+    }
+`);
+
+const HeaderSettings = defineQuery(`
+    *[_type == "headerSettings"][0] {
+        "menuDesktop": menuDesktop-> { ${HeaderMenuFragment} },
+        "menuMobile": menuMobile-> { ${HeaderMenuFragment} }
+    }
+`);
 
 const FooterSettings = defineQuery(`
     *[_type == "footerSettings"][0] {

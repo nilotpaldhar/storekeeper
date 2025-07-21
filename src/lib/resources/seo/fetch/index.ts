@@ -1,7 +1,13 @@
 import "server-only";
 import { getSanityClient } from "@/lib/clients/sanity";
 import { logEvent } from "@/lib/logging/log-event";
-import { GlobalSeo, NotFoundPageSeo, ProductSeo, StaticPageSeo } from "@/lib/queries/sanity";
+import {
+	GlobalSeo,
+	NotFoundPageSeo,
+	ProductSeo,
+	StaticPageSeo,
+	HomePageSeo,
+} from "@/lib/queries/sanity";
 
 /**
  * Fetches the global SEO settings from the CMS.
@@ -81,4 +87,23 @@ const getProductSeo = async ({ slug }: { slug: string }) => {
 	}
 };
 
-export { getGlobalSeo, getStaticPageSeoBySlug, getNotFoundPageSeo, getProductSeo };
+/**
+ * Fetches the SEO metadata for...
+ */
+const getHomePageSeo = async () => {
+	try {
+		const data = await getSanityClient().fetch(HomePageSeo);
+		if (!data || !data.seo) return null;
+		return data.seo;
+	} catch (err) {
+		logEvent({
+			fn: "getHomePageSeo",
+			level: "error",
+			event: "fail",
+			error: err,
+		});
+		return null;
+	}
+};
+
+export { getGlobalSeo, getStaticPageSeoBySlug, getNotFoundPageSeo, getProductSeo, getHomePageSeo };

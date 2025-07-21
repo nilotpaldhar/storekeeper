@@ -1314,7 +1314,7 @@
         "value": {
           "type": "object",
           "attributes": {
-            "text": {
+            "label": {
               "type": "objectAttribute",
               "value": {
                 "type": "string"
