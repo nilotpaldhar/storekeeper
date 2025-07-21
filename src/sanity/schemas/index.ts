@@ -6,6 +6,7 @@ import { menu } from "@/sanity/schemas/documents/menu";
 import { notFoundPage } from "@/sanity/schemas/documents/not-found-page";
 import { page } from "@/sanity/schemas/documents/page";
 import { product } from "@/sanity/schemas/documents/product";
+import { promoBlock } from "@/sanity/schemas/documents/promo-block";
 import { footerSettings } from "@/sanity/schemas/documents/settings-footer";
 import { generalSettings } from "@/sanity/schemas/documents/settings-general";
 import { headerSettings } from "@/sanity/schemas/documents/settings-header";
@@ -66,6 +67,8 @@ const schema: { types: SchemaTypeDefinition[] } = {
 		product,
 		sku,
 		brand,
+
+		promoBlock,
 
 		// Settings
 		generalSettings,

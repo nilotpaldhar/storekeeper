@@ -226,6 +226,51 @@ export type GeneralSettings = {
 	};
 };
 
+export type PromoBlock = {
+	_id: string;
+	_type: "promoBlock";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	description?: string;
+	thumbnail?: MediaImage;
+	backdrop?: MediaImage;
+	contentAlignment?: "left" | "right";
+	price?: {
+		label?: string;
+		amount?: string;
+	};
+	link?: {
+		text?: string;
+		resource?:
+			| {
+					_ref: string;
+					_type: "reference";
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: "page";
+			  }
+			| {
+					_ref: string;
+					_type: "reference";
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: "product";
+			  }
+			| {
+					_ref: string;
+					_type: "reference";
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: "taxonomy";
+			  }
+			| {
+					_ref: string;
+					_type: "reference";
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: "taxon";
+			  };
+	};
+};
+
 export type Menu = {
 	_id: string;
 	_type: "menu";
@@ -572,6 +617,16 @@ export type HomePage = {
 	_rev: string;
 	title?: string;
 	slug?: string;
+	promoSection?: {
+		hidden?: boolean;
+		items?: Array<{
+			_ref: string;
+			_type: "reference";
+			_weak?: boolean;
+			_key: string;
+			[internalGroqTypeReferenceTo]?: "promoBlock";
+		}>;
+	};
 	seo?: Seo;
 };
 
@@ -688,6 +743,7 @@ export type AllSanitySchemaTypes =
 	| FooterSettings
 	| HeaderSettings
 	| GeneralSettings
+	| PromoBlock
 	| Menu
 	| NotFoundPage
 	| ProductSpecification
