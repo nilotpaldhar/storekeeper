@@ -100,6 +100,7 @@ export type ProductDetails = {
 };
 
 export type ProductSummary = {
+	_key: string | null;
 	id: string;
 	title: string;
 	slug: string;
@@ -279,11 +280,10 @@ export type HomePage = {
 		hidden: boolean;
 		items: PromoBlock[];
 	};
+	productSections: {
+		refKey: string;
+		title: string;
+		hidden: boolean;
+		products: ProductSummary[];
+	}[];
 };
-
-// link: {
-//                 label: string;
-//                 resource: {
-//                     type: "page";
-//                     slug: string | null;
-//                 }

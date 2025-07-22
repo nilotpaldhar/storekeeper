@@ -1,6 +1,7 @@
 import { defineQuery } from "next-sanity";
 
 import { MediaImageFragment } from "@/lib/queries/sanity/media";
+import { ProductSummaryFragment } from "@/lib/queries/sanity/product";
 
 const PromoBlockFragment = `
     "id": _id,
@@ -47,6 +48,14 @@ const HomePageQuery = defineQuery(`
         promoSection {
             hidden,
             "items": items[]->{ ${PromoBlockFragment} }
+        },
+        "productSections": productShowcases[]{
+            "key": _key,
+            title,
+            hidden,
+            products[]->{ 
+                ${ProductSummaryFragment}
+            }
         }
     }
 `);

@@ -69,11 +69,11 @@ const PromoBlockContent = ({
 						{price.label}
 					</span>
 					<span className="text-primary-600 text-2xl leading-none font-black lg:text-3xl">
-						${price.amount}
+						{price.amount}
 					</span>
 				</div>
 				<Button className="mt-4 px-4 sm:order-1 sm:mt-0 lg:px-8" asChild>
-					<Link href={`/${resolvedHref}`} target="_blank" rel="noopener noreferrer">
+					<Link href={`/${resolvedHref}`}>
 						<ArrowRight />
 						<span>{link.label ?? "Discover Now"}</span>
 					</Link>

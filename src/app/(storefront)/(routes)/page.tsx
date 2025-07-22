@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 
 import { notFound } from "next/navigation";
+import { Fragment } from "react";
 
+import { ProductCollection } from "@/components/product/collection";
+import { ProductCollectionHeading } from "@/components/product/collection/heading";
 import { FeatureHighlights } from "@/components/sections/feature-highlights";
 import { NewsletterSubscription } from "@/components/sections/newsletter-subscription";
 import { PromoBlockSlider } from "@/components/sections/promo-block-slider";
@@ -25,7 +28,7 @@ const HomePage = async () => {
 	const page = await normalizeHomePage(rawPage);
 	if (!page) return notFound();
 
-	const { promoSection } = page;
+	const { promoSection, productSections } = page;
 
 	return (
 		<main>
@@ -34,6 +37,22 @@ const HomePage = async () => {
 					<PromoBlockSlider blocks={promoSection.items} />
 				</section>
 			) : null}
+
+			{productSections.map((section) => (
+				<Fragment key={section.refKey}>
+					{!section.hidden ? (
+						<section className="py-10 xl:py-14">
+							<Container>
+								<ProductCollectionHeading className="mb-6 border-b border-neutral-100 pb-6" asChild>
+									<h2>{section.title}</h2>
+								</ProductCollectionHeading>
+								<ProductCollection products={section.products} layout="grid" />
+							</Container>
+						</section>
+					) : null}
+				</Fragment>
+			))}
+
 			<section aria-label="Subscribe to our newsletter">
 				<NewsletterSubscription />
 			</section>

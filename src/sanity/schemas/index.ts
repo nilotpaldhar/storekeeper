@@ -25,6 +25,7 @@ import { navProduct } from "@/sanity/schemas/objects/nav-product";
 import { navTaxon } from "@/sanity/schemas/objects/nav-taxon";
 import { navTaxonomy } from "@/sanity/schemas/objects/nav-taxonomy";
 import { productOption } from "@/sanity/schemas/objects/product-option";
+import { productShowcase } from "@/sanity/schemas/objects/product-showcase";
 import { productSpecification } from "@/sanity/schemas/objects/product-specification";
 import { productVariant } from "@/sanity/schemas/objects/product-variant";
 import { seo } from "@/sanity/schemas/objects/seo";
@@ -49,6 +50,7 @@ const schema: { types: SchemaTypeDefinition[] } = {
 		productOption,
 		productVariant,
 		productSpecification,
+		productShowcase,
 
 		// Documents
 		// Pages

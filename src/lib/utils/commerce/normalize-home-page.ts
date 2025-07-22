@@ -3,10 +3,11 @@ import "server-only";
 import type { HomePage, PromoBlock } from "@/types/domain.types";
 import type { HomePageQueryResult } from "@/types/sanity.types";
 
+import { normalizeProductCollection } from "@/lib/utils/commerce/normalize-product-collection";
 import { getImageUrl } from "@/lib/utils/sanity/get-image-url";
 
 /**
- * Normalize a raw ...
+ * Normalize a raw Sanity home page response into a structured `HomePage` object.
  */
 const normalizeHomePage = async (
 	rawHomePage: HomePageQueryResult | null | undefined
@@ -20,15 +21,15 @@ const normalizeHomePage = async (
 				id: item.id,
 				title: item.title ?? "",
 				description: item.description ?? null,
-				contentAlignment: item.contentAlignment ? item.contentAlignment : "right",
+				contentAlignment: item.contentAlignment ?? "right",
 				thumbnail: {
 					src: item.thumbnail?.image ? getImageUrl(item.thumbnail.image).url() : null,
 					alt: item.thumbnail?.altText ?? null,
 				},
 				backdrop: item.backdrop
 					? {
-							src: item.backdrop?.image ? getImageUrl(item.backdrop.image).url() : null,
-							alt: item.backdrop?.altText ?? null,
+							src: item.backdrop.image ? getImageUrl(item.backdrop.image).url() : null,
+							alt: item.backdrop.altText ?? null,
 						}
 					: null,
 				price: {
@@ -39,12 +40,25 @@ const normalizeHomePage = async (
 					label: item.link?.label ?? "",
 					resource: item.link?.resource
 						? {
-								type: item.link.resource.type ? item.link.resource.type : null,
+								type: item.link.resource.type ?? null,
 								slug: item.link.resource.slug,
 							}
 						: null,
 				},
 			}))
+		: [];
+
+	const productSections: HomePage["productSections"] = Array.isArray(rawHomePage.productSections)
+		? await Promise.all(
+				rawHomePage.productSections.map(async (section) => ({
+					refKey: section.key,
+					title: section.title || "",
+					hidden: !!section.hidden,
+					products: Array.isArray(section.products)
+						? await normalizeProductCollection(section.products)
+						: [],
+				}))
+			)
 		: [];
 
 	return {
@@ -54,6 +68,7 @@ const normalizeHomePage = async (
 			hidden: promoSection?.hidden ?? false,
 			items: promoBlocks,
 		},
+		productSections,
 	};
 };
 

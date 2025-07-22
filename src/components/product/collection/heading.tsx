@@ -6,7 +6,7 @@ type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & {
 	asChild?: boolean;
 };
 
-const Heading = ({ asChild, className, children, ...props }: HeadingProps) => {
+const ProductCollectionHeading = ({ asChild, className, children, ...props }: HeadingProps) => {
 	const Comp = asChild ? Slot : "h2";
 	return (
 		<Comp
@@ -21,4 +21,4 @@ const Heading = ({ asChild, className, children, ...props }: HeadingProps) => {
 	);
 };
 
-export { Heading };
+export { ProductCollectionHeading };

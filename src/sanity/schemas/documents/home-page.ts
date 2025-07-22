@@ -26,7 +26,7 @@ const homePage = defineType({
 
 		defineField({
 			name: "promoSection",
-			title: "Promo Blocks Section",
+			title: "Promo Blocks",
 			type: "object",
 			options: { collapsible: true, collapsed: false },
 			fields: [
@@ -47,6 +47,13 @@ const homePage = defineType({
 						Rule.required().min(1).error("At least one promo block must be added."),
 				}),
 			],
+		}),
+
+		defineField({
+			name: "productShowcases",
+			title: "Product Showcases",
+			type: "array",
+			of: [{ type: "productShowcase" }],
 		}),
 
 		defineField({
