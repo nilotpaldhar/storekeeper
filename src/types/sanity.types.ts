@@ -630,8 +630,18 @@ export type HomePage = {
 	_rev: string;
 	title?: string;
 	slug?: string;
-	promoSection?: {
+	categorySection?: {
+		title?: string;
+		items?: Array<{
+			_ref: string;
+			_type: "reference";
+			_weak?: boolean;
+			_key: string;
+			[internalGroqTypeReferenceTo]?: "taxonomy";
+		}>;
 		hidden?: boolean;
+	};
+	promoSection?: {
 		items?: Array<{
 			_ref: string;
 			_type: "reference";
@@ -639,6 +649,7 @@ export type HomePage = {
 			_key: string;
 			[internalGroqTypeReferenceTo]?: "promoBlock";
 		}>;
+		hidden?: boolean;
 	};
 	productShowcases?: Array<
 		{
@@ -830,7 +841,7 @@ export type NotFoundPageQueryResult = {
 	description: string | null;
 } | null;
 // Variable: HomePageQuery
-// Query: *[_type == "homePage"] | order(_updatedAt desc) [0] {        "type": _type,        "id": _id,        title,        promoSection {            hidden,            "items": items[]->{     "id": _id,    title,    description,    contentAlignment,    price,    thumbnail {     "refKey": _key,    "image": image.asset._ref,    altText },    backdrop {     "refKey": _key,    "image": image.asset._ref,    altText },    link {        label,        resource->{            "type": _type,            "slug": slug.current        }    } }        },        "productSections": productShowcases[]{            "key": _key,            title,            hidden,            products[]->{                     "id": _id,    title,    "slug": slug.current,    description,    hasVariants,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "taxon": taxon->{     "id": _id,    title,    "slug": slug.current,    isLeaf },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ),    "variants": select(        defined(variants) => variants[]{     "refKey": _key,    variantKey,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ) },        []    ),            }        }    }
+// Query: *[_type == "homePage"] | order(_updatedAt desc) [0] {        "type": _type,        "id": _id,        title,        promoSection {            hidden,            "items": items[]->{     "id": _id,    title,    description,    contentAlignment,    price,    thumbnail {     "refKey": _key,    "image": image.asset._ref,    altText },    backdrop {     "refKey": _key,    "image": image.asset._ref,    altText },    link {        label,        resource->{            "type": _type,            "slug": slug.current        }    } }        },        categorySection {            title,            hidden,            items[]->{                 "id": _id,                title,                "slug": slug.current,                "thumbnail": media {     "refKey": _key,    "image": image.asset._ref,    altText }            }        },        "productSections": productShowcases[]{            "key": _key,            title,            hidden,            products[]->{                     "id": _id,    title,    "slug": slug.current,    description,    hasVariants,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "taxon": taxon->{     "id": _id,    title,    "slug": slug.current,    isLeaf },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ),    "variants": select(        defined(variants) => variants[]{     "refKey": _key,    variantKey,    "sku": sku->{     "id": _id,    code,    name,    description,    imageUrl,    piecesPerPack,    weight,    unitOfWeight,    hsTariffNumber },    "gallery":  select(        defined(gallery) => gallery[]{     "refKey": _key,    "image": image.asset._ref,    altText },        []    ) },        []    ),            }        }    }
 export type HomePageQueryResult = {
 	type: "homePage";
 	id: string;
@@ -876,6 +887,20 @@ export type HomePageQueryResult = {
 							slug: string | null;
 					  }
 					| null;
+			} | null;
+		}> | null;
+	} | null;
+	categorySection: {
+		title: string | null;
+		hidden: boolean | null;
+		items: Array<{
+			id: string;
+			title: string | null;
+			slug: string | null;
+			thumbnail: {
+				refKey: null;
+				image: string | null;
+				altText: string | null;
 			} | null;
 		}> | null;
 	} | null;
@@ -1682,7 +1707,7 @@ declare module "@sanity/client" {
 		'\n    *[_type == "page"]{ "slug": slug.current }\n': StaticPageSlugsQueryResult;
 		'\n    *[_type == "page" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        "type": _type,\n        "id": _id,\n        title,\n        "content": pageContent\n    }\n': StaticPageQueryResult;
 		'\n    *[_type == "notFoundPage"] | order(_updatedAt desc) [0] {\n        title,\n        description\n    }\n': NotFoundPageQueryResult;
-		'\n    *[_type == "homePage"] | order(_updatedAt desc) [0] {\n        "type": _type,\n        "id": _id,\n        title,\n        promoSection {\n            hidden,\n            "items": items[]->{ \n    "id": _id,\n    title,\n    description,\n    contentAlignment,\n    price,\n    thumbnail { \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n    backdrop { \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n    link {\n        label,\n        resource->{\n            "type": _type,\n            "slug": slug.current\n        }\n    }\n }\n        },\n        "productSections": productShowcases[]{\n            "key": _key,\n            title,\n            hidden,\n            products[]->{ \n                \n    "id": _id,\n    title,\n    "slug": slug.current,\n    description,\n    hasVariants,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    ),\n    "variants": select(\n        defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n        []\n    ),\n\n            }\n        }\n    }\n': HomePageQueryResult;
+		'\n    *[_type == "homePage"] | order(_updatedAt desc) [0] {\n        "type": _type,\n        "id": _id,\n        title,\n        promoSection {\n            hidden,\n            "items": items[]->{ \n    "id": _id,\n    title,\n    description,\n    contentAlignment,\n    price,\n    thumbnail { \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n    backdrop { \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n    link {\n        label,\n        resource->{\n            "type": _type,\n            "slug": slug.current\n        }\n    }\n }\n        },\n        categorySection {\n            title,\n            hidden,\n            items[]->{ \n                "id": _id,\n                title,\n                "slug": slug.current,\n                "thumbnail": media { \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n }\n            }\n        },\n        "productSections": productShowcases[]{\n            "key": _key,\n            title,\n            hidden,\n            products[]->{ \n                \n    "id": _id,\n    title,\n    "slug": slug.current,\n    description,\n    hasVariants,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    ),\n    "variants": select(\n        defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n        []\n    ),\n\n            }\n        }\n    }\n': HomePageQueryResult;
 		'\n    *[_type == "product"]{ "slug": slug.current }[0...$limit]\n': ProductSlugsQueryResult;
 		'\n    *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {\n        "id": _id,\n        title,\n        "slug": slug.current,\n        description,\n        hasVariants,\n        "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n        "brand": brand->{\n            "id": _id,\n            title,\n            "slug": slug.current\n        },\n        "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n        "options": select(\n            defined(options) => options[]{ \n    "refKey": _key,\n    name,\n    values\n },\n            []\n        ),\n        "variants": select(\n            defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n            []\n        ),\n        "gallery":  select(\n            defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n            []\n        ),\n        "specifications": select(\n            defined(gallery) => specifications[]{\n                "refKey": _key,\n                label,\n                value\n            },\n            []\n        )\n    }\n': ProductQueryResult;
 		'\n    *[_type == "product" && _id ==  $id] | order(_updatedAt desc) [0] {\n        \n    "id": _id,\n    title,\n    "slug": slug.current,\n    description,\n    hasVariants,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "taxon": taxon->{ \n    "id": _id,\n    title,\n    "slug": slug.current,\n    isLeaf\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    ),\n    "variants": select(\n        defined(variants) => variants[]{ \n    "refKey": _key,\n    variantKey,\n    "sku": sku->{ \n    "id": _id,\n    code,\n    name,\n    description,\n    imageUrl,\n    piecesPerPack,\n    weight,\n    unitOfWeight,\n    hsTariffNumber\n },\n    "gallery":  select(\n        defined(gallery) => gallery[]{ \n    "refKey": _key,\n    "image": image.asset._ref,\n    altText\n },\n        []\n    )\n },\n        []\n    ),\n\n    }\n': ProductSummaryQueryResult;

@@ -25,26 +25,57 @@ const homePage = defineType({
 		}),
 
 		defineField({
-			name: "promoSection",
-			title: "Promo Blocks",
+			name: "categorySection",
+			title: "Shop by Category Section",
 			type: "object",
-			options: { collapsible: true, collapsed: false },
+			options: { collapsible: true, collapsed: true },
 			fields: [
 				defineField({
+					name: "title",
+					title: "Section Heading",
+					type: "string",
+					initialValue: "Shop by Category",
+					description: "Main heading shown above the category carousel on the homepage.",
+					validation: (Rule) => Rule.required().error("Section heading is required."),
+				}),
+
+				defineField({
+					name: "items",
+					title: "Displayed Categories",
+					type: "array",
+					of: [{ type: "reference", to: [{ type: "taxonomy" }] }],
+					description: "Add taxonomies to display in the carousel.",
+				}),
+
+				defineField({
 					name: "hidden",
-					title: "Hide Section",
+					title: "Hide This Section",
 					type: "boolean",
 					initialValue: false,
-					description: "Toggle visibility of the promo block section on the frontend.",
+					description: "Toggle visibility of the 'Shop by Category' section on the homepage.",
 				}),
+			],
+		}),
+
+		defineField({
+			name: "promoSection",
+			title: "Promo Blocks Section",
+			type: "object",
+			options: { collapsible: true, collapsed: true },
+			fields: [
 				defineField({
 					name: "items",
 					title: "Promo Blocks",
 					type: "array",
 					of: [{ type: "reference", to: [{ type: "promoBlock" }] }],
 					description: "List of promotional banners or hero slides to be shown.",
-					validation: (Rule) =>
-						Rule.required().min(1).error("At least one promo block must be added."),
+				}),
+				defineField({
+					name: "hidden",
+					title: "Hide Section",
+					type: "boolean",
+					initialValue: false,
+					description: "Toggle visibility of the promo block section on the frontend.",
 				}),
 			],
 		}),

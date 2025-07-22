@@ -280,6 +280,16 @@ export type HomePage = {
 		hidden: boolean;
 		items: PromoBlock[];
 	};
+	categorySection: {
+		title: string;
+		hidden: boolean;
+		items: {
+			id: string;
+			title: string;
+			slug: string;
+			thumbnail: MediaImage;
+		}[];
+	};
 	productSections: {
 		refKey: string;
 		title: string;

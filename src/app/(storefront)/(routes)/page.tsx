@@ -5,6 +5,7 @@ import { Fragment } from "react";
 
 import { ProductCollection } from "@/components/product/collection";
 import { ProductCollectionHeading } from "@/components/product/collection/heading";
+import { CategoryCarousel } from "@/components/sections/category-carousel";
 import { FeatureHighlights } from "@/components/sections/feature-highlights";
 import { NewsletterSubscription } from "@/components/sections/newsletter-subscription";
 import { PromoBlockSlider } from "@/components/sections/promo-block-slider";
@@ -28,13 +29,26 @@ const HomePage = async () => {
 	const page = await normalizeHomePage(rawPage);
 	if (!page) return notFound();
 
-	const { promoSection, productSections } = page;
+	const { promoSection, categorySection, productSections } = page;
 
 	return (
 		<main>
-			{!promoSection.hidden ? (
+			{!promoSection.hidden && promoSection.items.length > 0 ? (
 				<section aria-label="Promotional Banners">
 					<PromoBlockSlider blocks={promoSection.items} />
+				</section>
+			) : null}
+
+			{!categorySection.hidden && categorySection.items.length > 0 ? (
+				<section className="py-10 xl:py-14" aria-label="Browse product categories">
+					<Container>
+						<ProductCollectionHeading className="text-center" asChild>
+							<h2>{categorySection.title}</h2>
+						</ProductCollectionHeading>
+						<div className="mt-8">
+							<CategoryCarousel items={categorySection.items} />
+						</div>
+					</Container>
 				</section>
 			) : null}
 

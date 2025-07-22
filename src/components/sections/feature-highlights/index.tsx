@@ -93,7 +93,7 @@ const FeatureHighlightItem = ({
 
 const FeatureHighlights = () => {
 	return (
-		<Carousel opts={{ align: "start", loop: true }} className="mx-auto w-full max-w-6xl px-4">
+		<Carousel opts={{ align: "start", loop: true }} className="mx-auto w-full px-4">
 			<CarouselContent>
 				{FEATURES.map((feature) => (
 					<CarouselItem

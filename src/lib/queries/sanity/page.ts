@@ -49,6 +49,16 @@ const HomePageQuery = defineQuery(`
             hidden,
             "items": items[]->{ ${PromoBlockFragment} }
         },
+        categorySection {
+            title,
+            hidden,
+            items[]->{ 
+                "id": _id,
+                title,
+                "slug": slug.current,
+                "thumbnail": media { ${MediaImageFragment} }
+            }
+        },
         "productSections": productShowcases[]{
             "key": _key,
             title,

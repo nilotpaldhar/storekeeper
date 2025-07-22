@@ -3377,18 +3377,78 @@
         },
         "optional": true
       },
-      "promoSection": {
+      "categorySection": {
         "type": "objectAttribute",
         "value": {
           "type": "object",
           "attributes": {
+            "title": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "items": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "array",
+                "of": {
+                  "type": "object",
+                  "attributes": {
+                    "_ref": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "_type": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string",
+                        "value": "reference"
+                      }
+                    },
+                    "_weak": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "boolean"
+                      },
+                      "optional": true
+                    }
+                  },
+                  "dereferencesTo": "taxonomy",
+                  "rest": {
+                    "type": "object",
+                    "attributes": {
+                      "_key": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "optional": true
+            },
             "hidden": {
               "type": "objectAttribute",
               "value": {
                 "type": "boolean"
               },
               "optional": true
-            },
+            }
+          }
+        },
+        "optional": true
+      },
+      "promoSection": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
             "items": {
               "type": "objectAttribute",
               "value": {
@@ -3430,6 +3490,13 @@
                     }
                   }
                 }
+              },
+              "optional": true
+            },
+            "hidden": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
               },
               "optional": true
             }
