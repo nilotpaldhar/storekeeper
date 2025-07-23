@@ -1,6 +1,7 @@
 import { type SchemaTypeDefinition } from "sanity";
 
 import { brand } from "@/sanity/schemas/documents/brand";
+import { collection } from "@/sanity/schemas/documents/collection";
 import { homePage } from "@/sanity/schemas/documents/home-page";
 import { menu } from "@/sanity/schemas/documents/menu";
 import { notFoundPage } from "@/sanity/schemas/documents/not-found-page";
@@ -71,6 +72,7 @@ const schema: { types: SchemaTypeDefinition[] } = {
 		brand,
 
 		promoBlock,
+		collection,
 
 		// Settings
 		generalSettings,

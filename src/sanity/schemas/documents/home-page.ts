@@ -25,43 +25,10 @@ const homePage = defineType({
 		}),
 
 		defineField({
-			name: "categorySection",
-			title: "Shop by Category Section",
-			type: "object",
-			options: { collapsible: true, collapsed: true },
-			fields: [
-				defineField({
-					name: "title",
-					title: "Section Heading",
-					type: "string",
-					initialValue: "Shop by Category",
-					description: "Main heading shown above the category carousel on the homepage.",
-					validation: (Rule) => Rule.required().error("Section heading is required."),
-				}),
-
-				defineField({
-					name: "items",
-					title: "Displayed Categories",
-					type: "array",
-					of: [{ type: "reference", to: [{ type: "taxonomy" }] }],
-					description: "Add taxonomies to display in the carousel.",
-				}),
-
-				defineField({
-					name: "hidden",
-					title: "Hide This Section",
-					type: "boolean",
-					initialValue: false,
-					description: "Toggle visibility of the 'Shop by Category' section on the homepage.",
-				}),
-			],
-		}),
-
-		defineField({
 			name: "promoSection",
 			title: "Promo Blocks Section",
 			type: "object",
-			options: { collapsible: true, collapsed: true },
+			options: { collapsible: true, collapsed: false },
 			fields: [
 				defineField({
 					name: "items",
@@ -75,7 +42,64 @@ const homePage = defineType({
 					title: "Hide Section",
 					type: "boolean",
 					initialValue: false,
-					description: "Toggle visibility of the promo block section on the frontend.",
+					description: "Enable this to hide the section from the frontend display.",
+				}),
+			],
+		}),
+
+		defineField({
+			name: "categorySection",
+			title: "Category Section",
+			type: "object",
+			options: { collapsible: true, collapsed: false },
+			fields: [
+				defineField({
+					name: "title",
+					title: "Section Heading",
+					type: "string",
+					initialValue: "Shop by Category",
+					description: "Main heading shown above the category carousel on the homepage.",
+					validation: (Rule) => Rule.required().error("Section heading is required."),
+				}),
+
+				defineField({
+					name: "items",
+					title: "Categories to Display",
+					type: "array",
+					of: [{ type: "reference", to: [{ type: "taxonomy" }] }],
+					description: "Add taxonomies to display in the carousel.",
+				}),
+
+				defineField({
+					name: "hidden",
+					title: "Hide This Section",
+					type: "boolean",
+					initialValue: false,
+					description: "Enable this to hide the section from the frontend display.",
+				}),
+			],
+		}),
+
+		defineField({
+			name: "collectionSection",
+			title: "Product Collections Section",
+			type: "object",
+			description: "A configurable section to showcase product collections.",
+			options: { collapsible: true, collapsed: false },
+			fields: [
+				defineField({
+					name: "items",
+					title: "Collections to Display",
+					type: "array",
+					of: [{ type: "reference", to: [{ type: "collection" }] }],
+					description: "Select one or more product collections to feature in this section.",
+				}),
+				defineField({
+					name: "hidden",
+					title: "Hide Section",
+					type: "boolean",
+					initialValue: false,
+					description: "Enable this to hide the section from the frontend display.",
 				}),
 			],
 		}),

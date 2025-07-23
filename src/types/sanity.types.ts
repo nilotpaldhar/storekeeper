@@ -226,6 +226,27 @@ export type GeneralSettings = {
 	};
 };
 
+export type Collection = {
+	_id: string;
+	_type: "collection";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	slug?: Slug;
+	description?: string;
+	thumbnail?: MediaImage;
+	banner?: MediaImage;
+	products?: Array<{
+		_ref: string;
+		_type: "reference";
+		_weak?: boolean;
+		_key: string;
+		[internalGroqTypeReferenceTo]?: "product";
+	}>;
+	seo?: Seo;
+};
+
 export type PromoBlock = {
 	_id: string;
 	_type: "promoBlock";
@@ -539,6 +560,7 @@ export type Taxon = {
 		[internalGroqTypeReferenceTo]?: "taxon";
 	};
 	isLeaf?: boolean;
+	seo?: Seo;
 };
 
 export type Taxonomy = {
@@ -551,6 +573,7 @@ export type Taxonomy = {
 	slug?: Slug;
 	description?: string;
 	media?: MediaImage;
+	seo?: Seo;
 };
 
 export type Sku = {
@@ -630,6 +653,16 @@ export type HomePage = {
 	_rev: string;
 	title?: string;
 	slug?: string;
+	promoSection?: {
+		items?: Array<{
+			_ref: string;
+			_type: "reference";
+			_weak?: boolean;
+			_key: string;
+			[internalGroqTypeReferenceTo]?: "promoBlock";
+		}>;
+		hidden?: boolean;
+	};
 	categorySection?: {
 		title?: string;
 		items?: Array<{
@@ -641,13 +674,13 @@ export type HomePage = {
 		}>;
 		hidden?: boolean;
 	};
-	promoSection?: {
+	collectionSection?: {
 		items?: Array<{
 			_ref: string;
 			_type: "reference";
 			_weak?: boolean;
 			_key: string;
-			[internalGroqTypeReferenceTo]?: "promoBlock";
+			[internalGroqTypeReferenceTo]?: "collection";
 		}>;
 		hidden?: boolean;
 	};
@@ -772,6 +805,7 @@ export type AllSanitySchemaTypes =
 	| FooterSettings
 	| HeaderSettings
 	| GeneralSettings
+	| Collection
 	| PromoBlock
 	| Menu
 	| NotFoundPage

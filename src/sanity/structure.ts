@@ -24,6 +24,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) =>
 		"taxon",
 		"brand",
 		"promoBlock",
+		"collection",
 	].includes(listItem.getId() ?? "");
 
 // Define the custom structure for the Sanity Studio

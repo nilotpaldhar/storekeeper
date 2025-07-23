@@ -14,7 +14,7 @@ type CategoryTileProps = {
 };
 
 const CategoryTile = ({ title, slug, thumbnail }: CategoryTileProps) => {
-	const imgUrl = thumbnail.src ?? ILLUSTRATIONS.PLACEHOLDERS.PRODUCT;
+	const imgUrl = thumbnail.src ?? ILLUSTRATIONS.PLACEHOLDERS.CATEGORY;
 	const imgAlt = thumbnail.alt ?? title;
 
 	return (
