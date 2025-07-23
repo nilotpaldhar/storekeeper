@@ -6,6 +6,7 @@ import { Fragment } from "react";
 import { ProductCollection } from "@/components/product/collection";
 import { ProductCollectionHeading } from "@/components/product/collection/heading";
 import { CategoryCarousel } from "@/components/sections/category-carousel";
+import { CollectionGrid } from "@/components/sections/collection-grid";
 import { FeatureHighlights } from "@/components/sections/feature-highlights";
 import { NewsletterSubscription } from "@/components/sections/newsletter-subscription";
 import { PromoBlockSlider } from "@/components/sections/promo-block-slider";
@@ -29,7 +30,7 @@ const HomePage = async () => {
 	const page = await normalizeHomePage(rawPage);
 	if (!page) return notFound();
 
-	const { promoSection, categorySection, productSections } = page;
+	const { promoSection, categorySection, collectionSection, productSections } = page;
 
 	return (
 		<main>
@@ -48,6 +49,14 @@ const HomePage = async () => {
 						<div className="mt-8">
 							<CategoryCarousel items={categorySection.items} />
 						</div>
+					</Container>
+				</section>
+			) : null}
+
+			{!collectionSection.hidden && collectionSection.items.length > 0 ? (
+				<section className="py-10 xl:py-14" aria-label="Browse Product Collections">
+					<Container>
+						<CollectionGrid items={collectionSection.items} />
 					</Container>
 				</section>
 			) : null}

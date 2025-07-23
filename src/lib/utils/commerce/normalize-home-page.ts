@@ -16,6 +16,7 @@ const normalizeHomePage = async (
 
 	const promoSection = rawHomePage.promoSection;
 	const categorySection = rawHomePage.categorySection;
+	const collectionSection = rawHomePage.collectionSection;
 
 	const promoBlocks: PromoBlock[] = Array.isArray(promoSection?.items)
 		? promoSection.items.map((item) => ({
@@ -61,6 +62,23 @@ const normalizeHomePage = async (
 			}))
 		: [];
 
+	const collections: HomePage["collectionSection"]["items"] = Array.isArray(
+		collectionSection?.items
+	)
+		? collectionSection.items.map((item) => ({
+				id: item.id,
+				title: item.title ?? "",
+				slug: item.slug ?? "",
+				description: item.description ?? null,
+				thumbnail: item.thumbnail
+					? {
+							src: item.thumbnail?.image ? getImageUrl(item.thumbnail.image).url() : null,
+							alt: item.thumbnail?.altText ?? null,
+						}
+					: null,
+			}))
+		: [];
+
 	const productSections: HomePage["productSections"] = Array.isArray(rawHomePage.productSections)
 		? await Promise.all(
 				rawHomePage.productSections.map(async (section) => ({
@@ -85,6 +103,10 @@ const normalizeHomePage = async (
 			title: categorySection?.title ?? "",
 			hidden: categorySection?.hidden ?? false,
 			items: categories,
+		},
+		collectionSection: {
+			hidden: collectionSection?.hidden ?? false,
+			items: collections,
 		},
 		productSections,
 	};

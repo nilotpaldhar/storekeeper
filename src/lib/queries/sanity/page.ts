@@ -1,5 +1,6 @@
 import { defineQuery } from "next-sanity";
 
+import { CollectionSummaryFragment } from "@/lib/queries/sanity/collection";
 import { MediaImageFragment } from "@/lib/queries/sanity/media";
 import { ProductSummaryFragment } from "@/lib/queries/sanity/product";
 
@@ -57,6 +58,12 @@ const HomePageQuery = defineQuery(`
                 title,
                 "slug": slug.current,
                 "thumbnail": media { ${MediaImageFragment} }
+            }
+        },
+        collectionSection {
+            hidden,
+            items[]->{ 
+                ${CollectionSummaryFragment}
             }
         },
         "productSections": productShowcases[]{
