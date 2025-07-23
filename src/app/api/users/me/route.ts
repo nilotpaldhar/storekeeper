@@ -10,16 +10,9 @@ import { getCurrentUser } from "@/lib/resources/user/services";
 export async function GET() {
 	const user = await getCurrentUser();
 
-	if (!user) {
-		return NextResponse.json(
-			{ success: false, message: "Unauthorized! Access denied" },
-			{ status: 401 }
-		);
-	}
-
 	return NextResponse.json({
 		success: true,
-		message: "User fetched successfully",
-		data: user,
+		message: user ? "User fetched successfully" : "Not logged in",
+		data: user ?? null,
 	});
 }

@@ -71,6 +71,13 @@ const taxon = defineType({
 			description: "Check this if products can be assigned to this category.",
 			initialValue: false,
 		}),
+
+		defineField({
+			name: "seo",
+			title: "SEO / Share Settings",
+			type: "seo",
+			description: "Configure SEO metadata and social sharing info for this taxon.",
+		}),
 	],
 	preview: {
 		select: {

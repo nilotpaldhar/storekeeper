@@ -5,7 +5,7 @@ import { axios, handleAxiosError } from "@/lib/http/client";
 
 const getCurrentUser = async () => {
 	try {
-		const res = await axios.get<APIResponse<UserProfile>>("/users/me");
+		const res = await axios.get<APIResponse<UserProfile | null>>("/users/me");
 		return res.data;
 	} catch (error) {
 		const errMsg = handleAxiosError(error);

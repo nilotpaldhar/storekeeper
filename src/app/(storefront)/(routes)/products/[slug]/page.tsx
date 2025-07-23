@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ProductCollection } from "@/components/product/collection";
-import { Heading } from "@/components/product/collection/heading";
+import { ProductCollectionHeading } from "@/components/product/collection/heading";
 import { ProductOverview } from "@/components/product/overview";
 import { Container } from "@/components/ui/container";
 
@@ -55,7 +55,9 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 				</section>
 				{relatedProducts.length > 0 ? (
 					<section className="pt-16">
-						<Heading className="mb-6 lg:mb-8">You May Also Like</Heading>
+						<ProductCollectionHeading className="mb-6 lg:mb-8">
+							You May Also Like
+						</ProductCollectionHeading>
 						<ProductCollection products={relatedProducts} layout="grid" />
 					</section>
 				) : null}

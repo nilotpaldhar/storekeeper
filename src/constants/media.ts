@@ -19,5 +19,8 @@ export const ILLUSTRATIONS = {
 	},
 	PLACEHOLDERS: {
 		PRODUCT: `${ILLUSTRATIONS_BASE}/placeholders/product-placeholder.png`,
+		CATEGORY: `${ILLUSTRATIONS_BASE}/placeholders/category-placeholder.png`,
+		COLLECTION_THUMBNAIL: `${ILLUSTRATIONS_BASE}/placeholders/collection-thumbnail-placeholder.png`,
+		COLLECTION_BANNER: `${ILLUSTRATIONS_BASE}/placeholders/collection-banner-placeholder.png`,
 	},
 };

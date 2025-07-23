@@ -1,11 +1,13 @@
 import { type SchemaTypeDefinition } from "sanity";
 
 import { brand } from "@/sanity/schemas/documents/brand";
+import { collection } from "@/sanity/schemas/documents/collection";
 import { homePage } from "@/sanity/schemas/documents/home-page";
 import { menu } from "@/sanity/schemas/documents/menu";
 import { notFoundPage } from "@/sanity/schemas/documents/not-found-page";
 import { page } from "@/sanity/schemas/documents/page";
 import { product } from "@/sanity/schemas/documents/product";
+import { promoBlock } from "@/sanity/schemas/documents/promo-block";
 import { footerSettings } from "@/sanity/schemas/documents/settings-footer";
 import { generalSettings } from "@/sanity/schemas/documents/settings-general";
 import { headerSettings } from "@/sanity/schemas/documents/settings-header";
@@ -24,6 +26,7 @@ import { navProduct } from "@/sanity/schemas/objects/nav-product";
 import { navTaxon } from "@/sanity/schemas/objects/nav-taxon";
 import { navTaxonomy } from "@/sanity/schemas/objects/nav-taxonomy";
 import { productOption } from "@/sanity/schemas/objects/product-option";
+import { productShowcase } from "@/sanity/schemas/objects/product-showcase";
 import { productSpecification } from "@/sanity/schemas/objects/product-specification";
 import { productVariant } from "@/sanity/schemas/objects/product-variant";
 import { seo } from "@/sanity/schemas/objects/seo";
@@ -48,6 +51,7 @@ const schema: { types: SchemaTypeDefinition[] } = {
 		productOption,
 		productVariant,
 		productSpecification,
+		productShowcase,
 
 		// Documents
 		// Pages
@@ -66,6 +70,9 @@ const schema: { types: SchemaTypeDefinition[] } = {
 		product,
 		sku,
 		brand,
+
+		promoBlock,
+		collection,
 
 		// Settings
 		generalSettings,

@@ -1,14 +1,19 @@
 import "server-only";
 import { getSanityClient } from "@/lib/clients/sanity";
 import { logEvent } from "@/lib/logging/log-event";
-import { NotFoundPage, StaticPage, StaticPageSlugs } from "@/lib/queries/sanity";
+import {
+	NotFoundPageQuery,
+	StaticPageQuery,
+	StaticPageSlugsQuery,
+	HomePageQuery,
+} from "@/lib/queries/sanity";
 
 /**
  * Fetches an array of static page slugs from the CMS.
  */
 const getStaticPageSlugs = async () => {
 	try {
-		const slugs = await getSanityClient().fetch(StaticPageSlugs);
+		const slugs = await getSanityClient().fetch(StaticPageSlugsQuery);
 		if (!slugs || !Array.isArray(slugs)) return null;
 		return slugs.map(({ slug }) => slug);
 	} catch (err) {
@@ -29,7 +34,7 @@ const getStaticPageSlugs = async () => {
  */
 const getStaticPageBySlug = async ({ slug }: { slug: string }) => {
 	try {
-		const page = await getSanityClient().fetch(StaticPage, { slug });
+		const page = await getSanityClient().fetch(StaticPageQuery, { slug });
 		if (!page) return null;
 		return page;
 	} catch (err) {
@@ -48,7 +53,7 @@ const getStaticPageBySlug = async ({ slug }: { slug: string }) => {
  */
 const getNotFoundPage = async () => {
 	try {
-		const page = await getSanityClient().fetch(NotFoundPage);
+		const page = await getSanityClient().fetch(NotFoundPageQuery);
 		if (!page) return null;
 		return page;
 	} catch (err) {
@@ -62,4 +67,23 @@ const getNotFoundPage = async () => {
 	}
 };
 
-export { getStaticPageSlugs, getStaticPageBySlug, getNotFoundPage };
+/**
+ * Fetches ...
+ */
+const getNotHomePage = async () => {
+	try {
+		const page = await getSanityClient().fetch(HomePageQuery);
+		if (!page) return null;
+		return page;
+	} catch (err) {
+		logEvent({
+			fn: "getNotHomePage",
+			level: "error",
+			event: "fail",
+			error: err,
+		});
+		return null;
+	}
+};
+
+export { getStaticPageSlugs, getStaticPageBySlug, getNotFoundPage, getNotHomePage };

@@ -7,18 +7,24 @@ import { Suspense } from "react";
 import { useCallbackUrl } from "@/hooks/common/use-callback-url";
 import { useCurrentUser } from "@/hooks/user/use-current-user";
 
-import { DASHBOARD_ROUTE, LOGIN_ROUTE } from "@/constants/routes";
+import { LOGIN_ROUTE } from "@/constants/routes";
 
 import { Button } from "@/components/ui/button";
 import { ThreeDotsLoader } from "@/components/ui/loader";
 
+import { notifyFeatureUnavailable } from "@/lib/utils/toast";
+
 const HeaderAccountPreviewContent = () => {
 	const router = useRouter();
 	const callbackUrl = useCallbackUrl();
-	const { data, isLoading } = useCurrentUser();
+	const { data, isLoading, isFetching } = useCurrentUser();
 
 	const user = data?.data ?? null;
 	const isAuthenticated = !isLoading && !!user;
+
+	const handleDashboardClick = () => {
+		notifyFeatureUnavailable({ featureName: "Dashboard" });
+	};
 
 	const handleLoginClick = () => {
 		router.push(`${LOGIN_ROUTE}?callbackUrl=${callbackUrl}`);
@@ -26,7 +32,7 @@ const HeaderAccountPreviewContent = () => {
 
 	return (
 		<div>
-			{isLoading ? (
+			{isLoading || isFetching ? (
 				<div className="flex h-20 items-center justify-center">
 					<ThreeDotsLoader />
 				</div>
@@ -50,7 +56,7 @@ const HeaderAccountPreviewContent = () => {
 						</p>
 					</div>
 					{isAuthenticated ? (
-						<Button className="w-full" onClick={() => router.push(DASHBOARD_ROUTE)}>
+						<Button className="w-full" onClick={handleDashboardClick}>
 							<LayoutDashboard />
 							<span>Dashboard</span>
 						</Button>

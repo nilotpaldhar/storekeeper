@@ -37,10 +37,16 @@ const NotFoundPageSeo = defineQuery(`
     }
 `);
 
+const HomePageSeo = defineQuery(`
+    *[_type == "homePage"] | order(_updatedAt desc) [0] {
+        seo { ${SeoFieldsFragment} }
+    }
+`);
+
 const ProductSeo = defineQuery(`
     *[_type == "product" && slug.current ==  $slug] | order(_updatedAt desc) [0] {
         seo { ${SeoFieldsFragment} }
     }
 `);
 
-export { GlobalSeo, StaticPageSeo, NotFoundPageSeo, ProductSeo };
+export { GlobalSeo, StaticPageSeo, NotFoundPageSeo, ProductSeo, HomePageSeo };

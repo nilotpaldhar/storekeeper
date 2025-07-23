@@ -5,7 +5,7 @@ import { z } from "zod";
 import { AddressSchema } from "@/lib/schemas";
 
 // ─────────────────────────────────────────────────────
-// Utility & Generic Types
+// Utility Types
 // ─────────────────────────────────────────────────────
 
 /**
@@ -16,7 +16,7 @@ export type OperationResult<TData = undefined, TReason extends string = "UNKNOWN
 	| { ok: false; reason: TReason; detail?: string };
 
 // ─────────────────────────────────────────────────────
-// User Types
+// User & Identity Types
 // ─────────────────────────────────────────────────────
 
 /**
@@ -25,11 +25,15 @@ export type OperationResult<TData = undefined, TReason extends string = "UNKNOWN
 export type UserProfile = User;
 
 // ─────────────────────────────────────────────────────
-// Product Primitives (building blocks)
+// Commerce Primitives
 // ─────────────────────────────────────────────────────
 
 export type ProductPrice = Price;
 export type ProductInventory = StockItem;
+
+// ─────────────────────────────────────────────────────
+// Product Entity Types (core definitions)
+// ─────────────────────────────────────────────────────
 
 export type ProductSku = {
 	id: string;
@@ -81,7 +85,7 @@ export type ProductBreadcrumb = {
 }[];
 
 // ─────────────────────────────────────────────────────
-// Product Aggregates (for display or pages)
+// Product Aggregates (composite types for UI/pages)
 // ─────────────────────────────────────────────────────
 
 export type ProductDetails = {
@@ -100,6 +104,7 @@ export type ProductDetails = {
 };
 
 export type ProductSummary = {
+	_key: string | null;
 	id: string;
 	title: string;
 	slug: string;
@@ -113,7 +118,7 @@ export type ProductSummary = {
 };
 
 // ─────────────────────────────────────────────────────
-// Cart & Order Shared Types
+// Cart & Order Core Types
 // ─────────────────────────────────────────────────────
 
 /**
@@ -215,7 +220,7 @@ export type CheckoutLineItem = Pick<
 };
 
 // ─────────────────────────────────────────────────────
-// Cart & Order Aliases
+// Cart & Order Aliases (specific naming conveniences)
 // ─────────────────────────────────────────────────────
 
 export type CartSummary = CheckoutSummary;
@@ -240,9 +245,81 @@ export type CheckoutStep = {
 	completed: boolean;
 };
 
+/**
+ * Zod-powered address input form shape.
+ */
 export type AddressInput = z.infer<typeof AddressSchema>;
 
+/**
+ * Address shape used for storage/records.
+ */
 export type AddressRecord = z.infer<typeof AddressSchema> & {
 	id: string;
 	type: "addresses";
+};
+
+// ─────────────────────────────────────────────────────
+// Marketing & Display Types (non-commerce)
+// ─────────────────────────────────────────────────────
+
+export type MediaImage = {
+	src: string | null;
+	alt: string | null;
+};
+
+export type PromoBlock = {
+	id: string;
+	title: string;
+	description: string | null;
+	contentAlignment: "left" | "right";
+	thumbnail: MediaImage;
+	backdrop: MediaImage | null;
+	price: {
+		label: string;
+		amount: string;
+	};
+	link: {
+		label: string;
+		resource: {
+			type: "page" | "product" | "taxonomy" | "taxon" | null;
+			slug: string | null;
+		} | null;
+	};
+};
+
+export type CollectionSummary = {
+	id: string;
+	title: string;
+	slug: string;
+	description: string | null;
+	thumbnail: MediaImage | null;
+};
+
+export type HomePage = {
+	id: string;
+	title: string;
+	promoSection: {
+		hidden: boolean;
+		items: PromoBlock[];
+	};
+	categorySection: {
+		title: string;
+		hidden: boolean;
+		items: {
+			id: string;
+			title: string;
+			slug: string;
+			thumbnail: MediaImage;
+		}[];
+	};
+	collectionSection: {
+		hidden: boolean;
+		items: CollectionSummary[];
+	};
+	productSections: {
+		refKey: string;
+		title: string;
+		hidden: boolean;
+		products: ProductSummary[];
+	}[];
 };

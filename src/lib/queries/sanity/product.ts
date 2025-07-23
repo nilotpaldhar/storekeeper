@@ -115,6 +115,7 @@ const ProductBySkuCodeQuery = defineQuery(`
 `);
 
 export {
+	ProductSummaryFragment,
 	ProductSlugsQuery,
 	ProductQuery,
 	ProductSummaryQuery,

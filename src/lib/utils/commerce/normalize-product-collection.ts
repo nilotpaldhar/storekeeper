@@ -3,6 +3,8 @@ import "server-only";
 import type { ProductSummary } from "@/types/domain.types";
 import type { ProductSummaryQueryResult } from "@/types/sanity.types";
 
+import { nanoid } from "nanoid";
+
 import { getProductPrice } from "@/lib/resources/products/fetch/index";
 import { normalizeProductImageGallery } from "@/lib/utils/commerce/normalize-product-image-gallery";
 
@@ -22,6 +24,7 @@ const normalizeProductCollection = async (
 			const price = skuId ? await getProductPrice({ skuId }) : null;
 
 			return {
+				_key: nanoid(),
 				id: item.id,
 				title: item.title ?? "",
 				slug: item.slug ?? "",

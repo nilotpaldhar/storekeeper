@@ -1,6 +1,15 @@
 import type { StructureBuilder } from "sanity/structure";
 
-import { Barcode, Building2, Layers, Package, Store, Tag } from "lucide-react";
+import {
+	Barcode,
+	Building2,
+	Layers,
+	Package,
+	SlidersHorizontal,
+	Store,
+	Tag,
+	LayoutGrid,
+} from "lucide-react";
 
 const productMenu = (S: StructureBuilder) =>
 	S.listItem()
@@ -52,6 +61,26 @@ const brandMenu = (S: StructureBuilder) =>
 		)
 		.icon(Building2);
 
+const promoBlockMenu = (S: StructureBuilder) =>
+	S.listItem()
+		.title("Promo Blocks")
+		.child(
+			S.documentTypeList("promoBlock")
+				.title("Promo Blocks")
+				.child((documentId) => S.document().documentId(documentId).schemaType("promoBlock"))
+		)
+		.icon(SlidersHorizontal);
+
+const collectionBlockMenu = (S: StructureBuilder) =>
+	S.listItem()
+		.title("Collections")
+		.child(
+			S.documentTypeList("collection")
+				.title("Collections")
+				.child((documentId) => S.document().documentId(documentId).schemaType("collection"))
+		)
+		.icon(LayoutGrid);
+
 const commerce = (S: StructureBuilder) =>
 	S.listItem()
 		.title("Commerce")
@@ -66,6 +95,9 @@ const commerce = (S: StructureBuilder) =>
 					taxonomyMenu(S),
 					taxonMenu(S),
 					brandMenu(S),
+					S.divider(),
+					promoBlockMenu(S),
+					collectionBlockMenu(S),
 				])
 		)
 		.icon(Store);

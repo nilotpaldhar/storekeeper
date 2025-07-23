@@ -8,7 +8,7 @@ import {
 	getUserSession,
 } from "@/lib/resources/user/fetch";
 
-const getCurrentUser = async ({ cached }: { cached?: true } = {}) => {
+const getCurrentUser = async ({ cached = true }: { cached?: boolean } = {}) => {
 	const session = await getUserSession();
 
 	const id = session?.id;

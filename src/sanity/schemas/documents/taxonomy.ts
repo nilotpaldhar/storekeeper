@@ -38,6 +38,13 @@ const taxonomy = defineType({
 			type: "mediaImage",
 			description: "Image representing the taxonomy",
 		}),
+
+		defineField({
+			name: "seo",
+			title: "SEO / Share Settings",
+			type: "seo",
+			description: "Configure SEO metadata and social sharing info for this taxonomy.",
+		}),
 	],
 	preview: {
 		select: {
