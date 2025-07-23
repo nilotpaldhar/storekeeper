@@ -1,3 +1,19 @@
+# [0.8.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.7.0...v0.8.0) (2025-07-23)
+
+
+### Features
+
+* **auth:** add LogoutButton component with client-side redirect ([adf1a6e](https://github.com/nilotpaldhar/storekeeper/commit/adf1a6ef920bc976f1df51c13e3fd99adf27f823))
+* **landing-page:** add Category section with CategoryCarousel component ([e14ab36](https://github.com/nilotpaldhar/storekeeper/commit/e14ab36711546fbd516f4e07cfb672675af0ff83))
+* **landing-page:** add Collection section with CollectionGrid component ([c422f55](https://github.com/nilotpaldhar/storekeeper/commit/c422f55e38494b84c0665d251df22d78ff774342))
+* **landing-page:** add newsletter subscription and feature highlights sections ([6287fb7](https://github.com/nilotpaldhar/storekeeper/commit/6287fb71435540592090b212afca38133be529ca))
+* **landing-page:** add product showcase sections ([5261a6a](https://github.com/nilotpaldhar/storekeeper/commit/5261a6a519b2f2c96ed1946ec4db74a08e0aee15))
+* **landing-page:** implement Promotional Banners section using PromoBlockSlider component ([1ece55f](https://github.com/nilotpaldhar/storekeeper/commit/1ece55f26a8c299779841186c103a8569472608b))
+* **schema:** add collection schema and integrate it into homePage document ([c05f975](https://github.com/nilotpaldhar/storekeeper/commit/c05f975a952a79c5c04f47e9aa04d78be4a16d4d))
+* **schema:** add promoBlock schema and integrate it into homePage document ([b29bcfd](https://github.com/nilotpaldhar/storekeeper/commit/b29bcfd3cad2c2a4ef5b342d58d6c305b3de16f6))
+
+
+
 # [0.7.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.6.0...v0.7.0) (2025-07-20)
 
 
@@ -49,18 +65,6 @@
 * **auth:** add basic structure and styling for login page (no auth logic yet) ([011bc65](https://github.com/nilotpaldhar/storekeeper/commit/011bc65bd15ef7b6962fae3d4bed1a7d3eba7289))
 * **auth:** add helper to sync user with Commerce Layer customer and store reference ID ([a3752c9](https://github.com/nilotpaldhar/storekeeper/commit/a3752c95c9c5d0a981941e5aa8b848b00ddab947))
 * **auth:** implement user authentication using Auth.js ([89316e4](https://github.com/nilotpaldhar/storekeeper/commit/89316e47559878b76418fcd8fb75bb84b4211d0e))
-
-
-
-# [0.3.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.2.0...v0.3.0) (2025-06-28)
-
-
-### Features
-
-* **layout:** add storefront layout with header and footer ([5eda0f1](https://github.com/nilotpaldhar/storekeeper/commit/5eda0f1fd8d08682d372fc5e219bd4bf41444677))
-* **not-found:** add custom 404 page to handle invalid routes gracefully ([448bc40](https://github.com/nilotpaldhar/storekeeper/commit/448bc400ba78e3023c6169e404598867ee251195))
-* **pages:** add static pages and restructure lib directory ([28ac36e](https://github.com/nilotpaldhar/storekeeper/commit/28ac36e8a61edadd3fae689bf4c8570c0a2d1548))
-* **seo:** add global and page-level SEO settings ([3fc90df](https://github.com/nilotpaldhar/storekeeper/commit/3fc90dfbb32b033feab7766856a1d16edbb5b0af))
 
 
 
