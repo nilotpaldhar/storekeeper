@@ -3,10 +3,7 @@
 import type { CheckoutData } from "@/stores/use-checkout-steps-store";
 import type { UserProfile } from "@/types/domain.types";
 
-import { useAction } from "next-safe-action/hooks";
-
-import { logoutAction } from "@/actions/auth/logout";
-
+import { LogoutButton } from "@/components/auth/logout-button";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
@@ -17,8 +14,6 @@ type UserDetailsSummaryProps = {
 };
 
 const UserDetailsSummary = ({ user, isLoading = false, onContinue }: UserDetailsSummaryProps) => {
-	const { execute, isPending } = useAction(logoutAction);
-
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-col items-start space-y-2">
@@ -30,14 +25,9 @@ const UserDetailsSummary = ({ user, isLoading = false, onContinue }: UserDetails
 					<div className="w-10">Email:</div>
 					<div className="font-medium">{user.email}</div>
 				</div>
-				<button
-					type="button"
-					className="text-primary-600 hover:text-primary-500 block cursor-pointer font-semibold disabled:cursor-not-allowed disabled:opacity-50"
-					disabled={isPending}
-					onClick={() => execute()}
-				>
+				<LogoutButton variant="primary-ghost" className="h-max px-0 py-0 text-base font-semibold">
 					Logout & Sign in to another account
-				</button>
+				</LogoutButton>
 			</div>
 			<Button
 				className="w-full"

@@ -6,7 +6,7 @@ import { getCurrentUser } from "@/lib/requests/user";
 
 const useCurrentUser = () => {
 	return useQuery({
-		queryKey: userKeys.current,
+		queryKey: userKeys.current(),
 		queryFn: getCurrentUser,
 		retry: 1,
 	});
