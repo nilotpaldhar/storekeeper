@@ -3,19 +3,19 @@
 import { Box, Button, Dialog, Flex, Layer, Stack, Text, TextInput, useToast } from "@sanity/ui";
 import { useEffect, useState } from "react";
 
-import { useSyncSkusFromCommerceLayer } from "@/hooks/sync-api";
+import { useIndexProductsToAlgolia } from "@/hooks/sync-api";
 
-type SyncSkusDialogProps = {
+type SyncProductsDialogProps = {
 	open: boolean;
 	onClose: () => void;
 	onSuccess?: () => void;
 };
 
-const SyncSkusDialog = ({ open, onClose, onSuccess }: SyncSkusDialogProps) => {
+const SyncProductsDialog = ({ open, onClose, onSuccess }: SyncProductsDialogProps) => {
 	const toast = useToast();
 	const [secret, setSecret] = useState("");
 
-	const { mutate, isPending, reset } = useSyncSkusFromCommerceLayer();
+	const { mutate, isPending, reset } = useIndexProductsToAlgolia();
 
 	const handleSync = () => {
 		mutate(
@@ -57,8 +57,8 @@ const SyncSkusDialog = ({ open, onClose, onSuccess }: SyncSkusDialogProps) => {
 	return (
 		<Layer>
 			<Dialog
-				id="sync-skus-dialog"
-				header="Admin Sync: Import SKUs from Commerce Layer"
+				id="sync-products-dialog"
+				header="Admin Sync: Push Products to Algolia"
 				onClose={onClose}
 				width={1}
 				footer={
@@ -78,8 +78,8 @@ const SyncSkusDialog = ({ open, onClose, onSuccess }: SyncSkusDialogProps) => {
 				<Box padding={4}>
 					<Stack space={4}>
 						<Text size={1}>
-							This is a restricted admin operation. To fetch SKUs from Commerce Layer and sync them
-							into Sanity, please enter the secure admin token.
+							This operation pushes published products from Sanity to Algolia. Admin access is
+							required. Enter the sync token below to proceed.
 						</Text>
 
 						<TextInput
@@ -97,4 +97,4 @@ const SyncSkusDialog = ({ open, onClose, onSuccess }: SyncSkusDialogProps) => {
 	);
 };
 
-export { SyncSkusDialog };
+export { SyncProductsDialog };

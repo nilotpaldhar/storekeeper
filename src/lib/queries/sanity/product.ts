@@ -114,6 +114,12 @@ const ProductBySkuCodeQuery = defineQuery(`
     }
 `);
 
+const SyncPublishedProductsQuery = defineQuery(`
+	*[ _type == "product" && !(_id in path('drafts.**'))] {
+		${ProductSummaryFragment}
+	}
+`);
+
 export {
 	ProductSummaryFragment,
 	ProductSlugsQuery,
@@ -121,4 +127,5 @@ export {
 	ProductSummaryQuery,
 	RelatedProductsQuery,
 	ProductBySkuCodeQuery,
+	SyncPublishedProductsQuery,
 };

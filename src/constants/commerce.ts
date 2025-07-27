@@ -164,3 +164,17 @@ export const ORDER_AND_CART_LINE_ITEM_FIELDS = [
 	"total_amount_cents",
 	"formatted_total_amount",
 ] as const satisfies QueryFields<LineItem>;
+
+export const ALGOLIA_INDEXES = {
+	PRODUCTS: "products",
+	PRODUCTS_PRICE_ASC: "products_price_asc",
+	PRODUCTS_PRICE_DESC: "products_price_desc",
+	PRODUCTS_QUERY_SUGGESTION: "products_query_suggestions",
+} as const;
+
+export const ALGOLIA_ATTRIBUTES = {
+	CATEGORY: "category",
+	PRICE: "price.amount_float",
+} as const;
+
+export const ALGOLIA_RECENT_SEARCHES_KEY = "sk.recent_search" as const;

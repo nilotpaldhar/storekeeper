@@ -74,3 +74,11 @@ export const AddressSchema = z.object({
 export const NewsletterFormSchema = z.object({
 	email: z.string().trim().email({ message: "Please enter a valid email address" }),
 });
+
+export const SyncCommerceLayerSkusSchema = z.object({
+	secret: z.string().min(1, "Unauthorized: secret token is invalid or missing."),
+});
+
+export const IndexProductsToAlgoliaSchema = z.object({
+	secret: z.string().min(1, "Unauthorized: secret token is invalid or missing."),
+});
