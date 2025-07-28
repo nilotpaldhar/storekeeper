@@ -40,6 +40,9 @@
     "url": "https://github.com/nilotpaldhar/storekeeper/issues"
   },
   "dependencies": {
+    "@algolia/autocomplete-js": "^1.19.2",
+    "@algolia/autocomplete-plugin-query-suggestions": "^1.19.2",
+    "@algolia/autocomplete-plugin-recent-searches": "^1.19.2",
     "@auth/prisma-adapter": "^2.10.0",
     "@commercelayer/js-auth": "^6.7.2",
     "@commercelayer/sdk": "^6.44.0",

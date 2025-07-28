@@ -189,3 +189,11 @@
 		@apply outline-2 outline-offset-4 outline-neutral-600 outline-dotted;
 	}
 }
+
+@layer utilities {
+	.search-clear-hidden::-webkit-search-cancel-button {
+		appearance: none;
+		-webkit-appearance: none;
+		display: none;
+	}
+}

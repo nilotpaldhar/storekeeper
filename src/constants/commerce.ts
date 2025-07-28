@@ -178,3 +178,5 @@ export const ALGOLIA_ATTRIBUTES = {
 } as const;
 
 export const ALGOLIA_RECENT_SEARCHES_KEY = "sk.recent_search" as const;
+
+export const ALGOLIA_SEARCH_QUERY_KEY = `${ALGOLIA_INDEXES.PRODUCTS}[query]` as const;

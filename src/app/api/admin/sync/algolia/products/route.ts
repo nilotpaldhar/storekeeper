@@ -2,9 +2,9 @@ import { type NextRequest, NextResponse } from "next/server";
 
 import { ALGOLIA_INDEXES } from "@/constants/commerce";
 
-import { adminAlgoliaClient } from "@/lib/clients/algolia";
+import { adminClient as adminAlgoliaClient } from "@/lib/clients/algolia/admin";
 import { getSanityClient } from "@/lib/clients/sanity";
-import { config as algoliaConfig } from "@/lib/config/algolia";
+import { env } from "@/lib/config/env";
 import { SyncPublishedProductsQuery } from "@/lib/queries/sanity";
 import { IndexProductsToAlgoliaSchema } from "@/lib/schemas";
 import { normalizeProductCollection } from "@/lib/utils/commerce/normalize-product-collection";
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
 	if (
 		!validatedFields.success ||
-		algoliaConfig.productsSyncSecret !== validatedFields.data.secret
+		env.ALGOLIA_SANITY_PRODUCTS_SYNC_SECRET !== validatedFields.data.secret
 	) {
 		return NextResponse.json(
 			{
