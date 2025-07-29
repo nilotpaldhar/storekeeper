@@ -7,7 +7,11 @@ import { useEffect, useState } from "react";
 import { Configure } from "react-instantsearch";
 import { InstantSearchNext } from "react-instantsearch-nextjs";
 
-import { ALGOLIA_INDEXES, ALGOLIA_SEARCH_QUERY_KEY } from "@/constants/commerce";
+import {
+	ALGOLIA_INDEXES,
+	ALGOLIA_SEARCH_QUERY_KEY,
+	SEARCH_RESULTS_PER_PAGE,
+} from "@/constants/commerce";
 
 import { SearchResultsAttribution } from "@/components/search/results-view/attribution";
 import { SearchResultsEmptyBoundary } from "@/components/search/results-view/empty-boundary";
@@ -17,7 +21,6 @@ import { SearchResultsFiltersMobile } from "@/components/search/results-view/fil
 import { SearchResultsInfo } from "@/components/search/results-view/info";
 import { SearchResultsLayoutSwitch } from "@/components/search/results-view/layout-switch";
 import { SearchResultsList } from "@/components/search/results-view/list";
-import { SearchResultsListSkeleton } from "@/components/search/results-view/list-skeleton";
 import { SearchResultsPagination } from "@/components/search/results-view/pagination";
 import { SearchResultsQueryInitializer } from "@/components/search/results-view/query-initializer";
 import { SearchResultsRefinements } from "@/components/search/results-view/refinements";
@@ -88,7 +91,7 @@ const SearchResultsView = () => {
 			future={{ preserveSharedStateOnUnmount: true }}
 			routing
 		>
-			<Configure hitsPerPage={12} />
+			<Configure hitsPerPage={SEARCH_RESULTS_PER_PAGE} />
 			<SearchResultsQueryInitializer query={query} />
 
 			<div className="min-h-screen pt-10 pb-14">
@@ -121,10 +124,10 @@ const SearchResultsView = () => {
 										<aside className="bg-fuchsia-300 xl:hidden">
 											<SearchResultsFiltersMobile />
 										</aside>
-										<div className="flex flex-1 justify-end px-6">
+										<div className="flex flex-1 justify-end sm:px-6">
 											<SearchResultsSort />
 										</div>
-										<div className="">
+										<div className="hidden sm:block">
 											<SearchResultsLayoutSwitch
 												activeLayout={activeLayout}
 												onChange={setActiveLayout}
@@ -145,8 +148,7 @@ const SearchResultsView = () => {
 							<section aria-label="Search results">
 								<SearchResultsEmptyBoundary fallback={<SearchResultsEmpty query={query} />}>
 									<SearchResultsList activeLayout={activeLayout} />
-									<SearchResultsListSkeleton activeLayout={activeLayout} />
-									<div className="flex hidden items-center justify-center pt-14">
+									<div className="flex items-center justify-center pt-14">
 										<SearchResultsPagination />
 									</div>
 								</SearchResultsEmptyBoundary>

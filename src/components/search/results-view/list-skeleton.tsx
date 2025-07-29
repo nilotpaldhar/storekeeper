@@ -1,10 +1,10 @@
 import type { ProductCollectionLayout } from "@/types/ui.types";
 
-import { useInstantSearch } from "react-instantsearch";
+import { SEARCH_RESULTS_PER_PAGE } from "@/constants/commerce";
 
 import { Skeleton, SkeletonImage } from "@/components/ui/skeleton";
 
-const ListSkeleton = ({ count = 12 }: { count?: number }) => {
+const ListSkeleton = ({ count = SEARCH_RESULTS_PER_PAGE }: { count?: number }) => {
 	const items = [...Array(count).keys()];
 
 	return (
@@ -30,7 +30,7 @@ const ListSkeleton = ({ count = 12 }: { count?: number }) => {
 	);
 };
 
-const GridSkeleton = ({ count = 12 }: { count?: number }) => {
+const GridSkeleton = ({ count = SEARCH_RESULTS_PER_PAGE }: { count?: number }) => {
 	const items = [...Array(count).keys()];
 
 	return (
@@ -42,14 +42,8 @@ const GridSkeleton = ({ count = 12 }: { count?: number }) => {
 	);
 };
 
-const SearchResultsListSkeleton = ({ activeLayout }: { activeLayout: ProductCollectionLayout }) => {
-	const { status } = useInstantSearch();
-
-	if (status === "loading" || status === "stalled") {
-		return activeLayout === "list" ? <ListSkeleton /> : <GridSkeleton />;
-	}
-
-	return null;
+const SearchResultsListSkeleton = ({ layout }: { layout: ProductCollectionLayout }) => {
+	return layout === "list" ? <ListSkeleton /> : <GridSkeleton />;
 };
 
 export { SearchResultsListSkeleton };
