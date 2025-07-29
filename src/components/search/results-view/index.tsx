@@ -1,5 +1,7 @@
 "use client";
 
+import type { ProductCollectionLayout } from "@/types/ui.types";
+
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Configure } from "react-instantsearch";
@@ -15,6 +17,7 @@ import { SearchResultsFiltersMobile } from "@/components/search/results-view/fil
 import { SearchResultsInfo } from "@/components/search/results-view/info";
 import { SearchResultsLayoutSwitch } from "@/components/search/results-view/layout-switch";
 import { SearchResultsList } from "@/components/search/results-view/list";
+import { SearchResultsListSkeleton } from "@/components/search/results-view/list-skeleton";
 import { SearchResultsPagination } from "@/components/search/results-view/pagination";
 import { SearchResultsQueryInitializer } from "@/components/search/results-view/query-initializer";
 import { SearchResultsRefinements } from "@/components/search/results-view/refinements";
@@ -47,6 +50,7 @@ const SearchResultsEmpty = ({ query }: { query: string }) => {
 
 const SearchResultsView = () => {
 	const [isMounted, setIsMounted] = useState(false);
+	const [activeLayout, setActiveLayout] = useState<ProductCollectionLayout>("grid");
 
 	const searchParams = useSearchParams();
 	const query = searchParams.get(ALGOLIA_SEARCH_QUERY_KEY) ?? "";
@@ -87,12 +91,12 @@ const SearchResultsView = () => {
 			<Configure hitsPerPage={12} />
 			<SearchResultsQueryInitializer query={query} />
 
-			<div className="pt-10 pb-14">
+			<div className="min-h-screen pt-10 pb-14">
 				<Container>
 					<div className="flex gap-6">
 						{/* Desktop Filters */}
 						<SearchResultsEmptyBoundary fallback={null}>
-							<aside className="hidden w-72 shrink-0 bg-teal-300 xl:block">
+							<aside className="hidden w-72 shrink-0 xl:block">
 								<SearchResultsFiltersContent />
 							</aside>
 						</SearchResultsEmptyBoundary>
@@ -100,7 +104,7 @@ const SearchResultsView = () => {
 						{/* Main Content */}
 						<main className="flex-1">
 							{/* Results Header */}
-							<header className="flex flex-col xl:flex-row">
+							<header className="flex flex-col pb-6 xl:flex-row">
 								{/* Info + Attribution */}
 								<div className="flex flex-1 justify-between">
 									<div className="bg-amber-200">
@@ -113,15 +117,18 @@ const SearchResultsView = () => {
 
 								{/* Filters (mobile), Sort, Layout Switch */}
 								<SearchResultsEmptyBoundary fallback={null}>
-									<div className="flex">
+									<div className="flex items-center pt-6 xl:pt-0">
 										<aside className="bg-fuchsia-300 xl:hidden">
 											<SearchResultsFiltersMobile />
 										</aside>
-										<div className="bg-error-300 flex flex-1 justify-end">
+										<div className="flex flex-1 justify-end px-6">
 											<SearchResultsSort />
 										</div>
-										<div className="bg-green-300">
-											<SearchResultsLayoutSwitch />
+										<div className="">
+											<SearchResultsLayoutSwitch
+												activeLayout={activeLayout}
+												onChange={setActiveLayout}
+											/>
 										</div>
 									</div>
 								</SearchResultsEmptyBoundary>
@@ -129,18 +136,17 @@ const SearchResultsView = () => {
 
 							{/* Refinements */}
 							<SearchResultsEmptyBoundary fallback={null}>
-								<section className="bg-indigo-300">
+								<section className="hidden bg-indigo-300">
 									<SearchResultsRefinements />
 								</section>
 							</SearchResultsEmptyBoundary>
 
 							{/* Products & Pagination */}
-							<section aria-label="Search results" className="bg-pink-300">
+							<section aria-label="Search results">
 								<SearchResultsEmptyBoundary fallback={<SearchResultsEmpty query={query} />}>
-									<div>
-										<SearchResultsList />
-									</div>
-									<div>
+									<SearchResultsList activeLayout={activeLayout} />
+									<SearchResultsListSkeleton activeLayout={activeLayout} />
+									<div className="flex hidden items-center justify-center pt-14">
 										<SearchResultsPagination />
 									</div>
 								</SearchResultsEmptyBoundary>
