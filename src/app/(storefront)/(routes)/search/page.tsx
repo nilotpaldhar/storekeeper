@@ -14,7 +14,7 @@ type SearchPageProps = {
 
 export const generateMetadata = async ({ searchParams }: SearchPageProps): Promise<Metadata> => {
 	const query = (await searchParams)[ALGOLIA_SEARCH_QUERY_KEY];
-	const title = query ? `"${query}" - Search Results` : `Search Results`;
+	const title = query ? `Search Results for "${query}"` : `Search Products`;
 	return getSeo({ metaTitle: title, shareTitle: title });
 };
 

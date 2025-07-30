@@ -18,7 +18,6 @@ import { SearchResultsEmptyBoundary } from "@/components/search/results-view/emp
 import { SearchResultsEmptyState } from "@/components/search/results-view/empty-state";
 import { SearchResultsFiltersContent } from "@/components/search/results-view/filters-content";
 import { SearchResultsFiltersMobile } from "@/components/search/results-view/filters-mobile";
-import { SearchResultsInfo } from "@/components/search/results-view/info";
 import { SearchResultsLayoutSwitch } from "@/components/search/results-view/layout-switch";
 import { SearchResultsList } from "@/components/search/results-view/list";
 import { SearchResultsPagination } from "@/components/search/results-view/pagination";
@@ -109,11 +108,12 @@ const SearchResultsView = () => {
 							{/* Results Header */}
 							<header className="flex flex-col pb-6 xl:flex-row">
 								{/* Info + Attribution */}
-								<div className="flex flex-1 justify-between">
-									<div className="bg-amber-200">
-										<SearchResultsInfo />
+								<div className="flex flex-1 items-center justify-between">
+									<div className="flex flex-wrap gap-1">
+										<span>Showing results for</span>
+										<strong>&quot;{query}&quot;</strong>
 									</div>
-									<div className="bg-emerald-300">
+									<div className="flex items-center">
 										<SearchResultsAttribution />
 									</div>
 								</div>
