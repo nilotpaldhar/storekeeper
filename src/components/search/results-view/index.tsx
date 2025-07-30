@@ -139,8 +139,8 @@ const SearchResultsView = () => {
 
 							{/* Refinements */}
 							<SearchResultsEmptyBoundary fallback={null}>
-								<section className="hidden bg-indigo-300">
-									<SearchResultsRefinements />
+								<section>
+									<SearchResultsRefinements className="pb-6" />
 								</section>
 							</SearchResultsEmptyBoundary>
 
