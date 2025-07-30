@@ -172,8 +172,9 @@ export const ALGOLIA_INDEXES = {
 	PRODUCTS_QUERY_SUGGESTION: "products_query_suggestions",
 } as const;
 
-export const ALGOLIA_ATTRIBUTES = {
+export const ALGOLIA_FACET_ATTRIBUTES = {
 	CATEGORY: "category",
+	BRAND: "brand",
 	PRICE: "price.amount_float",
 } as const;
 

@@ -109,6 +109,7 @@ export type ProductSummary = {
 	title: string;
 	slug: string;
 	category: string;
+	brand: string;
 	description: string | null;
 	hasVariants: boolean;
 	variants: ProductVariant[];

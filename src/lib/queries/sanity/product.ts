@@ -21,6 +21,12 @@ const ProductTaxonFragment = `
     isLeaf
 `;
 
+const ProductBrandFragment = `
+    "id": _id,
+    title,
+    "slug": slug.current
+`;
+
 const ProductOptionFragment = `
     "refKey": _key,
     name,
@@ -45,6 +51,7 @@ const ProductSummaryFragment = `
     hasVariants,
     "sku": sku->{ ${ProductSKUFragment} },
     "taxon": taxon->{ ${ProductTaxonFragment} },
+    "brand": brand->{ ${ProductBrandFragment} },
     "gallery":  select(
         defined(gallery) => gallery[]{ ${MediaImageFragment} },
         []

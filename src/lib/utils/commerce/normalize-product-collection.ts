@@ -31,6 +31,7 @@ const normalizeProductCollection = async (
 				description: item.description ?? null,
 				hasVariants: item.hasVariants ?? false,
 				category: item.taxon?.title ?? "",
+				brand: item.brand?.title ?? "",
 				sku: item.sku ?? null,
 				gallery: normalizeProductImageGallery(item.gallery),
 				variants: Array.isArray(item.variants)
