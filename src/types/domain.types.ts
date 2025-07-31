@@ -108,7 +108,9 @@ export type ProductSummary = {
 	id: string;
 	title: string;
 	slug: string;
-	category: string;
+	taxonomy: string;
+	taxon: string;
+	brand: string;
 	description: string | null;
 	hasVariants: boolean;
 	variants: ProductVariant[];

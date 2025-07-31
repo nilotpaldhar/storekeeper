@@ -1,10 +1,9 @@
 "use client";
 
 import { Box, Button, Dialog, Flex, Layer, Stack, Text, TextInput, useToast } from "@sanity/ui";
-import { useAction } from "next-safe-action/hooks";
 import { useEffect, useState } from "react";
 
-import { syncSkusAction } from "@/actions/sanity/sync-skus";
+import { useSyncSkusFromCommerceLayer } from "@/hooks/sync-api";
 
 type SyncSkusDialogProps = {
 	open: boolean;
@@ -16,26 +15,34 @@ const SyncSkusDialog = ({ open, onClose, onSuccess }: SyncSkusDialogProps) => {
 	const toast = useToast();
 	const [secret, setSecret] = useState("");
 
-	const { execute, isPending, reset } = useAction(syncSkusAction, {
-		onSuccess({ data }) {
-			toast.push({
-				status: "success",
-				title: "Sync Completed",
-				description: data?.message,
-			});
-			onSuccess?.();
-		},
-		onError({ error }) {
-			toast.push({
-				status: "error",
-				title: "Sync Failed",
-				description: error.serverError ?? "Unexpected error occurred",
-			});
-		},
-		onSettled() {
-			onClose();
-		},
-	});
+	const { mutate, isPending, reset } = useSyncSkusFromCommerceLayer();
+
+	const handleSync = () => {
+		mutate(
+			{ secret },
+			{
+				onSuccess(data) {
+					toast.push({
+						status: "success",
+						title: "Sync Completed",
+						description: data?.message,
+					});
+					onSuccess?.();
+					onClose();
+				},
+				onError(error) {
+					toast.push({
+						status: "error",
+						title: "Sync Failed",
+						description: error.message ?? "Unexpected error occurred",
+					});
+				},
+				onSettled() {
+					setSecret("");
+				},
+			}
+		);
+	};
 
 	// Reset form on open/close
 	useEffect(() => {
@@ -51,7 +58,7 @@ const SyncSkusDialog = ({ open, onClose, onSuccess }: SyncSkusDialogProps) => {
 		<Layer>
 			<Dialog
 				id="sync-skus-dialog"
-				header="Admin Sync: Commerce Layer SKUs"
+				header="Admin Sync: Import SKUs from Commerce Layer"
 				onClose={onClose}
 				width={1}
 				footer={
@@ -60,7 +67,7 @@ const SyncSkusDialog = ({ open, onClose, onSuccess }: SyncSkusDialogProps) => {
 						<Button
 							tone="primary"
 							text="Run Sync"
-							onClick={() => execute({ secret })}
+							onClick={handleSync}
 							disabled={!secret || isPending}
 							loading={isPending}
 							style={{ marginLeft: "0.5rem" }}
@@ -71,15 +78,15 @@ const SyncSkusDialog = ({ open, onClose, onSuccess }: SyncSkusDialogProps) => {
 				<Box padding={4}>
 					<Stack space={4}>
 						<Text size={1}>
-							This is an admin-only operation. Enter the secret token to trigger the SKU sync from
-							Commerce Layer to Sanity.
+							This is a restricted admin operation. To fetch SKUs from Commerce Layer and sync them
+							into Sanity, please enter the secure admin token.
 						</Text>
 
 						<TextInput
 							type="password"
 							value={secret}
 							onChange={(e) => setSecret(e.currentTarget.value)}
-							placeholder="Enter admin sync secret"
+							placeholder="Enter admin sync token"
 							autoFocus
 							disabled={isPending}
 						/>

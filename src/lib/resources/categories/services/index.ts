@@ -27,6 +27,17 @@ const TaxonById = defineQuery(`
 `);
 
 /**
+ * Query to get a taxonomy by its slug.
+ */
+const TaxonomyBySlug = defineQuery(`
+	*[_type == "taxonomy" && slug.current == $slug][0]{
+		"id": _id,
+		title,
+		"slug": slug.current
+	}
+`);
+
+/**
  * Query to get a taxon by its slug, including its taxonomy reference.
  */
 const TaxonBySlug = defineQuery(`
@@ -60,56 +71,60 @@ const resolveTaxonHierarchy = async ({ taxonId }: { taxonId: string }): Promise<
 };
 
 /**
- * Builds the breadcrumb trail for a given taxon slug.
+ * Builds the breadcrumb trail for a given taxonomy/taxon slug.
  * Uses flat URL structure: /categories/:slug for each level.
  */
 const buildCategoryBreadcrumb = async ({
-	taxonSlug,
-	inludeRoot = true,
+	slug,
+	includeRoot = true,
 }: {
-	taxonSlug: string;
-	inludeRoot?: boolean;
+	slug: string;
+	includeRoot?: boolean;
 }): Promise<ProductBreadcrumb> => {
+	const sanityClient = getSanityClient();
+	const breadcrumb: ProductBreadcrumb = [];
+
 	try {
-		const sanityClient = getSanityClient();
-		const breadcrumb: ProductBreadcrumb = [];
-
-		// Fetch taxon by slug with its taxonomy
-		const taxon = await sanityClient.fetch(TaxonBySlug, { slug: taxonSlug });
-		if (!taxon) return breadcrumb;
-
-		// Get full parent hierarchy
-		const taxonHierarchy = await resolveTaxonHierarchy({ taxonId: taxon.id });
-
-		// Get the taxonomy the taxon belongs to
-		const taxonomy = taxon.taxonomy;
-
-		// Optionally add Home link
-		if (inludeRoot) {
-			breadcrumb.push({
-				id: "root",
-				label: "Home",
-				path: "/",
-			});
+		// Optionally add Home
+		if (includeRoot) {
+			breadcrumb.push({ id: "root", label: "Home", path: "/" });
 		}
 
-		// Add taxonomy link: /categories/:slug
+		// Try finding a taxon first
+		const taxon = await sanityClient.fetch(TaxonBySlug, { slug });
+		if (taxon) {
+			const taxonomy = taxon.taxonomy;
+			const taxonHierarchy = await resolveTaxonHierarchy({ taxonId: taxon.id });
+
+			if (taxonomy) {
+				breadcrumb.push({
+					id: taxonomy.id,
+					label: taxonomy.title ?? "",
+					path: `/categories/${taxonomy.slug}`,
+				});
+			}
+
+			taxonHierarchy.forEach((node) => {
+				breadcrumb.push({
+					id: node.id,
+					label: node.title,
+					path: `/categories/${node.slug}`,
+				});
+			});
+
+			return breadcrumb;
+		}
+
+		// If no taxon found, try taxonomy
+		const taxonomy = await sanityClient.fetch(TaxonomyBySlug, { slug });
 		if (taxonomy) {
 			breadcrumb.push({
 				id: taxonomy.id,
 				label: taxonomy.title ?? "",
 				path: `/categories/${taxonomy.slug}`,
 			});
+			return breadcrumb;
 		}
-
-		// Add each taxon in hierarchy: /categories/:slug (flat path)
-		taxonHierarchy.forEach((node) => {
-			breadcrumb.push({
-				id: node.id,
-				label: node.title,
-				path: `/categories/${node.slug}`,
-			});
-		});
 
 		return breadcrumb;
 	} catch (error) {

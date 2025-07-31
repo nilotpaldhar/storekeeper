@@ -47,3 +47,5 @@ export type CheckoutStepProps = {
 	completed: boolean;
 	onStepComplete: () => void;
 };
+
+export type ProductCollectionLayout = "grid" | "list";

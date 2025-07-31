@@ -11,7 +11,7 @@ import {
 import { WishlistButton } from "@/components/product/collection/wishlist-button";
 
 const ProductGridItem = ({
-	product: { title, slug, category, gallery, price },
+	product: { title, slug, taxon, gallery, price },
 }: {
 	product: ProductSummary;
 }) => {
@@ -30,7 +30,7 @@ const ProductGridItem = ({
 						<Thumbnail title={title} image={image} />
 					</div>
 					<div className="space-y-1.5 overflow-hidden px-3 py-4 text-center">
-						<Category category={category} />
+						<Category category={taxon} />
 						<Title title={title} />
 						<Price price={price} className="flex justify-center text-center" />
 					</div>

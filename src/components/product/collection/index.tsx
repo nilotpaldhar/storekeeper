@@ -1,11 +1,12 @@
 import type { ProductSummary } from "@/types/domain.types";
+import type { ProductCollectionLayout } from "@/types/ui.types";
 
 import { ProductGridItem } from "@/components/product/collection/product-grid-item";
 import { ProductListItem } from "@/components/product/collection/product-list-item";
 
 type ProductCollectionProps = {
 	products: ProductSummary[];
-	layout?: "grid" | "list";
+	layout?: ProductCollectionLayout;
 };
 
 const ProductCollection = ({ products, layout = "grid" }: ProductCollectionProps) => {
@@ -22,7 +23,7 @@ const ProductCollection = ({ products, layout = "grid" }: ProductCollectionProps
 	}
 
 	return (
-		<div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-8 lg:grid-cols-4 lg:gap-y-10 xl:grid-cols-5 xl:gap-x-5">
+		<div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-8 lg:grid-cols-4 lg:gap-y-10">
 			{products.map((product, idx) => (
 				<div key={product._key ? `${product._key}-${product.id}` : `${product.id}-${idx}`}>
 					<ProductGridItem product={product} />

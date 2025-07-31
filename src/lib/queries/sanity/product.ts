@@ -14,11 +14,23 @@ const ProductSKUFragment = `
     hsTariffNumber
 `;
 
+const ProductTaxonomyFragment = `
+    "id": _id,
+    title,
+    "slug": slug.current
+`;
+
 const ProductTaxonFragment = `
     "id": _id,
     title,
     "slug": slug.current,
     isLeaf
+`;
+
+const ProductBrandFragment = `
+    "id": _id,
+    title,
+    "slug": slug.current
 `;
 
 const ProductOptionFragment = `
@@ -44,7 +56,9 @@ const ProductSummaryFragment = `
     description,
     hasVariants,
     "sku": sku->{ ${ProductSKUFragment} },
+    "taxonomy":  taxon->taxonomy->{  ${ProductTaxonomyFragment} },
     "taxon": taxon->{ ${ProductTaxonFragment} },
+    "brand": brand->{ ${ProductBrandFragment} },
     "gallery":  select(
         defined(gallery) => gallery[]{ ${MediaImageFragment} },
         []
@@ -114,6 +128,12 @@ const ProductBySkuCodeQuery = defineQuery(`
     }
 `);
 
+const SyncPublishedProductsQuery = defineQuery(`
+	*[ _type == "product" && !(_id in path('drafts.**'))] {
+		${ProductSummaryFragment}
+	}
+`);
+
 export {
 	ProductSummaryFragment,
 	ProductSlugsQuery,
@@ -121,4 +141,5 @@ export {
 	ProductSummaryQuery,
 	RelatedProductsQuery,
 	ProductBySkuCodeQuery,
+	SyncPublishedProductsQuery,
 };
