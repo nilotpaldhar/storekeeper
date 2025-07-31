@@ -1,3 +1,12 @@
+## [0.9.2](https://github.com/nilotpaldhar/storekeeper/compare/v0.9.1...v0.9.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* **ci:** set Git user for changelog commits to match GitHub account ([0f8a585](https://github.com/nilotpaldhar/storekeeper/commit/0f8a585306ff5bdd19869e14e7e2515430980e3e))
+
+
+
 ## [0.9.1](https://github.com/nilotpaldhar/storekeeper/compare/v0.9.0...v0.9.1) (2025-07-31)
 
 
@@ -53,18 +62,6 @@
 * **checkout:** add GET /api/commerce/orders/:orderId endpoint and useOrder hook for checkout page ([00fe91b](https://github.com/nilotpaldhar/storekeeper/commit/00fe91b6065c17a583e0de2f92b6fff32f898a95))
 * **checkout:** add PaymentDetailsStep and payment methods API (GET, PATCH) ([cc57aa7](https://github.com/nilotpaldhar/storekeeper/commit/cc57aa78f98820a7a3ab05c712527c9d41ae04fe))
 * **checkout:** add place order functionality to complete checkout flow ([3d25581](https://github.com/nilotpaldhar/storekeeper/commit/3d255817615b8c4bf410246edba448149576ea8c))
-
-
-
-# [0.6.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.5.0...v0.6.0) (2025-07-15)
-
-
-### Features
-
-* **cart-page:** add initial structure for cart page layout ([7337c35](https://github.com/nilotpaldhar/storekeeper/commit/7337c3543b408d01504e837aa9f57c0682338644))
-* **cart:** add cart, count, add-item APIs & useCart, useCartCount, useAddCartItem hooks ([e1e8f56](https://github.com/nilotpaldhar/storekeeper/commit/e1e8f560464a978d4a9d355867227f89b66c36bc))
-* **cart:** add POST/DELETE coupon endpoints and related hooks ([4cad5ce](https://github.com/nilotpaldhar/storekeeper/commit/4cad5cec804563f501f09214910d2c3bdb870016))
-* **cart:** add update and delete item endpoints and useUpdateCartItem, useRemoveCartItem hooks ([2b6ee36](https://github.com/nilotpaldhar/storekeeper/commit/2b6ee36113dc0f453f1060a393e660fac1864f05))
 
 
 
