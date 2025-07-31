@@ -1,3 +1,20 @@
+# [0.9.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.8.0...v0.9.0) (2025-07-31)
+
+
+### Features
+
+* **category:** add CategoryPage with category-based facet filtering in search ([9a8e5b8](https://github.com/nilotpaldhar/storekeeper/commit/9a8e5b871271ecc9f9583b913776ecf7d817c5c1))
+* **sanity:** add SKU and product sync API + admin UI ([4859838](https://github.com/nilotpaldhar/storekeeper/commit/4859838e05ed49381bc5558508c97cfca46346ed))
+* **search:** add HeaderSearchBar with autocomplete functionality ([03638f5](https://github.com/nilotpaldhar/storekeeper/commit/03638f5be5a897e492070de4a99f04427bc1f961))
+* **search:** add SearchResultsFiltersContent component for displaying search filter widgets ([b9cf17f](https://github.com/nilotpaldhar/storekeeper/commit/b9cf17fd956ba929933d71647192ca83f5d6c38f))
+* **search:** add SearchResultsList, LayoutSwitch, and ListSkeleton components ([5c00eb9](https://github.com/nilotpaldhar/storekeeper/commit/5c00eb928ecba99b9d9b96c327cc6c0b478185b8))
+* **search:** add SearchResultsPagination component ([38bcb1a](https://github.com/nilotpaldhar/storekeeper/commit/38bcb1abe000a8b26a209f8ad34c753995f81217))
+* **search:** add SearchResultsRefinements component to display and clear active search filters ([4e49fe9](https://github.com/nilotpaldhar/storekeeper/commit/4e49fe991ca77bbdcef20b6d1d4e33ccd965fe50))
+* **search:** add SearchResultsSort and SearchResultsAttribution for Algolia-powered search results ([a66d5e0](https://github.com/nilotpaldhar/storekeeper/commit/a66d5e0ab44af7d865e40fb2bfefd439139602a1))
+* **search:** add SearchResultsView with initial layout structure ([4038b5b](https://github.com/nilotpaldhar/storekeeper/commit/4038b5bd7bdd866dbe0e831dd5ab90c2eaa28d36))
+
+
+
 # [0.8.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.7.0...v0.8.0) (2025-07-23)
 
 
@@ -54,17 +71,6 @@
 * **product-page:** add ProductCollection component with related products section ([0d0eb7c](https://github.com/nilotpaldhar/storekeeper/commit/0d0eb7c460c10b9939aa4b13ea3b6b41b4a9883d))
 * **product-page:** add ProductSharePopover component to display social share buttons ([f5fe5e5](https://github.com/nilotpaldhar/storekeeper/commit/f5fe5e53575ef9ae402aa70c06b5a6b1e808ec17))
 * **product-page:** add responsive image gallery for desktop and mobile ([2b84a4a](https://github.com/nilotpaldhar/storekeeper/commit/2b84a4ac32872cf0bc8d0e7d72610aacaec4ba5e))
-
-
-
-# [0.4.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.3.0...v0.4.0) (2025-07-03)
-
-
-### Features
-
-* **auth:** add basic structure and styling for login page (no auth logic yet) ([011bc65](https://github.com/nilotpaldhar/storekeeper/commit/011bc65bd15ef7b6962fae3d4bed1a7d3eba7289))
-* **auth:** add helper to sync user with Commerce Layer customer and store reference ID ([a3752c9](https://github.com/nilotpaldhar/storekeeper/commit/a3752c95c9c5d0a981941e5aa8b848b00ddab947))
-* **auth:** implement user authentication using Auth.js ([89316e4](https://github.com/nilotpaldhar/storekeeper/commit/89316e47559878b76418fcd8fb75bb84b4211d0e))
 
 
 
