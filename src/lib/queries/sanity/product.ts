@@ -14,6 +14,12 @@ const ProductSKUFragment = `
     hsTariffNumber
 `;
 
+const ProductTaxonomyFragment = `
+    "id": _id,
+    title,
+    "slug": slug.current
+`;
+
 const ProductTaxonFragment = `
     "id": _id,
     title,
@@ -50,6 +56,7 @@ const ProductSummaryFragment = `
     description,
     hasVariants,
     "sku": sku->{ ${ProductSKUFragment} },
+    "taxonomy":  taxon->taxonomy->{  ${ProductTaxonomyFragment} },
     "taxon": taxon->{ ${ProductTaxonFragment} },
     "brand": brand->{ ${ProductBrandFragment} },
     "gallery":  select(

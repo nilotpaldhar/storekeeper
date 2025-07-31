@@ -49,4 +49,10 @@ const ProductSeo = defineQuery(`
     }
 `);
 
-export { GlobalSeo, StaticPageSeo, NotFoundPageSeo, ProductSeo, HomePageSeo };
+const CategorySeo = defineQuery(`
+    *[_type in ["taxonomy", "taxon"] && slug.current ==  $slug] | order(_updatedAt desc) [0] {
+        seo { ${SeoFieldsFragment} }
+    }
+`);
+
+export { GlobalSeo, StaticPageSeo, NotFoundPageSeo, ProductSeo, HomePageSeo, CategorySeo };

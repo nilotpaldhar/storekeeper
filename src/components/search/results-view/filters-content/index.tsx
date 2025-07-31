@@ -32,7 +32,10 @@ const SearchResultsFiltersContent = ({
 			<div className="flex flex-col space-y-6 py-6">
 				<FilterCategoryWidget
 					title={widgetTitles.category ?? "Category"}
-					attribute={ALGOLIA_FACET_ATTRIBUTES.CATEGORY}
+					attributes={{
+						taxonomy: ALGOLIA_FACET_ATTRIBUTES.TAXONOMY,
+						taxon: ALGOLIA_FACET_ATTRIBUTES.TAXON,
+					}}
 				/>
 				<FilterWidgetFacet
 					title={widgetTitles.brand ?? "Brand"}

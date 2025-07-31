@@ -173,7 +173,8 @@ export const ALGOLIA_INDEXES = {
 } as const;
 
 export const ALGOLIA_FACET_ATTRIBUTES = {
-	CATEGORY: "category",
+	TAXONOMY: "taxonomy",
+	TAXON: "taxon",
 	BRAND: "brand",
 	PRICE: "price.amount_float",
 } as const;

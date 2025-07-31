@@ -12,7 +12,7 @@ import {
 import { WishlistButton } from "@/components/product/collection/wishlist-button";
 
 const ProductListItem = ({
-	product: { title, description, slug, category, gallery, price },
+	product: { title, description, slug, taxon, gallery, price },
 }: {
 	product: ProductSummary;
 }) => {
@@ -35,7 +35,7 @@ const ProductListItem = ({
 					</div>
 					<div className="flex-1">
 						<div className="space-y-2">
-							<Category category={category} />
+							<Category category={taxon} />
 							<Title title={title} className="text-lg" />
 							<Description description={description ?? "N/A"} className="font-light" />
 						</div>

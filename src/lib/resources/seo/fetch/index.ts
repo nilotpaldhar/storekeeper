@@ -7,6 +7,7 @@ import {
 	ProductSeo,
 	StaticPageSeo,
 	HomePageSeo,
+	CategorySeo,
 } from "@/lib/queries/sanity";
 
 /**
@@ -106,4 +107,30 @@ const getHomePageSeo = async () => {
 	}
 };
 
-export { getGlobalSeo, getStaticPageSeoBySlug, getNotFoundPageSeo, getProductSeo, getHomePageSeo };
+/**
+ * Fetches the SEO metadata for...
+ */
+const getCategorySeo = async ({ slug }: { slug: string }) => {
+	try {
+		const data = await getSanityClient().fetch(CategorySeo, { slug });
+		if (!data || !data.seo) return null;
+		return data.seo;
+	} catch (err) {
+		logEvent({
+			fn: "getCategorySeo",
+			level: "error",
+			event: "fail",
+			error: err,
+		});
+		return null;
+	}
+};
+
+export {
+	getGlobalSeo,
+	getStaticPageSeoBySlug,
+	getNotFoundPageSeo,
+	getProductSeo,
+	getHomePageSeo,
+	getCategorySeo,
+};

@@ -1,6 +1,6 @@
 import type { ProductBreadcrumb } from "@/types/domain.types";
 
-import { NavigationTrail } from "@/components/product/overview/navigation-trail";
+import { NavigationTrail } from "@/components/navigation/navigation-trail";
 import { ProductSharePopover } from "@/components/product/overview/share-popover";
 
 const HeaderSection = ({

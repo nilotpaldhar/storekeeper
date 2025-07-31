@@ -21,6 +21,7 @@ import { SearchResultsFiltersMobile } from "@/components/search/results-view/fil
 import { SearchResultsLayoutSwitch } from "@/components/search/results-view/layout-switch";
 import { SearchResultsList } from "@/components/search/results-view/list";
 import { SearchResultsPagination } from "@/components/search/results-view/pagination";
+import { SearchResultsQueryInfo } from "@/components/search/results-view/query-info";
 import { SearchResultsQueryInitializer } from "@/components/search/results-view/query-initializer";
 import { SearchResultsRefinements } from "@/components/search/results-view/refinements";
 import { SearchResultsSort } from "@/components/search/results-view/sort";
@@ -28,6 +29,11 @@ import { Container } from "@/components/ui/container";
 import { ThreeDotsLoader } from "@/components/ui/loader";
 
 import { searchClient } from "@/lib/clients/algolia/search";
+
+type SearchResultsViewProps = {
+	headerStartContent?: React.ReactNode;
+	customFacetFilters?: string[] | string[][];
+};
 
 const SearchResultsStateWrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -41,7 +47,7 @@ const SearchResultsEmpty = ({ query }: { query: string }) => {
 	return (
 		<SearchResultsStateWrapper>
 			<SearchResultsEmptyState
-				title={`No results found for “${query}”`}
+				title={query.length === 0 ? "No search results" : `No results found for “${query}”`}
 				description="We couldn't find any products matching your search. Try a different keyword or remove some filters."
 				imageAlt="Illustration showing no search results"
 				examples={[]}
@@ -50,7 +56,7 @@ const SearchResultsEmpty = ({ query }: { query: string }) => {
 	);
 };
 
-const SearchResultsView = () => {
+const SearchResultsView = ({ headerStartContent, customFacetFilters }: SearchResultsViewProps) => {
 	const [isMounted, setIsMounted] = useState(false);
 	const [activeLayout, setActiveLayout] = useState<ProductCollectionLayout>("grid");
 
@@ -69,19 +75,6 @@ const SearchResultsView = () => {
 		);
 	}
 
-	if (!query) {
-		return (
-			<SearchResultsStateWrapper>
-				<SearchResultsEmptyState
-					title="No search term entered"
-					description="Start by typing in the search bar to explore our products."
-					imageAlt="Start Searching"
-					examples={["headphones", "laptops"]}
-				/>
-			</SearchResultsStateWrapper>
-		);
-	}
-
 	return (
 		<InstantSearchNext
 			key={query}
@@ -90,7 +83,7 @@ const SearchResultsView = () => {
 			future={{ preserveSharedStateOnUnmount: true }}
 			routing
 		>
-			<Configure hitsPerPage={SEARCH_RESULTS_PER_PAGE} />
+			<Configure hitsPerPage={SEARCH_RESULTS_PER_PAGE} facetFilters={customFacetFilters} />
 			<SearchResultsQueryInitializer query={query} />
 
 			<div className="min-h-screen pt-10 pb-14">
@@ -109,10 +102,7 @@ const SearchResultsView = () => {
 							<header className="flex flex-col pb-6 xl:flex-row">
 								{/* Info + Attribution */}
 								<div className="flex flex-1 items-center justify-between">
-									<div className="flex flex-wrap gap-1">
-										<span>Showing results for</span>
-										<strong>&quot;{query}&quot;</strong>
-									</div>
+									{headerStartContent ?? <SearchResultsQueryInfo query={query} />}
 									<div className="flex items-center">
 										<SearchResultsAttribution />
 									</div>

@@ -57,7 +57,7 @@ const normalizeProduct = async (
 		: [];
 
 	const taxonSlug = rawProduct.taxon?.slug ?? "";
-	const breadcrumb = taxonSlug ? await buildCategoryBreadcrumb({ taxonSlug }) : [];
+	const breadcrumb = taxonSlug ? await buildCategoryBreadcrumb({ slug: taxonSlug }) : [];
 
 	// Final normalized product object
 	return {
