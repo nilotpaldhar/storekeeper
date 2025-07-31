@@ -1,3 +1,12 @@
+## [0.9.1](https://github.com/nilotpaldhar/storekeeper/compare/v0.9.0...v0.9.1) (2025-07-31)
+
+
+### Bug Fixes
+
+* **ci:** set Git user for changelog commits to match GitHub account ([aef7924](https://github.com/nilotpaldhar/storekeeper/commit/aef79249ab31ddf2c5539c0c52a2359062a05f9d))
+
+
+
 # [0.9.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.8.0...v0.9.0) (2025-07-31)
 
 
@@ -56,21 +65,6 @@
 * **cart:** add cart, count, add-item APIs & useCart, useCartCount, useAddCartItem hooks ([e1e8f56](https://github.com/nilotpaldhar/storekeeper/commit/e1e8f560464a978d4a9d355867227f89b66c36bc))
 * **cart:** add POST/DELETE coupon endpoints and related hooks ([4cad5ce](https://github.com/nilotpaldhar/storekeeper/commit/4cad5cec804563f501f09214910d2c3bdb870016))
 * **cart:** add update and delete item endpoints and useUpdateCartItem, useRemoveCartItem hooks ([2b6ee36](https://github.com/nilotpaldhar/storekeeper/commit/2b6ee36113dc0f453f1060a393e660fac1864f05))
-
-
-
-# [0.5.0](https://github.com/nilotpaldhar/storekeeper/compare/v0.4.0...v0.5.0) (2025-07-09)
-
-
-### Features
-
-* **api:** add endpoints to retrieve product price and inventory ([bd9c43c](https://github.com/nilotpaldhar/storekeeper/commit/bd9c43c36a3431f1688daddf16dcfa4295565cd7))
-* **product-page:** add category breadcrumb trail on product page ([a992c02](https://github.com/nilotpaldhar/storekeeper/commit/a992c02330b57a276da8984135cd622f36c4d975))
-* **product-page:** add collapsible text for description and variant selector ([ca73d97](https://github.com/nilotpaldhar/storekeeper/commit/ca73d97d6a33b1524c29c548c15c09fab2b4cdae))
-* **product-page:** add initial structure for product page layout ([53c120b](https://github.com/nilotpaldhar/storekeeper/commit/53c120bec0dc75601fc9ea4cb04b61ef0c019210))
-* **product-page:** add ProductCollection component with related products section ([0d0eb7c](https://github.com/nilotpaldhar/storekeeper/commit/0d0eb7c460c10b9939aa4b13ea3b6b41b4a9883d))
-* **product-page:** add ProductSharePopover component to display social share buttons ([f5fe5e5](https://github.com/nilotpaldhar/storekeeper/commit/f5fe5e53575ef9ae402aa70c06b5a6b1e808ec17))
-* **product-page:** add responsive image gallery for desktop and mobile ([2b84a4a](https://github.com/nilotpaldhar/storekeeper/commit/2b84a4ac32872cf0bc8d0e7d72610aacaec4ba5e))
 
 
 
