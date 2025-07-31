@@ -16,6 +16,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Configure Git user
+        run: |
+          git config user.name "Nilotpal Dhar"
+          git config user.email "nilotpaldhar1997@gmail.com"
+
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v5
