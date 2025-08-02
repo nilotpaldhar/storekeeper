@@ -1,5 +1,3 @@
-# StoreKeeper – Headless E‑commerce App
-
 <a name="readme-top"></a>
 
 <br />
