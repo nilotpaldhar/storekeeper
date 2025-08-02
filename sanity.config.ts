@@ -6,6 +6,7 @@
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { media } from "sanity-plugin-media";
 
 import { CustomNavbar } from "./src/components/sanity/custom-navbar";
 import { env } from "./src/lib/config/env";
@@ -29,6 +30,7 @@ export default defineConfig({
 		visionTool({
 			defaultApiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION,
 		}),
+		media(),
 	],
 	document: {
 		productionUrl: resolveProductionUrl,
