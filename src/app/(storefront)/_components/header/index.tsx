@@ -36,7 +36,7 @@ const Header = async ({ className }: HeaderProps) => {
 		<header className={cn("h-20 w-full border-b border-neutral-100", className)}>
 			<Container className="flex h-full items-center justify-start 2xl:justify-between">
 				<SiteLogo href="/" logoSrc={logoSrc} alt={logoAlt} className="shrink-0" />
-				<div className="hidden items-center 2xl:flex 2xl:pl-8">
+				<div className="hidden 2xl:flex 2xl:w-full 2xl:items-center 2xl:justify-center 2xl:pl-8">
 					<HeaderDesktopMenu menu={menuDesktop} />
 				</div>
 				<div className="mx-4 flex w-full items-center justify-end 2xl:justify-center">

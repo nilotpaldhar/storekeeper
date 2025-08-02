@@ -639,12 +639,6 @@ export type Page = {
 	seo?: Seo;
 };
 
-export type Slug = {
-	_type: "slug";
-	current?: string;
-	source?: string;
-};
-
 export type HomePage = {
 	_id: string;
 	_type: "homePage";
@@ -794,6 +788,21 @@ export type SanityImageMetadata = {
 	isOpaque?: boolean;
 };
 
+export type MediaTag = {
+	_id: string;
+	_type: "media.tag";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	name?: Slug;
+};
+
+export type Slug = {
+	_type: "slug";
+	current?: string;
+	source?: string;
+};
+
 export type AllSanitySchemaTypes =
 	| SanityImagePaletteSwatch
 	| SanityImagePalette
@@ -826,7 +835,6 @@ export type AllSanitySchemaTypes =
 	| Sku
 	| NavPage
 	| Page
-	| Slug
 	| HomePage
 	| NavLink
 	| Seo
@@ -835,7 +843,9 @@ export type AllSanitySchemaTypes =
 	| SanityImageHotspot
 	| SanityImageAsset
 	| SanityAssetSourceData
-	| SanityImageMetadata;
+	| SanityImageMetadata
+	| MediaTag
+	| Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/lib/queries/sanity/category.ts
 // Variable: CategorySlugsQuery

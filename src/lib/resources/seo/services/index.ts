@@ -45,9 +45,9 @@ const getSeo = async (overrides: SeoOverrides = {}): Promise<Metadata> => {
 				follow: !globalSeo?.metaRobotsNofollow,
 			},
 			icons: {
-				icon: globalSeo?.favicon || "",
-				shortcut: globalSeo?.faviconLegacy || "",
-				apple: globalSeo?.touchIcon || "",
+				icon: globalSeo?.favicon || undefined,
+				shortcut: globalSeo?.faviconLegacy || undefined,
+				apple: globalSeo?.touchIcon || undefined,
 			},
 			openGraph: {
 				title: shareTitle,
