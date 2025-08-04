@@ -32,7 +32,7 @@ export const generateMetadata = async ({ params }: ProductPageProps): Promise<Me
 };
 
 export const generateStaticParams = async () => {
-	const slugs = await getProductSlugs();
+	const slugs = await getProductSlugs({ limit: 100 });
 	if (!slugs) return [];
 	return slugs.map((slug) => ({ slug }));
 };
