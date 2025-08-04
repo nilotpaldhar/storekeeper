@@ -196,62 +196,59 @@ npm run db:migrate
 1. NextAuth.js is already installed.  
 2. Choose authentication providers (Magic Link, Google, Facebook, etc.).  
 3. Add the relevant environment variables to `.env`:
-   ```env
-   NEXTAUTH_SECRET=<your_nextauth_secret>
-   NEXTAUTH_URL=http://localhost:3000
+    ```env
+    NEXTAUTH_SECRET=<your_nextauth_secret>
+    NEXTAUTH_URL=http://localhost:3000
 
-   EMAIL_PROVIDER_API_KEY=<your-email-provider-api-key>
-   EMAIL_FROM=noreply@yourdomain.com
+    EMAIL_PROVIDER_API_KEY=<your-email-provider-api-key>
+    EMAIL_FROM=noreply@yourdomain.com
 
-   GOOGLE_CLIENT_ID=<your_google_client_id>
-   GOOGLE_CLIENT_SECRET=<your_google_client_secret>
+    GOOGLE_CLIENT_ID=<your_google_client_id>
+    GOOGLE_CLIENT_SECRET=<your_google_client_secret>
 
-   FACEBOOK_CLIENT_ID=<your_facebook_client_id>
-   FACEBOOK_CLIENT_SECRET=<your_facebook_client_secret>
-   ```
+    FACEBOOK_CLIENT_ID=<your_facebook_client_id>
+    FACEBOOK_CLIENT_SECRET=<your_facebook_client_secret>
+    ```
 4. Restart your dev server after saving changes.  
 > See the [NextAuth.js docs](https://next-auth.js.org/getting-started/introduction) for complete setup instructions.
 
 ---
 
 ### **Step 6 – Configure Algolia Search**
-```bash
-# Create an Algolia account and project.
-# Add these variables to .env:
-NEXT_PUBLIC_ALGOLIA_APP_ID=<your_app_id>
-NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY=<your_search_api_key>
-ALGOLIA_WRITE_API_KEY=<your_write_api_key>
-
-# Create the following indexes (names must match exactly):
-products                   # Main product search
-products_price_asc         # Price sorting: low → high
-products_price_desc        # Price sorting: high → low
-products_query_suggestions # Autocomplete suggestions
-```
+1. Create an Algolia account and project.
+2. Add the relevant environment variables to `.env`:
+    ```env
+    NEXT_PUBLIC_ALGOLIA_APP_ID=<your_app_id>
+    NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY=<your_search_api_key>
+    ALGOLIA_WRITE_API_KEY=<your_write_api_key>
+    ```
+3. Create the following indexes (names must match exactly):
+    ```bash 
+    products                   # Main product search
+    products_price_asc         # Price sorting: low → high
+    products_price_desc        # Price sorting: high → low
+    products_query_suggestions # Autocomplete suggestions
+    ```
 
 ---
 
 ### **Step 7 – Sync SKUs from Commerce Layer**
-```bash
-# Add this variable to .env if not already set:
-SANITY_COMMERCE_SKU_SYNC_SECRET=<your_sku_sync_secret>
-
-# Open Sanity Studio at /studio or /studio/structure
-# Click "Fetch SKUs" → enter your secret → "Run Sync"
-# This pulls SKUs from Commerce Layer into Sanity as SKU documents.
-```
+1. Add this variable to .env if not already set:
+    ```env
+    SANITY_COMMERCE_SKU_SYNC_SECRET=<your_sku_sync_secret>
+    ```
+2. Open Sanity Studio at `/studio` or `/studio/structure`
+3. Click "Fetch SKUs" → enter your secret → "Run Sync". This will pull SKUs from Commerce Layer into Sanity as SKU documents.
 
 ---
 
 ### **Step 8 – Push Products to Algolia**
-```bash
-# Add this variable to .env if not already set:
-ALGOLIA_SANITY_PRODUCTS_SYNC_SECRET=<your_products_sync_secret>
-
-# Open Sanity Studio
-# Click "Push products to Algolia" → enter your secret → "Run Sync"
-# This pushes all products to the Algolia 'products' index.
-```
+1. Add this variable to .env if not already set:
+    ```env
+    ALGOLIA_SANITY_PRODUCTS_SYNC_SECRET=<your_products_sync_secret>
+    ```
+2. Open Sanity Studio
+3. Click "Push products to Algolia" → enter your secret → "Run Sync". This will push all products to the Algolia `products` index.
 
 ---
 

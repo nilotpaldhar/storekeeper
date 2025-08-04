@@ -26,7 +26,7 @@ export const generateMetadata = async ({ params }: CategoryPagePageProps): Promi
 };
 
 export const generateStaticParams = async () => {
-	const slugs = await getCategorySlugs();
+	const slugs = await getCategorySlugs({ limit: 100 });
 	if (!slugs) return [];
 	return slugs.map((slug) => ({ slug }));
 };
