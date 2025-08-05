@@ -6,7 +6,7 @@ export const LoginSchema = z.object({
 });
 
 export const SocialLoginSchema = z.object({
-	provider: z.enum(["google", "facebook"]),
+	provider: z.enum(["google"]),
 	callbackUrl: z.string().optional(),
 });
 
