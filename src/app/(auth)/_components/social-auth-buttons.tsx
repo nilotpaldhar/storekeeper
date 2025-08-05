@@ -5,7 +5,7 @@ import { useAction } from "next-safe-action/hooks";
 
 import { socialLoginAction } from "@/actions/auth/social-login";
 
-import { Facebook, Google } from "@/components/icons/brand";
+import { Google } from "@/components/icons/brand";
 import { Button } from "@/components/ui/button";
 
 const SocialAuthButtons = () => {
@@ -22,14 +22,6 @@ const SocialAuthButtons = () => {
 			>
 				<Google className="size-3.5 fill-current" />
 				<span>Google</span>
-			</Button>
-			<Button
-				disabled={isPending}
-				onClick={() => execute({ provider: "facebook", callbackUrl: callbackUrl ?? "" })}
-				className="bg-social-facebook hover:bg-social-facebook w-full sm:flex-1"
-			>
-				<Facebook className="size-3.5 fill-current" />
-				<span>Facebook</span>
 			</Button>
 		</div>
 	);
